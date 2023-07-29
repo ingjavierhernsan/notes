@@ -1,0 +1,91 @@
+1.- Mostrar la ruta actual.
+2.- Enlistar los archivos de la carpeta actual.
+    -Con detalles de los archivos.
+    -Con detalles de los archivos con informacion mas legible.
+    -Mostrar todos los archivos.
+    -Ordenar por tamano.
+    -Ordenar de la z a la a.
+    -Archivos con cierta extension.
+    -Mostrar todos los archivos que inicien con cierta palabra.
+    -Mostrar directorios que empiezan con mayuscula.
+    -Mostrar directorios que empiezan con minusculas.
+    -Mostrar los archivos que inician con los caracteres indicados.
+3.- Enlistar acompletando el nombre del archivo o carpeta.
+4.- Enlistar el contenido del directorio raiz.
+5.- Enlistar el contenido de un directorio sin entrar a el.
+6.- Enlistar el contenido de un directorio anterior al actual.
+7.- Crear un documento txt con el resultado de un enlistado.
+8.- Concatenar el resultado de un enlistado a un documento txt ya creado.
+9.- Crear un documento txt con los errores al ejecutar un comando.
+10.- Crear un documento txt con la salida exitosa o el error.
+11.- Generar una salida en consola.
+12.- Mostrar archivo de texto en la consola.
+13.- Mostrar dos archivos de texto concatenados en la consola.
+14.- Crear archivo y editarlo en consola.
+15.- Mostrar en partes el resultado de algun comando.
+16.- Mostrar en partes el resultado de algun comando y crear un archivo.
+17.- Mostrar la fecha del sistema.
+18.- Cambiar de directorio.
+19.- Cambiar a la carpeta de home.
+20.- Cambiar a la carpeta del usuario.
+21.- Cambiar a una carpeta anterior.
+22.- Cambiar a dos carpetas anteriores.
+23.- Limpiar carpeta.
+24.- Mostrar cierta informacion de algun archivo.
+25.- Que el sistema acomplete el comando.
+26.- Crear una carpeta.
+27.- Crea varias carpetas.
+28.- Eliminar una carpeta.
+29.- Crear un archivo.
+30.- Crear varios archivos.
+31.- Copiar archivo.
+32.- Copiar archivo a otra carpeta.
+33.- Mover archivo.
+34.- Mover archivo a una carpeta anterior.
+35.- Renombrar un archivo.
+36.- Borrar archivo.
+37.- Pregunta antes de borrar el archivo.
+38.- Borrar directorios.
+39.- Pregunta antes de borrar el directorio.
+40.- Forza el borrado
+41.- Borrar varios archivos o carpetas.
+42.- Mostrar la cabecera de una archivo de texto.
+43.- Mostrar mas renglones de al cabecera.
+44.- Mostrar los ultimos renglones de un archivo de texto.
+45.- Mostrar mas renglones de al parte final de un archivo de texto.
+46.- Mostrar texto en consola y navegar en el.
+47.- Abrir un archivo desde la consola al ambiente grafico.
+48.- Abrir una carpeta desde la consola al ambiente grafico.
+49.- Obtener informacion de algun comando.
+50.- Crear alias.
+51.- Mostrar manual de algun comando.
+52.- Correr comandos de manera sincrona (uno de tras de otro).
+53.- Correr comandos de manera asincrona.
+54.- Correr comandos de manera condicional (And/Or).
+55.- Tipos de archivos.
+56.- Tipo de modo.
+57.- Abrebiaturas de tipo de modo.
+58.- Crear link simbolico.
+59.- Eliminar link simbolico.
+60.- Enlistar variables de entorno.
+61.- Mostrar una variable de entorno.
+62.- Modificar variables de entorno.
+63.- Crear alias en las variables de entorno.
+64.- Crear una variable de entorno.
+65.- Buscar en un documento de texto desde la linea de comandos.
+66.- Mostrar informacion de algun documento de texto.
+67.- Mostrar informacion sobre los usuarios conectados.
+68.- Mostrar los usuarios que han iniciado session.
+68.- Mostrar todos los procesos.
+69.- Mostrar una lista de procesos actuales.
+70.- Buscar la cache de algun programa.
+71.- Mostrar lista de los repositoris de donde se obtubieron los programas instalados.
+72.- Mostrar configuracion de la red.
+73.- Revisar si una direccion IP esta activa.
+74.- Traer un archivo de texto atraves de la red.
+75.- Guardar el archivo de texto que se trae atraves de la red.
+76.- Descargar el archivo directamente.
+77.- Mostrar los dispositivos de red.
+78.- Mostrar las conexiones de red.
+79.- Comprimir un archivo.
+80.- Descomprimir un archivo.

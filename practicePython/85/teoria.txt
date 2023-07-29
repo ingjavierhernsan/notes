@@ -1,0 +1,8 @@
+valueError: Se genera cuando una operacion ofuncion recibe un argumento que tiene un valor inapropiado como vimos en el conceptio anterior altratar de convertir un string a entero siendo que el string no contiene valores numericos.
+IndexError: Se genera cuando un subindice de una secuencia (tupla, lista, string) esta fuera de rango.
+NameError: Se genera cuando llamamos a una funcion, metodo o tratamos de acceder a una variable inexistente.
+TypeError: Se genera cuando una operacion o funcion se aplica a untipo de dato inapropiado. Por ejempli si queremos suamr un entero y un string.
+ModuleNotFoundError: Se genera cuando la  declaracion de un import tiene problemas al intentar cargar el modulo inexistente.
+ZeroDivisionError: Se genera cuando intentamos dividir una variable o valor por cero.
+OverflowError: Se genera cuando un resultado de una operacion aritmetica con valores reales (no enteros) es demasiado grande para ser representado.
+KeyError: Se genera cuando no se envuentra una clave en un diccionario.

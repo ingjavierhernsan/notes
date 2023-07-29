@@ -1,0 +1,1237 @@
+PYTHON
+
+1.- IMPRIMIR PANTALLA
+2.- PEDIR UN VALOR
+3.- GUARDAR VALOR OBTENIDO
+4.- MOSTRAR VALOR DE VARIABLE
+5.- IF
+6.- OPERADORES RELACIONALES
+7.- OPERADORES MATEMATICOS
+8.- OPERADORES LOGICOS
+9.- WHILE
+10.- FOR
+11.- COMENTARIOS
+12.- VARIABLES
+13.- CADENAS DE CARACTERES
+14.- ESTRUCTURA DE DATOS: LISTAS
+15.- LISTAS: CARGA DE SUS ELEMENTOS
+16.- LISTAS: COMPONENTES DE TIPO LISTA
+17.- LISTAS: CARGA POR TECLADO DE COMPONENTES DE TIPO LISTA
+18.- LISTAS: ELIMINACION DE ELEMENTOS
+19.- FUNCIONES
+20.- ESTRUCTURA DE DATOS TIPO TUPLA
+21.- LISTAS Y TUPLAS ANIDADAS
+22.- VARIANTES DE FOR PARA RECORRER TUPLAS Y LISTAS
+23.- ESTRUCTURA DE DATOS TIPO DICCIONARIO
+24.- DICCIONARIOS: CON VALORES DE TIPO LISTAS, TUPLAS Y DICCIONARIOS
+25.- PORCIONES DE LISTAS, TUPLAS Y CADENAS DE CARACTERES
+26.- INDICES NEGATIVOS EN LISTAS, TUPLAS Y CADENAS DE CARACTERES
+27.- BIBLIOTECA ESTANDAR DE PYTHON
+28.- IMPORTAR ALGUNAS FUNCIONALIDADES DE UN MODULO DE LA BIBLIOTECA ESTANDAR DE PYTHON
+29.- DEFINICION DE ALIAS PARA UAN FUNCIONALIDAD
+30.- APLICACIONES PROPIAS CON VARIOS MODULOS
+31.- DECLARACION DE UNA CLASE Y CREACION DE OBJETOS
+32.- METODO __init__ DE LA CLASE
+33.- LLAMADA DE METODOS DESDE OTRO METODO DE LA MISMA CLASE
+34.- COLABORACION DE CLASES
+35.- HERENCIA
+36.- VARIABLE DE CLASE
+37.- REDEFINICION DE LOS OPERADORES MATEMATICOS CON OBJETOS
+38.- REDEFIINICION DE LOS OPERADORES RELACINALES CON OBJETOS
+39.- USO DE PIP
+40.- INTERFAZ GRAFICA DE USUARIO: TKINTER
+41.- TKINTER: CONTROLES BUTTON Y LABEL
+42.- TKINTER: CONTROL ENTRY
+43.- TKINTER: CONTROL RADIOBUTTON
+44.- TKINTER: CONTROL CHECKBUTTON
+45.- TKINTER: CONTROL LISTBOX
+46.- TTK: CONTROL COMBOBOX
+47.- TKINTER: CONTROL MENU
+48.- TTK: CONTROLES NOTEBOOK Y FRAME
+49.- TTK: CONTROL LABELFRAME
+50.- TKINTER: LAYOUT MANAGER (ADMINISTRADOR DE DISENO)
+51.- TKINTER.MESSAGEBOX: VENTANAS DE MENSAJES
+52.- TKINTER: VENTANAS DE DIALOGOS
+53.- TTK: CONTROL SPINBOX
+54.- TKINTER.SCROLLEDTEXT: EDITOR MULTILINEA
+55.- TKINTER: CONTROL CANVAS
+56.- CANVAS: CAPTURA DE EVENTOS DEL MOUSE
+57.- CANVAS: BORRAR FIGURAS MEDIANTE IDS Y TAGS
+58.- CANVAS: DESPLAAR UNA FIGURA MEDIANTE EL METODO MOVE
+59.- CANVAS: MOSTRAR UNA IMAGEN
+60.- CANVAS: MOVER UNA FIGURA
+61.- ARCHIVOS DE TEXTOS: CREACION, ESCRITURA Y LECTURA
+62.- ARCHIVOS DE TEXTOS: INTERFAZA VISUAL CON TKINTER PARA LEER Y ESCRIBIR UN ARCHIVO
+63.- MYSQL: BASE DE DATOS DESDE PYTHON
+64.- MYSQL: INTERFAZ VISUAL CON TKINTER Y ACCESO A LA BASE DE DATOS
+65.- MYSQL: OTRAS FUNCIONALIDADES DEL PAQUTE MYSQL-CONNECTOR
+66.- MANEJO DE EXCEPCIONES EN PYTHON
+67.- EXCEPCIONES ESTANDAR DE PYTHON
+68.- INSTRUCCION FINALLY EN UN BLOQUE
+69.- SQLITE: BASE DE DATOS DESDE PYTHON
+70.- SQLITE: INTERFAZ VISUAL CON TKINTER Y ACCESO A LA BASE DE DATOS
+71.- PYTHON: F-STRING PARA FORMATEO DE CADENAS DE CARACTERES
+72.- RECURSIVIDAD: CONCEPTOS BASICOS
+73.- RECURSIVIDAD: PROBLEMAS DONDE CONVIENE APLICAR LA RECURSIVIDAD
+74.- FUNCIONES DE ORDEN SUPERIOR
+75.- FUNCIONES LAMBDA EN PYTHON
+76.- COMPRESION DE LISTAS EN PYTHON
+77.- ESTRUCTURA DE DATOS TIPO CONJUNTO (SET)
+78.- MODULOS Y PAQUETES EN PYTHON
+79.- ACCESO A INTERNET MEDIANTE EL PAQUETE URLLIB
+80.- PROCESAR ARCHIVOS CON FORMATO JSON EN PYTHON (MODULO JSON)
+81.- SERIALIZACION Y DESARIALIZACION EN PYTHON (MODULO JSON)
+82.- LOGGING
+
+Platzi
+ingjavierhernsan@hotmail.com
+@sdf321#
+
+1.- IMPRIMIR PANTALLA
+print("Hola mundo.")
+
+2.- PEDIR UN VALOR
+lado = input("Ingrese valor: ")
+
+3.- GUARDAR VALOR OBTENIDO
+lado = input("Ingrese valor: ")
+lado = int(lado)
+
+Forma resumida:
+lado = int(input("Ingrese valor: "))
+
+4.- MOSTRAR VALOR DE VARIABLE
+superficie = lado * lado
+print(superficie)
+
+print("El resultado es: ", superficie)
+print(superficie, " es el resultado.")
+print("El valor: ", superficie, " es el resultado.")
+
+print("uno")
+print("dos")
+
+uno
+dos
+
+print("uno", "dos", "tres")
+uno dos tres
+
+print("uno", "dos", "tres", sep=",")
+uno, dos, tres
+
+print("uno", end="-")
+print("dos")
+
+uno-dos
+
+lista=[10, 20, 30]
+print(lista)
+10 20 30
+
+print(lista, end=",")
+10, 20, 30
+
+
+5.- IF
+valor = 11
+
+if valor > 10:
+	print("El valor es mayor a 10.")
+
+if num1 > num2:
+	print(num1)
+else:
+	print(num2)
+
+if num1 >= 7:
+	print("Promocionado.")
+else:
+	if num1 >= 4:
+		print("Regular.")
+	else:
+		print("Reprobado.")
+
+if num1 > num2 and num1 > num3:
+	print(num1)
+
+if mes == 1 or mes == 2 or mes ==3:
+	print("Corresponde al primer trimestre.")
+
+6.- OPERADORES RELACIONALES
+== Igualdad
+!= Desigualdad
+<  Menor
+<= Menor igual
+>  Mayor
+>= Mayor igual
+
+7.- OPERADORES MATEMATICOS
++  Suma
+-  Resta
+*  Multiplicacion
+/  Division de flotantes
+// Division de enteros
+%  Resto de una division
+** Exponenciacion
+
+8.- OPERADORES LOGICOS
+and Y
+or  O
+
+9.- WHILE
+x = 1
+while x <= n:
+	print(x)
+	x = x + 1
+	
+10.- FOR
+for x in range(101):
+	print(x)
+
+Imprime numeros del 0 al 100.
+
+for x in range(20, 31):
+	print(x)
+
+Imprime numeros del 20 al 30
+
+for x in range(1, 100, 2):
+	print(x)
+
+Imprime numeros impar del 1 al 99
+
+n = int(input("Ingrese numero de ciclos: "))
+for x in range(n):
+	print(x)
+
+11.- COMENTARIOS
+#Una linea
+
+"""Varias
+	lineas"""
+
+12.- VARIABLES
+Enteros
+cantidad = 1
+
+Flotante
+cantidad = 3.14
+
+Cadena de caracteres
+dia = 'Lunes'
+dia = "Lunes"
+
+convercion de valores
+dia = '1'
+cantidad = int(dia)
+
+dia = "3.14"
+cantidad = float(dia)
+
+dia = "74"
+dia = int(dia)
+dia = float(dia)
+
+dia = input("Ingrese el dia: ")
+cantidad = int(input("Ingrese un numero entero: "))
+cantidad = float(input("Ingrese un numero decimal: "))
+
+if dia == "Lunes":
+	#proceso
+
+#programa que ordena de forma alfabetica dos nombres
+if nombre1 < nombre2:
+	print(nombre1)
+	print(nombre2)
+else:
+	print(nombre2)
+	print(nombre1)
+
+13.- CADENAS DE CARACTERES
+varString = "texto"
+
+Ver parte de la cadena
+print(varString[1])
+
+if varString[0] == "a":
+	accion
+
+No se puede utilizar como metodo para asignar un valor
+varString[3] = "m" #MARCARIA ERROR AL COMPILAR
+
+Largo de la cadena
+varInt = len(varString)
+
+Capitalizar
+varString2 = varString.capitalize()
+
+Mayusculas
+varString2 = varString.upper()
+
+Minusculas
+varString2 = varString.lower()
+
+14.- ESTRUCTURA DE DATOS: LISTAS
+lista1 = [10, 5, 3]
+lista2 = [1.78, 2.66, 1.55, 89, 4]
+lista3 = ["lunes", "martes", "miercoles"]
+lista4 = ["juan", 45, 1.92]
+
+Conocer cantidad de elementos
+varInt = len(lista1)
+
+Mostrar un valor de la lista
+print(lista3[2])
+
+Recorrer una lista
+x = 0
+
+while x < len(lista3)
+	print(lista3[x])
+	x = x+1
+
+Mostrar todos lso elementos de la lista
+print("Los elementos de la lista son: ")
+print(lista3)
+
+Agregar un nuevo elemento
+lista1.append(100)
+
+15.- LISTAS: CARGA DE SUS ELEMENTOS
+lista = [10, 20, 30]
+lista.append(100)
+#[10, 20, 30, 100]
+
+valor = int(input("Ingrese un valor entero: "))
+lista.append(valor)
+
+16.- LISTAS: COMPONENTES DE TIPO LISTA
+Lo que hace tan flexible a esta estructura de datos es que podemos almacenar componentes de tipo lista.
+
+notas = [[4, 5], [6, 9], [7, 3]]
+
+Utilizar ciclo for
+for k in range(len(lista)):
+	for x in range(len(lista[k])):
+		lista[k][x]=0
+
+17.- LISTAS: CARGA POR TECLADO DE COMPONENTES DE TIPO LISTA
+nombres=[]
+notas=[]
+
+for x in range(3):
+	nom=input("Ingrese el nombre del alumno: ")
+	nombres.append(nom)
+	no1=int(input("Ingrese la primer nota: "))
+	no2=int(input("Ingrese la segunda nota: "))
+	
+	notas.append([no1, no2])
+
+for x in range(3):
+	print(nombres[x], notas[x][0], notas[x][1])
+
+hijos=[]
+hijos.append([])
+hijos[0].append("Juan")
+
+18.- LISTAS: ELIMINACION DE ELEMENTOS
+lista=[10, 20, 30, 40]
+
+ELIMINA EL PRIMER ELEMENTO
+lista.pop(0)
+
+lista.pop(2)
+
+ESTA FUNCION TIENE UNA SALIDA, APARTE DE ELIMINAR MUESTRA EL ELMENTO ELIMINADO
+print(lista.pop(0))
+
+19.- FUNCIONES
+INICIAR UNA FUNCION
+
+def funcionUno():
+	accion1
+	accion2
+
+def funcionDos():
+	accion1
+	accion2
+
+
+# programa principal
+
+funcionUno()
+funcionDos()
+
+PARAMETROS
+def funcionUno(parametro):
+	print(parametro)
+
+funcionUno("mensaje)
+
+def funcionSumar(v1, v2):
+	v1=v1+v2
+	print(v1)
+
+funcionSumar(2, 7)
+
+RETORNO DE DATOS
+def retorno_superficie(lado):
+	sup=lado*lado
+	return sup
+	
+superficie=retorno_superficie(23)
+print("La superficie del cuadrado es: ", superficie)
+
+PARAMETROS TIPO LISTA
+
+def sumarizar(lista):
+	suma=0
+	for x in range(len(lista)):
+		suma=suma+lista[x]
+	return suma
+
+listavalores=[10, 56, 23, 120, 94]
+print("La suma de todos sus elementos es: ", sumarizar(listavalores))
+
+RETORNO DE UNA LISTA
+def carga_lista():
+	li=[]
+	for x in range(5):
+		valor=int(input("Ingrese valor: "))
+		li.append(valor)
+	return li
+
+lista=carga_lista()
+
+PARAMETROS CON VALOR POR DEFECTO
+def titulo_subrayado(titulo, caracter="*"):
+	print(titulo)
+	print(caracter * len(titulo))
+
+titulo_subrayado("Sistema de Administracion")
+titulo_subrayado("Ventas", "-")
+
+IMPORTANTE
+Los parametros por defectro deben ser los ultimos que se declaren en la funcion.
+
+LLAMADA A LA FUNCION CON ARGUMENTOS NOMBRADOS
+def calcular_sueldo(nombre, costohora, contidadhoras):
+	sueldo=costohora*cantidadhoras
+	print(nombre, "trabajo", cantidadhoras, " y cobra un sueldo de ", sueldo)
+
+calcular_sueldo("Juan", 10, 120)
+calcular_sueldo(costohora=12, cantidadhoras=40, nombre="Ana")
+calcular_sueldo(cantidadhoras=90, nombre="Luis", costohora=7)
+
+CON CANTIDAD VARIABLE DE PARAMETROS
+Para definir una cantidad varaible de parametros debemos anteceder el caracter asterisco (*) al ultimo parametro de la funcion.
+
+def sumar(v1, v2, *lista):
+	suma=v1+v2
+	for x in range(len(lista)):
+		suma=suma+lista[x]
+	return suma
+
+print(sumar(1, 2, 3, 4))
+
+def sumar(v1, v2, v3):
+	return v1+v2+v3
+
+li=[2, 4, 5]
+su=sumar(*li)
+print(su)
+
+PARAMETROS MUTABLES E INMUTABLES
+Tipos de datos mutables:
+Enteros, flotantes, cadena de caracteres, tuplas.
+
+Tipos de datos mutables:
+Listas, diccionarios
+
+def cargar():
+	lista[]
+	continua="s"
+	while continua=="s"
+		valor=int(input("Ingrese un valor: "))
+		lista.append(valor)
+		continua=input("Agrega otro elemento a la lista [s/n]: ")
+	return lista
+
+def imprimir(lista):
+	for elemento in lista:
+		print(elemento, "-", sep="", end="")
+	print("")
+
+lista=cargar()
+imprimir(lista)
+
+
+
+20.- ESTRUCTURA DE DATOS TIPO TUPLA
+Una tupla permite almacenar una coleccion de datos no necesariamente del mismo tipo. Los datos de al tupla son inmutables a diferencia de las listas que son mutables. Una vez inicializada la tupla no podemos agregar, borrar o modificar sus elementos.
+
+tupla=(1, 2, 3)
+fecha=(25, "Diciembre", 2016)]
+punto=(10, 2)
+persona=("Rodriguez", "Pablo", 43)
+
+print(tupla)
+print(fecha[0])
+print(persona[1])
+
+unaLista=list(punto)
+unaLista[0]=31
+unaTupla=tuple(unaLista)
+
+def cargar_fecha():
+	dd=int(input("Ingrese numero de dias: "))
+	mm=int(input("Ingrese numero de mes: "))
+	aa=int(input("Ingrese numero de mes: "))
+	return (dd, mm, aa)
+
+21.- LISTAS Y TUPLAS ANIDADAS
+empleado=["juan", 53, (25, 11, 1999)]
+empleado.append((1, 1, 2016))
+alumnno=("pedro", [7, 9])
+alumno[1].append(10)
+
+paises=[]
+paises.append(("Mexico", 9))
+print(paises[0][0], paises[0][1])
+
+22.- VARIANTES DE FOR PARA RECORRER TUPLAS Y LISTAS
+lista=[2, 3, 50, 7, 9]
+
+for elemento in lista:
+	print(elemento)
+
+empleados=[]
+empleados.append(("Juan", 32))
+
+for nombre, sueldo in empleados:
+	print(nombre, sueldo)
+
+23.- ESTRUCTURA DE DATOS TIPO DICCIONARIO
+productos={"manzanas":39, "peras":32, "lechuga":17}
+print(productos)
+
+productos={}
+for x in range(5):
+	nombre=input("Ingrese el nombre del producto: ")
+	precio=int(input("Ingrese el precio: "))
+	productos[nombre]=precio
+
+for nombre in productos:
+	print(nombre, productos[nombre])
+
+24.- DICCIONARIOS: CON VALORES DE TIPO LISTAS, TUPLAS Y DICCIONARIOS
+productos={}
+prodcutos["pr1"]=("manzana", 34.5, 15)
+
+for codigo in productos:
+	print(codigo, productos[codigo][0], productos[codigo][1], productos[codigo][2])
+
+agenda={}
+lista=[]
+lista.append((20, "correr"))
+agenda["lunes"]=lista
+
+for fecha in agenda:
+	print("Para el dia: ", fecha)
+	for hora, actividad in agenda[fecha]
+		print(hora, actividad)
+
+25.- PORCIONES DE LISTAS, TUPLAS Y CADENAS DE CARACTERES
+lista1=[1,2,3,4,5,6]
+lista2=lista1[2:5] #2,3,4
+
+lista3=lista1[1:3] #1,2
+
+lista4=lista1[:3] #0,1,2
+
+lista5=lista1[2:] #2,3,4,5,6
+
+def meses_faltantes(numeroMes):
+	meses=('enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio')
+	return meses[numeroMes:]
+
+def primeros_tres(cadena):
+	return caden[:3]
+	
+meses=('enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio')
+
+for x in meses:
+	print(primeros_tres(x))
+
+26.- INDICES NEGATIVOS EN LISTAS, TUPLAS Y CADENAS DE CARACTERES
+lista1=[0,1,2,3,4,5,6]
+print(lista1[-1] #6
+print(lista1[-2] #5
+
+27.- BIBLIOTECA ESTANDAR DE PYTHON
+Random
+
+import Random
+dado=random.randint(1,6)
+print(dado)
+
+El modulo random cuenta con otra funcion llamada shuffleque le pasamos como prametro una lista y nos la devuelve con los elementos mezclados.
+random.shuffle(lista)
+
+28.- IMPORTAR ALGUNAS FUNCIONALIDADES DE UN MODULO DE LA BIBLIOTECA ESTANDAR DE PYTHON
+import random #Importa toda las funciones.
+
+from random import randint #Solo importa la funcion de randint.
+
+from random import randint,shuffle
+
+from math import sqrt, pow
+
+valor=10
+r1=sqrt(valor)
+r2=pow(valor, 3)
+
+29.- DEFINICION DE ALIAS PARA UAN FUNCIONALIDAD
+from math import sqrt as raiz, pow as elevar
+
+valor=10
+r1=raiz(valor)
+r2=elevar(valor, 2)
+
+30.- APLICACIONES PROPIAS CON VARIOS MODULOS
+operacioneslista.py
+principal.py
+
+#operacioneslista.py
+def cargar():
+	lista=[]
+	for x in range(5):
+		valor=int(input("Ingrese valor: "))
+		lista.append(valor)
+	return lista
+
+#principal.py
+import operacineslista
+
+lista=operacioneslista.cargar()
+
+Es importante indicar que cuando queremos ejecutar nuestro programa tenemos que abrir el archivo princial.py y elegir la opcion "Run Module" o presionar la tecla F5.
+
+En la carpeta de nuestro proyecto hay una carpeta llamada __pycache__ con un archivo con extension *.pyc (operacioneslista.cpython-35.pyc) este archivo lo crea automaticamente el python cuando ejecutamos por primera vez nuestro programa y tiene por objetivo hacer mas eficiente las ejecuciones futuras del programa.
+
+mayormenor.py
+principal.py
+
+#mayormenor.py
+def mayor(x1, x2):
+	if x1>x2:
+		return x1
+	else:
+		return x2
+
+def menor(x1, x2):
+	if x1<x2:
+		return x1
+	else:
+		return x2
+
+#principal.py
+from mayormenor import mayor
+
+valor1=int(input("Ingrese primer valor: "))
+valor2=int(input("Ingrese segundo valor: "))
+print("El mayor de los dos valores es ", mayor(valor1, valor2))
+
+31.- DECLARACION DE UNA CLASE Y CREACION DE OBJETOS
+class Persona:
+	def inicilizar(self, nom):
+		self.nombre=nom
+	
+	def imprimir(self):
+		print("Nombre", self.nombre)
+		
+persona1=Persona()
+persona1.iniicializar("Pedro")
+persona1.imprimir()
+
+class Alumno:
+	def inicializar(seld, nombre, nota):
+		self.nombre-nombre
+		self.nota=nota
+	
+	def imprimir(self):
+		print("Nombre: ", self.nombre)
+		print("Nota: ", self.nota)
+	
+	def mostrar_estado(self):
+		if self.nota>=4:
+			pirnt("Regular")
+		else:
+			print("Libre")
+	
+alumno1=Alumno()
+alumno1.inicializar("Diego", 2)
+alumno1.imprimir()
+alumno1.mostrar_estado()
+
+32.- METODO __init__ DE LA CLASE
+El metodo __init__ es como el constructor de una clase en la programacion orientada a objetos.
+
+Sintaxis:
+def __init__(parametros):
+	#algoritmo
+
+class Empleado:
+	def __init__(self):
+		self.nombre=input("Ingrese el nombre del empleado: ")
+		self.sueldo=float(input("Ingrese el sueldo: "))
+	
+	def imprimir(self):
+		print("Nombre: ", self.nombre)
+		print("Sueldo: ", self.sueldo)
+
+empleado1=Empleado()
+empleado1.imprimir()
+
+class Punto:
+	def __init__(self, x, y):
+		self.x=x
+		self.y=y
+	
+	def imprimir(self):
+		print("Coordenada del punto")
+		print("(",self.x,",",self.y,")")
+
+punto1=Punto(10, -2)
+punto1.imprimit()
+
+33.- LLAMADA DE METODOS DESDE OTRO METODO DE LA MISMA CLASE
+Sintaxis:
+self.nombreDelMetodo()
+
+class Operacion:
+	def __init__(self):
+		self.valor1=int(input("Ingrese primer valor: "))
+		self.valor2=int(input("Ingrese segundo valor: "))
+		self.sumar()
+
+	def sumar(self):
+		suma=self.valor1+self.valor2
+		print("La suma es: ", suma)
+
+operacion1=Operacion()
+
+34.- COLABORACION DE CLASES
+class Cliente:
+	def __init__(self, nombre):
+		self.nombre=nombre
+		self.monto=0
+	
+	def depositar(self, monto):
+		self.monto=monto+monto
+	
+	def imprimir(self):
+		print(self.nombre, "tiene depositado la suma de ", self.monto)
+
+class Banco:
+	def __init__(self):
+		self.cliente1=Cliente("Juan")
+		self.cliente2=cliente("Ana")
+	
+	def operar(self):
+		self.cliente1.depositar(100)
+		self.cliente2.depositar(150)
+		
+	def depositos_totales(self):
+		self.cleinte1.imprimir()
+		self.cliente2.imprimir()
+
+35.- HERENCIA
+class Persona:
+	def __init__(self):
+		self.nombre=input("Ingrese el nombre: ")
+		self.edad=int(input("Ingrese la edad: ")
+	
+	def imprimir(self):
+		print("Nombre: ", self.nombre)
+		print("Edad: ", self.edad)
+
+class Empleado(Persona):
+	def __init__(self):
+		super().__init__()
+		self.sueldo=float(input("Ingrse el sueldo: "))
+	
+	def imprimir(self):
+		super.imprimir()
+		print("Sueldo: ", self.sueldo)
+	
+	def paga_impuestos(self):
+		if self.sueldo>3000:
+			print("El empleado debe pagar impuestos")
+		else:
+			print("No pafa impuestos")
+
+persona1=Persona()
+persona1.imprimir()
+print("_____________________")
+empleado1=Empleado()
+empleado1.imprimir()
+empleado1.paga_impuestos()
+
+En Python para indicar que un metodo se agrega pass
+
+def operar(self):
+	pass
+
+class Operacion:
+	def __init__(self):
+		self.valor1=0
+		self.valor2=0
+		self.resultado=0
+	
+	def operar(self):
+		pass
+
+class Suma(Operaion):
+	def operar(self):
+		self.resultado=self.valor1+self.valor2
+	
+
+class Resta(Operacion):
+	def operar(self):
+		self.resultado=self.valor1-self.valor2
+
+suma1=Suma()
+suma1.operar()
+
+resta1=Resta()
+resta1.operar()
+
+36.- VARIABLE DE CLASE
+En algunas situaciones necesitamos almacenar datos que sean compartidos por todos los objetos de dicha clase, en esas situaciones debemos emplear vaiables de clase.
+
+class clase:
+	variableDeClase=0
+	
+	def __init__(self):
+
+class Cliente:
+	suspendidos=[]
+	
+	def __init__(self, codigo, nombre):
+		self.codigo=codigo
+		self.nombre=nombre
+	
+	def imprimir(self):
+		print("Codigo: ", self.codigo)
+		print("Nombre: ", self.nombre)
+		self.esta_suspendido()
+	
+	def esta_suspendido(self):
+		if self.codigo in cliente.suspendidos:
+			print("Esta suspendido")
+		else:
+			print("No esta suspendido")
+		print("_________________________________")
+	
+	def suspender(self):
+		cliente.suspendidos.append(self.codigo)
+
+cliente1=Cliente(1, "Juan")
+cliente2=Cliente(2, "Ana")
+
+cliente1.suspender()
+
+cliente1.imprimir()
+cliente2.imprimir()
+
+print(Cliente.suspendidos)
+
+METODO ESPECIAL __str__
+Python nos permite redefinir el metodo que se debe ejecutar. Esto se hace definiendo en la clase el metodo espcial __str__.
+
+class Persona:
+	def __init__(self, nom, ape):
+		self.nombre=nom
+		self.apellifo=ape
+	
+	def __str__(self):
+		cadena=self.nombre+","+self.apellido
+		return cadena
+
+persona1=Persona("Jose", "Rodriguez")
+print(persona1)
+
+Jose, Rodriguez
+
+Como vemos debemos implementar el metodo __str__ y retornar un string, este luego sera el que imprime la funcion print.
+
+37.- REDEFINICION DE LOS OPERADORES MATEMATICOS CON OBJETOS
+Python nos permite redefinir los operadores matematicos cuando planteamos una clase.
+Los metodos especiales que debemos implementar son lso siguientes:
+
+Para el operador +:
+__add__(self, objeto2)
+
+Para el operador -:
+__sub__(self, objeto2)
+
+Para el operador *:
+__mul__(self, objeto2)
+
+Para el operador //:
+__floordiv__(self, objeto2)
+
+Para el operador /:
+__truediv__(self, objeto2)
+
+class Cliente:
+	def __init__(self, nombre, monto):
+		self.nombre=nombre
+		self.monto=monto
+	
+	def __add__(self, objeto2):
+		s=self.monto+objeto2.monto
+		return s
+
+cli1=Cliente('Ana', 1200)
+cli2=Cliente('Luis', 1500)
+print("El total depositado por los dos clientes es: ")
+print(cli1+cli2)
+
+38.- REDEFIINICION DE LOS OPERADORES RELACINALES CON OBJETOS
+Python tambien nos permite redefinir los operadores relacionales cuando planteamos una clase.
+Los metodos especiales que podemos implementar son los siguientes:
+
+
+Para el operador ==:
+__eq__(self, objeto2)
+
+Para el operador !=:
+__ne__(self, objeto2)
+
+Para el operador >:
+__gt__(self, objeto2)
+
+Para el operador >=:
+__ge__(self, objeto2)
+
+Para el operador <:
+__lt__(self, objeto2)
+
+Para el operador <=:
+__le__(self, objeto2)
+
+class Persona:
+	def __init__(self, nombre, edad):
+		self.nombre=nombre
+		self.edad=edad
+	
+	def __eq__(self, objeto2):
+		if self.edad==objeto2.edad:
+			return True
+		else:
+			return False
+
+persona1=Persona('Juan', 22)
+persona2=Persona('Ana', 22)
+
+if persona1==persona2:
+	print("Las dos personas tienen la misma edad.")
+else:
+	print("No tienen la misma edad.")
+
+39.- USO DE PIP
+Instalar
+pip install [nombre del paquete]
+pip install wxPython
+
+Desinstalar
+pip uninstall wxPython
+
+Mostrar los archivos del paquete
+pip show --files wxPython
+
+Tambien:
+pip show -f wxPython
+
+Mostrar lso paquetes instalados
+pip list
+
+Revisar los paquetes que no estan actualizados
+pip list --outdated
+
+Instalar una version especifica
+pip install wxPython=4.0.2
+
+Actualizar un paquete
+pip install --upgrade wxPython
+
+40.- INTERFAZ GRAFICA DE USUARIO: TKINTER
+*CAMBIAR DE COLOR EL FONDO DE LA VENTANA
+self.ventana1.configure(bg="red")
+(Carpeta 57)
+
+41.- TKINTER: CONTROLES BUTTON Y LABEL
+(Carpeta 58)
+
+42.- TKINTER: CONTROL ENTRY
+(Carpeta 59)
+
+43.- TKINTER: CONTROL RADIOBUTTON
+(Carpeta 60)
+
+44.- TKINTER: CONTROL CHECKBUTTON
+(Carpeta 61)
+
+45.- TKINTER: CONTROL LISTBOX
+(Carpeta 62)
+
+46.- TTK: CONTROL COMBOBOX
+(Carpeta 64)
+
+47.- TKINTER: CONTROL MENU
+(Carpeta 65)
+
+48.- TTK: CONTROLES NOTEBOOK Y FRAME
+(Carpeta 66)
+
+49.- TTK: CONTROL LABELFRAME
+(Carpeta 67)
+
+50.- TKINTER: LAYOUT MANAGER (ADMINISTRADOR DE DISENO)
+(Carpeta 68)
+
+51.- TKINTER.MESSAGEBOX: VENTANAS DE MENSAJES
+(Carpeta 69)
+
+52.- TKINTER: VENTANAS DE DIALOGOS
+(Carpeta 70)
+
+53.- TTK: CONTROL SPINBOX
+(Carpeta 71)
+
+54.- TKINTER.SCROLLEDTEXT: EDITOR MULTILINEA
+(Carpeta 72)
+
+55.- TKINTER: CONTROL CANVAS
+(Carpeta 73)
+
+56.- CANVAS: CAPTURA DE EVENTOS DEL MOUSE
+(Carpeta 74)
+
+57.- CANVAS: BORRAR FIGURAS MEDIANTE IDS Y TAGS
+(Carpeta 75)
+
+58.- CANVAS: DESPLAZAR UNA FIGURA MEDIANTE EL METODO MOVE
+(Carpeta 76)
+
+59.- CANVAS: MOSTRAR UNA IMAGEN
+(Carpeta 77)
+
+60.- CANVAS: MOVER UNA FIGURA
+(Carpeta 78)
+
+61.- ARCHIVOS DE TEXTOS: CREACION, ESCRITURA Y LECTURA
+(Carpeta 79)
+
+62.- ARCHIVOS DE TEXTOS: INTERFAZA VISUAL CON TKINTER PARA LEER Y ESCRIBIR UN ARCHIVO
+(Carpeta 80)
+
+63.- MYSQL: BASE DE DATOS DESDE PYTHON
+(Carpeta 81)
+
+64.- MYSQL: INTERFAZ VISUAL CON TKINTER Y ACCESO A LA BASE DE DATOS
+(Carpeta 82)
+
+65.- MYSQL: OTRAS FUNCIONALIDADES DEL PAQUTE MYSQL-CONNECTOR
+(Carpeta 83)
+
+66.- MANEJO DE EXCEPCIONES EN PYTHON
+(Carpeta 84)
+
+67.- EXCEPCIONES ESTANDAR DE PYTHON
+(Carpeta 85)
+
+68.- INSTRUCCION FINALLY EN UN BLOQUE
+(Carpeta 86)
+
+69.- SQLITE: BASE DE DATOS DESDE PYTHON
+(Carpeta 87)
+
+70.- SQLITE: INTERFAZ VISUAL CON TKINTER Y ACCESO A LA BASE DE DATOS
+(Carpeta 88)
+
+71.- PYTHON: F-STRING PARA FORMATEO DE CADENAS DE CARACTERES
+(Carpeta 89)
+
+72.- RECURSIVIDAD: CONCEPTOS BASICOS
+(Carpeta 90)
+
+73.- RECURSIVIDAD: PROBLEMAS DONDE CONVIENE APLICAR LA RECURSIVIDAD
+(Carpeta 91)
+
+74.- FUNCIONES DE ORDEN SUPERIOR
+(Carpeta 92)
+
+75.- FUNCIONES LAMBDA EN PYTHON
+(Carpeta 93)
+
+76.- COMPRESION DE LISTAS EN PYTHON
+(Carpeta 94)
+
+77.- ESTRUCTURA DE DATOS TIPO CONJUNTO (SET)
+La cuarta estructura de datos que presentaremos se llama conjunto (set), esta estructura de datos permite almacenar una coleccion de elementos que no se pueden repetir y no se encuentran ordenadas.
+Podemos definir elementos de un cojunto de tipo tupla pero no de tipo lista, diccionario o conjunto.
+
+Creacion de un conjunto por asignacion
+conjunto1={1, 5, 10, 20}
+print(conjunto)
+
+conjunto2={"juan", 20, 6.4, True}
+print(conjunto)
+
+conjunto3={("juan", 33), ("ana", 44)}
+print(conjunto3)
+
+Agregar elementos
+lenguajes={"C", "Pascal"}
+lenguajes.add("Ruby")
+
+Eliminar elementos
+lenguajes={"C", "Pascal", "Ruby"}
+lenguajes.remove("Pascal")
+
+Si el metodo remove no encuentra el elemento dentro del conjunto genera una excepcion de tipo KeyError.
+
+Si queremos eliminar un elemento del conjunto y que no genere error si no existe debemos hacer uso del metodo discard.
+
+leguajes.discard("Kotlin")
+
+Operador de pertenencia in
+Si queremos verificar si un conjunto contiene un determinado valor podemos utilizar el operador in:
+
+if "PHP" in lenguajes:
+	print("El lenguaje PHP se encuentra en el conjunto")
+
+Operaciones con conjuntos:
+Las operaciones basicas con conjuntos son:
+Union - |
+Interseccion - &
+Diferencia - -
+Diferencia simetrica - ^
+
+lenguajes1={"C", "Pascal", "PHP", "Python"}
+lenguajes2={"C++", "Java", "Python"}
+
+Union
+conjunto=lenguajes1 | lenguajes2
+
+Interseccion
+conjunto=lenguajes1 & lenguajes2
+
+Diferencia
+conjunto=lenguajes1 - lenguajes2
+
+Diferencia simetrica
+conjunto=lenguajes1 ^ lenguajes2
+
+Conjuntos disjuntos
+Dos conjuntos son disjuntos si no tienen elementos en comun entre ellos. Su interseccion es el conjunto vacio.
+
+La clase set dispone del meodo isdisjoint que retorna True si los conjutnos no tienen elementos en comun:
+
+diasferiados={"sabado", "domingo"}
+diaslaborables={"lunes", "martes, "miercoles", "jueves", "viernes"}
+
+if diaslaborables.isdisjoint(diasferiados):
+	print("diaslaborables no tiene elementos en comun con diasferiados)
+
+Igualdad de conjuntos, subconjuntos y superconjuntos
+conjunto1==conjunto2
+conjunto1!=conjunto2
+conjunto1<conjunto2 (si el conjunto1 es un subconjunto de conjunto2)
+conjunto1<=conjunto2 (si el cojunto1 es un subconjunto o es igual que conjunto2)
+conjunto1>conjunto2 (si el conjunto1 es un superconjunto de conjunto2)
+conjunto1>=conjunto2 (si el conjunto1 es un superconjunto o es igual que conjunto2)
+
+diassemana={"lunes", "martes", "miercoles", "jueves", "viernes", "sabado", "domingo"}
+diasferiados={"sabado", "domingo"}
+diaslaborables={"lunes", "martes", "miercoles", "jueves", "viernes"}
+
+if diasferiado<diasseamana:
+	print("diasferiados es un subconjunto de diassemana")
+
+if diasferiados!=diaslaborables:
+	print("diasferiados es distinto a diaslaborables")
+
+if diassemana>diaslaborables:
+	print("diassemana es un superconjunto de diaslaborables")
+
+Acotaciones
+Cantidad de elementos:
+len(lenguajes)
+
+Conjunto vacio
+lenguajes=set()
+lenguajes.add("C")
+lenguajes.add("Pascal")
+
+Es importante que en Python las llaves abiertas y cerradas crean un diccionario y no un conjunto:
+productos={}
+productos["manzana"]=39
+productos["peras"]=32
+
+Un uso comun de los conjuntos es eliminar valores repetidos de listas y tuplas:
+edades=[23, 21, 25, 21, 23]
+conjunto=set(edades)
+
+Iteracion:
+dias={"lunes", "martes", "miercoles'}
+
+for dia in dias:
+	print(dia)
+
+Conjuntos congelados frozenset
+Hay otra clase llamada frozenset que permite crear conuntos inmutables, es decir que no se le pueden agregar o eliminar elementos una vez creado.
+
+opciones_salir=frozenset(["no", "NO"])
+
+78.- MODULOS Y PAQUETES EN PYTHON
+Veremos ahora que un paquete en Python agrupa un conjunto de modulos relacionados y se los localiza en un directorio.
+(carpeta 98)
+
+79.- ACCESO A INTERNET MEDIANTE EL PAQUETE URLLIB
+Para acceder a recursos de interne python nos proporciona en la biblioteca estandar un paquete fundamental llamado urllib.
+(Carpeta 99)
+
+80.- PROCESAR ARCHIVOS CON FORMATO JSON EN PYTHON (MODULO JSON)
+(Carpeta 100)
+
+81.- SERIALIZACION Y DESARIALIZACION EN PYTHON (MODULO JSON)
+Serializacion: Consiste en convertir un objeto de Python (normalmente una lista o diccionario) en un string.
+Deserializacion: Consiste en convertir un string en un objeto de Python (normalmente una lista o diccionario).
+(Carpeta 101)
+
+Tranformacion de datos entre Python y JSON
+Los tipos de datos en JSON son muy similares a los tipos de datos en Python, pero no son exactamente iguales.
+La conversion en los procesos de serializar y deserializar son:
+
+Pytho			JSON
+dic				object
+list o tupla	array
+str				string
+int y flot		number
+True			true
+False			false
+None			null
+
+82.- LOGGING
+import logging
+
+logging.debug('This is a debug message')
+logging.info('This is an info message')
+logging.warning('This is a warning message')
+logging.error('This is an error message')
+logging.critical('This is a critical message')

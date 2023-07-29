@@ -1,0 +1,269 @@
+C++
+
+1.- COMPILAR CODIGO C++
+2.- CORRER PROGRAMA
+3.- CODIGO BASICO
+4.- SALIDA DE CONSOLA
+5.- DECLARAR VARIABLES
+6.- ASIGNAR VALOR A LAS VARIABLES DESDE CONSOLA
+7.- MOSTRAR VALOR DE VARIABLE EN SALIDADE CONSOLA
+8.- IF
+9.- OPERADORES RELACIONALES
+10.- OPERADORES MATEMATICOS
+11.- OPERADORES LOGICOS
+12.- WHILE
+13.- DO WHILE
+14.- FOR
+15.- CADENA DE CARACTERES MEDIANTE VECTORES
+16.- DECLARACION DE UNA CLASE Y DEFINICION DE OBJETOS
+18.- SINTAXIS DE UN METODO
+
+1.- COMPILAR CODIGO C++
+g++ file.cpp -o file
+
+2.- CORRER PROGRAMA
+./file
+
+3.- CODIGO BASICO
+#include<iostream>
+
+using namespace std;
+
+int main(){
+
+	return 0;
+}
+
+4.- SALIDA DE CONSOLA
+cout <<"Hola mundo.";
+
+5.- DECLARAR VARIABLES
+int intVar;
+int intVar = 0;
+
+float floatVar;
+
+6.- ASIGNAR VALOR A LAS VARIABLES DESDE CONSOLA
+cin >>intVar;
+cin >>floarVar;
+
+7.- MOSTRAR VALOR DE VARIABLE EN SALIDADE CONSOLA
+int intVar=19;
+
+cout <<intVar;
+
+8.- IF
+if (condicion)
+{
+	accion();
+}
+
+float sueldo=0;
+
+if (sueldo>3000)
+{
+	cout<<"Esta persona debe abonar impuestos";
+}
+
+if(sueldo>3000)
+{
+	accion1();
+}
+else
+{
+	accion2();
+}
+
+if(suldo>3000)
+{
+	accion1();
+}
+else
+{
+	if(sueldo==1000)
+	{
+		accion2()
+	}
+	else
+	{
+		accion3()
+	}
+}
+
+if(suldo>3000)
+{
+	accion1();
+}
+else if (sueldo==2000)
+{
+	accion2();
+}
+else
+{
+	accion3();
+}
+
+if(sueldo<1000 || sueldo>3000)
+{
+	accion1();
+}
+
+9.- OPERADORES RELACIONALES
+== Igualdad
+!= diferente
+> Mayor que
+>= Mayor o igual que
+< Menor que
+<= Menor o igual que
+
+10.- OPERADORES MATEMATICOS
++ Suma
+- Resta
+* Multiplicacion
+/ Division
+% Resto de la division
+
+11.- OPERADORES LOGICOS
+&& and
+|| or
+
+12.- WHILE
+int x;
+x=1;
+
+while (x<=100)
+{
+	cout<<x;
+	cout<<" - ";
+	x=x+1;
+}
+
+
+int n, x;
+n=10;
+x=1;
+
+while (x<=n)
+{
+	cout<<x;
+	cout<<" - ";
+	x=x+1;
+}
+
+13.- DO WHILE
+int valor;
+
+do
+{
+	accion();
+}
+while(valor!=0);
+
+14.- FOR
+int f;
+for(f=1; f<=100; f++)
+{
+	cout<<f;
+	cout<<"=";
+}
+
+for(int x=0; x<=10; x++)
+{
+	accion();
+}
+
+15.- CADENA DE CARACTERES MEDIANTE VECTORES
+char <nombre> [<Cantidad de caracteres>];
+
+char cadena[8];
+
+La variable cadena puede almacenar hasta 7 caracteres (lo definimos de 8 ya que requiere un caracter para indicar el fin).
+El terminador de cadena es \0.
+
+char cadena[8]="hola";
+
+char mes1[20]="enero";
+
+cout<<mes1;
+
+Para ingresar cadenas de caracteres por teclado debemos emplear el metodo getline del objeto cin (le pasamos como parametro la cadena a ingresar y el tamano de la cadena)
+
+cin.getline(cadena, 40);
+
+char nombre[40]
+cout<<"Ingrese su nombre: ";
+
+cin.getline(nombre, 40);
+
+cout<<"El nombre ingresado es: ";
+cout<<nombre;
+
+Comparar cadenas
+int strcmp(cadena1, cadena2)
+
+Retorna 0 si las dos cadenas son exactamente iguales, mayor a cero si cadena1 es mayor alfabeticamente que cadena2 y meno a cero en caso contrario.
+
+if (strcmp(cadena1, cadena2)==0)
+{
+	cout<<"Son iguales";
+}
+
+16.- DECLARACION DE UNA CLASE Y DEFINICION DE OBJETOS
+#include <iostream>
+
+using namespace std;
+
+class Persona{
+	private:
+		char nombre[40];
+		int edad;
+	public:
+		void inicializar();
+		void implimir();
+		void esMayorEdad();
+};
+
+void Persona::inicializar()
+{
+	cout<<"Ingrese nombre: ";
+	cin.getline(nombre, 40);
+	cout<<"Ingrese edad: "'
+	cin>>edad;
+}
+
+void Persona::imprimir()
+{
+	cout<<"Nombre: ";
+	cout<<nombre;
+	cout<<"\n";
+	cout<<"Edad: ";
+	cout<<edad;
+	cout<<"\n";
+}
+
+void Persona::esMayorEdad()
+{
+	if(edad>=18)
+	{
+		cout<<"Es mayor de edad.";
+	}
+	else
+	{
+		cout<<"No es mayor de edad.";
+	}
+
+	cin.get();
+	cin.get();
+}
+
+int main()
+{
+	Persona persona1;
+	persona1.inicializar();
+	persona1.imprimir();
+	persona1.esMayorEdad();
+
+	return 0;
+}
+
+18.- SINTAXIS DE UN METODO

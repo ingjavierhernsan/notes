@@ -1,0 +1,72 @@
+Caracter .
+En la busqueda se selecciona .* (busca por medio de expresiones regulares).
+Al escribir . en la busqueda, encontrara cualquier caracter.
+
+Al escribir .  (punto y un espacio), encuentra cualquier caracter que este acompanado con un espacio.
+Al escribir cierta cantidad de puntos se busca donde hay esa cantidad de caracteres.
+... - Busca en donde hay 3 caracteres o 3 grupos de caracteres.
+
+Las clases prdefinida y construidas
+Apartir del punto nacen tres clases predefinidas por la sintaxis de las expresiones regulares:
+Digito
+Palabra
+Espacios
+
+Digitos: \d
+Cantidad de digitos: \d\d\d
+
+Letras: \w (de la a a la z en minusculas o mayusculas, guion bajo y digitos)
+\d\d\w
+
+Espacios: \s
+
+Construir una clase:
+Se inicia con: []
+Se agrega lo que se necesita buscar: [0-9]
+
+[0-9] - Busca del 0 al 9.
+[a-z] - Busca de la a a la z en minusculas.
+[a-zA-Z]
+[adeg] - Busca solo el rango indicado.
+
+Escapar los caracteres
+Se agrega una diagonal al caracter que se quiere escapar \
+\.
+[a-z\.] - Ahora en la busqueda se incluye al punto.
+
+.* Encuentra todos los caracteres.
+\d.* Encuentra todos digitos.
+\d+
+\d?
+
+* Greedy, todos
++ Uno o mas
+? Cero o una, haya o no haya.
+
+\d+[a-z] Encuentra solo los digitos que tengan una letra de la a a la z.
+\d*[a-z] Encuentra todos los digitos que tengan una letra de la a la z.
+\d*[a-z][a-z] Encuenta todos los digitos que tengan dos letras de la a la z.
+s Solo con s.
+s? Puede tener o no tener s.
+
+Contadores
+{numero}
+{numero minimo, numero maximo} En algunos casos de leguajes se puede.
+
+\d{2} - Encontrar dos numeros.
+\d{2,5} - Encontrar de dos a cinco numeros.
+\d{4,} - No tener un numero maximo indica no tener un limite.
+[a-z]{2}
+
+NOT(^), su uso y sus peligros
+\D No es un digito.
+\W No es una palabra.
+\S No es un espacio.
+
+[0-5a-c] Busca lo que hay en este rango.
+[^0-5a-c] Busca lo que no esta en este rango.
+
+Principio (^) y final de linea ($)
+^\d$
+^\d{3}$
+^[^\d]$ es igual a ^[\D]$

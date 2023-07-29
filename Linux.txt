@@ -1,0 +1,420 @@
+ls - Enlista los archivos de la carpeta actual.
+ls
+
+ls -l - Enlista los archivos de la carpeta actual con detalle.
+ls -lh - Enlista los archivos de la carpeta actual con detalle con la informacion mas legible.
+ls -la - Muestra todos los archivos, incluyendo ocultos.
+ls -ls - Ordena por tamano los archivos.
+ls -lr - Muestra los archivos odenados de la z a a.
+ls *.txt - Muestra todos los archivos con esa extension.
+ls datos* - Muestra todos los archivos que inician con la palabra datos.
+ls datos? - Muestra todos los archivos que inician con la palabra datos y con un solo caracter al final.
+ls datos???
+ls -d [[:upper:]]* - Muestra los directorios que empiezan con mayuscula.
+ls -d [[:lower:]]
+ls [ad]* - Muestra los archivos que inician con los caracteres indicados.
+
+ls Desk + Tab - Acompleta la palabra del directorio, al dar Enter muestra el contenido de esa carpeta.
+
+ls D - Muestra todo lo que empiece con D.
+
+ls -a - Muestra todo lo contenido en la carpeta.
+ls / - Muestra el contenido del directorio raiz, no importa en que carpeta se encuentre el usuario.
+ls carpeta/ - Muestra el contenido del directorio sin entrar a ese directorio.
+
+Redireccionamiento del resultado de un comando:
+> - Estandar output.
+< - Estandar input.
+
+ls Documents > mydocuments.txt - Crea un documento txt con los archivos y directorios enlistados.
+ls Downloads >> mydocuments.txt - Concatena el listado de Downloads junto con los de Documents en le archivo previamente creado.
+
+Para incluir en el documento de texto el error se debe incluir el 2
+ls dfsdfsd 2> error.txt
+
+Para incluir la salida exitosa o el error
+ls fdfsdfsd > output.txt 2>&1
+
+echo - Genera una salida en consola.
+echo "Hola mundo" - La respuesta en consola solo sera Hola mundo.
+
+cat - Concatena las salidas.
+cat documento1.txt documento2.txt
+
+Tambien:
+
+cat < documento1.txt
+
+| - Redireccionamiento pipe, redirecciona una salida a un programa.
+ls | less - La salida de ls se mostrara en el comando less y se podra utilizar normalmente. No se crea el archivo.
+ls -lh | less
+ls -lh | less | tee | output.txt - Muestra la salida de ls en less y crea el archivo.
+ls -lh | tee output.txt | less = Muestra la salida, crear el archivo y muestra en less.
+ls -lh | sort | tee output.txt | less - Hace lo mismo pero ordena la lista de archivos.
+
+date - Muestra la fecha del sistema.
+
+cd - Cambia el directorio.
+cd carpeta
+
+cd - Sin parametros manda directamente a home.
+cd ~ Nos manda a la carpeta del usuario.
+
+cd .. - Se sale de la carpeta.
+cd ../..
+
+
+clear o Ctrl L - Limpia la pantalla.
+clear
+
+pwd - Muestra la ruta actual.
+
+file - Nos da cierta informacion sobre ciento archivo.
+file code.cpp
+
+file ./pictures/imagen.png - Archivo en otra carpeta.
+
+Al escrivir el nombre de algun archivo al dar Tab el sistema al encontrar una coincidencia acompletara el nombre del archivo.
+
+No funciona en Ubunto, se debe instalar una herramienta.
+tree - Muestra una grafica de arbol de todas las carpetas y archivos de la computadora.
+tree -L 2 - Solo profundisa a dos niveles.
+
+mkdir - Crea un directorio.
+mkdir midirectorio
+mkdir "mi directorio"
+
+mkdir dir1 dir2 dir3 - Crea varios directorios al mismo tiempo.
+
+rmdir - Elimina un directorio.
+rmdir nombrecarpeta
+
+Para poder eliminar el directorio debe estar vacio.
+
+touch - Crea un archivo.
+touch archivo.txt
+
+touch file1.txt file2.txt file3.txt
+
+cp - Copiar archivo.
+cp file1.txt file1bk.txt
+cp test.txt otracarpeta/test.txt
+cp test.txt otracarpeta/copiatest.txt
+
+mv - Mueve un archivo.
+mv file1bk.txt .. - Muefve el archivo a una carpeta anterior.
+mv filea.txt file2.txt - Renombre un archivo. Tambien puede usarse en directorios.
+
+rm - Borrar archivos.
+rm filebk.txt
+rm -i filebk.txt - Pregunta antes de borrar el archivo.
+rm -r - Borrar directorios.
+rm -ri - Pregunta antes de borrar el directorio.
+rm -rf -Forza el borrado
+
+rm -r dir1 dir2 dir3
+
+head - Muestra la cabera de un archivo de texto (las primeras 10 lineas).
+head file.txt
+head file.txt -n 15 - Muestra las primeras 15 lineas.
+
+tail - Muestra las ultimas lineas de texto.
+tail file.txt
+tail file.txt -n 15
+
+less - Muestra todo el archivo de texto y nos permite navegar por el.
+less file.txt
+
+Al precionar la techa / nos permite buscar alguna palabra.
+
+Para salir de preciona la tecla q.
+
+xdg-open - Abre el archivo con el programa predeterminado en el ambiente grafico.
+xdg-open index.html
+
+xdg-open . - Abre la carpeta actual en la terminal en el ambiente grafico.
+
+Ctrl + c - Mata el proceso que este corriendo en la terminal.
+
+nautilus - Abre la carpeta que se indique en el ambiente grafico.
+nautilus directorio
+
+type - Nos da informacion del tipo de comando.
+type cd
+type ls
+
+alias - Crea alias con los comandos.
+alias l="ls -lh"
+
+Los alias solo son temporales, cuando se cierra la terminal se borran. (se pueden guardar, pero es un tema avanzado).
+
+help - Muestra ayuda sobre algun comando.
+help cd
+
+Tambien:
+cd --help
+
+man - Muestra el manual del comando.
+man ls
+man cd
+
+info - Muestra informacion mas resumida del comando.
+info ls
+
+whatis - Muestra informacion basica del comando.
+whatis ls
+whatis cd
+
+Correr comandos de manera sincrona (uno de tras de otro):
+ls; mkdire directorionuevo
+
+Correr comandos de manera asincrona:
+ls & date
+Primero mostrara una lista de los hilos de procesos. Despues mostrara la salida de los procesos.
+
+Correr comandos de manera condicional:
+mkdir test && cd test
+
+cd dfdksjfsdkj && touch file.txt && echo "Archivo creado" - No se crea el archivo ni se expresa lo del echo por que ocurre un error al tratar de cambiar la directorio indicado.
+
+El operador que si permitiera este tipo de acciones es el OR:
+cd dfdsfs || touch file.txt || echo "Archivo creado"
+
+Tipos de archivos
+- Un archivo normal.
+d Un directorio.
+l Un link simbolico.
+b Un archivo de bloque especial. Son archivos que manejan la informacion de los bloques de datos como una USB.
+
+Tipo de modo
+Dueno
+rwx
+111 binario / 7 octal
+
+Grupo
+r-x
+101 binario / 5 octal
+
+World
+r-x
+101 binario / 5 octal
+
+r read
+w write
+x execute
+
+Modo simbolico
+u Solo para el usuario.
+g Solo para el grupo.
+o Solo para otros (es el world)
+a Aplica para todos.
+
+Link simbolico o acceso directo desde la terminal
+ln -s Documents/Dev linksimbolico
+cd linksimbolico
+
+Remover link simbolico
+rm linksimbolico
+
+Variable de entorno
+Enlistar las variables de entorno.
+printenv
+
+Imprimir variable de entorno.
+echo $HOME
+
+Modificar variables de entorno.
+Ubicar en /home/usuario
+Abrir en editor de texto el archivo:
+.bashrc
+
+Agregar un alias:
+alias l='ls -lh'
+
+Crear una variable de entorno:
+HOLA_MESSAGE="Hola amigos"
+
+Modificar PATH:
+PATH=$PATH:'/home/codevars/bin'
+
+Despues de guardar las modificaciones se debe volver a cargar el archivo. Se debe recargar con:
+bash
+
+Buscar en un docuemntos de texto desde la linea de comandos
+grep
+
+grep palabraABuscar documento.txt
+Muestra una lista de donde se encuentra la palabra a buscar en el documento.
+
+grep -i palabraABuscar documento.txt
+La busqueda no es sensible a mausculas y minusculas.
+
+grep -i palabraABuscar documento.txt || less
+Busca la palabra y la dirige a less.
+
+grep -c
+Cuenta las veces que aparece la palabra en la busqueda.
+
+grep -vi
+Muestra lo que no coneitne la busqueda.
+
+grep -vi palabraABuscar documento.txt > docACrear.txt
+Guardar la busqueda en un documento de texto.
+
+wc test.txt - Muestra informacion del documento de texto.
+
+Contar las lineas, palabras y bits que hay en un documento.
+wc -l docuemnto.txt
+
+Contar el numero de palabras.
+wc -w
+
+Contar numero de bits.
+wc -c
+
+w - Muestra la informacion sobre los usuarios actualmente conectados y lo que eesta haciendo cada usuario.
+
+who - Muestra los usuarios que han iniciado sesion.
+
+top - Muestra los procesos de linux.
+
+sudo apt intall htop - Es una herramienta que muestra de una forma diferente los procesos de linux
+
+ps aux - Muestra una lista de procesos actuales
+
+ps aux | less - Muestra la lista con pausas.
+
+apt-cache search whatever - Buscar el cache de algun programa.
+
+Mostrar lista de los repositoris de donde se obtubieron los programas instalados:
+cat /etc/apt/sources.list
+
+UTILIDADES DE RED
+ifconfig - Nos muestra la configuracion de nuestra red.
+ifconfig
+dispositivoDeRed: InformacionDelDispositivo
+
+ping - Nos indica si una pagina esta activa.
+ping www.google.com
+
+curl - Trae un archivo de texto atraves de la red.
+curl www.google.com (trae su codigo html)
+
+Para guardar el texto recibido:
+curl www.google.com > index.html
+
+wget - Hace lo mismo que curl pero descega el archivo directamente a la computadora.
+wget www.google.com
+
+netstat -i - Muestra los dispisitivos de red.
+
+netstat -tupln - Muestra las conexiones de red.
+
+sudo apt install net-tools
+
+traceroute - Nos indica a todos los puntos que nos conectamos cuando entramos a una pagina web.
+No lo tiene ubuntu, se debe instalar.
+
+COMPRIMIR ARCHIVOS
+tar - Comprime archivos con la extension tar.
+tar -cvf tocompr.tar acomprimir - Comprime (c) y muestra (v) el archivo (f).
+
+Tambien:
+tar -cvzf tocompr.tar.gz acomprimir
+
+Tambien:
+zip -r tocompr.zip acomprimir
+
+Descomprimir
+tar -xvf tocompr.tar
+
+Tambien:
+tar -xvzf tocompr.tar
+
+Tambien:
+unzip tocompr.zip
+
+MANEJO DE PROCESOS
+
+ps - Muestra los procesos que estan corriendo en la terminal actualmente.
+Muestra: PID - Process id
+
+Para matar los procesos necesitasmo el PID:
+
+kill PID - Mata los procesos que se estan corriendo por medio de su id.
+kill 4713
+
+Para el proceso
+cat > mi_nota.txt (ejemplo de proceso)
+Para suspender el proceso presionamos Ctrl+z
+Motrara el siguiente mensaje
+^Z
+[1]+ Stopped cat>mi_nota.txt
+
+Esto manda al background el proceso. [1] este es el numero de proceso suspendido.
+
+jobs - Muestra los procesos que tenemos en el background.
+
+fg numero de proveso suspendido - Manda el proceso suspendido al foreground.
+fg 1
+
+Para ciertos linux se usa fg %1
+
+Ctrl + d para terminar el input y guardar los cambios.
+
+Otra forma de enviar al background el proceso es poner un & al final de la sentencia:
+cat > mi_nota.txt &
+
+Otra forma es con:
+bg 1
+
+bg sirve para dejar en background pero que siga continuando su proceso.
+Correr un proceso.
+Ctrl + z Mandar a suspender el proceso.
+jobs Revisar en que estatus y que numero tiene el proceso.
+bg numero de proceso
+Al correr la sentencia jobs se mostrara lo siguiente:
+[1]+ Running proceso &
+
+How to boot Ubuntu into text/command console
+
+Open terminal.
+Make a backup the configuration file:
+
+sudo cp - n /etc/default/grub /etc/default/grub.backup
+
+Edit the configuration file:
+
+sudo vim /etc/default/grub
+
+Disable:
+#GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
+
+Set:
+GRUB_CMDLINE_LINUX="text"
+
+Able:
+GRUB_TERMINAL="console"
+
+Save the changes and quit from VIM.
+
+Via command run:
+
+sudo update-grub
+
+and:
+
+sudo systemctl set-default multi-user.target
+
+How to restore
+Via command run:
+
+sudo mv /etc/default/grub.backup /etc/default/grub
+
+also:
+
+sudo update-grub
+
+and:
+
+sudo systemctl set-default graphical.target
