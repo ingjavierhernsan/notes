@@ -1,0 +1,58 @@
+Calculo 
+Realizar operciones pra llegar a un resultado.
+
+Calculo infinitesimal
+Los valores de las veaibles con cercanos a cero.
+
+Calculo diferencial
+Estudia las tasas de cambio en las funciones cuando esos cambios son muy pequenos (se aproximan a cero). Su principal herramienta es la derivada.
+
+Calculo integral
+Estudia el proceso de integracion o de antiderivada.
+
+funcionesEs una regla donde a cada elemento de un conjunto A se le asigna un elmento de un conjunto B.
+
+y=f(x)
+
+Formas de representar una funcion
+- Verbalmente
+- Numericamente
+- Visualmente
+- Algebraicamente
+
+Verbalmente
+-> A cada letra del abecedario se le asigna un numero entero diferente.
+-> El precio aumenta en 2 dolares por cada kilometro.
+
+Numericamente
+x       f(x)
+-14     4
+-6      2
+0       -4
+1       0
+3       -10
+
+Visualmente
+Por medio de una grafica: Una parabola.
+
+Algebraicamente
+Parabola:
+y = f(x) = x^2
+
+Dominio y rango de una funcion
+Que valores pueden tener las funciones?
+
+Dominio de una funcion
+Los valores que toma x y estan definidos en la funcion f(x).
+
+Rango de una funcion
+Todos los resultados que nos puede dar una funcion.
+
+Relacionando...
+El dominio son los granos de cafe.
+La funcion es nuestra cafetera.
+El rando son todas las clases de cafe que podemos preparar.
+
+Como programar funciones algebraicas
+
+Funciones trascendentes

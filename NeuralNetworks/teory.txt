@@ -1,0 +1,65 @@
+1.- Conocimiento previo:
+Curso de matematicas para data science: Calculo
+
+Python
+NumPy
+Pandas
+matplotlib
+
+2.- Herramientas:
+TensorFlow
+PyTorch
+
+Keras
+Es un API para facilitar la conexion con TensorFlow y PyTorch.
+
+TensorFlow utiliza el GPU de la computadora para resolver calculos matematicos a gran escala en deep learning.
+
+colab - IDE para python. Es de Google y permite utilizar CPU y GPU en la nube.
+
+Deep learning:
+
+Artificial intelligence
+    ^
+Machine learning
+    ^
+Deep learning
+
+La inteligencia artificial son los intentos de replicar la inteligencia humana en sistemas artificiales.
+
+Machine learning son las tecnicas de aprendizaje automatico, en donde mismo sistema aprende como encontrar una respuesta sin que alguien lo este programando.
+
+Deep learning es todo lo relacionado a las redes neuronales. Se llama aprendizaje profundo porque a mayor capas conectadas entre si se obtiene un aprendizaje mas fino.
+
+En el deep learning existen dos grandes problemas:
+Overfitting: Es cuando el algoritmo "memoriza" los datos y la red neuronal no save generalizar.
+
+Black box: Nosotros conocemos las entradas a las redes neuronales. Sin embargo, no conocemos que es lo qeu pasa dentro de las capas intermedias de la red.
+
+La neurona: Una pequena y poderosa herramienta.
+
+Arquitectura de una red neuronal.
+
+Funciones de activacion
+Discretas: Conjunto finito de valores.
+Continuas: Valores dentro de algun intervalo.
+
+Funcion escalon/escalonada/threshold
+Si es mayor a cero o igual a 1 es igual a 1.
+Si es menor a cero o igual a 0 es igual a 0.
+
+Funcion signo/signum
+
+Funcion sigmoidal/sigmoid
+Util en estadistica y probabilidad.
+Usa derivadas.
+
+Funcion tangente hiperbolica/tanh
+
+Funcion lineal rectificada/ReLU
+Se utiliza mas actualmente
+Es mas usada al trabajar con capas ocultas.
+
+Funcion softmax
+Da una probabilidad de salida.
+
