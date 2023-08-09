@@ -1,0 +1,1830 @@
+CONFIGURAR CODE:BLOCKS
+Si no compila el framework seguir los siguientes pasos:
+1.- Ir al menu "Settings".
+2.- Seleccionar la opcion "Compiler...".
+3.- En la ventan Compiler settings seleccionar la pestana "Toolchain executables".
+4.- Dar clic en el boton "Auto-detect".
+5.- En el cuadro de texto cambiara la ruta, algo parecido a: "C:\Program Files(x86)\CodeBlocks\MinGW".
+
+1.- ESTRUCTURA BASICA
+2.- IMPRIMIR MENSAJE
+3.- VARIABLES
+4.- IMPRIMIR VALOR DE VARIABLES
+5.- CAPTURAR VALOR DE CONSOLA
+6.- OPERADORES
+7.- IF
+8.- WHILE
+9.- DO WHILE
+10.- FOR
+11.- VECTORES INT Y FLOAT
+12.- CHAR
+13.- CADENAS DE CARACTERES
+14.- FUNCIONES QUE FACILITAN EL TRABAJO CON CADENAS DE CARACTERES (STRING.H)
+15.- CONCEPTO DE FUNCIONES - PROGRAMACION ESTRUCTURADA
+16.- FUNCIONES CON PARAMETROS DE TIPO INT, FLOAT Y CHAR
+17.- FUNCIONES CON RETORNO DE UN VALOR
+18.- FUNCIONES CON PARAMETROS DE TIPO VECTOR
+19.- VECTORES (MAYOR Y MENOR ELEMENTO)
+20.- VECTORES (ORDENAMIENTO)
+21.- ESTRUCTURA DE DATOS TIPO MATRIZ (ELEMENTOS INT Y FLOAT)
+22.- ESTRUCTURA DE DATOS TIPO MATRIZ (ELEMENTOS CHAR)
+23.- VECTORES Y MATRICES PARALELAS (ORDENAMIENTO)
+24.- DIRECTIVA #DEFINE
+25.- ESTRUCTURA DE DATOS TIPO REGISTRO (STRUCT)
+26.- FUNCIONES CON PARAMETROS DE TIPO STRUCT
+27.- ESTUCTURA DE DATOS TIPO VECTOR (ELEMENTOS DE TIP STRUCT)
+28.- ESTRUCTURA DE DATOS TIPO REGISTRO (CON CAMPOS INT, FLOAT, VECTOR, REGISTROS ANIDADOS, ETC.)
+29.- VARIABLES DE TIPO PUNTERO
+30.- PARAMETROS DE UNA FUNCION DE TIPO PUNTEROS A INT, FLOAT Y CHAR
+31.- PARAMETRO DE UNA FUNCION DE TIPO PUNTEROS A STRUCT
+32.- RELACION ENTRE PUNTEROS Y VECTORES
+33.- OPERADORES ++ Y -- CON VARIABLES DE TIPO PUNTERO
+34.- ASIGNACION DINAMICA DE MEMORIA (MALLOC Y FREE)
+35.- ESTRUCTURAS DINAMICAS EN C: CONCEPTO DE LISTAS
+36.- ESTRUCTURAS DINAMICAS EN C: LISTAS TIPO PILA
+
+.- RECURSIVIDAD CONCEPTOS BASICOS
+.- RECURSIVIDAD: PROBLEMAS DONDE CONVIENE APLICAR LA RECURSIVIDAD
+
+.- ESTRUCTURAS DINAMICAS EN C: CONCEPTOS DE ARBOLES
+.- ESTRUCTURAS DINAMICAS EN C: IMPLEMENTACION DE UN ARBOL BINARIO ORDENADO
+
+.- TODOS LOS TIPOS DE DATOS PRIMIVTIVOS EN EL LENGUAJE C
+
+
+1.- ESTRUCTURA BASICA
+int main(){
+	
+	return 0;
+}
+
+#include<stdio.h>
+
+int main(){
+
+	return 0;
+}
+
+2.- IMPRIMIR MENSAJE
+Se utiliza la funcion printf("Texto"), esta funcion se encuentra en stdio.h, por eso se debe incluir en el proyecto.
+
+printf("Mensaje");
+
+#include<stdio.h>
+
+int main(){
+	printf("Hola mundo!!!");
+	
+	return 0;
+}
+
+3.- VARIABLES
+int variableEntera;
+variableEntera=1;
+
+int variableEntera=2;
+
+float variableDecimal;
+variableDecimal=2.3
+
+float variableDecimal=4.3;
+
+4.- IMPRIMIR VALOR DE VARIABLES
+int varInt=1;
+float varFloat=1.3;
+
+printf("%i", varInt);
+printf("%f", varFloat);
+
+printf("El valor es %i", varInt);
+printf("El valor %f sin dividir", varFloat);
+
+printf("%0.2f", varFloar);
+Imprimer los solo dos decimales de la variable flotante.
+
+5.- CAPTURAR VALOR DE CONSOLA
+Se utiliza la funcion scanf(tipoVariable, &Variable) y se encuentra en stdio.h.
+
+int varInt;
+
+printf("Escribe un valor numerico: ");
+scanf("%i", &varInt);
+
+printf("%i", varInt);
+
+getchar();
+
+Para detener el proceso para ver el resultado se debe utilizar getchar(), que tambien se encuentra en stdio.h. Tambien se puede utilizar getch(), pero se debe incluir conio.h.
+#include<stdio.h>
+#include<conio.h>
+
+6.- OPERADORES
+Operadores matematicos
++	suma
+-	resta
+*	multiplicacion
+/	divicion
+%	resto de la divicion
+
+Operadores relacionales
+>	mayor que
+<	menor que
+>=	mayor o igual que
+<=	menor o igual que
+==	igual que
+!=	diferente que
+
+Operadores logicos
+&&	y
+||	o
+
+7.- IF
+if(a == b){
+
+}
+
+if(a != b){
+
+}
+else {
+
+}
+
+if (a == b){
+
+}
+else if (b <= c) {
+
+}
+else {
+
+}
+
+if (a == b){
+	if (b == c){
+	
+	}
+}
+else {
+	if(a > b){
+	
+	}
+	else {
+	
+	}
+}
+
+8.- WHILE
+int varInt=0;
+
+while(varInt != 10){
+	printf("%i", varInt);
+	varInt=varInt+1;
+}
+
+9.- DO WHILE
+int varInt=0;
+
+do{
+	printf("Escribe un numero: ");
+	scanf("%i", &varInt);
+} while(varInt == 1);
+
+10.- FOR
+int varInt=0;
+
+for(varInt=0; varInt<=10; varInt++){
+	printf("%i", varInt);
+}
+
+for(int x=0; x<=10; x++){
+	printf("%i", x);
+}
+
+11.- VECTORES INT Y FLOAT
+int vecInt[10];
+float vecFloat[5];
+
+for(int x=0; x<10; x++){
+	printf("Ingrese valor: ");
+	scanf("%i", &vecInt[x]);
+}
+
+for(int x=0; x<10; x++){
+	print("%i", &vecInt[x]);
+	print("\n");
+}
+
+Inicializar
+int vec[3]={10, 20, 30};
+
+12.- CHAR
+char varChar='a';
+varChar=65; //En ASCII es la letra A
+
+printf("Ingrese una letra: ");
+scanf(" %c", &varChar);
+
+printf("%c", varChar);
+
+if (varChar == 's'){
+
+}
+
+char letra;
+
+for(letra='A'; letra<='Z'; letra++){
+	printf("%c", letra);
+	printf("-");
+}
+
+for(letra='a'; letra<='z'; letra++){
+	printf("%c", letra);
+	printf("-");
+}
+
+13.- CADENAS DE CARACTERES
+char vecChar[16]="Pablo Rodriguez";
+
+printf("%s", vecChar);
+
+El tamano 16 no es un capricho, si contamos la cantidad de caracteres que hay entre las comillas incluyendo el espacio en blanco veremos que es 15. Luego recordar que debe haber un caracter extra en el vector donce se indica que ahi finalizan los datos de la cadena. No hay problema si el vector reserva mas de 16 caracteres, en cambio se generaran errores inesperados si el vector tiene menos de 16 caracteres.
+
+Componente	[0]	[1]	...	[15]
+vecChar		'p'	'a'	...	'\0'
+
+En memoria se almacenan en cada posicion del vector el caracter respectivo y cuando se ejecuta el programa y se muestran los datos mediante la funcion printf se muestran todos hasta que encuentra el caracter NULL que coincide con el caracgter ASCII 0.
+
+char vecChar[16]="Pablo";
+
+componente	[0]	[1]	[2]	[3]	[4]	[5]	[6]	... [15]
+vecChar		'p'	'a'	'b'	'l'	'0'	'\0' ''	...	''
+
+Para cargar por teclado una cadena de caracteres debemos emplear por ahora la funcion gets.
+
+gets(nombre del vector);
+
+char nombre1[21];
+char nombre2[21];
+int edad1;
+int edad2;
+
+printf("Ingrese el nombre de la primera persona: ");
+gets(nombre1);
+
+printf("Ingrese la edad: ");
+scanf("%i", &edad1);
+
+fflush(stdin);
+
+printf("Ingrese el nombre de la segunda persona: ");
+gets(nombre2);
+
+printf("Ingrese la edad: ");
+scanf("%i", &edad2);
+
+char palabra[30];
+int x=0;
+int cant=0;
+
+while (palabra[x] != '\0'){
+	if(palabra[x] == 'a'){
+		cant++;
+	}
+	x++;
+}
+
+14.- FUNCIONES QUE FACILITAN EL TRABAJO CON CADENAS DE CARACTERES (STRING.H)
+#include<string.h>
+
+strlen
+
+int cant=strlen(varChar);
+
+strcmp
+
+int strcmp(cadena1, cadena2)
+
+if(strcmp(nombre1, nombre0) == 0){
+
+}
+
+Retorna un cero si las dos cadenas son exactamente iguales.
+Retorna un valor mayor a cero si la cadena1 es mayor alfabeticamente que la segunda.
+Retorna un valor menor a cero si la cadena2 es mayor alfabeticamente que la primera.
+
+strcpy
+
+strcpy(cadena1, cadena2);
+Si en un problema necesitamos dejar un string vacio podemos utilizar la funcion strcpy pasando un string sin caracteres (no debe haber un espacio en blanco):
+
+strcpy(cadena, "");
+
+strcat
+Si necesitamos agregar a un string otro string podemos utilizar la funcion strcat.
+
+strcat(cadena1, cadena2);
+
+15.- CONCEPTO DE FUNCIONES - PROGRAMACION ESTRUCTURADA
+Estructura de una funcion:
+
+[valor que retorna] [nombre de la funcion] ([parametros de la funcion]){
+	[algoritmo]
+}
+
+void presentacion(){
+	printf("HOLA!!!\n");
+}
+
+void cargarNumero(){
+	int valor;
+	
+	printf("Ingrese un valor: ");
+	scanf("%i", &valor);
+	printf("El valor es: %i", valor);
+}
+
+int main(){
+	presentacion();
+	cargarNumero();
+	
+	getch();
+	
+	return 0;
+}
+
+16.- FUNCIONES CON PARAMETROS DE TIPO INT, FLOAT Y CHAR
+void funcion1(int v1){
+	...
+}
+
+void funcion2(int v1, int v2){
+	...
+}
+
+void funcion3(float f1, int v1){
+	...
+}
+
+void funcion4(char letra){
+	...
+}
+
+
+#include<stdio.h>
+#include<conio.h>
+
+void imprimirMayor(int v1, int v2){
+	if (v1>v2){
+		print("El mayor es %i", v1);
+	}
+	else {
+		printf("El mayor es %i", v2);
+	}
+}
+
+int main(){
+	int valor1, valor2;
+	
+	printf("Ingrese primer valor: ");
+	scanf("%i", &valor1);
+	
+	printf("Ingrese segundo valor: ");
+	scanf("%i", &valor2);
+	
+	imprimirMayor(valor1, valor2);
+	
+	getch();
+
+	return 0;
+}
+
+17.- FUNCIONES CON RETORNO DE UN VALOR
+int funcion1(){
+	return 1;
+}
+
+float funcion2{
+	return 3.1415;
+}
+
+char funcion3{
+	return 'a';
+}
+
+#include<stdio.h>
+#include<conio.h>
+
+int retornarMayor(int v1, int v2){
+	int mayor;
+
+	if (v1>v2){
+		mayor=v1;
+	}
+	else {
+		mayor=v2;
+	}
+	
+	return mayor;
+}
+
+int main(){
+	int valor1, valor2;
+	
+	printf("Ingrese primer valor: ");
+	scanf("%i", &valor1);
+	
+	printf("Ingrese segundo valor: ");
+	scanf("%i", &valor2);
+	
+	printf("El valor mayour es %i", retornarMayor(valor1, valor2));
+	
+	getch();
+
+	return 0;
+}
+
+18.- FUNCIONES CON PARAMETROS DE TIPO VECTOR
+Cuando un vector se pasa como parametro a una fucnion no se hace una copia como sucede con los tipos de dato char, int, float sino se pasa la direccion de memoria donde se almacena el vector original. Esta forma de pasaje de datos tipo vector hace que si modificamos el parametro dentro de la funcion lo que sucede es que se modifica la variable definida en la funcion main o donde se haya definido.
+
+void funcion1(int vec[5]){
+	...
+}
+
+int vector[5];
+funcion1(vector);
+
+#include<stdio.h>
+#include<conio.h>
+
+void cargar(int vec[5]){
+	int x;
+	
+	for(x=0; x<5; x++){
+		printf("Ingrese elemento: ");
+		scanf("%i", &vec[x]);
+	}
+}
+
+void imprimir(int vec[5]){
+	int x;
+	
+	printf("Contnido completo del vector:");
+	
+	for(x=0; x<5; x++){
+		printf("%i", vec[x]);
+	}
+}
+
+int main(){
+	int vector[5];
+	
+	cargar(vector);
+	imprimir(vector);
+	
+	getch();
+	
+	return 0;
+}
+
+19.- VECTORES (MAYOR Y MENOR ELEMENTO)
+Cargar e imprimir el mayor elemento y su posicion.
+
+#include<stdio.h>
+#include<conion.h>
+
+void cargar(int vector[5]){
+	int x;
+	
+	for(x=0; x<5; x++){
+		printf("Ingrese elemento:");
+		scanf("%i", &vector[x]);
+	}
+}
+
+void mayor(int vector[5]){
+	int may=vector[0];
+	int pos=0;
+	int x;
+	
+	for(x=1; x<5; x++){
+		if(vector[x]>may){
+			may=vector[x];
+			pos=x;
+	}
+	
+	printf("Mayor elemento del vector: %i\n", may);
+	printf("Se encuentra en la posicion: %i", pos);
+}
+
+int main(){
+	int vector[5];
+	
+	cargar(vector);
+	mayor(vector);
+	
+	getch();
+	return 0;
+}
+
+Cargar, imprimir el menor y un mensaje si se repite dentro del vector.
+
+#include<stdio.h>
+#include<conio.h>
+
+void cargar(int vector[5]){
+	int x;
+	
+	for(x=0; x<5; x++){
+		printf("Ingrese elemento: ");
+		scanf("%i", &vector[x]);
+	}
+}
+
+int menor(int vector[5]){
+	int men=vector[0];
+	int x;
+	
+	for(x=1; x<5; x++){
+		if(vector[x]<men){
+			men=vector[x];
+		}
+	}
+	
+	return men;
+}
+
+void verificarRepite(int vector[5], int men){
+	int cant=0;
+	int x;
+	
+	for(x=0; x<5; x++){
+		if(vector[x]==men){
+			cant++;
+		}
+	}
+	
+	if(cant==1){
+		printf("El menor del vector no se repite.");
+	}
+	else {
+		printf("El menor del vector se repite.");
+	}
+}
+
+int main(){
+	int vector[5];
+	
+	cargar(vector);
+	
+	int men=menor(vector);
+	
+	printf("El elemento menor del vector es: %i\n", men);
+	
+	verificarRepite(vector, men);
+	
+	getch();
+	
+	return 0;
+}
+
+20.- VECTORES (ORDENAMIENTO)
+
+#include<stdio.h>
+#include<conio.h>
+
+void cargar(int vector[5]){
+	int x;
+	
+	for(x=0; x<5; x++){
+		printf("Ingrese elemento: ");
+		scanf("%i", &vector[x]);
+	}
+}
+
+void ordenarMenorMayor(int vector[5]){
+	int k, f;
+	
+	for(k=0; k<4; k++){
+		for(f=0; f<4-k; f++){
+			if(vector[f]>vector[f+1]){
+				int aux;
+				aux=vector[f];
+				vector[f]=vector[f+1];
+				vector[f+1]=aux;
+			}
+		}
+	}
+}
+
+void ordenarMayorMenor(int vector[5]){
+	int k, f;
+	
+	for(k=0; k<4; k++){
+		for(f=0; f<4-k; f++){
+			if(vector[f]<vector[f+1]){
+				int aux;
+				aux=vector[f];
+				vector[f]=vector[f+1];
+				vector[f+1]=aux;
+			}
+		}
+	}
+}
+
+void imprimir(int vector[5]){
+	int x;
+	
+	for(x=0; x<5; x++){
+		printf("%i", vector[x]);
+	}
+}
+
+int main(){
+	int vector[5];
+	
+	cargar(vector);
+	ordenarMenorMayor(vector);
+	
+	printf("Ordenado de menor a mayor\n");
+	
+	imprimir(vector);
+	
+	ordenarMayorMenor(vector);
+	
+	printf("Ordenar de mayor a menor\n");
+	
+	imprimir(vector);
+	
+	getch();
+	return 0;
+}
+
+21.- ESTRUCTURA DE DATOS TIPO MATRIZ (ELEMENTOS INT Y FLOAT)
+
+int mat[fila][columna];
+int mat[3][5];
+
+Inicializar
+int mat[2][3]={{10, 20, 30},
+				{40, 50, 50}};
+
+for(int f=0; f<3; f++){
+	for(int c=0; c<5; c++){
+		printf("Ingrese componentes: ");
+		scanf("%i", &mat[f][c]);
+	}
+}
+
+for(int f=0; f<3; f++){
+	for(int c=0; c<5; c++){
+		printf("%i", mat[f][c]);
+	}
+}
+
+Imprimir en diagonal
+
+int mat[4][4];
+
+for(int x=0; x<4; x++){
+	printf("%i", mat[x][x]);
+}
+
+Imprimir valor mayor
+
+void mayor(int mat[3][4]){
+	int may=mat[0][0];
+	
+	for(int f=0; f<3; f++){
+		for(int c=0; c<4; c++){
+			if(mat[f][c]>may){
+				may=mat[f][c];
+			}
+		}
+	}
+	
+	printf("Elemento mayor de la matriz: %i", may);
+}
+
+Intercambiar filas
+void intercambiarFilas(int mat[2][5]){
+	int aux;
+	
+	for(int c=0; c<5; c++){
+		aux=mat[0][c];
+		mat[0][c]=mat[1][c];
+		mat[1][c]=aux;
+	}
+}
+
+22.- ESTRUCTURA DE DATOS TIPO MATRIZ (ELEMENTOS CHAR)
+Las matrices de tipo dato char se utilizan fundamentalmente para guardar un conjunto de cadenas de caracteres (varios nombres de personas, nombres de articulos, etc.).
+
+Cuando trabajamos una matriz de tipo char para almacenar cadenas de caracteres cada fila almacena un string.
+
+Para trabajar una matriz de tipo char se parece a trabajar con un vector, debemos indicar una solo subindice y estaremos accediendo a toda la fila.
+
+void cargar(char articulos[3][31]){
+	for(int x=0; x<3; x++){
+		printf("Ingrese el nombre del articulos: ");
+		gets(articulos[x]);
+	}
+}
+
+void imprimir(char articulos[3][31]){
+	for(int x=0; x<3; x++){
+		printf("%s\n", articulos[f]);
+	}
+}
+
+char nom[30];
+char nom[5][30];
+int existe;
+
+for(int x=0; x<5; x++){
+	if(strcmp(nom, nombres[f]) == 0){
+		existe=1;
+	}
+}
+
+void ordenar(char nombres[4][41]){
+	char aux[41];
+	
+	for(int x=0; x<4; x++){
+		for(int y=0; y<4-x; y++){
+			if(strcmp(nombres[y], nombres[y+1])>0){
+				strcpy(aux, nombres[y]);
+				strcpy(nombres[y], nombres[y+1]);
+				strcpy(nombres[y+1], aux);
+			}
+		}
+	}
+}
+
+23.- VECTORES Y MATRICES PARALELAS (ORDENAMIENTO)
+
+void cargar(char nombres[5][40], int notas[5]){
+	for(int x=0; x<5; x++){
+		printf("Ingrese el nombre del alumno: ");
+		gets(nombres[f]);
+		
+		printf("Ingrese la nota del alumno: ");
+		scanf("%i", &notas[f]);
+		fflush(stdin);
+	}
+}
+
+void ordenar(char nombres[5][60], int notas[5]){
+	int auxnotas;
+	char auxnombre[40];
+	
+	for(int k=0; k<4; k++){
+		for(int f=0; f<4-k; f++){
+			if(notas[f]<notas[f+1]){
+				auxnotas=notas[f];
+				notas[f]=notas[f+1];
+				notas[f+1]=auxnota;
+				strcpy(auxnombre, nombres[f]);
+				strcpy(nombres[f], nombres[f+1]);
+				strcpy(nombres[f+1], auxnombre);
+			}
+		}
+	}
+}
+
+void imprimir(char nombres[5][40], int notas[5]){
+	for(int x=0; x<5; x++){
+		printf("%s - %i\n", nombres[f], notas[f]);
+	}
+}
+
+24.- DIRECTIVA #DEFINE
+La directiva #define especifica un nombre que sera reemplazado por un cierto valor en todods los lugares del programa donde se haga referencia a dicho nombre.
+
+Se crean fuera de cualquier funcion normalmente en la parte inicial del archivo luego de las directivas #include. La sintaxis es la siguiente:
+
+#define [nombre de la macro] [valor de la macro]
+
+#define TAMANO 20
+#define MENSAJEFIN "Presione una tecla para finalizar"
+
+El nombre de la macro es comun que se lo escriba con caracteres mayusculas (es una regla que utilizan muchos programadores pero no es obligatoria).
+
+Luego de espicificar el nombre de la macro hay uno o mas espacios en blanco y debemos especificar el valor de la macro.
+
+El primer paro del compilador es reemplazar todas las partes del programa donde hay declaradas macros por los valores de dichas macros.
+
+El uso excesivo de macros puede tornar muy dificil el mantenimiento de programas.
+
+#define TAMANO 5
+#define FINPROGRAMA "Gracias por utilizar nuestro programa"
+
+void cargar(float sueldos[TAMANO]){
+	for(int f=0; f<TAMANAO; f++){
+		printf("Ingrese sueldo: ");
+		scanf("%f", &sueldos[f]);
+	}
+	
+	printf(FINPROGRAMA);
+}
+
+25.- ESTRUCTURA DE DATOS TIPO REGISTRO (STRUCT)
+
+Un registro es una estructura de datos que permite almacenar un conjunto de lementos no ecensialmente del mismo tipo.
+
+Vimos que vectores y matrices son estructuras de datos que permiten almacenar un conjunto de datos del mismo tipo. Un registro normalmente almacena un conjunto de datos que estan relacionados entre si.
+
+A un vector o matriz accedemos a sus elementos por medio de subindices, a los elmentos de un registro se los llama campos y tienen cada uno un nombre. Por ejemplo si definimos el registro "producto" sus campos pueden ser el "codigo", "descripcion" y "precio".
+
+A diferencia de vectores y matrices los registros deben declararse y luego definir variables de dicho tipo. Pero si solo declaramos el registro no nos sirve de nada, debemos definir una o mas variables de dicho tipo.
+
+struct producto{
+	int codigo;
+	char descripcion[41];
+	float precio;
+};
+
+#include<stdio.h>
+#include<conio.h>
+
+struct producto{
+	int codigo;
+	char descripcion[41];
+	float precio;
+};
+
+int main(){
+	struct producto pro1, pro2;
+	
+	printf("Ingrese el codigo del producto: ");
+	scanf("%i", &pro1.codigo);
+	fflush(stdin);
+	
+	printf("Ingrese la descripcion: "):
+	gets(pro1.descripcion);
+	
+	printf("Ingrese el precio: ");
+	scanf("%f", &pro1.precio);
+	
+	printf("Ingrese el codigo del producto: ");
+	scanf("%i", &pro2.codigo);
+	fflush(stdin);
+	
+	printf("Ingrese la descripcion: "):
+	gets(pro2.descripcion);
+	
+	printf("Ingrese el precio: ");
+	scanf("%f", &pro2.precio);
+	
+	if(pro1.precio>pro2.precio){
+		printf("El producto %s tiene un precio mayo.", pro1.descripcion);
+	}
+	else{
+		if(pro2.precio>pro1.precio){
+			printf("El producto %s tiene un precio mayor", pro2.descripcion);
+		}
+		else{
+			printf("Tienen igual precio");
+		}
+	}
+	
+	getch();
+	
+	return 0;
+}
+
+26.- FUNCIONES CON PARAMETROS DE TIPO STRUCT
+Su funcionamiento es identico a los tipos de datos simples, es decir que se hace una copia del registro en el parametro. No podemos modificar el registro que le enviamos a la funcion sino solo accederlo para consultarlo.
+
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+
+struct producto {
+	int codigo;
+	char descripcion[41];
+	float precio;
+};
+
+void imprimir(struct producto p){
+	printf("Codigo del producto: %i\n", p.codigo);
+	printf("Descripcion: %s\n", p.descripcion);
+	printf("Precio: %0.2f", p.precio);
+}
+
+int main(){
+	struct producto pro;
+	
+	pro.codigo=1;
+	strcpy(pro.descripcion, "naranjas");
+	pro.precio=12.50;
+	
+	imprimir(pro);
+	
+	getch();
+	
+	return 0;
+}
+
+27.- ESTUCTURA DE DATOS TIPO VECTOR (ELEMENTOS DE TIP STRUCT)
+#include<stdio.h>
+#include<conio.h>
+
+#define TAMANO 4
+
+struct producto{
+	int codigo;
+	char descripcion[41];
+	float precio;
+};
+
+void cargar(struct producto vec[TAMANO]){
+	for(int f=0; f<TAMANO; f++){
+		printf("Ingrese el codigo del prodcuto: ");
+		scanf("%i", &vec[f].codigo);
+		fflush(stdin);
+		
+		printf("Ingrese la descripcion: ");
+		gets(vec[f].descripcion);
+		
+		printf("Ingrese el precio: ");
+		scanf("%f", &vec[f].precio);
+	}
+}
+
+void imprimir(struct producto vec[TAMANO]){
+	for(int f=0; f<TAMANO; f++){
+		printf("%i %s %0.2f\n", vec[f].codigo, vec[f].descripcion, vec[f].precio);
+	}
+}
+
+int main(){
+	struct producto vector[TAMANO];
+	cargar(vector);
+	imprimir(vector);
+	
+	getch();
+	
+	return 0;
+}
+
+28.- ESTRUCTURA DE DATOS TIPO REGISTRO (CON CAMPOS INT, FLOAT, VECTOR, REGISTROS ANIDADOS, ETC.)
+En este concepto veremos que los campos de un registro pueden ser tambien de tipo registro, es decir anidar un registro dentro de otro registro.
+
+struct fecha{
+	int dd;
+	int mm;
+	int aa;
+};
+
+struct producto{
+	int codigo;
+	char descripcion[41];
+	float precio;
+	struct fecha fechavencimiento;
+};
+
+void cargar(struct producto vec[3]){
+	for(int f=0; f<3; f++){
+		printf("Ingrese codigo del producto: ");
+		scanf("%i", &vec[f].codigo);
+		fflush(stdin);
+		
+		prinft("Ingrese descripcion: ");
+		get(vec[f].descripcion);
+		
+		printf("Ingrese precio: ");
+		scanf("%f", &vec[f].precio);
+		
+		printf("Fecha de vencimiento.\n");
+		printf("Dia: ");
+		scanf("%i", &vec[f].fechavencimiento.dd);
+		
+		printf("Mes: ");
+		scanf("%i", &vec[f].fechavencimiento.mm);
+		
+		printf("Anio: ");
+		scanf("%i", &vec[f].fechavencimiento.aa);
+	}
+}
+
+void imprimirt(struct producto vec[3]){
+	for(int f=0; f<3; f++){
+		printf("%i %s %0.2f %i/%i/%i\n", vec[f].codigo, vec[f].descripcion, vec[f].precio, vec[f].fechavencimiento.dd, vec[f].fechavencimiento.mm, vec[f].fechavencimiento.aa);
+	}
+}
+
+29.- VARIABLES DE TIPO PUNTERO
+Los punteros en el lenguaje C son esenciales:
+Para que un programa sea muy eficiente.
+Modificar variables de tipo int, float, struct, etc. en otras funciones.
+Poder requerir y liberar memoria durante la ejecucion del programa (hay muchas situaciones donde no sabemos cuanto espacio reservar).
+
+Definicion de puntero.
+Una variable de tipo funtero almacena la direccion de memoria de otra varaible que puede ser int, char, float, struct, etc.
+
+int valor1=10;
+int valor2=20;
+int *pe;
+
+pe=&valor1;
+printf("Lo apuntado por pe es: %i\n", *pe);
+printf("La direccion que almacena pe es: %p\n", pe);
+
+pe=&valor2;
+printf("Lo apuntado por pe es: %i\n", *pe);
+prinrf("La direccion que almacena pe es: %p\n", pe);
+
+getch();
+return 0;
+
+int x1, x2;
+int *pe;
+
+pe=&x1;
+*pe=100;
+
+pe=&x2;
+*pe=200;
+
+printf("Primer variable entera: %i\n", x1);
+printf("Segunda variable entera: %i\n", x2);
+
+char c1='A';
+char c2='B';
+char *pc;
+
+pc=&c1;
+printf("%c\n", c1); //se imprime: A
+
+*pc='a';
+printf("%c\n", c1); //se imprime: a
+
+c1='Z';
+printf("%c\n", *pc); //se imprime: Z
+
+pc=&c2;
+printf("%c\n", *pc); //se imprime: B
+
+int f;
+int *pe;
+pe=&f;
+
+for(*pe=1; *pe<=10; *pe=*pe+1){
+	pirntf("%i\n", f):
+}
+
+30.- PARAMETROS DE UNA FUNCION DE TIPO PUNTEROS A INT, FLOAT Y CHAR
+Hemos visto que cuando llamamos a una funcion y le pasamos un tipo de dato char, int o float lo que sucede es que se hace una copia de dicha variable en el parametro de la funcion.
+
+Ahora veremos el primer uso real de punteros en el lenguaje C. Cuando unos quiere modificar una variable char, int, float en una funcion lo que hacemos es pasar la direccion de la variable y que lo reciba un puntero.
+
+void cargar(int *pe1, int *pe2){
+	*pe1=100;
+	*pe2=200;
+}
+
+int main(){
+	int x1, x2;
+	
+	cargar(&x1, &x2);
+	
+	printf("%i %i", x1, x2);
+	
+	getch();
+	
+	return 0;
+}
+
+Importante:
+Despues de mucho avanzar en este curso del lenguaje C podemos entender completamente porque es la siguiente sintaxis para cargar un entero por teclado:
+
+int x1;
+scanf("%i", &x1);
+
+El & significa que le pasamos la direccion de al variable x1 para que la funcion por medio de un puntero cargue un entero en x1.
+
+void incrementar(int *pe){
+	*pe=*pe+1;
+}
+
+int main(){
+	int x=0;
+	
+	print("%i\n", x);
+	
+	incrementar(&x);
+	
+	printf("%i\n", x);
+	
+	getch();
+	
+	return 0;
+}
+
+31.- PARAMETRO DE UNA FUNCION DE TIPO PUNTEROS A STRUCT
+Vimos  que cuando pasamos una variable de tipo registro a una funcion lo que sucede es que se hace una copia en el parametro.
+
+Ahora veremos que si queremos modificar el registro en la funcion lo que debemos hacer es pasar la direccion del registro y que lo reciba un puntero.
+
+struct producto{
+	int codigo;
+	char descripcion[41];
+	float precio;
+}
+
+void cargar(struct producto *pprod){
+	printf("Ingrese codigo: ");
+	scanf("%i", &(*pprod).codigo);
+	fflush(stdin);
+	
+	printf("Ingrese descripcion: ");
+	gets((*pprod).descripcion);
+	
+	printf("Ingrese precio: ");
+	scanf("%f", &(*pprod).precio);
+}
+
+void imprimir(struct producto prod){
+	printf("Codigo:%i\n", prod.codigo);
+	printf("Descripcion:%s\n", prod.descripcion);
+	printf("Precio:%0.2f", prod.precio);
+}
+
+int main(){
+	struct producto prod;
+	
+	cargar(&prod);
+	imprimir(prod);
+	
+	getch();
+	
+	return 0;
+}
+
+Importante
+Si bien en el lenguaje C podemos utilizar para acceder a los campos del registro la sintaxis anterior es mucho mas comun utilizar el operador -> para acceder a los campos.
+
+void cargar(struct producto *pprod){
+	printf("Ingrese codigo: ");
+	scanf("%i", &pprod->codigo);
+	fflush(stdin);
+	
+	printf("Ingrese descripcion: ");
+	gets(pprod->descripcion);
+	
+	printf("Ingrese precio: ");
+	scanf("%f", &pprod->precio);
+}
+
+32.- RELACION ENTRE PUNTEROS Y VECTORES
+Es importante entender que un vector es un puntero que contiene la direccion de la primera componente.
+
+int vec[5]={10, 20, 30, 40, 50};
+int *pe;
+
+Si luego igualamos pe con vec:
+
+pe=vec;
+
+La variable pe almacena la misma direccion de memoria que la variable vec. Ahora podemos trabajar perfectamente con la variable pe para acceder a las componentes del vector.
+
+
+void cargar (float *p){
+	for(int f=0; f<5; f++){
+		printf("Ingrese elemento: ");
+		scanf("%f", &p[f]);
+	}
+}
+
+void imprimir(float *p){
+	for(int f=0; f<5; f++){
+		printf("%0.2f",  p[f]);
+	}
+}
+
+int main(){
+	float vec[5];
+	
+	cargar(vec);
+	imprimir(vec);
+	
+	getch();
+	
+	return 0;
+}
+
+33.- OPERADORES ++ Y -- CON VARIABLES DE TIPO PUNTERO
+Los operadores ++ y -- con tipo de dato puntero tienen un funcionamiento distinto que cuando incrementamos o decrementamos una variable entera.
+
+Cuando utilizamos el operador ++ con un puntero incrementa la variable segun el tamano del tipo de dato que apunta. Si es un puntero a entero incrementa la direccion a 4 bytes (en un sistema operativo de 32 bits), si es un puntero a tipo char incrementa la direccion en 1 byte etc.
+
+int main(){
+	int vec[5]={10, 20, 30, 40, 50};
+	int *pe;
+	
+	pe=vec;
+	
+	printf("%i\n", *pe); //10
+	pe++;
+	printf("%i\n", *pe); //20
+	pe++;
+	printf("%i\n", *pe); //30
+	pe--;
+	printf("%i\n", *pe); //20
+	
+	getch();
+	
+	return 0;
+}
+
+void cargar(int *pe){
+	for(int f=0; f<5; f++){
+		printf("Ingrese elemento: ");
+		scanf("%i", &*pe);
+		pe++;
+	}
+}
+
+void imprimir(int *pe){
+	for(int f=0; f<5; f++){
+		printf("%i ", *pe);
+		pe++;
+	}
+}
+
+int main(){
+	int vec[5];
+	
+	cargar(vec);
+	imprimir(vec);
+	
+	getch();
+	
+	return 0;
+}
+
+34.- ASIGNACION DINAMICA DE MEMORIA (MALLOC Y FREE)
+Una caracteristica esencial del lenguaje C es la capacidad de requerir bloques de memoria variable durante la ejecucion del programa.
+
+Hasta ahora hemos visto que se reserva espacio para variables en el momento que las definimos:
+
+int x;
+
+El lenguaje C nos permite en tiempo de ejecucion solicitar espacio mediante la funcion malloc (memory allocate = asignar memoria) y luego de usarla en forma obligada debemos devolverla llamando a la funcion free. Estas dos funciones se encuentran en el archivo de inclusion: stdlib.h
+
+Para trabajar con la memoria dinamica en el lenguaje C es obligatorio trabajar con punteros.
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+int main(){
+	int *pe;
+	int tam;
+	
+	printf("Cuantos elementos tendra el vector: ");
+	scanf("%i", &tam);
+	
+	pe=malloc(tam*sizeof(int));
+	
+	for(int f=0; f<tam; f++){
+		printf("Ingrese elemento: ");
+		scanf("%i", &pe[f]);
+	}
+	
+	printf("Contenido del vector dinamico: ");
+	
+	for(int f=0; f<tam; f++){
+		printf("%i ", pe[f]);
+	}
+	
+	free(pe);
+	getch();
+	return 0;
+}
+
+El operador sizeof cuando le pasamos como parametro un tipo de dato lo que nos devuelve es la cantidad de bytes que se requieren para almacenar dicho tipo de dato. Si compilamos nuestro programa en un compilador de 32 bits luego un int requiere 4 bytes. Finalmente multiplicamos lo que retorna sizeof por el contenido de l variable tam, cuyo resultado es la cantidad de bytes que se necesitan reservar para un vector de tam elementos.
+
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+#include<stdlib.h>
+
+struct producto{
+	int codigo;
+	char descripcion[41];
+	float precio;
+}
+
+int main(){
+	struct producto *prod;
+	
+	prod=malloc(sizeof(struct producto));
+	
+	prod->codigo=1;
+	strcpy(prod->descripcion, "papas");
+	prod->precio=10.50;
+	
+	printf("Codigo del articulo:%i\n", prod->codigo);
+	printf("Descripcion:%s\n", prod->descripcion);
+	printf("Precio:%0.2f", prod->precio);
+	
+	free(prod);
+	
+	getch();
+	
+	return 0;
+}
+
+35.- ESTRUCTURAS DINAMICAS EN C: CONCEPTO DE LISTAS
+Una lista es un conjunto de nodos, cada uno de los cuales tiene dos campos: uno de informacion y un apuntador al siguient nodo de la lista. Ademas un apuntador externo senala el primer nodo de la lista.
+
+Informacion | Direccion al siguiente nodo
+
+La informacion puede ser cualquier tipo de dato simple (int, char, float, etc.) o estructura de datos (registro, vector, etc.);
+
+La direccion al siguiente nodo es un puntero.
+
+raiz -> 4|->7|->3|->7|*
+
+Como deciamos, una lista es una secuenciea de nodos (en este caso cuatro nodos). La informacion de los nodos en este caso es un entero y siempre contiene un puntero que guarda la direccion del siguiente nodo. raiz es otro puntero externo a la lista que contiene la direccion del primer nodo.
+
+El estado de una lista varia durante la ejecucion del programa.
+
+De esta forma representamos graficamente una lista vacia:
+raiz->*
+
+Si insertamos un dodo en la lista quedaria asi:
+raiz->4|*
+
+Si insertamos otro nodo al principio con el valor de 9 tenemos:
+
+raiz->9|->4|*
+
+Lo mismo podemos borrar nodos de cualquier parte de la lista.
+
+Tipos de listas
+Segun el mecanismo de insercion y extraccion de nodos en la lista tenemos los siguientes tipos:
+
+Listas tipo pila.
+Listas tipo cola.
+Listas genericas.
+
+Una lista se comporta como una pila si las inserciones y extracciones las hacemos por un mismo lado de la lista (por ejemplo donde apunta raiz). Tambien se las llama listas LIFO (Last In First Out - ultimo en entrar primero en salir).
+
+Una lista se comporta como una cola si las inserciones las hacemos al final y las extracciones las hacemos por el frente de la lista. Tambien se las llama listas FIFO (First In First Out - primero en entrar primero en salir).
+
+Una lista se comporta como generica cuando las inserciones y extracciones se realizan en cualquier parte de la lista. Podemos en algun momento insertar un nodo en medio de la lista, en otro momento al final, borrar uno del frente, borrar uno del fondo o uno interior, etc.
+
+36.- ESTRUCTURAS DINAMICAS EN C: LISTAS TIPO PILA
+Inicialmente la pila esta vacia y decimos que el puntero raiz apunta a NULL (si apunta a NULL decimos que no tiene una direccion de memoria, en realidad este valor NULL es el valor cero).
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+struct nodo{
+	int info;
+	struct nodo *sig;
+};
+
+struct nodo *raiz=NULL;
+
+void insertar(int x){
+	struct nodo *nuevo;
+	nuevo=malloc(sizeof(struct nodo));
+	nuevo->info=x;
+	
+	if(raiz==NULL){
+		raiz=nuevo;
+		nuevo->sig=NULL;
+	}
+	else{
+		nuevo->sig=raiz;
+		raiz=nuevo;
+	}
+}
+
+void imprimir(){
+	struct nodo *reco=raiz;
+	
+	printf("Lista completa.\n");
+	
+	while(reco!=NULL){
+		printf("%i ", reco->info);
+		reco=reco->sig;
+	}
+	
+	printf("\n");
+}
+
+int extraer(){
+	if(raiz!=NULL){
+		int informacion=raiz->info;
+		struct nodo *bor=raiz;
+		raiz=raiz->sig;
+		free(bor);
+		return informacion;
+	}
+	else{
+		return -1;
+	}
+}
+
+void liberar(){
+	struct nodo *reco=raiz;
+	struct nodo *bor;
+	
+	while(reco!=NULL){
+		bor=reco;
+		reco=reco->sig;
+		free(bor);
+	}
+}
+
+int main(){
+	insertar(10);
+	insertar(40);
+	insertar(3);
+	
+	imprimir();
+	
+	printf("Extraemos de la pila: %i\n", extraer());
+	
+	imprimir();
+	
+	liberar();
+	
+	getch();
+	
+	return 0;
+}
+
+.- RECURSIVIDAD CONCEPTOS BASICOS
+Primero debemos decir que la recursividad no es una esctructura de datos, sino que es una tecnica de programacin que nos permite que un bloque de instrucciones se ejecute n veces. Remplaza en ocasiones a esctructuras repetitivas.
+
+Este concepto sera de gran utilidad para los conceptios de la estructura de datos tipo arbol.
+
+En C las funciones pueden llamarse a si mismos. Si dentro de una funcion existe la llamada a si mismo decimos que la funcion es recursiva.
+
+Cuando una funcion se llama asi misma, se asigna espacio en la pila para las nuevas variables locales y parametros.
+
+Al volver de una llamada recursiva, se recuperan de la pila las variables locales y los parametros antiguos y la ejecucion se reanuda en el punto de la llamada a la funcion.
+
+#include<stdio.h>
+#include<conio.h>
+
+void repetir(){
+	repetir();
+}
+
+int main(){
+	repetir();
+	getch();
+	return 0;
+}
+
+La funcion repetir es recursiva porque dentro de la funcion se llama a si misma. Cuando ejecuta este programa se bloqueata y generara una error.
+
+#include<stdio.h>
+#include<conio.h>
+
+void imprimir(int x){
+	printf("%i", x);
+	imprimir(x-1);
+}
+
+int main(){
+	imprimir(5);
+	getch();
+	return 0;
+}
+
+Desde la main se llama a la funcion imprimir y se le envia el valor 5. El parametro x recibe el valor 5. Se ejecuta el algoritmo de la funcion, imprime el contenido del parametro (5) y seguidamente se llama a una funcion, en este caso a si misma (por eso decimos que es una funcion recursiva), enviandole el valor 4.
+
+El parametro x recibe el valor 4 y se imprime en pantalla el cuatro, llamando nuevamente a la funcion imprimir enviandole el valor 3. Si continuamos este algoritmo podremos observar que en pantalla se imprime:
+
+5 4 3 2 1 0 -1 -2 -3 ...
+
+hasta que se bloquee el programa.
+
+Tener en cuenta que cada llamada a una funcion consume 4 bytes por la llamada y en este caso 4 bytes por el parametro x. Como nunca finaliza la ejecucion completa de las funciones se desborda la pila estatica por las sucesivas llamadas.
+
+#include<stdio.h>
+#include<conio.h>
+
+void imprimir(int x){
+	if(x>0){
+		printf("%i", x);
+		imprimir(x-1);
+	}
+}
+
+int main(){
+	imprimir(5);
+	getch();
+	return 0;
+}
+
+Ahora si podemos ejecutar este programa y observar los resultados en pantalla. Se imprime los numeros 5 4 3 2 1 y no se bloquea el programa.
+
+Obtener el factorial de un numero
+
+#include<stdio.h>
+#include<conio.h>
+
+int factorial(int fact){
+	if(fact>0){
+		int valor=fact*factorial(fact-1);
+		return valor;
+	} else {
+		return 1;
+	}
+}
+
+int main(){
+	printf("El factorial de 4 es %i", factorial(4));
+	getch();
+	return 0;
+}
+
+Ordenar los elementos de un vector
+
+void ordernar(int vec[CANTIDAD], int cant){
+	if(cant>1){		
+		for(int f=0; f<cant-1; f++){
+			if(vec[f]>vec[f+1]){
+				if(vec[f]>vec[f+1]){
+					int aux=vec[f];
+					vec[f]=vec[f+1];
+					vec[f+1]=aux;
+				}
+			}
+		}
+		
+		ordenar(vec, cant-1);
+	}
+}
+
+.- RECURSIVIDAD: PROBLEMAS DONDE CONVIENE APLICAR LA RECURSIVIDAD
+Imprimir la informacion de una lista simplemente encadenada de atras para adelante.
+El empleo de estructuras repetitivas para resolver este problema es bastante engorroso y lento (debemos avanzar hasta el ultimo nodo e imprimir, luego avanzar desde el principio hasta el anteultimo nodo y asi sucesivamente).
+
+El empleo de la recursividad para este problema hace mas sencilla su solucion.
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+struct nodo{
+	int info;
+	struct nodo *sig;
+};
+
+struct nodo *raiz=NULL;
+
+void insertarPrimero(int x){
+	struct nodo *nuevo;
+	nuevo=malloc(sizeof(struct nodo));
+	nuevo->info=x;
+	nuevo->sig=raiz;
+	raiz=nuevo;
+}
+
+void imprimir(struct nodo *reco){
+	if(reco!=NULL){
+		imprimir(reco->sig);
+		printf("%i ", reco->info);
+	}
+}
+
+void liberar(){
+	struct nodo *reco=raiz;
+	struct nodo *bor;
+	
+	while(reco!=NULL){
+		bor=reco;
+		reco=reco->sig;
+		free(bor);
+	}
+}
+
+int main(){
+	insertarPrimero(10);
+	insertarPrimero(4);
+	insertarPrimero(5);
+	
+	printf("Impresion de la lista del final al principio.\n");
+	
+	imprimir(raiz);
+	
+	liberar();
+	
+	getch();
+	
+	return 0;
+}
+
+.- ESTRUCTURAS DINAMICAS EN C: CONCEPTOS DE ARBOLES
+Igual que la lista, el arbol es una estructura de datos. Son muy eficientes para la busqueda de informacion. Los arboles soportan estructuras no lineales.
+
+				A
+			/	|	\
+			B	C	D
+		/	|
+		E	F
+
+Algunos conceptos de la estructura de datos tipo arbol:
+Nodo hoja: Es un nodo sin descendientes (Nodo terminal)
+Nodo E, F, C y D.
+
+Nodo interior: Nodo que no es hoja.
+Nodo A y B.
+
+Nivel de un arbol: El nodo A esta en el nivel 1 sus descendientes directos estan en el nivel 2 y asi sucesivamente. El nivel del arbol esta dado por el nodo de maximo nivel.
+Este arbol es de nivel 3.
+
+Grado de un nodo: Es el numero de nodos hijos que tiene dicho nodo (solo se tiene en cuenta los nodos interiores). El nodo A tiene grado 3. El nodo B tiene grado 2.
+Los otros nodos no tienen grado porque no tienen descendientes.
+
+Grado de un arbol: Es el maximo de los grados de todos los nodos de un arbol.
+El grado del arbol es 3.
+
+Longitud de camino del nodo x: Al numero de arcos que deben ser recorridos para llegar a un nodo x, partiendo de la raiz. La raiz tiene longitud de camino 1, sus descendientes directos tienen longitud de camino 2, etc. En forma general un nodo en el nivel tiene longitud de camino i.
+
+Arbol binario: Un arbol binario si cada nodo tiene como maximo 2 descendientes.
+
+			A
+		/		\
+		B		C
+	/	|			\
+	D	E			F
+	
+Para cada nodo esta definido el subarbol izquierdo y el derecho.
+
+Para el nodo A el subarbol izquierdo esta constituido por los nodos B, D y E. Y el subarbol derecho esta formado por los nodos C y F. 
+
+Lo mismo para el nodo B tiene el subarbol izquierdo con un nodo (D) y un nodo en el subarbol derecho (E).
+
+El nodo D tiene ambos subarboles vacios.
+
+El nodo C tiene el subarbol izquierdo vacio y el subarbol derecho con un nodo (F).
+
+Arbol binario perfectamente equilibrado: Si para cada nodo el numero de nodos en el subarbol izquierdo y el numero de nodos en el subarbol derecho, difiere como mucho en una unidad.
+
+Hay qeu tener en cuenta todos los nodos del arbol.
+
+El arbol de mas arriba es perfectamente equilibrado.
+
+Arbol que no es perfectamente equilibrado:
+El nodo A tiene 3 nodos en el subarbol izquierdo y solo uno en el subarbol derecho, por lo que no es perfectamente equilibrado.
+
+				A
+			/		\
+			B		C
+		/	|
+		D	E
+
+Arbol binario completo: Es un arbol binario con hojas como maximo en los niveles n-1 y n (Siendo n el nivel del arbol).
+
+Los dos arboles graficados son complejos por que son arboles de nivel 3 y hay nodos hoja en el nivel 3 en el primer caso, y hay nodos hoja en los niveles 3 y 2 en el segundo caso.
+
+Arbol binario no completo
+
+				A
+			/		\
+			B		C
+		/	|
+		D	E
+				\
+				F
+
+Hay nodos hoja en los niveles 4, 3 y 2. No deberia haber nodos hojas en el nivel 2.
+
+Arbol binario ordenado: Si para cada nodo del arbol, los nodos ubicados a la izquierda son inferiores al que consideramos raiz para ese momento y los nodos ubicados a la derecha son mayores que la raiz.
+
+				50
+			/		\
+			25		70
+		/	|
+		8	30
+		
+Analicemos si se trata de un arbol binario ordenado:
+Para el nodo que tiene el 50:
+Los nodos del subarbol izquierdo son todos menores a 50? 8, 25, 30 si
+Los nodos del subarbol derecho son todos mayores a 50? 70 si
+
+Para el nodo que tiene el 25:
+Los nodos del subarbol izquierdo son todos menores a 25? 8 si
+Los nodos del subarbol derecho son todos mayores a 25? 30 si
+
+No hace falta analizar los nodos hoja. Si todas las respuestas son afirmativas podemos luego decir que se trata de un arbol binario ordenado.
+
+.- ESTRUCTURAS DINAMICAS EN C: IMPLEMENTACION DE UN ARBOL BINARIO ORDENADO
+Desarrollar un programa para la administracion de un arbol binario ordenado con informacion de tipo int.
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+struct nodo{
+	int info;
+	struct nodo *izq;
+	struct nodo *der;
+};
+
+struct nodo *raiz=NULL;
+
+void insertar(int x){
+	struct nodo *nuevo;
+	nuevo=malloc(sizeof(struct nodo));
+	nuevo->info=x;
+	nuevo->izq=NULL;
+	nuevo->der=NULL;
+	
+	if(raiz==NULL){
+		raiz=nuevo;
+	} else {
+		struct nodo *anterior, *reco;
+		anterior=NULL;
+		reco=raiz;
+		
+		while(reco!=NULL){
+			anterior=reco;
+			
+			if(x<reco->info){
+				reco=reco->izq;
+			} else {
+				reco=reco->der;
+			}
+		}
+		
+		if(x<anterior->info){
+			anterior->izq=nuevo;
+		} else {
+			anterior->der=nuevo;
+		}
+	}
+}
+
+void imprimirPre(struct nodo *reco){
+	if(reco!=NULL){
+		printf("%i-", reco->info);
+		imprimirPre(reco->izq);
+		imprimirPre(reco->der);
+	}
+}
+
+void imprimirEntre(struct nodo *reco){
+	if(reco!=NULL){
+		imprimirEntre(reco->izq);
+		printf("%i-", reco->info);
+		imprimirEntre(reco->der);
+	}
+}
+
+void imprimirPost(struct nodo *reco){
+	if(reco!=NULL){
+		imprimirPost(reco->izq);
+		imprimirPost(reco->der);
+		printf("%i", reco->info);
+	}
+}
+
+void borrar(struct nodo *reco){
+	if(reco!=NULL){
+		borrar(reco->izq);
+		borrar(reco->der);
+		free(reco);
+	}
+}
+
+int main(){
+	insertar(100);
+	insertar(50);
+	insertar(25);
+	insertar(75);
+	insertar(150);
+	
+	printf("Impresion preorden: ");
+	
+	imprimirPre(raiz);
+	
+	printf("\n\n");
+	printf("Impresion entreorden: ");
+	
+	imprimirEntre(raiz);
+	
+	printf("\n\n");
+	printf("Impresion postorden: ");
+	
+	imprimirPost(raiz);
+	
+	borrar(raiz);
+	
+	getch();
+	return 0;
+}
+
+.- TODOS LOS TIPOS DE DATOS PRIMIVTIVOS EN EL LENGUAJE C
