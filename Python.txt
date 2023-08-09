@@ -82,10 +82,8 @@ PYTHON
 80.- PROCESAR ARCHIVOS CON FORMATO JSON EN PYTHON (MODULO JSON)
 81.- SERIALIZACION Y DESARIALIZACION EN PYTHON (MODULO JSON)
 82.- LOGGING
-
-Platzi
-ingjavierhernsan@hotmail.com
-@sdf321#
+83.- RUN APPLICATION
+84.- BUILD .EXE
 
 1.- IMPRIMIR PANTALLA
 print("Hola mundo.")
@@ -131,7 +129,6 @@ print(lista)
 
 print(lista, end=",")
 10, 20, 30
-
 
 5.- IF
 valor = 11
@@ -572,11 +569,11 @@ print(lista1[-2] #5
 27.- BIBLIOTECA ESTANDAR DE PYTHON
 Random
 
-import Random
+import random
 dado=random.randint(1,6)
 print(dado)
 
-El modulo random cuenta con otra funcion llamada shuffleque le pasamos como prametro una lista y nos la devuelve con los elementos mezclados.
+El modulo random cuenta con otra funcion llamada shuffle que le pasamos como parametro una lista y nos la devuelve con los elementos mezclados.
 random.shuffle(lista)
 
 28.- IMPORTAR ALGUNAS FUNCIONALIDADES DE UN MODULO DE LA BIBLIOTECA ESTANDAR DE PYTHON
@@ -1235,3 +1232,15 @@ logging.info('This is an info message')
 logging.warning('This is a warning message')
 logging.error('This is an error message')
 logging.critical('This is a critical message')
+
+83.- RUN APPLICATION
+C:/App/Python39/python.exe c:/pythonapp.py
+
+84.- BUILD .EXE
+Install pyinstaller
+
+pip install pyinstaller
+
+Create executable
+
+pyinstaller --onefile pythonapp.py
