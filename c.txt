@@ -6,6 +6,10 @@ Si no compila el framework seguir los siguientes pasos:
 4.- Dar clic en el boton "Auto-detect".
 5.- En el cuadro de texto cambiara la ruta, algo parecido a: "C:\Program Files(x86)\CodeBlocks\MinGW".
 
+COMPILAR CODIGO EN WINDOWS VS CODE
+gcc test.c -o test
+gcc test.c -o directory\test
+
 1.- ESTRUCTURA BASICA
 2.- IMPRIMIR MENSAJE
 3.- VARIABLES
@@ -40,16 +44,28 @@ Si no compila el framework seguir los siguientes pasos:
 32.- RELACION ENTRE PUNTEROS Y VECTORES
 33.- OPERADORES ++ Y -- CON VARIABLES DE TIPO PUNTERO
 34.- ASIGNACION DINAMICA DE MEMORIA (MALLOC Y FREE)
-35.- ESTRUCTURAS DINAMICAS EN C: CONCEPTO DE LISTAS
-36.- ESTRUCTURAS DINAMICAS EN C: LISTAS TIPO PILA
+35.- RECURSIVIDAD CONCEPTOS BASICOS
+36.- RECURSIVIDAD: PROBLEMAS DONDE CONVIENE APLICAR LA RECURSIVIDAD
+37.- ESTRUCTURAS DINAMICAS EN C: CONCEPTOS DE ARBOLES
+38.- ESTRUCTURAS DINAMICAS EN C: IMPLEMENTACION DE UN ARBOL BINARIO ORDENADO.- TODOS LOS TIPOS DE DATOS PRIMIVTIVOS EN EL LENGUAJE C
+39.- TODOS LOS TIPOS DE DATOS PRIMIVTIVOS EN EL LENGUAJE C
+40.- OPERADOR DE MOLDE CON TIPOS ENTEROS Y REALIES (CAST)
+41.- OPERADORES DE ASIGNACION
+42.- OPERADOR CONDICIONAL ?
+43.- ESTRUCTURA CONDICIONAL
+44.- COMANDOS BREAK Y CONTNUE DENTRO DE ESTRUCTURAS REPETITIVAS
+45.- COMANDO GOTO
+46.- FUNCION EXIT PARA TERMINAR UN PROGRAMA Y SYSTEM PARA LLAMAR OTRO
 
-.- RECURSIVIDAD CONCEPTOS BASICOS
-.- RECURSIVIDAD: PROBLEMAS DONDE CONVIENE APLICAR LA RECURSIVIDAD
 
-.- ESTRUCTURAS DINAMICAS EN C: CONCEPTOS DE ARBOLES
-.- ESTRUCTURAS DINAMICAS EN C: IMPLEMENTACION DE UN ARBOL BINARIO ORDENADO
 
-.- TODOS LOS TIPOS DE DATOS PRIMIVTIVOS EN EL LENGUAJE C
+
+
+
+
+
+.- ESTRUCTURAS DINAMICAS EN C: CONCEPTO DE LISTAS
+.- ESTRUCTURAS DINAMICAS EN C: LISTAS TIPO PILA
 
 
 1.- ESTRUCTURA BASICA
@@ -1189,7 +1205,6 @@ pe=vec;
 
 La variable pe almacena la misma direccion de memoria que la variable vec. Ahora podemos trabajar perfectamente con la variable pe para acceder a las componentes del vector.
 
-
 void cargar (float *p){
 	for(int f=0; f<5; f++){
 		printf("Ingrese elemento: ");
@@ -1337,131 +1352,7 @@ int main(){
 	return 0;
 }
 
-35.- ESTRUCTURAS DINAMICAS EN C: CONCEPTO DE LISTAS
-Una lista es un conjunto de nodos, cada uno de los cuales tiene dos campos: uno de informacion y un apuntador al siguient nodo de la lista. Ademas un apuntador externo senala el primer nodo de la lista.
-
-Informacion | Direccion al siguiente nodo
-
-La informacion puede ser cualquier tipo de dato simple (int, char, float, etc.) o estructura de datos (registro, vector, etc.);
-
-La direccion al siguiente nodo es un puntero.
-
-raiz -> 4|->7|->3|->7|*
-
-Como deciamos, una lista es una secuenciea de nodos (en este caso cuatro nodos). La informacion de los nodos en este caso es un entero y siempre contiene un puntero que guarda la direccion del siguiente nodo. raiz es otro puntero externo a la lista que contiene la direccion del primer nodo.
-
-El estado de una lista varia durante la ejecucion del programa.
-
-De esta forma representamos graficamente una lista vacia:
-raiz->*
-
-Si insertamos un dodo en la lista quedaria asi:
-raiz->4|*
-
-Si insertamos otro nodo al principio con el valor de 9 tenemos:
-
-raiz->9|->4|*
-
-Lo mismo podemos borrar nodos de cualquier parte de la lista.
-
-Tipos de listas
-Segun el mecanismo de insercion y extraccion de nodos en la lista tenemos los siguientes tipos:
-
-Listas tipo pila.
-Listas tipo cola.
-Listas genericas.
-
-Una lista se comporta como una pila si las inserciones y extracciones las hacemos por un mismo lado de la lista (por ejemplo donde apunta raiz). Tambien se las llama listas LIFO (Last In First Out - ultimo en entrar primero en salir).
-
-Una lista se comporta como una cola si las inserciones las hacemos al final y las extracciones las hacemos por el frente de la lista. Tambien se las llama listas FIFO (First In First Out - primero en entrar primero en salir).
-
-Una lista se comporta como generica cuando las inserciones y extracciones se realizan en cualquier parte de la lista. Podemos en algun momento insertar un nodo en medio de la lista, en otro momento al final, borrar uno del frente, borrar uno del fondo o uno interior, etc.
-
-36.- ESTRUCTURAS DINAMICAS EN C: LISTAS TIPO PILA
-Inicialmente la pila esta vacia y decimos que el puntero raiz apunta a NULL (si apunta a NULL decimos que no tiene una direccion de memoria, en realidad este valor NULL es el valor cero).
-
-#include<stdio.h>
-#include<conio.h>
-#include<stdlib.h>
-
-struct nodo{
-	int info;
-	struct nodo *sig;
-};
-
-struct nodo *raiz=NULL;
-
-void insertar(int x){
-	struct nodo *nuevo;
-	nuevo=malloc(sizeof(struct nodo));
-	nuevo->info=x;
-	
-	if(raiz==NULL){
-		raiz=nuevo;
-		nuevo->sig=NULL;
-	}
-	else{
-		nuevo->sig=raiz;
-		raiz=nuevo;
-	}
-}
-
-void imprimir(){
-	struct nodo *reco=raiz;
-	
-	printf("Lista completa.\n");
-	
-	while(reco!=NULL){
-		printf("%i ", reco->info);
-		reco=reco->sig;
-	}
-	
-	printf("\n");
-}
-
-int extraer(){
-	if(raiz!=NULL){
-		int informacion=raiz->info;
-		struct nodo *bor=raiz;
-		raiz=raiz->sig;
-		free(bor);
-		return informacion;
-	}
-	else{
-		return -1;
-	}
-}
-
-void liberar(){
-	struct nodo *reco=raiz;
-	struct nodo *bor;
-	
-	while(reco!=NULL){
-		bor=reco;
-		reco=reco->sig;
-		free(bor);
-	}
-}
-
-int main(){
-	insertar(10);
-	insertar(40);
-	insertar(3);
-	
-	imprimir();
-	
-	printf("Extraemos de la pila: %i\n", extraer());
-	
-	imprimir();
-	
-	liberar();
-	
-	getch();
-	
-	return 0;
-}
-
-.- RECURSIVIDAD CONCEPTOS BASICOS
+35.- RECURSIVIDAD CONCEPTOS BASICOS
 Primero debemos decir que la recursividad no es una esctructura de datos, sino que es una tecnica de programacin que nos permite que un bloque de instrucciones se ejecute n veces. Remplaza en ocasiones a esctructuras repetitivas.
 
 Este concepto sera de gran utilidad para los conceptios de la estructura de datos tipo arbol.
@@ -1567,7 +1458,7 @@ void ordernar(int vec[CANTIDAD], int cant){
 	}
 }
 
-.- RECURSIVIDAD: PROBLEMAS DONDE CONVIENE APLICAR LA RECURSIVIDAD
+36.- RECURSIVIDAD: PROBLEMAS DONDE CONVIENE APLICAR LA RECURSIVIDAD
 Imprimir la informacion de una lista simplemente encadenada de atras para adelante.
 El empleo de estructuras repetitivas para resolver este problema es bastante engorroso y lento (debemos avanzar hasta el ultimo nodo e imprimir, luego avanzar desde el principio hasta el anteultimo nodo y asi sucesivamente).
 
@@ -1626,7 +1517,7 @@ int main(){
 	return 0;
 }
 
-.- ESTRUCTURAS DINAMICAS EN C: CONCEPTOS DE ARBOLES
+37.- ESTRUCTURAS DINAMICAS EN C: CONCEPTOS DE ARBOLES
 Igual que la lista, el arbol es una estructura de datos. Son muy eficientes para la busqueda de informacion. Los arboles soportan estructuras no lineales.
 
 				A
@@ -1721,7 +1612,7 @@ Los nodos del subarbol derecho son todos mayores a 25? 30 si
 
 No hace falta analizar los nodos hoja. Si todas las respuestas son afirmativas podemos luego decir que se trata de un arbol binario ordenado.
 
-.- ESTRUCTURAS DINAMICAS EN C: IMPLEMENTACION DE UN ARBOL BINARIO ORDENADO
+38.- ESTRUCTURAS DINAMICAS EN C: IMPLEMENTACION DE UN ARBOL BINARIO ORDENADO
 Desarrollar un programa para la administracion de un arbol binario ordenado con informacion de tipo int.
 
 #include<stdio.h>
@@ -1827,4 +1718,596 @@ int main(){
 	return 0;
 }
 
-.- TODOS LOS TIPOS DE DATOS PRIMIVTIVOS EN EL LENGUAJE C
+39.- TODOS LOS TIPOS DE DATOS PRIMIVTIVOS EN EL LENGUAJE C
+Cada vez que necesitamos almacenar un entero utilizamos el tipo int, tambine dijimis que el tipo char permite almacenar un entero pequeno, pero el lenguaje C permite definir distintos tipos de enteros segun la capacidad maxima a almacenar y si necesitamos guardar el signo.
+
+Hay cuatro modificadores detipo para las variables enteras: signed, unsigned, short y long que nos permiten ampliar los tipos enteros en el lenguaje C.
+
+char (permite almacenar un valor entero entre -128 y 127 o entre 0 y 255 dependiendo del compilador utilizado).
+
+signed char (permite almacenar un valor entero entre [-128, 127]).
+
+unsigned char (permite almacenr un valor entero entre [0, 255]).
+
+signed short int (permite almacenr un valor como minimi entre [-32767, 32767]).
+Cuando definimos una variable de este tipo podemos resumitla poniendo solo short o short int o signed short.
+
+unsigned int (permite almacenar un valot como minimo entre [-2147483648, 2147483647]).
+Cuando definimos una variable de este tipo podemos resumirla poniendo solo int.
+Recordemos que hasta ahora siempre utilizamos este tipo de dato para almacenar enteros, pero de ahora en mas podemos utilizar la mas eficiente segun la necesidd de almacenamiento.
+
+unsigned int (permite almacenar un valor como minimo entre [0, 4294967295]).
+Cuando definimos una variable de este tipo podemos resumirla poniendo solo unsigned.
+
+signed long int (permite almacenar un valor como minimo entre [-2147483648, 2147483647]).
+Cuando definimos una variable de este tipo podemos resumirla poniedo solo long o long int o signed long.
+
+unsdigned long int (permite almacenar un valor como minimo entre [0, 4294967295]).
+Cuando definimos una variable de este tipo podemos resumirla poneinfo solo unsigned long.
+
+signed long long int (permite almacenar un valor como minimo entre [?9223372036854775807, 9223372036854775807])
+Cuando definimos una variable de este tipo podemos reumirla poniendo solo long long o long long int o signed long long.
+
+unsigned long long int (permite almacenar un valor comon minimo entre [0, 18446744073709551615]).
+Cuando definimos una variable de este tipo podemos resumirla poniedo solo unsigned long long.
+
+#include<stdio.h>
+#include<conio.h>
+
+int main()
+{
+	signed char c1=65;
+	printf("ci es de tipo signed char:%c \n", c1);
+
+	unsigned char c2=160;
+	printf("c2 ed de tipo unsigned char:%c \n", c2);
+
+	signed short int e1=3200;
+	printg("e1 es dfe tipo short int:%i \n", e1);
+
+	unsdigned short int e2=64000;
+	printf("e2 es de tipo unsigned short int:%i \n", e2);
+
+	signed int e3 =-2147483648;
+	printf("e3 es de tipo signed int:%i \n", e3);
+
+	unsigned int e4=4294967295;
+	printf("e4 es de tipo unsigned int:%u \n", e4);
+
+	signed long int e5=-2147483648;
+	printf("e5 es de tipo signed long int:%li \n", e5);
+
+	unsigned long int e6=2147483647;
+	printf("e6 es de tipo unsigned long int:%lu \n", e6);
+
+	signed long long int e7=-9223372036854775807;
+	printf("e7 es de tipo signed long long int:%lli \n", e7);
+
+	unsigned long long int e8=18446744073709551615;
+	prinft("e8 es de tipo unsigned long long int:%llu \n", e8);
+
+	getch();
+	return 0;
+}
+
+Si queremos conocer cual es el valor maximo y minimo para cada uno de los tipos de datos enteros del lenguaje C podemos ejecutar el siguiente programa:
+
+#include<stdio.h>
+#include<conio.h>
+#include<limits.h>
+
+int main()
+{
+	printf("El minimo valor para un signed char = %i\n", SCHAR_MIN);
+	printf("El maximo valor para un signed char = %i\n", SCHAR_MAX);
+	printf("El maximo valor para un unsigned char = %i\n\n", UCHAR_MAX);
+
+	printf("El minimo valor para un signed short int = %i\n", SHRT_MIN);
+	printf("El maximo valor para un signed short int = %i\n", SHRT_MAX);
+	printf("El maximo valor para un unsigned short int = %i\n\n", USHRT_MAX);
+
+	printf("El minimo valor para un signed int = %i\n", INT_MIN);
+	printf("El maximo valor para un signed int = %i\n", INT_MAX);
+	printf("El maximo valor para un unsigned int = %u\n\n", UINT_MAX);
+
+	printf("El minimo valor para un signed long int = %li\n", LONG_MIN);
+	printf("El maximo valor para un signed long int = %li\n", LONG_MAX);
+	printf("El maximo valor para un unsigned long int = %lu\n\n" ULONG_MAX);
+
+	printf("El minimo valor para un signed long long int = %lli\n", LONG_LONG_MIN);
+	printf("El maximo valor para un signed long long int = %lli\n", LONG_LONG_MAX);
+	printf("El maximo valor para un unsigned long long int = %llu\n\n", ULONG_LONG_MAX);
+
+	getch();
+
+	return 0;
+}
+
+El archivo de invlusion limits.h tiene una serie de macros con los valores maximos y minimos definidos para nuestro compilador.
+
+Debemos elegir la variable mas adecuada segun el valor maximo y minimo a guardar para que nuestro programa sea mas eficiente en cuanto a espacio para reservar como el tiempo de procesamiento de dichas variables.
+
+Si queremos saber cuantos bytes se necesitan reservar para cada uno de los tipos de variables podemos ejecutar el programa:
+
+#include<stdio.h>
+#include<conio.h>
+
+int main()
+{
+	printf("Bytes requeridos para tipo char: %i\n", sizeof(char));
+	printf("Bytes requeridos para tipo short int: %i\n", sizeof(short int));
+	printf("Bytes requeridos para tipo int: %i\n", sizeof(int));
+	printf("Bytes requeridos para tipo long int: %i\n" sizeof(long int));
+	printf("Bytes requeridos para tipo long long int: %i\n", sizeof(long long int));
+
+	getch();
+
+	return 0;
+}
+
+Como podemos ver definir una variable de tipo long long int require reservar 8 bytes para el almacenamiento del entero.
+
+En el lenguaje C podemos definir variables decimales de tipo:
+
+float
+double
+long double
+
+Se diferencian en la precision como almacenan el valor real. La menos precisa es el tipo float, le sigue double y finalmente la mas precisa es long double.
+
+#include<stdio.h>
+#include<conio.h>
+
+int main()
+{
+	printf("Bytes requeridos para tipo float: %i\n", sizeof(float));
+	printf("Bytes requeridos para tipo double: %i\n", sizeof(double));
+	printf("Bytes requeridos para tipo long double: %i\n", sizeof(long double));
+
+	getch();
+
+	return 0;
+}
+
+40.- OPERADOR DE MOLDE CON TIPOS ENTEROS Y REALIES (CAST)
+Hemos visto que cuando realizamos una operacion con un conjunto de datos enteros el resultado es otro entero.
+
+En algunas situaciones necesitamos que el resultado sea de otro tipo en estos casos utilizamos el concepto de cast (moldear):
+
+float f = 7/2;
+printf("%f, f); //3
+
+Luego podemos ver si imprimimos la variable f su contenido es un 3.
+
+Esto ocurre por que la division de un int con respecto a otro valor int da como resultado un entero.
+
+Si queremos que el resultado sea exacto podemos anteceder entre parentesis al tipo de dato que queramos que se moldee:
+
+float f = (float)7/2;
+printf("%f", f); //3.5
+
+#include<stdio.h>
+#include<conio.h>
+
+int main()
+{
+	int nota1, nota2, nota3;
+
+	float promedio;
+
+	printf("Ingrese primer nota: ");
+	scanf("%i", &nota1);
+
+	printf("Ingrese segunda nota: ");
+	scanf("%i", &nota2);
+
+	printf("Ingrese tercer nota: ");
+	scanf("%i", &nota3);
+
+	promedio = (float)(nota1+nota2+nota3)/3;
+
+	printf("La nota promedio es: %0.2f", promedio);
+
+	getch();
+
+	return 0;
+
+}
+
+41.- OPERADORES DE ASIGNACION
+
+Los operadores de asignacion mas comunes son:
+
++=
+-=
+*=
+/=
+%=
+
+suma=suma+valor; --> suma+=valor;
+
+42.- OPERADOR CONDICIONAL ?
+Este operador hace mas compacta ciertas algoritmos en las que interviene una estructura condicional if.
+
+int v1=1, v2=4, may = 0;
+
+may = (v1>v2)?v1:v2;
+
+printf("El valor mayor es: %i", may);
+
+Hay que tener en cuenta que el operador conficional ?: puede remplazar el uso de if an algunas situaciones y no en todas.
+
+La sintaxis del operadot condicinal entonces es:
+
+condicion ? valor si cierto : valor si falso
+
+Luego para usar el resultado que genera el operador condicional disponemos una sintaxis similar a esta:
+
+variable = condicion ? valor si cierto : valor si falso
+
+Ejemplo:
+len += print_time(msg->ts_nsec, buf ? buf + len : NULL);
+
+43.- ESTRUCTURA CONDICIONAL
+
+#include<stdio.h>
+#include<conio.h>
+
+int main()
+{
+	int valor;
+
+	printf("Ingrese un valor entre 1 y 5: ");
+	scanf("%i", &valor);
+
+	switch(valor){
+		case 1:
+			printf("Uno");
+			break;
+		case 2:
+			printf("Dos");
+			break;
+		case 3:
+			printf("Tres");
+			break;
+		default:
+			printf("El valor esta fuera de rango.");
+	}
+}
+
+char operacion;
+
+printf("Ingrese la operacion quiere hacer: +, -, *, /: ");
+scanf(" %c", &operacion);
+
+switch (operacion){
+	case '+':
+		printf("La suma es: ");
+		break;
+	case '-':
+		printf("La resta es: ");
+		break;
+	case '*':
+		printf("El producto es: ");
+		break;
+	case '/':
+		printf("La division es: ");
+		break;
+}
+
+char palabra[50];
+int f;
+
+for(f=0; f<strlen(palabra); f++)
+{
+	switch (palabra[f]){
+		case 'a':
+		case 'e':
+		case 'i':
+		case 'o':
+		case 'u':
+			vocales++;
+			break;
+		default:
+			consonantes++;
+	}
+}
+
+44.- COMANDOS BREAK Y CONTNUE DENTRO DE ESTRUCTURAS REPETITIVAS
+Hay dos comandos en el lenguaje C que modifican un ciclo repetitivo for, while o do while.
+
+break
+El primer comando se llama break y lo que hace es finalizar el ciclo repetitivo inmediatamente sin tener que analizar la condicion del ciclo.
+
+for(int f=0; f<10; f++)
+{
+	printf("Ingrese un valor: ");
+	scanf("%i", &valor);
+
+	if(valor==0)
+	{
+		break;
+	}
+}
+
+
+continue
+El comando continue cuando se ejecuta vuelve al principio del ciclo repetitivo.
+
+for(int f=0; f<5; f++)
+{
+	printf("Ingrese un valor: ");
+	scanf("%i", &valor);
+
+	if (valor>5 || valor<=0)
+	{
+		continue;
+	}
+
+	switch (valor){
+		case 1: 
+			printf("Uno");
+			break;
+		case 2:
+			printf("Dos");
+			break;
+	}
+
+	printf("\n");
+}
+
+En este problema cuando el if se verifica verdadero, es decir vuando el operador carga un valor mayor a  5 o menor o igual a cero se ejecuta el comando continue, en dicho caso la siguiente instuccion a ejecutarse es el incremento del contador f en la parte superior del for. Luego verifica la condicion y de ser verdadera se repite nuevamente el bloque del for.
+
+Tengamos en cuenta que los break contenidos en el switch el lenguaje C no los confunde con comandos break contenidos en el for.
+
+while(1)
+{
+	printf("Ingrese un valor (0 para finalizar): ");
+	scanf("%i", &valor);
+
+	if(valor==0)
+	{
+		break;
+	}
+	
+	suma+=valor;
+}
+
+45.- COMANDO GOTO
+Otro comando que tiene el lenguaje C es el goto. Este comando nos permite saltar en forma incondicional a cualquier otra parte de la misma funcion.
+
+La sentencia goto no es aconsejada en la metodologia de programacion estructurada pero su uso en casos especiales nos permite crear codigo mas conciso.
+
+Un caso comun donde se la utiliza es cunado queremos salir de una serie de for anidados a un bloque de la misma funcion pero fuera de dichos for (tener en cuenta que el comando break solo sale delfor que la contiene).
+
+void cargar (int mat[FILAS][COLUMNA])
+{
+	int f, c;
+
+	for(f=0; f<FILAS; f++)
+	{
+		for(c=0; c<COLUMNAS; c++)
+		{
+			printf("Ingrese elemento [%i, %i]: ", f, c);
+			scanf("%i", &mat[f][c]);
+
+			if(mat[f][c]==0)
+			{
+				goto salir;
+			}
+		}
+	}
+
+	return;
+
+	salir: printf("Con un cero se termina la carga de elementos\n");
+}
+
+46.- FUNCION EXIT PARA TERMINAR UN PROGRAMA Y SYSTEM PARA LLAMAR OTRO
+Funcion exit
+La funcion exit interrumpe la ejecucion del programa en forma inmediata y retorna un entero al proceso que llamo el programa (normalmente este valor devuelto lo recibe el sistema operativo).
+
+La sintaxis de esta funcion es:
+
+void exit(int codigo)
+
+Para poder llamar a esta funcion debemos importar el archivo de inclusion:
+
+#include<stdlib.h>
+
+El valor devuelto por convencion es un cero si el programa finaliza en forma correcta o un valor distinto a cero indicando distintos codigos de error que los puede interpretar quien ejecuto el programa.
+
+Es importante notar que a exit la podemos llamar en cualquier parte de nuestro programa e inmediatamente el programa se detendara y no ejecutara mas comandos del mismo.
+
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+#include<stdlib.h>
+
+void ingresoClave()
+{
+	char clave[50];
+	int intentos=0;
+
+	do{
+		if(intentos==3)
+		{
+			exit(1);
+		}
+
+		printf("Ingrese clave: ");
+		gets(clave);
+		intentos++;
+	}	while (strcmp(clave, "123abc")!=0);
+}
+
+int main()
+{
+	ingresoClave();
+
+	printf("Bienvenido\n");
+	
+	getch();
+
+	return 0;
+}
+
+Funcion system
+La funcion system nos permite ejecutar otro programa. Debemos pasr como parametro una cadena con el nombre del programa a ejecutar, debe ser un programa ejecutable el mismo.
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+int main()
+{
+	int codigo;
+
+	codigo=system("program199.exe");
+
+	printf("El programa finalizo retornando el codigo: %i", codigo);
+
+	getch();
+
+	return 0;
+}
+
+Si indicamos el path el codigo quedaria:
+codigo=system("c:\\programasc\\programa199.exe");
+
+
+
+
+
+
+
+
+
+
+===============================================================================
+
+.- ESTRUCTURAS DINAMICAS EN C: CONCEPTO DE LISTAS
+Una lista es un conjunto de nodos, cada uno de los cuales tiene dos campos: uno de informacion y un apuntador al siguient nodo de la lista. Ademas un apuntador externo senala el primer nodo de la lista.
+
+Informacion | Direccion al siguiente nodo
+
+La informacion puede ser cualquier tipo de dato simple (int, char, float, etc.) o estructura de datos (registro, vector, etc.);
+
+La direccion al siguiente nodo es un puntero.
+
+raiz -> 4|->7|->3|->7|*
+
+Como deciamos, una lista es una secuenciea de nodos (en este caso cuatro nodos). La informacion de los nodos en este caso es un entero y siempre contiene un puntero que guarda la direccion del siguiente nodo. raiz es otro puntero externo a la lista que contiene la direccion del primer nodo.
+
+El estado de una lista varia durante la ejecucion del programa.
+
+De esta forma representamos graficamente una lista vacia:
+raiz->*
+
+Si insertamos un dodo en la lista quedaria asi:
+raiz->4|*
+
+Si insertamos otro nodo al principio con el valor de 9 tenemos:
+
+raiz->9|->4|*
+
+Lo mismo podemos borrar nodos de cualquier parte de la lista.
+
+Tipos de listas
+Segun el mecanismo de insercion y extraccion de nodos en la lista tenemos los siguientes tipos:
+
+Listas tipo pila.
+Listas tipo cola.
+Listas genericas.
+
+Una lista se comporta como una pila si las inserciones y extracciones las hacemos por un mismo lado de la lista (por ejemplo donde apunta raiz). Tambien se las llama listas LIFO (Last In First Out - ultimo en entrar primero en salir).
+
+Una lista se comporta como una cola si las inserciones las hacemos al final y las extracciones las hacemos por el frente de la lista. Tambien se las llama listas FIFO (First In First Out - primero en entrar primero en salir).
+
+Una lista se comporta como generica cuando las inserciones y extracciones se realizan en cualquier parte de la lista. Podemos en algun momento insertar un nodo en medio de la lista, en otro momento al final, borrar uno del frente, borrar uno del fondo o uno interior, etc.
+
+.- ESTRUCTURAS DINAMICAS EN C: LISTAS TIPO PILA
+Inicialmente la pila esta vacia y decimos que el puntero raiz apunta a NULL (si apunta a NULL decimos que no tiene una direccion de memoria, en realidad este valor NULL es el valor cero).
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+struct nodo{
+	int info;
+	struct nodo *sig;
+};
+
+struct nodo *raiz=NULL;
+
+void insertar(int x){
+	struct nodo *nuevo;
+	nuevo=malloc(sizeof(struct nodo));
+	nuevo->info=x;
+	
+	if(raiz==NULL){
+		raiz=nuevo;
+		nuevo->sig=NULL;
+	}
+	else{
+		nuevo->sig=raiz;
+		raiz=nuevo;
+	}
+}
+
+void imprimir(){
+	struct nodo *reco=raiz;
+	
+	printf("Lista completa.\n");
+	
+	while(reco!=NULL){
+		printf("%i ", reco->info);
+		reco=reco->sig;
+	}
+	
+	printf("\n");
+}
+
+int extraer(){
+	if(raiz!=NULL){
+		int informacion=raiz->info;
+		struct nodo *bor=raiz;
+		raiz=raiz->sig;
+		free(bor);
+		return informacion;
+	}
+	else{
+		return -1;
+	}
+}
+
+void liberar(){
+	struct nodo *reco=raiz;
+	struct nodo *bor;
+	
+	while(reco!=NULL){
+		bor=reco;
+		reco=reco->sig;
+		free(bor);
+	}
+}
+
+int main(){
+	insertar(10);
+	insertar(40);
+	insertar(3);
+	
+	imprimir();
+	
+	printf("Extraemos de la pila: %i\n", extraer());
+	
+	imprimir();
+	
+	liberar();
+	
+	getch();
+	
+	return 0;
+}
+
+===============================================================================
