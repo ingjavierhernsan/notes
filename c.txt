@@ -49,6 +49,18 @@ gcc test.c -o directory\test
 37.- ESTRUCTURAS DINAMICAS EN C: CONCEPTOS DE ARBOLES
 38.- ESTRUCTURAS DINAMICAS EN C: IMPLEMENTACION DE UN ARBOL BINARIO ORDENADO.- TODOS LOS TIPOS DE DATOS PRIMIVTIVOS EN EL LENGUAJE C
 39.- TODOS LOS TIPOS DE DATOS PRIMIVTIVOS EN EL LENGUAJE C
+40.- OPERADOR DE MOLDE CON TIPOS ENTEROS Y REALIES (CAST)
+41.- OPERADORES DE ASIGNACION
+42.- OPERADOR CONDICIONAL ?
+43.- ESTRUCTURA CONDICIONAL
+44.- COMANDOS BREAK Y CONTNUE DENTRO DE ESTRUCTURAS REPETITIVAS
+45.- COMANDO GOTO
+46.- FUNCION EXIT PARA TERMINAR UN PROGRAMA Y SYSTEM PARA LLAMAR OTRO
+
+
+
+
+
 
 
 
@@ -1856,6 +1868,316 @@ int main()
 
 	return 0;
 }
+
+40.- OPERADOR DE MOLDE CON TIPOS ENTEROS Y REALIES (CAST)
+Hemos visto que cuando realizamos una operacion con un conjunto de datos enteros el resultado es otro entero.
+
+En algunas situaciones necesitamos que el resultado sea de otro tipo en estos casos utilizamos el concepto de cast (moldear):
+
+float f = 7/2;
+printf("%f, f); //3
+
+Luego podemos ver si imprimimos la variable f su contenido es un 3.
+
+Esto ocurre por que la division de un int con respecto a otro valor int da como resultado un entero.
+
+Si queremos que el resultado sea exacto podemos anteceder entre parentesis al tipo de dato que queramos que se moldee:
+
+float f = (float)7/2;
+printf("%f", f); //3.5
+
+#include<stdio.h>
+#include<conio.h>
+
+int main()
+{
+	int nota1, nota2, nota3;
+
+	float promedio;
+
+	printf("Ingrese primer nota: ");
+	scanf("%i", &nota1);
+
+	printf("Ingrese segunda nota: ");
+	scanf("%i", &nota2);
+
+	printf("Ingrese tercer nota: ");
+	scanf("%i", &nota3);
+
+	promedio = (float)(nota1+nota2+nota3)/3;
+
+	printf("La nota promedio es: %0.2f", promedio);
+
+	getch();
+
+	return 0;
+
+}
+
+41.- OPERADORES DE ASIGNACION
+
+Los operadores de asignacion mas comunes son:
+
++=
+-=
+*=
+/=
+%=
+
+suma=suma+valor; --> suma+=valor;
+
+42.- OPERADOR CONDICIONAL ?
+Este operador hace mas compacta ciertas algoritmos en las que interviene una estructura condicional if.
+
+int v1=1, v2=4, may = 0;
+
+may = (v1>v2)?v1:v2;
+
+printf("El valor mayor es: %i", may);
+
+Hay que tener en cuenta que el operador conficional ?: puede remplazar el uso de if an algunas situaciones y no en todas.
+
+La sintaxis del operadot condicinal entonces es:
+
+condicion ? valor si cierto : valor si falso
+
+Luego para usar el resultado que genera el operador condicional disponemos una sintaxis similar a esta:
+
+variable = condicion ? valor si cierto : valor si falso
+
+Ejemplo:
+len += print_time(msg->ts_nsec, buf ? buf + len : NULL);
+
+43.- ESTRUCTURA CONDICIONAL
+
+#include<stdio.h>
+#include<conio.h>
+
+int main()
+{
+	int valor;
+
+	printf("Ingrese un valor entre 1 y 5: ");
+	scanf("%i", &valor);
+
+	switch(valor){
+		case 1:
+			printf("Uno");
+			break;
+		case 2:
+			printf("Dos");
+			break;
+		case 3:
+			printf("Tres");
+			break;
+		default:
+			printf("El valor esta fuera de rango.");
+	}
+}
+
+char operacion;
+
+printf("Ingrese la operacion quiere hacer: +, -, *, /: ");
+scanf(" %c", &operacion);
+
+switch (operacion){
+	case '+':
+		printf("La suma es: ");
+		break;
+	case '-':
+		printf("La resta es: ");
+		break;
+	case '*':
+		printf("El producto es: ");
+		break;
+	case '/':
+		printf("La division es: ");
+		break;
+}
+
+char palabra[50];
+int f;
+
+for(f=0; f<strlen(palabra); f++)
+{
+	switch (palabra[f]){
+		case 'a':
+		case 'e':
+		case 'i':
+		case 'o':
+		case 'u':
+			vocales++;
+			break;
+		default:
+			consonantes++;
+	}
+}
+
+44.- COMANDOS BREAK Y CONTNUE DENTRO DE ESTRUCTURAS REPETITIVAS
+Hay dos comandos en el lenguaje C que modifican un ciclo repetitivo for, while o do while.
+
+break
+El primer comando se llama break y lo que hace es finalizar el ciclo repetitivo inmediatamente sin tener que analizar la condicion del ciclo.
+
+for(int f=0; f<10; f++)
+{
+	printf("Ingrese un valor: ");
+	scanf("%i", &valor);
+
+	if(valor==0)
+	{
+		break;
+	}
+}
+
+
+continue
+El comando continue cuando se ejecuta vuelve al principio del ciclo repetitivo.
+
+for(int f=0; f<5; f++)
+{
+	printf("Ingrese un valor: ");
+	scanf("%i", &valor);
+
+	if (valor>5 || valor<=0)
+	{
+		continue;
+	}
+
+	switch (valor){
+		case 1: 
+			printf("Uno");
+			break;
+		case 2:
+			printf("Dos");
+			break;
+	}
+
+	printf("\n");
+}
+
+En este problema cuando el if se verifica verdadero, es decir vuando el operador carga un valor mayor a  5 o menor o igual a cero se ejecuta el comando continue, en dicho caso la siguiente instuccion a ejecutarse es el incremento del contador f en la parte superior del for. Luego verifica la condicion y de ser verdadera se repite nuevamente el bloque del for.
+
+Tengamos en cuenta que los break contenidos en el switch el lenguaje C no los confunde con comandos break contenidos en el for.
+
+while(1)
+{
+	printf("Ingrese un valor (0 para finalizar): ");
+	scanf("%i", &valor);
+
+	if(valor==0)
+	{
+		break;
+	}
+	
+	suma+=valor;
+}
+
+45.- COMANDO GOTO
+Otro comando que tiene el lenguaje C es el goto. Este comando nos permite saltar en forma incondicional a cualquier otra parte de la misma funcion.
+
+La sentencia goto no es aconsejada en la metodologia de programacion estructurada pero su uso en casos especiales nos permite crear codigo mas conciso.
+
+Un caso comun donde se la utiliza es cunado queremos salir de una serie de for anidados a un bloque de la misma funcion pero fuera de dichos for (tener en cuenta que el comando break solo sale delfor que la contiene).
+
+void cargar (int mat[FILAS][COLUMNA])
+{
+	int f, c;
+
+	for(f=0; f<FILAS; f++)
+	{
+		for(c=0; c<COLUMNAS; c++)
+		{
+			printf("Ingrese elemento [%i, %i]: ", f, c);
+			scanf("%i", &mat[f][c]);
+
+			if(mat[f][c]==0)
+			{
+				goto salir;
+			}
+		}
+	}
+
+	return;
+
+	salir: printf("Con un cero se termina la carga de elementos\n");
+}
+
+46.- FUNCION EXIT PARA TERMINAR UN PROGRAMA Y SYSTEM PARA LLAMAR OTRO
+Funcion exit
+La funcion exit interrumpe la ejecucion del programa en forma inmediata y retorna un entero al proceso que llamo el programa (normalmente este valor devuelto lo recibe el sistema operativo).
+
+La sintaxis de esta funcion es:
+
+void exit(int codigo)
+
+Para poder llamar a esta funcion debemos importar el archivo de inclusion:
+
+#include<stdlib.h>
+
+El valor devuelto por convencion es un cero si el programa finaliza en forma correcta o un valor distinto a cero indicando distintos codigos de error que los puede interpretar quien ejecuto el programa.
+
+Es importante notar que a exit la podemos llamar en cualquier parte de nuestro programa e inmediatamente el programa se detendara y no ejecutara mas comandos del mismo.
+
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+#include<stdlib.h>
+
+void ingresoClave()
+{
+	char clave[50];
+	int intentos=0;
+
+	do{
+		if(intentos==3)
+		{
+			exit(1);
+		}
+
+		printf("Ingrese clave: ");
+		gets(clave);
+		intentos++;
+	}	while (strcmp(clave, "123abc")!=0);
+}
+
+int main()
+{
+	ingresoClave();
+
+	printf("Bienvenido\n");
+	
+	getch();
+
+	return 0;
+}
+
+Funcion system
+La funcion system nos permite ejecutar otro programa. Debemos pasr como parametro una cadena con el nombre del programa a ejecutar, debe ser un programa ejecutable el mismo.
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+int main()
+{
+	int codigo;
+
+	codigo=system("program199.exe");
+
+	printf("El programa finalizo retornando el codigo: %i", codigo);
+
+	getch();
+
+	return 0;
+}
+
+Si indicamos el path el codigo quedaria:
+codigo=system("c:\\programasc\\programa199.exe");
+
+
+
+
 
 
 
