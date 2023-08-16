@@ -56,6 +56,14 @@ gcc test.c -o directory\test
 44.- COMANDOS BREAK Y CONTNUE DENTRO DE ESTRUCTURAS REPETITIVAS
 45.- COMANDO GOTO
 46.- FUNCION EXIT PARA TERMINAR UN PROGRAMA Y SYSTEM PARA LLAMAR OTRO
+47.- DEFINICION DE CONSTANTES (CONST)
+48.- EMPLEO DE LLAVES OPCIONALES EN ESTRUCTURAS CONDICIONALES Y REPETITIVAS
+49.- DECLARACION DE ENUMERACIONES
+50.- DECLARACION DE UNIONES
+51.- DEFINICION DE NUEVOS NOMBRES PARA TIPOS DE DATOS EXISTENTES (TYPEDEF)
+
+
+
 
 
 
@@ -2175,8 +2183,251 @@ int main()
 Si indicamos el path el codigo quedaria:
 codigo=system("c:\\programasc\\programa199.exe");
 
+47.- DEFINICION DE CONSTANTES (CONST)
+Si necesitamos almacenar un valor en una variable que nunca seta cambiado el lenguaje C nos permite definir una constante.
+
+const int impuesto=21;
+
+La definicion como constante del indentificador impuesto asegura que cualquier intento de asignarle otro valor generara un error cuando compilemos el programa:
+
+impuesto=25; //error
+
+Se pueden definir constantes de cualquier tipo de dato que nos provee el lenguaje C.
+
+Una constante a diferencia de una macro ocupa un espacio durante la ejecucion del programa:
+
+#define PI 3.1416
+
+const float pi=3.1416;
+
+Es importante notar que pi reserva espacio para un valor float durante la ejecucion del programa, en cambio la macro PI cuando compilamos se sustituye todas las partes que aparece PI por el valor 3.1416.
+
+#include<stdio.h>
+#include<conio.h>
+
+struct persona {
+	char nombre[50];
+	int edad;
+};
+
+int main()
+{
+	const short int v1=30000;
+	const int v2=2000000;
+	const float r1=10.55;
+	const char l1='A';
+	const struct persona per1={"juan", 18};
+
+	getch();
+
+	return 0;
+}
+
+Modificador const en los parametros de una funcion
+Cuando un parametro no debe ser modificado es conveniente agregarle el modificador const para evitar que por descuido le asignemos un valor.
+
+void impirmir(const int vec[3])
+{
+	int f;
+
+	for(f=0; f<3; f++)
+	{
+		printf("%i", vec[f]);
+	}
+}
+
+48.- EMPLEO DE LLAVES OPCIONALES EN ESTRUCTURAS CONDICIONALES Y REPETITIVAS
+Las llaves de apertura y cerrado de una estructura condicional y repetitiva en el lenguaje C es opcional si hay una sola instruccion.
+
+int v1, v2;
+
+if (v1>v2)
+	printf("El valor mayor es %i", v1);
+else
+	printf("El valor mayor es %i", v2);
+
+int x;
+for(x=1; x<=10; x++)
+	printf("%i\n", x);
+
+49.- DECLARACION DE ENUMERACIONES
+Una enumeracion es un tipo de dato que creamos asociando un conjunto de enteros con un conjunto de literales.
+
+enum operaciones {SUMA, RESTA, MULTIPLICACION, DIVISION};
+enum respuesta {NO, SI};
+enum boolean {FALSE, TRUE};
+
+Como vemos la declaracion de un tipo de dato enumerado se declara mediante la palabra clave enum y seguidamente el nombre del tipo de datos, luego entre llaves indicamos todas los valores que puede almacenar una variable de ese tipo. La primer constante o literal indicado toma el valor cero, la segunda el valor 1 y asi sucesivamente.
+
+Podemos declarar la enumeracion con la sintaxis:
+
+enum operaciones {SUMA=0, RESTA=1, MULTIPLICACION=2, DIVISION=3};
+
+Pero es opcional si queremos iniciar a partir de cero la enumeracion el propio compilador lo hace.
+
+Luego para definir una variable de tipo enumeracion utilizamos la sintaxis:
+
+enum operaciones op;
+
+Definimos la variable op de tipo operaciones. Luego en la variable op podemos almacenar cualquiera de los cuatro literales definidos en la enumeracion:
+
+op=MULTIPLICACION;
+
+Las enumeracions tienen por objetivo que el programa sea mas legible para cuando tengamos que hacer cambios. Si no existieran las enumeraciones podemos definir una variable entera y recordar que el 0=SUMA, 1=RESTA, 2=MULTIPLICACION y 3=DIVISION.
+
+int op; //si guardo 0=suma, 1=resta, 2=multiplicacion y 3=division
+op=2;
+
+#include<stdio.h>
+
+enum texiste {NO, SI};
+
+void consulta(int vec[3])
+{
+	enum texiste existe = NO;
+
+	for(int f=0; f<3; f++)
+		if(valor==vec[f])
+			existe=SI;
+	
+	if(existe==SI)
+		printf("El valor ingresado esta dentro del vector");
+	else
+		printf("El valor ingresado no esta dentro del vector");
+}
+
+#include<stdio.h>
+#include<stdlib.h>
+
+enum operacion {SUMAR, RESTAR, MULTIPLICAR, DIVIDIR};
+
+int operar(int v1, int v2, enum operacion op)
+{
+	switch(op){
+		case SUMAR: return v1+v2;
+		case RESTAR: return v1-v2;
+		case MULTIPLICAR: return v1*v2;
+		case DIVIDIR: return v1/v2;
+		default: printf("El programa se detien por operacion no valida.");
+				exit(1);
+	}
+}
+
+Asignacion de otros valores a los literales
+
+Podemos iniciar los literales a partir de otro valor y no de cero:
+
+enum diassemana {LUNES=1, MARTES, MIERCOLES};
+
+Podemos asignar valores no consecutivos a cada uno:
+
+enum dispositivos {TECLADO=1, MOUSE=10, CAMARA=100};
+
+50.- DECLARACION DE UNIONES
+La union es una estructura de datos muy particular del lenguaje C. La declaracion de una union es similar a un registro (struct).
+
+union dato{
+	int x;
+	char letra;
+	char cadena[5];
+};
+
+Como vemos cambiamos la palabra clave struct por union, hasta ahi la semejanza con los registros.
+
+Cuando definimos una variable de un tipo  union utilizamos la sintaxis:
+
+union dato d;
+
+La caracteristica fundamental es que se reserva el mismo espacio de memoria para lso atriburos x, letra y cadena[5].
+
+En una variable de tipo stuct cada campo reserva un espacio distinto de memoria en cambio en una union todas comparten el mismo espacio. Se reservapara el tipo de dato mayor contenida en al union, si tenemos que x es un int y ocupa 4 bytes, letra es un tipo char y ocupa 1 byte y el vector cadena ocupa 5 bytes luego significa que cuando defino la variable d de tipo union dato se estara reservando 5 bytes de memoria.
+
+51.- DEFINICION DE NUEVOS NOMBRES PARA TIPOS DE DATOS EXISTENTES (TYPEDEF)
+En el lenguaje C existen muchos tipos de datos primitivos (int, char, float, etc.) y estructuras de datos.
+
+Mediante la palabra clave typedef podemos definir un alias para un tipo de dato existente:
+
+#include<stdio.h>
+#include<conio.h>
+
+typedef int entero;
+
+int main()
+{
+	entero edad1, edad2;
+
+	edad1=5;
+	edad2=7;
+
+	printf("Las edades son: %i y %i", edad1, edad2);
+
+	getch();
+
+	return 0;
+}
+
+Decimos que el nombre "entero" es un alias del tipo de dato int.
+
+La declaracion de tipos tiene por objetivo hacer que nuetro programa sea mas legible.
+
+typedef con struct
+Podemos declarar un alias para un tipo de dato registro.
+
+typedef struct {
+	int codigo;
+	char descripcion[41];
+	float precio;
+} tproducto;
+
+int main()
+{
+	tproducto pro1, pro2;
+}
+
+------------------------------
+
+struct producto {
+	int codigo;
+	char descripcion[41];
+	float precio;
+};
+
+typedef struct producto tproducto;
+
+int main()
+{
+	tproducto pro1, pro2;
+}
 
 
+typedef con struct y array
+
+Podemos declarar un alias para un tipo de dato de array de registros.
+
+#define TAM 5
+
+struct persona {
+	char nombre[40];
+	int edad;
+};
+
+typedef struct persona tpersonas[TAM];
+
+int main()
+{
+	tpersonas personas;
+}
+
+--------------------------------
+
+struct nodo{
+	int info;
+	struct nodo *sig;
+};
+
+typedef struct nodo * tnodo;
+
+tnodo raiz=NULL;
 
 
 
