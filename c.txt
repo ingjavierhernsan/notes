@@ -61,13 +61,11 @@ gcc test.c -o directory\test
 49.- DECLARACION DE ENUMERACIONES
 50.- DECLARACION DE UNIONES
 51.- DEFINICION DE NUEVOS NOMBRES PARA TIPOS DE DATOS EXISTENTES (TYPEDEF)
-
-
-
-
-
-
-
+52.- VARIABLES LOCALES STATIC
+53.- APLICACION EN C CON MAS DE UN ARCHIVO FUENTE (PROYECTOS CON MULTIPLES ARCHIVOS)
+54.- DEFINICION DE FUNCIONES Y VARIABLES STATIC
+55.- VARIABLES GLOBALES CON EL MODIFICADOR EXTERN
+56.- MODIFICADOR INLINE EN LA DEFINICION DE FUNCIONES
 
 
 
@@ -2429,6 +2427,295 @@ typedef struct nodo * tnodo;
 
 tnodo raiz=NULL;
 
+52.- VARIABLES LOCALES STATIC
+Hemos visto que cuando definimos una variable loval su valor se pierde inmediatamente cuando finaliza la funcion.
+
+En el lenguaje C podemos definir variables locales que no pierdan su valor entre llamadas mediante el modificador static.
+
+Veamos con dos programas la diferencia entre definir una variable local y una variable local static:
+
+void imprimir()
+{
+	int x=0;
+	x++;
+	printf("%i", x);
+}
+
+int main()
+{
+	imprimir();
+	imprimir();
+	imprimir();
+
+	getch();
+
+	return 0;
+}
+
+//111
+
+Cada vez que se llama a la funcion imprimir se define una variable local llamada x, se la inicializa con 0 y luego se la incrementa en uno y se imprime su valor.
+
+Si queremos que la variable x no pierda su valor entre llamadas a la funcion imprimir se le antecede el modificador static:
+
+void imprimir()
+{
+	static int x=0;
+	x++;
+	printf("%i", x);
+}
+
+int main()
+{
+	imprimir();
+	imprimir();
+	imprimir();
+
+	getch();
+
+	return 0;
+}
+
+//123
+
+53.- APLICACION EN C CON MAS DE UN ARCHIVO FUENTE (PROYECTOS CON MULTIPLES ARCHIVOS)
+Crear una carpeta proyecto001.
+Entrar en la carpeta.
+Crear una carpeta Sources.
+Crear una carpeta Headers
+En la carperta Sources agregar archivos:
+main.c
+productos.c
+En la carpeta Headers agregar archivo:
+productos.h
+Editar codigo correspondiente:
+
+productos.h
+
+typedef struct{
+	int codigo;
+	char descripcion[41];
+	float precio;
+} tproducto;
+
+#define CANT 4
+
+void cargar(tproducto productos[CANT]);
+void imprimir(tproducto productos[CANT]);
+
+main.c
+
+#include<stdio.h>
+#include"produntos.h"
+
+int main()
+{
+	tproducto productos[CANT];
+	int opcion;
+
+	do{
+		printf("1.- Carga de productos.\n");
+		printf("2.- Listado de productos.\n");
+		printf("3.- Finalizar programa..\n\n");
+		printf("Elija su opcion: ");
+		scanf("%i", &opcion);
+
+		switch(opcion){
+			case 1:cargar(productos);
+					break;
+			case 2:imprimir(productos);
+					break;
+		}
+	} while(opcion!=3);
+
+	return 0;
+}
+
+productos.c
+
+#include<stdio.h>
+#include"productos.h"
+
+void cargar(tproducto productos[CANT])
+{
+	int f;
+
+	for(f=0; f<CANT; f++)
+	{
+		printf("Ingrese el codigo: ");
+		scanf("%i", &productos[f].codigo);
+
+		fflush(stdin);
+
+		printf("Ingrese la descripcion: ");
+		gets(productos[f].descripcion);
+
+		printf("Ingrese el precio: ");
+		scanf("%f", &productos[f].precio);
+	}
+}
+
+void imprimir(tproducto productos[CANT])
+{
+	int f;
+
+	for(f=0; f<CANT; f++)
+	{
+		printf("Codigo: %i\n", productos[f].codigo);
+		printf("Descripcion: %s\n", productos[f].descripcion);
+		printf("Precio:%0.2f\n", productos[f].precio);
+	}
+
+	printf("\n\n");
+}
+
+54.- DEFINICION DE FUNCIONES Y VARIABLES STATIC
+Cuando tenemos proyectos grandes cada uno de los archivos *.c tienen como objetivo definido y lo llevan a cabo implementando funciones.
+
+Las funciones que implementa un archivo *.c son accedidas desde otros archivos.
+
+Cuando queremos implementar funciones que solo puedan ser llamadas desde fucniones del mismo archivo debemos anteceder el modificador static previo al nombre de la funcion.
+
+Una funcion static se oculta al resto de archivos del proyecto, con esto logramos encapsular funcionalidades dentro de un archivo.
+
+El modificador static aplicada a una variable global definida en el archivo tambien solo puede ser accedida por las funciones de ese archivo.
+
+#include<stdio.h>
+#include"productos.h"
+
+static void mostrarTitulo(char *tit)
+{
+	printf("%s\n", tit);
+}
+
+static void mostrarAsteriscos()
+{
+	printf("******************************************************************\n\n");
+}
+
+void cargar(tproducto productos[CANT])
+{
+	int f;
+	
+	mostrarTitulo("Cargar de datos de productos");
+
+	for(f=0; f<CANT; f++)
+	{
+		//...
+	}
+
+	mostrarAsteriscos();
+}
+
+55.- VARIABLES GLOBALES CON EL MODIFICADOR EXTERN
+Cuando tenemos una aplicacion constituida por varios archivos *.c y queremos acceder a una variable global de un archivo en otro archivo debemos declarar la variable global con el modificador extern.
+
+Cuando una variable global se declara como extern, el compilador no crea un espacio para ella en memoria, sino que, tan solo tiene en cuenta que dicha variable ya ha sido declarada en otro archivo del programa.
+
+pila.h
+
+struct nodo{
+	int info;
+	struct nodo *sig;
+};
+
+typedef struct nodo * tnodo;
+
+void insertar(int x);
+void imprimir();
+int extraer();
+void liberar();
+
+main.c
+
+#include<stdio.h>
+#include<conio.h>
+#include"pila.h"
+
+tnodo raiz=NULL;
+
+int main()
+{
+	insertar(10);
+	insertar(40);
+	insertar(3);
+
+	imprimir();
+
+	printf("Extraemos de la pila: %i\n", extraer());
+
+	imprimir();
+	liberar();
+
+	getch();
+
+	return 0;
+}
+
+pila.c
+
+#include<stdio.h>
+#include<stdlib.h>
+#include"pila.h"
+
+extern tnodo raiz;
+
+void insertar(int x)
+{
+	tnodo nuevo;
+	nuevo = malloc(sizeof(struct nodo));
+	nuevo->info = x;
+
+	if(raiz == NULL)
+	{
+		raiz = nuevo;
+		nuevo->sig = NULL;
+	}
+	else
+	{
+		nuevo->sig = raiz;
+		raiz = nuevo;
+	}
+}
+
+void imprimir()
+{
+	tnodo reco=raiz;
+	printf("Lista completa.\n");
+
+	while(reco!=NULL)
+	{
+		printf("%i", reco->info);
+		reco=reco->sig;
+	}
+
+	printf("\n");
+}
+
+56.- MODIFICADOR INLINE EN LA DEFINICION DE FUNCIONES
+Otra herramienta mas en busca de hacer que nuestro programa sea lo mas eficinete es permitirnos endicar al compilador que una funcion se inserte su codigo en lugar de ser llamada.
+
+Para indicar al compilador que inserte el algoritmo de la funcion se utiliza la palabra clave inline previo a la definicion de la misma.
+
+El modificador inline se hace fundamental en funciones que realizan algoritmos muy cortos.
+
+#include<stdio.h>
+#include<conio.h>
+
+static inline int calclarCuadrado(int x)
+{
+	return x*x;
+}
+
+int main(){
+	printf("El cuadrado de5 es: %i", calcularCuadrado(5));
+	getch();
+	return 0;
+}
+
+Con el modificador inline en la definicion calcularCuadrado estamos solicitando al compilador que en lugar de llamar a la funcion sustituya el algoritmo de la misma, como si nosotros hubieramos codificado:
+
+printf("Elcuadrado de 5 es: %i", 5*5);
 
 
 
