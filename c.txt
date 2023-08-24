@@ -61,16 +61,22 @@ gcc test.c -o directory\test
 49.- DECLARACION DE ENUMERACIONES
 50.- DECLARACION DE UNIONES
 51.- DEFINICION DE NUEVOS NOMBRES PARA TIPOS DE DATOS EXISTENTES (TYPEDEF)
-
-
-
-
-
-
-
-
-
-
+52.- VARIABLES LOCALES STATIC
+53.- APLICACION EN C CON MAS DE UN ARCHIVO FUENTE (PROYECTOS CON MULTIPLES ARCHIVOS)
+54.- DEFINICION DE FUNCIONES Y VARIABLES STATIC
+55.- VARIABLES GLOBALES CON EL MODIFICADOR EXTERN
+56.- MODIFICADOR INLINE EN LA DEFINICION DE FUNCIONES
+57.- ARCHIVOS BINARIOS: CREACION Y GRABACION DE TIPO DE DATOS PRIMITIVOS (FOPEN, FWRITE, FCLOSE)
+58.- ARCHIVOS BINARIOS: LECTURA DE DATOS PRIMITIVOS (FREAD)
+59.- ARCHIVOS BINARIOS: DESPLAZAMIENTO DEL PUNTERO DE ARCHIVO (FSEEK)
+60.- ARCHIVO BINARIOS: AGREGAR DATOS
+61.- ARCHIVOS BINARIOS: MODIFICAR DATOS
+62.- ARCHIVOS BINARIOS: IDENTIFICAR FINAL DE ARCHIVO (FEOF)
+63.- ARCHIVOS BINARIOS: POSICION ACTUAL DEL PUNTERO DE ARCHIVO (FTELL)
+64.- ARCHIVOS BINARIOS: GRABAR Y LEER VECTORES COMPLETOS EN UN ARCHIVO
+65.- ARCHIVO BINARIOS: AGREGAR, CONSULTAR Y MDOIFICAR RESGISTROS (STRUCT) EN UN ARCHIVO
+66.- ARCHIVO DE TEXTO: CREACION Y GRABACION DE DATOS
+67.- ARCHIVO DE TEXT: LECTURA
 
 .- ESTRUCTURAS DINAMICAS EN C: CONCEPTO DE LISTAS
 .- ESTRUCTURAS DINAMICAS EN C: LISTAS TIPO PILA
@@ -2429,11 +2435,1199 @@ typedef struct nodo * tnodo;
 
 tnodo raiz=NULL;
 
+52.- VARIABLES LOCALES STATIC
+Hemos visto que cuando definimos una variable loval su valor se pierde inmediatamente cuando finaliza la funcion.
 
+En el lenguaje C podemos definir variables locales que no pierdan su valor entre llamadas mediante el modificador static.
 
+Veamos con dos programas la diferencia entre definir una variable local y una variable local static:
 
+void imprimir()
+{
+	int x=0;
+	x++;
+	printf("%i", x);
+}
 
+int main()
+{
+	imprimir();
+	imprimir();
+	imprimir();
 
+	getch();
+
+	return 0;
+}
+
+//111
+
+Cada vez que se llama a la funcion imprimir se define una variable local llamada x, se la inicializa con 0 y luego se la incrementa en uno y se imprime su valor.
+
+Si queremos que la variable x no pierda su valor entre llamadas a la funcion imprimir se le antecede el modificador static:
+
+void imprimir()
+{
+	static int x=0;
+	x++;
+	printf("%i", x);
+}
+
+int main()
+{
+	imprimir();
+	imprimir();
+	imprimir();
+
+	getch();
+
+	return 0;
+}
+
+//123
+
+53.- APLICACION EN C CON MAS DE UN ARCHIVO FUENTE (PROYECTOS CON MULTIPLES ARCHIVOS)
+Crear una carpeta proyecto001.
+Entrar en la carpeta.
+Crear una carpeta Sources.
+Crear una carpeta Headers
+En la carperta Sources agregar archivos:
+main.c
+productos.c
+En la carpeta Headers agregar archivo:
+productos.h
+Editar codigo correspondiente:
+
+productos.h
+
+typedef struct{
+	int codigo;
+	char descripcion[41];
+	float precio;
+} tproducto;
+
+#define CANT 4
+
+void cargar(tproducto productos[CANT]);
+void imprimir(tproducto productos[CANT]);
+
+main.c
+
+#include<stdio.h>
+#include"produntos.h"
+
+int main()
+{
+	tproducto productos[CANT];
+	int opcion;
+
+	do{
+		printf("1.- Carga de productos.\n");
+		printf("2.- Listado de productos.\n");
+		printf("3.- Finalizar programa..\n\n");
+		printf("Elija su opcion: ");
+		scanf("%i", &opcion);
+
+		switch(opcion){
+			case 1:cargar(productos);
+					break;
+			case 2:imprimir(productos);
+					break;
+		}
+	} while(opcion!=3);
+
+	return 0;
+}
+
+productos.c
+
+#include<stdio.h>
+#include"productos.h"
+
+void cargar(tproducto productos[CANT])
+{
+	int f;
+
+	for(f=0; f<CANT; f++)
+	{
+		printf("Ingrese el codigo: ");
+		scanf("%i", &productos[f].codigo);
+
+		fflush(stdin);
+
+		printf("Ingrese la descripcion: ");
+		gets(productos[f].descripcion);
+
+		printf("Ingrese el precio: ");
+		scanf("%f", &productos[f].precio);
+	}
+}
+
+void imprimir(tproducto productos[CANT])
+{
+	int f;
+
+	for(f=0; f<CANT; f++)
+	{
+		printf("Codigo: %i\n", productos[f].codigo);
+		printf("Descripcion: %s\n", productos[f].descripcion);
+		printf("Precio:%0.2f\n", productos[f].precio);
+	}
+
+	printf("\n\n");
+}
+
+54.- DEFINICION DE FUNCIONES Y VARIABLES STATIC
+Cuando tenemos proyectos grandes cada uno de los archivos *.c tienen como objetivo definido y lo llevan a cabo implementando funciones.
+
+Las funciones que implementa un archivo *.c son accedidas desde otros archivos.
+
+Cuando queremos implementar funciones que solo puedan ser llamadas desde fucniones del mismo archivo debemos anteceder el modificador static previo al nombre de la funcion.
+
+Una funcion static se oculta al resto de archivos del proyecto, con esto logramos encapsular funcionalidades dentro de un archivo.
+
+El modificador static aplicada a una variable global definida en el archivo tambien solo puede ser accedida por las funciones de ese archivo.
+
+#include<stdio.h>
+#include"productos.h"
+
+static void mostrarTitulo(char *tit)
+{
+	printf("%s\n", tit);
+}
+
+static void mostrarAsteriscos()
+{
+	printf("******************************************************************\n\n");
+}
+
+void cargar(tproducto productos[CANT])
+{
+	int f;
+	
+	mostrarTitulo("Cargar de datos de productos");
+
+	for(f=0; f<CANT; f++)
+	{
+		//...
+	}
+
+	mostrarAsteriscos();
+}
+
+55.- VARIABLES GLOBALES CON EL MODIFICADOR EXTERN
+Cuando tenemos una aplicacion constituida por varios archivos *.c y queremos acceder a una variable global de un archivo en otro archivo debemos declarar la variable global con el modificador extern.
+
+Cuando una variable global se declara como extern, el compilador no crea un espacio para ella en memoria, sino que, tan solo tiene en cuenta que dicha variable ya ha sido declarada en otro archivo del programa.
+
+pila.h
+
+struct nodo{
+	int info;
+	struct nodo *sig;
+};
+
+typedef struct nodo * tnodo;
+
+void insertar(int x);
+void imprimir();
+int extraer();
+void liberar();
+
+main.c
+
+#include<stdio.h>
+#include<conio.h>
+#include"pila.h"
+
+tnodo raiz=NULL;
+
+int main()
+{
+	insertar(10);
+	insertar(40);
+	insertar(3);
+
+	imprimir();
+
+	printf("Extraemos de la pila: %i\n", extraer());
+
+	imprimir();
+	liberar();
+
+	getch();
+
+	return 0;
+}
+
+pila.c
+
+#include<stdio.h>
+#include<stdlib.h>
+#include"pila.h"
+
+extern tnodo raiz;
+
+void insertar(int x)
+{
+	tnodo nuevo;
+	nuevo = malloc(sizeof(struct nodo));
+	nuevo->info = x;
+
+	if(raiz == NULL)
+	{
+		raiz = nuevo;
+		nuevo->sig = NULL;
+	}
+	else
+	{
+		nuevo->sig = raiz;
+		raiz = nuevo;
+	}
+}
+
+void imprimir()
+{
+	tnodo reco=raiz;
+	printf("Lista completa.\n");
+
+	while(reco!=NULL)
+	{
+		printf("%i", reco->info);
+		reco=reco->sig;
+	}
+
+	printf("\n");
+}
+
+56.- MODIFICADOR INLINE EN LA DEFINICION DE FUNCIONES
+Otra herramienta mas en busca de hacer que nuestro programa sea lo mas eficinete es permitirnos endicar al compilador que una funcion se inserte su codigo en lugar de ser llamada.
+
+Para indicar al compilador que inserte el algoritmo de la funcion se utiliza la palabra clave inline previo a la definicion de la misma.
+
+El modificador inline se hace fundamental en funciones que realizan algoritmos muy cortos.
+
+#include<stdio.h>
+#include<conio.h>
+
+static inline int calclarCuadrado(int x)
+{
+	return x*x;
+}
+
+int main(){
+	printf("El cuadrado de5 es: %i", calcularCuadrado(5));
+	getch();
+	return 0;
+}
+
+Con el modificador inline en la definicion calcularCuadrado estamos solicitando al compilador que en lugar de llamar a la funcion sustituya el algoritmo de la misma, como si nosotros hubieramos codificado:
+
+printf("Elcuadrado de 5 es: %i", 5*5);
+
+57.- ARCHIVOS BINARIOS: CREACION Y GRABACION DE TIPO DE DATOS PRIMITIVOS (FOPEN, FWRITE, FCLOSE)
+Hemos aprnedido distintas estructuras de datos que nos permiten administrar informacion en la memoria RAM de nuestra computadora.
+
+Ahora veremos otra estructura de datos que nos permite almacenar datos en una memoria secuadaria de nuestra computadora como podria ser el disco duro, pendrive, etc.
+
+Esta estructura de datos son los archivos. Un archivo veremos que es independiente a nuestro programa y podra ser accedido luefo por otros programas.
+
+Un archivo podemos imaginarlo en forma similar a un vector. Tambien a un archivo los distintos componentes (bytes) se ubican uno a continuacion del otro, y al igual que en los vectores, los componentes de un archivo en C tambien son automaticamente numerados con indices, desde el 0 (cero) en adelante. Pero la forma de procesar un archivo difiere totalmente con respecto a un vector.
+
+Podemos clasificar los archivos segun el formato como se guardan los datos en:
+
+-Archivos binarios.
+-Archivos de texto.
+
+Crear un archivo binario y almacenar un caracter, un entero y un flotante. Identificar en el disco duro el archivo creado y cual es su tamano en bytes.
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+int main()
+{
+	FILE *arch;
+
+	arch=fopen("archivo1.dat", "wb");
+
+	if (arch==NULL)
+		exit(1);
+	
+	char letra='A';
+
+	fwrite(&letra, sizeof(char), 1, arch);
+
+	int valor1=12;
+
+	fwrite(&valor1, sizeof(int), 1, arch);
+
+	float valor2=5.25;
+
+	fwrite(&valor2, sizeof(float), 1, arch);
+
+	fclose(arch);
+
+	printf("Se creo un archivo binario que almacena un char, un int y un float.");
+
+	getch();
+	return 0;
+}
+
+fopen
+
+El primer parametro indicamos el nombre del archivo a crear, debe ser un nombre valido para el sistema operativo donde se ejecuta. Con wb estamos pidiendo a fopen que cree el archivo binario (si ya existe se borra el actual y se crea uno nuevo vacio).
+
+La funcion fwrite tiene 4 parametros:
+
+-Al primer parametro hay que pasar la direccion de la variable a grabar en el archivo.
+-Al segundo parametro hay que pasar la cantidad de bytes de tipo de datos a grabar. Normalmente utilizamos el operador sizeof para recuperar el tamano.
+-El tercer parametro le pasamos un 1 ya que guardamos solo una variable (tendra snetido cuando grabemos todo un vector con una sola llamada).
+-El cuarto parametro es el nombre logico del archivo.
+
+58.- ARCHIVOS BINARIOS: LECTURA DE DATOS PRIMITIVOS (FREAD)
+Vimos en el concepto anterior como crear archivos binarios y grabar tipos de datos primitivos empleando las funciones que provee el lenguaje C.
+
+Ahora veremos como leer los datos contenidos en un archivo binario.
+
+Para trabajar con los datos almacenados en un archivo debemos hacer uan copia de los msimos en la memoria RAM.
+
+Debemos conocer los tipos de datos almacenados enel archivo binario y el orden exacto como estan guardados.
+
+Abrir el archivo binario que se creo en el concepto anterior "archivo1.dat y leer sus datos. Recordemos que el archivo almacena un caracter, un entero y un floar en ese orden.
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+int main()
+{
+	FILE *arch;
+
+	arch=fopen("archivo1.dat", "rb");
+
+	if(arch==NULL)
+		exit(1);
+	
+	char c;
+	fread(&c, sizeof(char), 1, arch);
+	printf("Caracter: %c\n", c);
+
+	int v1;
+	fread(&v1, sizeof(int), 1, arch);
+	printf("Entero: %i\n", v1);
+
+	float v2;
+	fread(&v2, sizeof(float), 1, arch);
+	printf("Float: %0.2f\n", v2);
+
+	fclose(arch);
+
+	getch();
+	return 0;
+
+}
+
+Si no conocemos la estructura interna del archivo binario (en nuestro ejemplo un char, un int y finalmente un float) sera imposible recuperar correctamente la informacion almacenada.
+
+59.- ARCHIVOS BINARIOS: DESPLAZAMIENTO DEL PUNTERO DE ARCHIVO (FSEEK)
+Veremos ahora una funcion que nos permite desplazar el puntero de archivo a cualquier posicion previo a la lectura.
+
+Con el desplazamiento del puntero de archivo no estamos obligados a leer en forma secuencial los datos.
+
+La funcion qeu nos permite desplazar el puntero de archivo se llama fseek y tiene tres parametros:
+
+fseek([nombre logico del archivo], [cantidad de bytes a desplazarse], [ubicacion desde donde comenzar a desplazarse])
+
+El tercer parametro puede tomar alguno de estos tres valores (son tres macros definidas en el archivo stdio.h):
+
+-SEEK_SET: Reposicionar comenzando desde el principio del archivo (es lo mismo poner un 0).
+-SEEK_CUR: Reposicionar comenzando desde la posicion actual del puntero (es lo mismo poner un 1).
+-SEEK_END: Reposicionar comenzando desde el final del archivo (es lo mismo poner un 2).
+
+Abrir el archivo binario que se creo en conceptos anteriores: archivo1.dat y leer solo los bytes donde se alamcena el valor float. Recordemos que el archivo almacena un caracter, un entero y un float en ese orden.
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+int main()
+{
+	FILE *arch;
+
+	arch=fopen("archivo1.dat", "rb");
+
+	if (arch==NULL)
+		exit(1);
+	
+	float v2;
+	
+	fseek(arch, 5, SEEK_SET);
+	fread(&v2, sizeof(float), 1, arch);
+
+	printf("Float: %0.2f\n", v2);
+
+	fclose(arch);
+	
+	getch();
+	return 0;
+}
+
+Abrir el archivo binario "archivo1.dat" y leer e imprimir el char y el float.
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+int main()
+{
+	FILE *arch;
+
+	arch=fopen("archivo1.dat", "rb");
+
+	if(arch==NULL)
+		exit(1);
+	
+	char c;
+	fread(&c, sizeof(float), 1, arch);
+	printf("Caracter: %c\n", c);
+
+	float v2;
+	fread(&v2, sizeof(float), 1, arch);
+	printf("Float: %0.2f\n", v2);
+
+	fclose(arch);
+
+	getch();
+	return 0;
+}
+
+El puntero avanza un byte luego de leer, entonces como queremos leer el float que se encuentra despues del int procedemos a avanzar desde la posicion actual (SEEK_CUR) cuatro bytes.
+
+60.- ARCHIVO BINARIOS: AGREGAR DATOS
+Hemos visto que cuando necesitamos crear un archivo lo hacemos pasando a la funcion fopen el valor "wb". Con esto indicamos que se cree el archivo y si ya existe lo borre y lo cree nuevamente vacio.
+
+En muchas situaciones podemos necesitar agregar datos al archivo sin tenerlo qeu borrar, para esto debemos pasar a la funcion fopen el valor ab (append binary).
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+void crear()
+{
+	FILE *arch;
+
+	arch=fopen("archivo3.dat", "wb");
+
+	if(arch==NULL)
+		exit(1);
+	
+	int valor1=10;
+	fwrite(&valor1, sizeof(int), 1, arch);
+
+	int valor2=20;
+	fwrite(&valor2, sizeof(int), 1, arch);
+
+	int valor3=30;
+	fwrite(&valor3, sizeof(int), 1, arch);
+
+	fclose(arch);
+}
+
+void agregar()
+{
+	FILE *arch;
+	
+	arch=fopen("archivo3.dat", "ab");
+
+	if(arch==NULL)
+		exit(1);
+
+	float f1=5.45;
+	fwrite(&f1, sizeof(float), 1, arch);
+
+	fclose(arch);
+}
+
+void imprimir()
+{
+	FILE *arch;
+
+	arch=fopen("archivo3.dat", "rb");
+
+	if(arch==NULL)
+		exit(1);
+	
+	int v1, v2, v3;
+
+	fread(&v1, sizeof(int), 1, arch);
+	printf("Entero: &i\n", v1);
+
+	fread(&v2, sizeof(int), 1, arch);
+	printf("Entero: &i\n", v2);
+
+	fread(&v3, sizeof(int), 1, arch);
+	printf("Entero: &i\n", v3);
+
+	float f1;
+	fread(&f1, sizeof(float), 1, arch);
+	printf("Float: %0.2f\n", f1);
+
+	fclose(arch);
+}
+
+int main()
+{
+	crear();
+	agregar();
+	imprimir();
+
+	getch();
+	return 0;
+}
+
+61.- ARCHIVOS BINARIOS: MODIFICAR DATOS
+Hemos visto hasta ahora como se crea un archivo binario desde C, como se lo lee, como se agregan datos al final. Nos esta quedando como modificar datos almacenados en el archivo.
+
+Listado completo de modos de apertura de archivos binarios:
+
+rb.- Solo lectura. El archivo debe existir previamente. si no existe, fopen retorna NULL.
+wb.- Solo escritura. Si el archivo no existia, lo crea. Si existia, destruye su contenido y lo abre vacio.
+ab.- Solo escritura, pero en modo append (o sea anadir): Los datos que se graban, lo hacen al final. Crea el archivo si no existia, y no destruye su contenido si ya existia.
+r+b.- Permite lectura y escritura. El archivo debe existir previamente.
+w+b.- Permite escritura y lectura. Crea el archivo si no existia, pero destruye su contenido si ya existia, y lo abre vacio.
+a+b.- Permite anadir al final, en modo lectura-escritura. Crea el archivo si no existia. No destruye su contenido si ya existia.
+
+Confeccionar un programa con tres funciones:
+1.- Creacion de un archivo binario llamado "archivo4.dat" y almacenar 3 enteros. Seguidamente cerrar el archivo.
+2.- Abrir nuevamente el archivo pero en modo "r+b" y modificar el segundo entero almacenado en el archivo.
+3.- Finalmente abrir el archivo para lectura y mostrar todos sus datos.
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+void crear()
+{
+	FILE *arch;
+
+	arch=fopen("archivo3.dat", "wb");
+
+	if(arch==NULL)
+		exit(1);
+	
+	int valor1=10;
+	fwrite(&valor1, sizeof(int), 1, arch);
+
+	int valor2=20;
+	fwrite(&valor2, sizeof(int), 1, arch);
+
+	int valor3=30;
+	fwrite(&valor3, sizeof(int), 1, arch);
+
+	fclose(arch);
+}
+
+void modificar()
+{
+	FILE *arch;
+	
+	arch=fopen("archivo3.dat", "r+b");
+
+	if(arch==NULL)
+		exit(1);
+	
+	fseek(arch, 4, SEEK_SET)
+
+	int x=100;
+	fwrite(&x, sizeof(int), 1, arch);
+
+	fclose(arch);
+}
+
+void imprimir()
+{
+	FILE *arch;
+
+	arch=fopen("archivo3.dat", "rb");
+
+	if(arch==NULL)
+		exit(1);
+	
+	int v1, v2, v3;
+
+	fread(&v1, sizeof(int), 1, arch);
+	printf("Entero: &i\n", v1);
+
+	fread(&v2, sizeof(int), 1, arch);
+	printf("Entero: &i\n", v2);
+
+	fread(&v3, sizeof(int), 1, arch);
+	printf("Entero: &i\n", v3);
+
+	fclose(arch);
+}
+
+int main()
+{
+	crear();
+	modificar();
+	imprimir();
+
+	getch();
+	return 0;
+}
+
+62.- ARCHIVOS BINARIOS: IDENTIFICAR FINAL DE ARCHIVO (FEOF)
+Hemos visto la funcion fread que nos permite recuperar dtos de un archivo binario. Ahora veremos otra funcion disponible en stdio.h que nos permite luego de la ejecucion de la funcion fread verificar si se ha llegado a fin de archivo:
+
+int feof([nombre logico del archivo]);
+
+Esta funcion devuelve 0 si no es fin de archivo y un valor distinto a 0 si se ha llegado al final de archivo.
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+void crearCargar()
+{
+	FILE *arch;
+
+	arch=fopen("archivo4.dat", "wb");
+
+	if(arch==NULL)
+		exit(1);
+	
+	int valor;
+
+	do{
+		printf("Ingrese valor entero (0 para finalizar): ");
+		scanf("%i", &valor);
+
+		if(valor!=0)
+			fwrite(&valor, sizeof(int), 1, arch);
+	} while(valor!=0);
+
+	fclose(arch);
+}
+
+void imprimir()
+{
+	FILE *arch;
+
+	arch=fopen("archivo4.dat", "rb");
+
+	if(arch==NULL)
+		exit(1);
+	
+	printf("Todos los dtos almacenados en el archivo.\n");
+
+	int x;
+
+	fread(&x, sizeof(int), 1, arch);
+
+	while(!feof(arch))
+	{
+		printf("%i", x);
+		fread(&x, sizeof(int), 1, arch);
+	}
+
+	fclose(arch);
+}
+
+int main()
+{
+	crearCargar();
+	imprimir();
+
+	getch();
+	return 0;
+}
+
+63.- ARCHIVOS BINARIOS: POSICION ACTUAL DEL PUNTERO DE ARCHIVO (FTELL)
+Medienate la funcion fseek podemos desplazar el puntero de archivo a cualquier byte del mismo, como vimos si queremos grabar datos al final lo desplazamos con el fseek facilmente al final.
+
+Ahora veremos que hay una funcion que nos informa en que byte del archivo esta el puntero:
+
+int ftell([nombre logico del archivo]);
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+void crear()
+{
+	FILE *arch;
+
+	arch=fopen("archivo6.dat", "wb");
+
+	if(arch==NULL)
+		exit(1);
+	
+	int valor1=10;
+	fwrite(&valor1, sizeof(int), 1, arch);
+	int pos=ftell(arch);
+	printf("Posicion del puntero de archivo luego grabar un esntero:%i\n", pos);
+
+	int valor2=20;
+	fwrite(&valor2, sizeof(int), 1, arch);
+	pos=ftell(arch);
+	printf("Posicion del puntero de archivo luego grabar un entero:%i\n", pos);
+
+	int valor3=30;
+	fwrite(&valor3, sizeof(int), 1, arch);
+	pos=ftell(arch);
+	printf("Posicion del puntero de archivo luego grabar un entero:%i\n", pos);
+
+	fclose(arch);
+}
+
+void imprimir()
+{
+	FILE *arch;
+
+	arch=fopen("archivo6.dat", "rb");
+
+	if(arch==NULL)
+		exit(1);
+	
+	printf("Todos los datos almacenados en el archivo.\n");
+
+	int x;
+	int pos;
+
+	fread(&x, sizeof(int), 1, arch);
+
+	while(!feof(arch))
+	{
+		pos=ftell(arch);
+		printf("dado leido %i y posicion del puntero de archivo %\n", x, pos);
+		fread(&x, sizeof(int), 1, arch);
+	}
+
+	fclose(arch);
+}
+
+int main()
+{
+	crear();
+	imprimir();
+
+	getch();
+
+	return 0;
+}
+
+Confeccionar un programa que imprima el tamano en bytes del archivo "archivo6.dat" creado en el programa anterior.
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+int main()
+{
+	FILE *arch;
+
+	arch=fopen("archivo6.dat", "rb");
+
+	if(arch==NULL)
+		exit(1);
+	
+	fseek(arch, 0, SEEK_END);
+
+	int pos=ftell(arch);
+
+	printf("El tamano del archivo \"archivo6.dat\" es de %i bytes", pos);
+
+	fclose(arch);
+
+	getch();
+	
+	return 0;
+}
+
+64.- ARCHIVOS BINARIOS: GRABAR Y LEER VECTORES COMPLETOS EN UN ARCHIVO
+Veremos ahora como cuando necesitamos grabar o leer un vector en una sola llamada a la funcion fread o fwrite indicamos en dicho tercer parametro el tamano del vector.
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+#define TAM 10
+
+void grabarVector()
+{
+	FILE *arch;
+
+	arch=fopen("archivo7.dat", "wb");
+
+	if(arch==NULL)
+		exit(1);
+	
+	int vec[TAM]={10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
+
+	fwrite(vec, sizeof(int), TAM, arch);
+
+	fclose(arch);
+}
+
+void recuperarVector()
+{
+	FILE *arch;
+
+	arch=fopen("archivo7.dat", "rb");
+
+	if(arch==NULL)
+		exit(1);
+	
+	int vec[TAM];
+
+	fread(vec, sizeof(int), TAM, arch);
+
+	int f;
+
+	for(f=0; f<TAM; f++)
+	{
+		printf("%i", vec[f]);
+	}
+
+	fclose(arch);
+}
+
+int main()
+{
+	grabarVector();
+	recuperarVector();
+
+	getch();
+
+	return 0;
+}
+
+Es importante hacer notar que no le disponemos el caracter & previo al nombre vec debido a que los vectores son punteros en el lenguaje C y por lo tanto estamos enviando la direccion del vector al enviarle vec.
+
+Ahora en el tercer parametro indicamos la macro TAM que sera remplazada por el valor 10 (esto debido a que el vector tiene 10 enteros).
+
+La funcion para recuperar los 10 int almacenados en el archivo tambien los hacemos con una sola llamada a la funcion fread.
+
+65.- ARCHIVO BINARIOS: AGREGAR, CONSULTAR Y MDOIFICAR RESGISTROS (STRUCT) EN UN ARCHIVO
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+typedef struct{
+	int codigo;
+	char descripcion[41];
+	float precio;
+} tproducto;
+
+void continuar()
+{
+	printf("Presione una tecla para continuar\n\n");
+	getch();
+}
+
+void crear()
+{
+	FILE *arch;
+	arch=fopen("productos.dat", "wb");
+
+	if(arch==NULL)
+		exit(1);
+
+	fclose(arch);
+		
+	continuar();
+}
+
+void cargar()
+{
+	FILE *arch;
+	
+	arch=fopen("productos.dat", "ab");
+
+	if(arch==HULL)
+		exit(1);
+	
+	tprodcuto producto;
+
+	printf("Ingrese el codifo del producto: ");
+	scanf("%i", &producto.codigo);
+
+	fflush(stdin);
+
+	printf("Ingrese el nombre del producto: ");
+	gets(producto.descripcion);
+
+	printf("Ingrese precio: ");
+	scanf("%f", &producto.precio);
+
+	fwrite(&producto, sizeof(tproducto), 1, arch);
+
+	fclose(arch);
+
+	continuar();
+}
+
+void listado()
+{
+	FILE *arch;
+
+	arch=fopen("productos.dat", "rb");
+
+	if(arch==NULL)
+		exit(1);
+	
+	tproducto producto;
+
+	fread(&producto, sizeof(tproducto), 1, arch);
+
+	while(!feof(arch))
+	{
+		pirntf("%i %s %0.2f\n", producto.codigo, producto.descripcion, producto.precio);
+		fread(&producto, sizeof(tproducto), 1, arch);
+	}
+
+	fclose(arch);
+	continuar();
+}
+
+void consulta()
+{
+	FILE *arch;
+
+	arch=fopen("productos.dat", "rb");
+
+	if(arch==NULL)
+		exit(1);
+	
+	printf("Ingrese el codigo de producto a consultar: ");
+
+	int cod;
+	scanf("&i", &cod);
+
+	tproducto producto;
+
+	int existe=0;
+
+	fread(&producto, sizeof(tproducto), 1, arch);
+
+	while(!feof(arch))
+	{
+		if(cod==producto.codigo)
+		{
+			printf("%i %s %0.2f\n", producto.codigo, producto.descripcion, producto.precio);
+			existe=1;
+			break;
+		}
+
+		fread(&producto, sizeof(tproducto), 1, arch);
+	}
+
+	if(existe==0)
+		printf("No existe un producto con dicho codigo\n");
+	
+	fclose(arch);
+	continuar();
+}
+
+void modificacion()
+{
+	FILE *arch;
+
+	arch=fopen("productos.dat", "r+b");
+
+	if(arch==NULL)
+		exit(1);
+	
+	printf("Ingrese el codifo de producto a modificar: ");
+
+	int cod;
+
+	scanf("%i", &cod);
+
+	tproducto producto;
+
+	int existe=0;
+
+	fread(&producto, sizeof(tproducto), 1, arch);
+
+	while(!feof(arch))
+	{
+		if(cod==producto.codigo)
+		{
+			printf("%i %s %0.2f\n", producto.codigo, producto.descripcion, producto.precio);
+			
+			printf("Ingrese nuevo precio: ");
+			SCANF("&f", &producto.precio);
+
+			int pos=ftell(arch)-sizeof(tproducto);
+
+			fseek(arch, pos, SEEK_SET);
+
+			fwrite(&producto, sizeof(tproducto), 1, arch);
+
+			printf("Se modifico el precio para dicho produto.\n");
+
+			existe=1;
+
+			break;
+		}
+
+		fread(&producto, sizeof(tproducto), 1, arch);
+	}
+
+	if(existe==0)
+		printf("No existe un producto con dicho codigo\n");
+	
+	fclose(arch);
+
+	continuar();
+}
+
+int main()
+{
+	int opcion;
+
+	do{
+		printf("1.- Crear un archivo binario llamado \"productos.dat\"n");
+		printf("2.- Carga de registros de tipo tproducto\n");
+		printf("3.- Listado completo de productos.\n");
+		printf("4.- Consulta de un producto por su codigo.\n");
+		printf("5.- Modificacion del precio de un producto.\n");
+		printf("6.- Finalizar\n\n");
+		
+		printf("Ingrese su opcion: ");
+		scanf("%i", &opcion);
+
+		switch(opcion){
+			case 1: crear();
+					break;
+			case 2: cargar();
+					break;
+			case 3: listado();
+					break;
+			case 4: consulta();
+					break;
+			case 5: modificacion();
+					break;
+		}
+	} while(opcion!=6);
+
+	return 0;
+}
+
+66.- ARCHIVO DE TEXTO: CREACION Y GRABACION DE DATOS
+Ahora veremos otro formato de archivos llamado "archivos de texto".
+
+Una archivo de texto contiene solo caracteres legibles por el ser humano con la salveda del salto de linea que le serive a un editor de texto para comenzar a mostrar los siguientes caracteres una linea mas abajo.
+
+Es un formato muy utilizado los podemos encontrar en archivos de configuracion, los archivos de cofigo fuente en C u otros lenguajes, las paginas HTML, archivos XML etc.
+
+Un archivo de texto lo podemos editar (crear, agregar, modificar y borrar desde cualquier editor de texto).
+
+El lenguaje C provee una serie de funciones para procesar en forma sencilla un archivo de texto.
+
+Listado completo de modos de apertura de archivos de texto:
+
+rt.- Solo lectura. El archivo debe existir previamente. Si no existe, fopen retorna NULL.
+wt.- Solo exritura. Si el archivo no existia, lo crea. Si existia, destruye su contenido y lo abre vacio.
+at.- Solo escritura, pero en modo append (o sea anadir): Los datos que se graban, lo hacen al final. Crea el archivo si no existia y no destruye su contenido si ya existia.
+r+t.- Permite lectura y escritura. El archivo debe existir previamente.
+w+t.- Permite escritura y lectura. Crea el archivo si no existia, pero destruye su contenido si ya existia, y lo abre vacio.
+a+t.- Permite anadir al final, en modo lectura - escritura. Crea el archivo si no existia. No destruye su contenido si ya existia.
+
+Crear un archivo de texto llamado datos1.txt y almacenar tres lineas. Acceder a su contenido luego con al menos dos editores de texto.
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+void main()
+{
+	FILE *arch=fopen("datos1.txt", "wt");
+
+	if(arch==NULL)
+		exit(1);
+	
+	fputs("Primer linea\n", arch);
+	fputs("Segunfa linea\n", arch);
+	fputs("Tercer linea\n", arch);
+
+	fclose(arch);
+
+	printf("Se creo el archivo de texto con tres lineas de texto.");
+
+	getch();
+
+	return 0;
+}
+
+67.- ARCHIVO DE TEXT: LECTURA
+Vimos en el concepto anterior como crear y grabar datos en un archivo de texto. La visualizacion de su contenido la hicimos desde un editor de texto.
+
+Ahora veremos como acceder al contenido del archivo desde nuestro programa.
+
+Abrir el archivo datos1.txt en modo lectura, leer todas sus lineas y mostrar su contenido por pantalla.
+
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+void main()
+{
+	FILE *arch=fopen("datos1.txt", "rt");
+
+	if(arch==NULL)
+		exit(1);
+	
+	char caracter=fgetc(arch);
+
+	while(!feof(arch))
+	{
+		printf("%c", caracter);
+		caracter=fgetc(arch);
+	}
+
+	fclose(arch);
+
+	getch();
+
+	return 0;
+}
+
+Ahora con fgets
+
+#include<stdio.h>
+
+void main()
+{
+	FILE *arch=fopen("datos1.txt", "rt");
+
+	if(arch==NULL)
+		exit(1);
+	
+	char linea[100];
+
+	fgets(linea, 100, arch);
+
+	while(!feof(arch))
+	{
+		printf("%s", linea);
+		fgets(linea, 100, arch);
+	}
+
+	fclose(arch);
+
+	getch();
+
+	return 0;
+}
+
+La funcion fgets leer cadenas de caracteres tantos como los indicados en el segundo parametro menos 1, o hasta que lea un salto de linea \n o se llegue al final de archivo.
+
+Dentro de la variable linea tambien se almacena el salto de linea \n.
 
 ===============================================================================
 

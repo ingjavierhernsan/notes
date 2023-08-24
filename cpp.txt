@@ -16,7 +16,9 @@ C++
 14.- FOR
 15.- CADENA DE CARACTERES MEDIANTE VECTORES
 16.- DECLARACION DE UNA CLASE Y DEFINICION DE OBJETOS
-18.- SINTAXIS DE UN METODO
+17.- SINTAXIS DE UN METODO
+18.- ESTRUCTURA DE DATOS TIPO VECTOR EN C++
+19.- ESTRUCTURA DE DATOS TIPO MATRIZ
 
 1.- COMPILAR CODIGO C++
 g++ file.cpp -o file
@@ -266,4 +268,177 @@ int main()
 	return 0;
 }
 
-18.- SINTAXIS DE UN METODO
+17.- SINTAXIS DE UN METODO
+Sintaxis:
+
+void [nombre de la clase]::[nombre del metodo]()
+{
+	[algoritmo]
+}
+
+Metodo con parametros
+
+void [nombre de la clase]::[nombre del metodo]([parametros])
+{
+	[algoritmo]
+}
+
+Los parametros los podemos imaginar como variables locales al metodo, pero su valor se inicializa con datos que llegan cuando lo llamamos.
+
+#include<iostrem>
+
+using namespace std;
+
+clss TablaMultiplicar{
+	private:
+		void calcular(int v);
+	public:
+		void cargarValor();
+};
+
+void TablaMultiplicar::calcular(int v)
+{
+	for(int f=v; f<=v*10; f=f+v)
+	{
+		cout <<f;
+		cout<<"-";
+	}
+
+	cout<<"\n";
+}
+
+void TablaMultiplicar::cargarValor()
+{
+	int valor;
+
+	do{
+		cout <<"Ingrese un valor (-1 para finalizar): ";
+		cin >>valor;
+
+		if(valor!=-1)
+		{
+			calcular(valor);
+		}
+	} while (valor!=-1);
+}
+
+int main()
+{
+	TablaMultiplicar tabla1;
+	tabla1.cargarValor();
+	return 0;
+}
+
+Un metodo puede no tener parametros como hemos visto en problemas anteriores o puede tener uno o mas parametros (en caso de tener mas de un parametro los mismos se separan por coma).
+
+Metrods que retornan un dato
+
+[tipo de dato] [nombre de la clase]::[nombre del metodo]([parametros])
+{	
+	[algoritmo]
+	return [tipo de dato]
+}
+
+#include<iostream>
+
+using namespace std;
+
+class MayorMenor{
+	public:
+		int calcularMenor(int v1, int v2, int v3);
+};
+
+int MayorMenor::calcularMenor(int v1, int v2, int v3)
+{
+	int m;
+
+	if(v1<v2 && v1<v3)
+	{
+		m=v1;
+	}
+	else{
+		if(v2<v2)
+		{
+			m=v2;
+		}
+		else{
+			m=v3;
+		}
+	}
+
+	return m;
+}
+
+int main()
+{
+	int valor;
+
+	MayorMenor mayormenor1;
+	valor = mayormenor1.calcularMenor(1, 2, 3);
+
+	return 0;
+}
+
+18.- ESTRUCTURA DE DATOS TIPO VECTOR EN C++
+Un vector es una estructura de datos que permite alamcenar un conjunto de datos del mismo tipo. Con un unico nombre se define un vector y por medio de un subindice hacemos regerencia a cada elemento del mismo (componente).
+
+#include<iosgtream>
+
+using namespace std;
+
+class PruebaVector1{
+	private:
+		int sueldos[5];
+	public:
+		void cargar();
+		void imprimir();
+};
+
+void PruebaVector1::cargar()
+{
+	for(int f=0; f<5; f++)
+	{
+		cout <<"Ingrese valor del sueldo: ";
+		cin >>sueldos[f];
+	}
+}
+
+void PruebaVector1::imprimir()
+{
+	cout <<"Listado de sueldos.";
+	cout <<"\n";
+
+	for(int f = 0; f<5; f++)
+	{
+		cout <<sueldos[f];
+		cout <<"\n";
+	}
+
+	cin.get();
+	cin.get();
+}
+
+int main()
+{
+	PruebaVector1 pv1;
+	pv1.cargar();
+	pv1.imprimir();
+
+	return 0;
+}
+
+int sueldos[5]
+Lo definimos como atributo de la clase ya que lo utilizatemos en los dos metodos y ademas lo ubicamos en la zona private para no poder accederlo fuera de la clase.
+
+19.- ESTRUCTURA DE DATOS TIPO MATRIZ
+Una matriz es una estructura de datos que permite almacenar un conjunto de datos del mismo tipo. Con una unico nombre se define la matriz y por medio de dos subindices hacemos referencia a cada elemento de la misma (componente).
+
+		Columnas
+Filas	50	5	27	400	7
+		0	67	90	6	97
+		30	14	23	251	490
+
+Hemos graficado una matriz de 3 filas y 5 columnas. Para hacer referencia a cada elemento debemos indicar primero la fila y luego la columna, por ejemplo en la componente 1, 4  se alamcena el valor 97.
+
+int mat [3][5];
+
