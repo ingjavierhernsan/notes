@@ -1,0 +1,29 @@
+Which pricing model is best suited for a  batch computing workload that requires significant compute power and can be stopped at any time?
+Spot instance.
+
+Which AWS services are free?
+Amazon EC2 Auto Scaling, CloudFormation, IAM.
+
+With Amazon S3, which of the following are not chargeable items?
+Inbound data transfer.
+
+What are the three fundamentals of pricing in AWS?
+Compute, storage and outbound data transfer.
+
+Which pricing model is highly flexible with no long-term commitments or upfront payments?
+On-demand.
+
+What can you use to assign metadata to AWS resources for cost reporting?
+Tags.
+
+Which AWS pricing feature can be used to take advantage of volume pricing discounts across multiple accounts?
+Consolidated billing.
+
+Which AWS support plan comes with a Technical Account Manager (TAM)?
+Enterprise.
+
+Which of the following is not a payment option for Amazon EC2 reserved instances?
+All at the end.
+
+Which tool can an IT manager use to forecast costs over the next 3 months?
+AWS Cost Explorer.
