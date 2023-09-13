@@ -27,3 +27,20 @@ All at the end.
 
 Which tool can an IT manager use to forecast costs over the next 3 months?
 AWS Cost Explorer.
+
+Which tool can be used to find compliance information that relates to the AWS Cload platform?
+AWS Artifact.
+
+What is AWS' policy regarding penetration testing?
+You can perform penetration testing against selected services without approval.
+
+Which service can assist with protectiog against common web-based exploits?
+AWS Web Application Firewall (WAF)
+
+Which service is involved with encryption?
+AWS Key Management Service (KMS).
+
+In case of account compromise, which of the following actions should you performed?
+Open a support case with AWS.
+
+
