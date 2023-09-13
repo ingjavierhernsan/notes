@@ -43,4 +43,21 @@ AWS Key Management Service (KMS).
 In case of account compromise, which of the following actions should you performed?
 Open a support case with AWS.
 
+According to the AWS Shared Resposibility model, who is responsible for operating system patching for Amazon EC2 instances?
+The customer.
+
+According to the AWS Shared Resposibility model, who is responsible for configuring server-side encryption for Amazon S3?
+The customer.
+
+According to the AWS Shared Responsibility model, who is responsible for data center security?
+AWS
+
+Which service uses a hardware security module to protect encryption keys in the cloud?
+AWS CloudHSM
+
+Which service can be used to find reports on Payment Card Industry (PCI) compliance of the AWS cloud?
+AWS Artifact
+
+Who is responsible for parching networking equipment in AWS?
+AWS
 
