@@ -1,0 +1,8 @@
+ASP.NET Web Application (.NET Frameworl)
+Nombre del proyecto.
+Empty
+Click derecho sobre proyecto.
+Add
+New Item...
+Web Form
+Nombrar archivo como Default.aspx
