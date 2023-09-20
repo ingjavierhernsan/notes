@@ -1,0 +1,64 @@
+AWS Certified Developer - Associate Study Guide Learning Goals
+
+1.- AWS Essentials & Core Services
+- Learn the fundamentals of cloud computing and the AWS global infrastructure.
+- Define important AWS services including EC2, S3, RDS, and well as their use cases.
+- Understand the AWS Shared Responsibility Model in terms of security and compliance.
+
+2.- IAM stands for Identity and Access Management
+- IAM users, groups, and roles with proper permissions can be created and managed.
+- For increased security, use multi-factor authentication (MFA).
+- Apply IAM policies gto fine-grained AWS resource access control.
+
+3.- Amazon Web Services Compute Services
+- Launch and configure EC2 instances of various types and Amazon Machine Images (AMIs).
+- Implement auto scaling to efficiently manage varying workloads.
+- For serverless computing and event-driven architecture, use AWS Lambda.
+
+4.- Data Storage with Amazon S3
+- Amazon S3 buckets and objects can be created and managed.
+- For data management, configure S3 lifecycle policies and versioning.
+- For long-term data storage, use Amazon EBS and Amazon RDS.
+
+5.- Amazon VPC and networking
+- Create Amazon Virtual Private Cloud (VPC) subnets, route tables, and internet gateways.
+- Security groups and Network Access Control Lists (NACLs) are used to secure nertwork traffic.
+- For secure communication, configure VPC peering and VPN connections.
+
+6.- AWS DynamoDB and databases
+- Deploy and administer relational database Amazon RDS instances.
+- Design and construct a NoSQL database schema in Amazon DynamoDB.
+- Use DynamoDB Streams to process data in real time.
+
+7.- Elastic Beanstalk jand AWS Deployment
+- AWS Elastic Beanstalk is used to deploy and manage applications.
+- For application updates, use blue-green deployments and rollbacks.
+- For automated application deployments, use AWS CodeDeploy.
+
+8.- AWS Step Functions with the Serveless Application Model (SAM)
+- Using AWS SAM templates, create serverless applications.
+- Create and manage serverless workflows with AWS Step Functions.
+- In serverless designs, incorporate Lambda functions, SynamoDB, and other AWS services.
+
+9.- Monitoring, logging, and troubleshooting are all part of the process.
+- To monitor AWS resources, use CloudWatch metrics and alarms.
+- CloudWatch Logs can be used for centralized logging and analysis.
+- Troubleshoot typical application deployment and performance difficulties.
+
+10.- Application Encryption and Security
+- Using AWS Key Management Service (KMS), implement encryption for data at rest and in transit.
+- IAM roles, policies, and encryption are used to secure application data.
+- For SSL/TLS certificate management, use AWS Certificate Manager.
+
+11.- Messaging and Application Integration
+- Use Amazon Simple Notification Service (SNS) and Amazon Simple Queue (SQS) to integrate apps.
+- Use Amazon EventBridge to implement event-driven architecture.
+- For Message and event processing, use AWS Lambda.
+
+12.- SDK, CLI, and API Gateway from AWS
+- AWS SDKs and the AWS Command Line Interface (CLI) are used to create applications.
+- Using Amazon API Gateway, you can create and administer REASTful APIs.
+- Implemente API Gateway resource authentication and authorization.
+
+AWS Developer Tools: Building and Deploying
+Discover AWS's developer toolbox. Master the art of continuous integration and continuous deployment (CI/CD) by diving into AWS CodeCommit, CodeBuild, and CodeDeploy. Learn how to manage code efficiently, automate testing, and deploy apps efforlessly for speedy and dependable releases.
