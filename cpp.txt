@@ -19,6 +19,10 @@ C++
 17.- SINTAXIS DE UN METODO
 18.- ESTRUCTURA DE DATOS TIPO VECTOR EN C++
 19.- ESTRUCTURA DE DATOS TIPO MATRIZ
+20.- CONSTRUCTOR DE LA CLASE
+21.- DESTRUCTOR DE LA CLASE
+22.- PARTE PRIVATE Y PUBLIC DE UNA CLASE EN C++
+
 
 1.- COMPILAR CODIGO C++
 g++ file.cpp -o file
@@ -442,3 +446,176 @@ Hemos graficado una matriz de 3 filas y 5 columnas. Para hacer referencia a cada
 
 int mat [3][5];
 
+20.- CONSTRUCTOR DE LA CLASE
+En c++ podemos definir un metodo que se ejecute inicialmente y en forma automatica. Este metodo se lo llama constuctor.
+
+Elconstructor tiene las siguientes caracteristicas:
+- Tiene el mismo nombre de la clase.
+- Es el primer metodo que se ejecuta.
+- Se ejecuta en forma automatica.
+- No puede retornar datos.
+- Se ejecuta una unica vez.
+- Un constuctor tiene por objetivo inicializar atributos.
+
+#include<iostream>
+
+using namespace std;
+
+class operarios{
+	private:
+		float sueldos[5];
+	public:
+		Operarios();
+		void imprimir();
+};
+
+Operarios::Operarios(){
+	cout<<"Carga de sueldos. " <<"\n";
+
+	for(int f=0; f<5; f++){
+		cout<<"Ingrese el sueldo: ";
+		cin>>sueldos[f];
+	}
+}
+
+void Operarios::imprimir(){
+	for(int f=0; f<5; f++){
+		cout<<sueldos[f] <<"\n";
+	}
+
+	cin.get();
+	cin.get();
+}
+
+int main(){
+	Operarios op;
+	op.imprimir();
+
+	return 0;
+}
+
+21.- DESTRUCTOR DE LA CLASE
+En C++ podemos definir un metodo que se ejecute cuando se elimine el objeto y en forma automatica. Este metodo se lo llama destructor.
+
+El destructor tiene las siguientes caracteristicas:
+- Tiene el mismo nombre de la clase mas el caracter ~ al principio.
+- Es el ultimo metodo que se ejecuta.
+- Se ejecuta en forma automatica.
+- No puede retornar datos.
+- Se ejcuta una unica vez.
+- No es obligatorio.
+
+#include<iostream>
+
+using namespace std;
+
+class Tabla{
+	private:
+		int valor;
+	public:
+		Tabla();
+		void imprimir();
+		~Tabla();
+};
+
+Tabla::Tabla(){
+	cout<<"Ingrese un valor: ";
+	cin>>valor;
+}
+
+void Tabla::imprimir(){
+	for(int f=vlaor; f<=valor*10; f=f+valor){
+		cout<< f << "-";
+	}
+	
+	cout<<"\n";
+}
+
+Tabla::~Tabla(){
+	cout<<"Gracias por utilizar este programa.";
+	cin.get();
+	cin.get();
+}
+
+int main(){
+	Tabla tabla1;
+	tabla1.imprimir();
+
+	return 0;
+}
+
+Luego de llamar a metodo imprimir llega la llave del final de la main pero previo a esto se llama el destructor de la clase Tabla.
+
+22.- PARTE PRIVATE Y PUBLIC DE UNA CLASE EN C++
+Uno de los principios fundamentales de la programacion orientada a objetos es el encapsulamiento, esto se logra agrupando una serie de metodos (funciones) y atributos (varibles) dentro de una clase.
+
+Hemos visto que una clase tiene dos secciones: una publica y otra privada. Por principios de la programacion orientada a objetos los atributos (variables) deben definirse en la parte privada y los metodos dependiendo si queremos que se los pueda llamar desde la main los definiremos de tipo publico y si queremos que queden ocultos y solo puedan ser llamados dentro de la clase los definimos en la parte privada.
+
+#include<iostream>
+#include<cstdlib>
+#include<ctime>
+
+using namespace std;
+
+class Dado{
+	private:
+		int valor;
+		void separador();
+	public:
+		void tirar();
+		void imprimir();
+};
+
+void Dado::separador(){
+	cout<<"********************************";
+	cout<<"\n";
+}
+
+void Dado::tirar(){
+	srand(time(NULL));
+	valor=rand()%6+1;
+}
+
+void Dado::imprimir(){
+	seaparador();
+	cout<<valor;
+	cout<<"\n";
+	separador();
+}
+
+int main(){
+	Dado d;
+	d.tirar();
+	d.imprimir();
+
+	return 0;
+}
+
+El atributo valor y el metodo separador() como estan antecedidas por la palabra clave private: significa que desde la main no se podran acceder, es decir que si escribimos en la main lo siguiente se genera un error sintactico.
+
+La ventaja dee definir losatributos en al zona privada de la clase es que en el caso de haber un error logico en nuestro programa el mismo queda encapsulado en una clase y es mas facil identificarlo.
+
+Dentro de la clase para llamar a otro metodo de la misma clase lo hacemos indicando solo el nombre del otro metodo (dentro del metodo imprimir llamamos al metodo separador por su nombre).
+
+Importante
+Una forma muy comun de escribir la declaracion de una clase es obviar la palabra clave private:
+
+class Dado {
+	int valor;
+	void separador();
+	public:
+		void tirar();
+		void imprimir();
+};
+
+El lenguaje C++ inclusive nos permite especificar varias secciones privadas y publicas:
+
+class Dado{
+	public:
+		void tirar();
+	private:
+		int valor;
+		void separar();
+	public:
+		void imprimir();
+};
