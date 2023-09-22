@@ -1,0 +1,251 @@
+SISTEMA DE ENTRENAMIENTO POR PUESTO 
+
+Cursos para nuevo ingreso
+En un archivo de excel compartido con RH se tiene los nuevos ingresos (New Hire 2023.xlsx). 
+RH cita a los empleados que recibiran la induccion.
+El curso empieza el dia que RH cita al empleado.
+Entrenamiento revisa el documento de excel para ver quienes son los nuevos ingresos que recibiran la induccion (se revisa minimo los lunes).
+Prepara todo para el curso de induccion.
+Se lleva un control de asistencia por curso (este es un documento de papel).
+Se lleva un control de los temas del curso de induccion (estes es un documento de papel, es un check por cada tema que se ve). Este mismo documento lleva un control de la lecturas que toma del usuario.
+Se captura en un documento de excel que el nuevo ingreso tomo el cuerso de induccion (training records final2.002.xlsx).
+
+Curso normal
+Antonio hace el calendario en base a las necesidades de capcitacion de los empleados.
+Antonio revisa el calendario.
+
+Solicitud de cursos
+Se espera un formulario de parte de Rocio Jimenez
+
+Formato DC-3
+Se debe tener en fisico y digital.
+
+Menu de la pagina principal
+Entrenamientos
+Matrices
+Calendario
+	Mostrar en un calendario que dias hay cursos, si se da clic en el dia mostrara los entrenamientos registrados.
+Planeacion
+Asistencia
+	Registrar asistencia
+	Revisar asistencia
+Expedicion DC-3
+	Por separado
+	Masivo
+Administracion
+	Control de usuarios
+		Usuarios
+		Roles
+			Permisos
+	Catalogos
+		Areas STPS
+		Catalogo puestos STPS
+		Relacion Safran STPS
+		Trainers
+		Training Category
+		Training Method
+		Type of source
+
+Fondo de pagina principal
+Logotipo de la empresa.
+
+Si hay personal por capacitar se mostrara una tabla donde muestra los entrenamientos que se ocupan dar.
+Si hay entrenamientos programados que se muestren en una tabla.
+
+ADMIN  
+- Ver reporte de Cursos requeridos Existente / Nuevos
+- Crear cursos y ligarlos a la matriz por puesto (crear los catálogos relacionados)
+- Agregar número de OCR liberado para adición de curso
+- Obtener un reporte de entrenamientos pendientes por impartir por curso.
+- Calendarizar las sesiones con el personal correspondiente
+
+MM	
+- Seleccionar un curso del catalogo
+- Puestos al que va dirigida
+- Someterse a aprobación 
+- SI NO EXISTE, LLENAR FORMULARIO DE REQUERIMIENTO
+- Titulo
+- Breve descripción de contenido y tópicos
+- Puestos al que va dirigida
+- Certificación Yes/No
+- Proveedor
+- SE DEBE SOMETER UN OCR PARA APROBACIÓN POR STAFF
+- Agregar a la/s matriz/es el nuevo curso
+- EN CASO CONTRARIO CREAR CURSO Y AGREGADOS
+
+TRAINING
+- Registrar entrenamientos impartidos a un grupo de empleados
+- Registrar evidencia del curso impartido (calificaciones, archivos, etc.)
+* Es posición la tendrá todo empleado que este registrado como maestro
+
+QUALITY MANAGER
+- Nota: Revisar el proceso del OCR para tratar de automatizar el proceso de la captura de la matriz de entrenamiento.
+
+STAFF	
+
+EMPLOYEE
+- Reporte de Cursos de su puesto por estatus
+
+============================================================================================================================
+
+- Los procesos.
+	Registro y modificación de entrenamientos nuevos
+		- Internos
+		- Externos
+	Registro y modificación de entrenamientos a empleados
+		- Dados por el área de entrenamientos
+		- Dados por el área del empleado (OJT)
+		- Dados por otras áreas
+		- Dados por empresas externas
+	Planeación de entrenamientos
+		- Internos
+			- Por parte del área de entrenamiento
+				- Nuevo ingreso
+				- Empleados
+				- Que curso será
+				- Cuando
+				- Donde
+				- Quienes deben asistir
+			- Por parte de otra área
+				- Empleados
+				- Que curso será
+				- Cuando
+				- Donde
+				- Quienes deben asistir
+		-Externos
+			- Empleados
+			- Que curso será
+			- Cuando
+			- Donde
+			- Quienes deben asistir
+	Registro de asistencia a cursos
+	Registro de resultados de los cursos
+	Impartición de cursos a empleados
+		-Dados por el área de entrenamiento.
+			-Cursos de inducción
+			-Cursos necesarios por área
+	Registro y expedición de certificado de cursos impartidos registrados en gobierno
+		- Formato DC-3
+
+- Como son esos procesos.
+	Registro y modificación de entrenamientos nuevos
+		Cuando un manufacturing manager tiene la necesidad de entrenar a su personal con algún curso nuevo debe comunicarse con el personal de entrenamiento de forma personal o correo electrónico. Se plantea de manera formal la necesidad del curso. En base a la experiencia del personal de entrenamiento se solicita información sobre el curso en cuestión al manufacturing manager, esta información se plantea en el documento xxxx.docs. Se revisa si de forma interna se puede dar el curso, si se tienen los recursos, si esto no es posible se consideran las opciones externas y con la información completa se pasa a un siguiente nivel para su aprobación. Cuando se aprueba el curso la información de este se captura en el documento de Microsoft Excel de matriz de entrenamiento.
+		
+		También se puede tener cursos nuevos que ocupan impartir por parte de otras áreas de la empresa a los empleados de otras áreas, un ejemplo es Seguridad e higiene. Con la información de este curso nuevo se captura en el documento de Microsoft Excel de matriz de entrenamiento.
+			
+	Registro y modificación de cursos a empleados
+		Este registro se hace en un documento de Microsoft Excel. Este documento se le denomina matriz de entrenamiento, cada área en la empresa tiene un documento donde se registra que cursos debe tener el puesto. En el documento se tienen varias pestañas, en la pestaña Catalogo se registran todos los cursos, se tiene una pestaña por cada puesto del área y se registran los cursos que debe tener ese puesto.
+		
+		Ejemplo del documento de matriz de entrenamiento del departamento de IT: IT Matrix.xlsx
+		
+		También se tiene un documento de Microsoft Excel llamado Training Records_final 2.002.xlsx donde se registra los entrenamientos que han realizado cada empleado.
+	Planeación de cursos
+		-Internos
+			-Por parte del are de entrenamiento
+				-Nuevo ingreso
+					Se revisan los lunes el documento de Microsoft Excel New Hire 2023.xlsx que edita el área de recursos humanos, aquí se indican que personas son de nuevo ingreso y que fecha será su ingreso a la empresa como empleados. En base a su fecha de ingreso se prepara el curso de inducción para estos empleados.
+					
+					Recursos humanos se encarga de indicarle a los empleados de nuevo ingreso en donde se darán los cursos de inducción.
+				-Empleados normales
+					Se revisa en los documentos de Microsoft Excel que empleados necesitan algún curso para terminar su capacitación. Cuando se encuentra algún curso faltante se revisa en unas listas de cursos asignados a las áreas. Esto sirve para formar un grupo de empleados y aprovechar ese tiempo para capacitar a más empleados. 
+			-Por parte de otra área
+				Se encarga de desarrollar el curso que impartirá a empleados de otras áreas. Estos cursos deben ser proporcionados al área de entrenamiento para su captura en la matriz de entrenamiento. 
+				
+				El área que dará el entrenamiento debe informarle al área de entrenamiento que tiene que impartir el curso, además de solicitarle algún espacio para este mismo.
+				
+				Al finalizar el curso, el área debe dar la lista de asistencia de los empleados al área de entrenamiento para agregar este entrenamiento a los registros del empleado.
+		-Externos
+			El área de entrenamiento se encarga de capturar en la matriz de entrenamiento el curso. Además, se encarga de preparar el área donde se dará el curso en las instalaciones de la empresa, convocara a los empleados que recibirán el curso. El encargado del curso externo proporciona la lista de asistencia al curso para que el área de entrenamiento agregue el entrenamiento a los registros del empleado.
+	Registro de asistencia a cursos
+		Por cada curso que se imparte se debe llevar un registro de los empleados que tomaron el curso y si lo terminaron. El área de entrenamiento registra la asistencia de los empleados a los cursos en una hoja de registro denominada REGISTRO DE ENTRENAMIENTO y posteriormente se captura en un documento de Microsoft Excel.
+	Registro de resultados de los cursos
+		No se registran los resultados del curso impartido. Solo se tiene un estatus de este si no se terminó de impartir.
+	Impartición de cursos a empleados
+		-Dados por el área de entrenamiento.
+			-Cursos de inducción
+				Los cursos que se impartirán dependerán a que área y puesto serán asignados los empleados, en base a esto se imprime el documento Hoja de Verificacion - Induccion al Personal, este documento se lleva el control de que cursos se han impartido al empleado.			
+			-Cursos necesarios por área
+				Cuando ya se tiene formado el grupo se asigna una fecha para impartir el curso, se le informa al supervisor del empleado para que se coordine con el empleado.
+	Registro y expedición de certificado de cursos impartidos registrados en gobierno
+		Si el curso se encuentra dentro del catálogo del formato DC-3 se llena el formato que se tiene capturado en un documento de Microsoft Word, se imprime y se archiva en los registros del empleado. Si el empleado solicita el certificado, se imprime y se entrega.
+
+- Propuesta para mejorar esos procesos.
+	- Revisar los datos que manejan para poderlos guardar en una base de datos.
+	- Revisar las herramientas para mejorar estos procesos.
+- Propuesta con el sistema.
+
+================================================================================================================================
+
+Revisar de donde toman la Functional area.
+	-Sacar las diferentes areas para que los comparen o validen.
+De la pestaña personal activo, que informacion del personal necesitan?
+	-Se utiliza para llenar las columnas de la B a la  F en la pestana Training Records del documento Training records final 2002
+De la matriz de entrenamiento de cada puesto preguntar si General Knowledge deberia estar en el catalogo de entrenamientos.
+En que momento se utiliza la informacion de la tabla Training Distrubution (IT Matrix.xlsx).
+	-Dar clic en los campos de Job title.
+
+PROBLEMA:
+Ocupamos el puesto, pero este no esta en un catalogo y tampoco tenemos un id. El puesto se puede tomar en la tabla Colabora de la base de datos References.
+
+================================================================================================================================
+
+CREATE TABLE CtTrainings (
+	idTraining INTEGER,
+	codeTraining NVARCHAR(MAX),
+	trainingDesc NVARCHAR(MAX),
+	idTypeSource INTEGER,
+	idArea INTEGER,
+	idCategoryTraining INTEGER,
+	referenceDocument NVARCHAR(MAX),
+	rCReference NVARCHAR(MAX),
+	revision NVARCHAR(MAX),
+	duration FLOAT,
+	content NVARCHAR(MAX),
+	idCatSME INTEGER,
+	idCatPrimaryTrainer INTEGER,
+	idCatBackupTrainer INTEGER,
+	costMX FLOAT,
+	costUS FLOAT,
+	idTrainingMethod INTEGER,
+	recertification INTEGER,
+	trainingCompletedWithin INTEGER,
+	experationDate DATE,
+	OJT BIT,
+	statusTraining INTEGER,
+	idAppUserReg INTEGER,
+	dateReg DATETIME
+	PRIMARY KEY (idTraining))
+
+================================================================================================================================
+
+Se capturan el catalogo: Usuarios
+Se capturan el catalogo: Trainers
+Se capturan el catalogo: SME
+Se capturan el catalogo: Primary_Trainer
+Se capturan el catalogo: BackUp_Trainer
+Se capturan el catalogo: Type of source
+Se capturan el catalogo: Training_Method
+Se capturan el catalogo: Knowledge_Type
+Se capturan el catalogo: Training_Category
+Se capturan el catalogo: Tra_Dis_Cat
+Se capturan el catalogo: Training Distribution
+Se capturan el catalogo: Pos_Tra_Dis
+Se capturan el catalogo: Status_Training
+Se capturan el catalogo: Training_Records_Status
+Se capturan el catalogo: Catalogo puestos STPS
+Relacionar puestos con el catalogo de Safran con el catalogo STPS
+Se capturan el catalogo: Catalogo Areas STPS
+Relacionar areas con el catalogo de Safran con el catalogo STPS
+
+Se capturan los entrenamientos.
+Se captura la matrix por puesto.
+Se captura los entrenamientos llevados por el trabajador.
+
+================================================================================================================================
+
+ACCIONES NECESARIOS:
+- Agregar el Id del puesto en la tabla de Colabora de la base de datos Reference.
+- En el area de entrenamiento corregir los nombre de las areas.
+- En el area de entrenamiento asignar los puesto correspondientes a los empleados.
+
+================================================================================================================================
