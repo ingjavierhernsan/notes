@@ -1,0 +1,662 @@
+1.- WHY IS THE PLANIFICATION PHASE IMPORTANT?
+2.- CLARIFICATION OF THE SCOPE
+3.- EXCERCISE, DEFINE THE LIST OF TASKS
+4.- TASKS PLANIFICATION
+5.- GANTT DIAGRAM
+6.- PROJECT BUDGET ESTIMATION
+7.- RISK ANALYSIS
+8.- EXCERCISE, GANTT DIAGRAM, BUDGET AND RISKS
+
+1.- WHY IS THE PLANIFICATION PHASE IMPORTANT?
+As we have seen before, the project manager is not necessarily involved in the initiation phase.
+
+However, he joins the project at the planning phase and he's responsible for it.
+
+If the project manager was not involved during the initiation phase, he must familiarize himself with
+
+the various documents that have been produced to fully understand what it is.
+
+It is the responsibility of the project manager to get in the bath quickly before starting the planning.
+
+Moreover, this is one of the difficulties that the project managers encounter so quickly, building
+
+up their skills on a subject when they were not part of the initiation phase.
+
+So it's a challenge, but is precisely this kind of challenge that makes the position of project manager
+
+interesting.
+
+If it was easy, we will bored.
+
+Right?
+
+So the project manager is responsible for the planning.
+
+But what is this phase for?
+
+The purpose of the planning phase is to analyze, evaluate and organize the project.
+
+It allows the project to be divided into several stages.
+
+It also makes it possible to estimate the cost and duration of the various tasks.
+
+This phase is very important for the rest of the project, and there are three essential steps during
+
+the planning phase.
+
+Define a goal.
+
+Evaluate the options and choose and confirm the best options.
+
+These steps must be completed in order, otherwise we may end up with the famous case of the Vasa ship.
+
+I don't know if you know this story in 1628.
+
+The Vasa was to be the flagship of this Swedish kingdom fleet.
+
+The king himself had signed the commission contract.
+
+It was a national issue.
+
+This ship was to help impose Swedish superiority.
+
+It was a big project.
+
+For three years, 400 people worked six days a week to finish the ship.
+
+On the day of its inauguration, the Vasa sank only 15 minutes after being launched.
+
+How come?
+
+It's simple.
+
+The Dutch builder who ran the project used to build this kind of ship.
+
+He had to plan specifications.
+
+Everything was planned.
+
+But in the middle of the project, the king gave the order to increase the dimensions of the ship.
+
+The objective of the project changed.
+
+The scope changed and the initial plans were no longer good.
+
+The builder was under pressure because he had to finish the ship as quickly as possible because the
+
+war had already started.
+
+So he did what he could.
+
+The plans were not precise.
+
+The dimensions had not been recalculated, and there were a lot of approximation with no proper planning.
+
+This is why the ship lasted for 15 minutes before sinking.
+
+This disaster could have been avoided with more serious planning, with documentation, with dates
+
+dimensions, tasks and sub-tasks.
+
+Clear and precise responsibilities.
+
+It is precisely the role of the project manager to ensure that the planning is done properly.
+
+So project managers create a list of tasks to be accomplished to satisfy the needs of the project and
+
+achieve the objectives.
+
+There are things that the project manager knows and that he masters, but they also think that he doesn't
+
+know.
+
+And in this case, he should call in experts to help him during this planning phase.
+
+No one expects a project manager to be an expert in all areas.
+
+Besides, that's not his role.
+
+His expertise lies in project management, and that's already a lot.
+
+Fortunately, the project manager does not work alone.
+
+He doesn't do the planning alone.
+
+He doesn't estimate the cost of different tasks on his own.
+
+He may have an idea to challenge the different estimates.
+
+But is it is not for him to estimate everything.
+
+In fact, this is often a mistake that we see in some organizations.
+
+The project managers estimates everything alone in his corner and validate his plans with the management.
+
+But when the team starts working on the project.
+
+He realize that his estimates are her estimates were not right.
+
+I stress this point to tell you that you should call on the various experts in your organization to
+
+help you in this task, what is certain is that the project manager must be serious and think of all
+
+possible scenarios.
+
+The ultimate goal is to achieve the project's objectives on time and within the allocated budget.
+
+The time you spent planning saves you a lot of errors during the execution.
+
+2.- CLARIFICATION OF THE SCOPE
+So now that we are clear on the importance of planning, the question that arises for the project manager
+
+is how to plan the execution of the project.
+
+The first thing is to become familiar with the scope and the information gathered during the initiation
+
+phase.
+
+You remember when we talked about the scope of the project during the initiation phase.
+
+This part was managed by the project sponsor to clear the land and get an idea on the viability of the
+
+project.
+
+The project manager, if he had not been involved during the initiation phase, must be perfectly clear
+
+on the scope.
+
+He must be clear on the objectives.
+
+He can discuss with the sponsor and the client to understand their request and make sure nothing has
+
+been forgotten.
+
+The project manager can also talk to people who are impacted by the project to get as much information
+
+as possible, like the different teams that will work on the project.
+
+Once clear on all this?
+
+The project manager details his findings in a document called the Project Scope Statement.
+
+This document describes in detail the deliverables, constraints and assumptions that have been made.
+
+It serves as a contract between the project manager and the stakeholders.
+
+It can be used as evidence showing that what is in scope and what is not.
+
+In other words.
+
+The product manager is committed to delivering what they put in their product scope statement in case
+
+of doubt later during the project.
+
+We can refer to this document to find out what the project manager has promised to deliver.
+
+The project scope statement contains the following information.
+
+The characteristic of the project, name of the project, name of the project manager.
+
+Name of the sponsor.
+
+The drafting of the product stereoscope statement.
+
+And so.
+
+The objective of the project.
+
+Why the project was created.
+
+The description of the scope.
+
+Description of the scope of the project.
+
+So the description of the expectations of the project.
+
+This part details the expected outputs at the end of the project.
+
+The deliverables of the project.
+
+So the list of all achievements of the project, whether they are products or services.
+
+This list contains everything that will be delivered at the end of the project.
+
+The excluded domains in order to avoid any ambiguity.
+
+This part contains all the things that are excluded from the project, whether in terms of products
+
+or services.
+
+Acceptance criteria for the product or service.
+
+So the list of all the essential criteria for the success of the project.
+
+These are the criteria to be met, to obtain customer or stakeholder satisfaction.
+
+Project constraints, least on technical material or financial constraints of the project, hypothesis
+
+lists of all assumptions made during the planning phase.
+
+There you go.
+
+Now that this document is finished, things are becoming more and more clear.
+
+We know what to deliver, what is excluded, the assumptions and the constraints.
+
+Now the project manager must go into more detail.
+
+The next step is to break down the deliverables into tasks.
+
+This visual representation allows us at a glance to see the whole project and the tasks to be accomplished.
+
+In this example, I have resumed building a new house.
+
+We can see that there are three main deliverables.
+
+There is the construction of the house in the middle, the interior decoration and the exterior decoration.
+
+There aren't really any rules about splitting the project into deliverables.
+
+It's up to you to see, which makes the most sense in your project.
+
+The goal is to group activities into deliverables and then into tasks.
+
+It's up to you to add the necessary level of detail.
+
+For example, here I have divided the interior decoration into two sub deliverables, which is fixed
+
+like the installation of the fireplace.
+
+The installation of a fountain in the entrance.
+
+And then all that is furniture like armchairs, sofas and so on normally.
+
+And the installed fireplace, I can detail the different actions, such as buying the insert, installing
+
+the air inlet and so on in the base of the fireplace and so on.
+
+All the things necessary to make the fireplace.
+
+This is precisely the purpose of the next document in this document, all the tasks to be performed
+
+exhaustively detailed here and used Excel.
+
+But you can use Microsoft Projects, for instance.
+
+Here's the lowest level in terms of detail.
+
+Each task must have an owner.
+
+This person will be responsible for its execution.
+
+In the case of dependency, she or he will be responsible for its Follow-Up.
+
+Imagine that the purchase and delivery of the insert for the fireplace will be carried out by a fireplace
+
+distributor.
+
+So the person who takes charge of this task will be responsible for monitoring the purchase and delivery.
+
+This document must contain all the activities of our project.
+
+It is important to fill it out carefully because it's a very important document for the rest of the
+
+project.
+
+This is the one we will use to monitor the progress of the project during the execution phase.
+
+Now that we are clear on all the tasks to be performed, we need to determine how long each task takes
+
+and in what order they will be performed.
+
+3.- EXCERCISE, DEFINE THE LIST OF TASKS
+Now that you are clear on the scope and the deliverables, it is time to list all the tasks of your project.
+
+You can use Excel, Microsoft Project or any online tools.
+
+The goal is to list all the tasks to be performed during your project. This list should be as exhaustive as possible.
+
+You can also group these activities by categories, themes, etc.
+
+This list is important for the rest of your project.
+
+4.- TASKS PLANIFICATION
+Now that we are clear on the To-Do list, it is time to estimate their direction.
+
+It is also important to note the sequence, the order in which these tasks will be performed.
+
+They are surely some tasks that cannot be started until other tasks have been completed.
+
+While there are other tasks that can be performed in parallel, this is what we will see together in
+
+this video.
+
+The first thing the project manager should do is to estimate the duration of each task, add little buffer
+
+to absorb the potential delays.
+
+The project manager starts by estimating the time needed for each task in hours, days, weeks, months
+
+and even in years if necessary.
+
+How does he do that?
+
+He calls on experts in each field to help him get an idea, but also based on his own experience.
+
+The goal is to have the most accurate estimate possible.
+
+As a project manager, if something seems inconsistent to you, you should ask questions to clarify
+
+the reasons for the durations that seem exaggerated or on the contrary too short.
+
+I tell you that you have to challenge and ask questions because humans tend to underestimate the time
+
+required to complete a task.
+
+This is something that was confirmed by sociologists Travesky and Kanneman in 1979.
+
+Most people think that everything will go as planned because of cognitive bias called optimism bias.
+
+It's when you think you are less exposed to a negative event than others.
+
+I'm talking about those cognitive biases to warn you against overly optimistic estimates.
+
+You should always change if the figures seem inconsistent and add little buffer to make sure that your
+
+schedule has little margin.
+
+Things never go as planned.
+
+So you have to be prepared and you have two options.
+
+Either you add a little delay after each task for you have a little delay after a group of tasks.
+
+It's up to you to decide which option is best for you and in your particular situation.
+
+The duration for this measure depends on the task and the complexity of your project. A known task
+
+that does not involve uncertainty.
+
+will have a lower buffer than a complex task, which has never been performed by your teams and which
+
+has a lot of uncertainty.
+
+For example, if you have never worked with a consulting firm, you have no idea how good their work is.
+
+In this case, the buffer will be bigger than what you put on a consulting firm with whom you are used
+
+to work.
+
+And you know well, then there is the criticality of the task.
+
+If a task is critical for the project and its delay could endanger the whole project.
+
+The buffer associated with this task will be adjusted to take its criticality into account.
+
+One way to determine the criticality of taks is called the critical path method.
+
+I will tell you more about this later in the training.
+
+And finally, you have to take into account the experience of the people who perform the tasks.
+
+Yes.
+
+The tasks are performed by human, and you have to take that into account.
+
+A senior employee is more predictable than a junior employee.
+
+I have seen in the companies where I worked, a junior developer can get stuck on a task while another
+
+developer can finish it faster.
+
+From experience, the more junior person is, the more the buffer must be adjusted to accommodate to
+
+this degree of uncertainty.
+
+It's not always true, but it's often the case.
+
+5.- GANTT DIAGRAM
+So we cannot talk about project management without talking about the Gantt chart. This diagram allows a visual
+
+representation of our entire project.
+
+We see the main achievements with their durations, their start dates and end dates.
+
+On the far left of the diagram, you see the tasks.
+
+The following column shows a number of weeks each task will take to be completed.
+
+You can see that here.
+
+I have chosen to represent the work chart in terms of weeks.
+
+So the durations you see are the number of weeks it takes to complete an activity.
+
+You also see the start date of each week, January 4th, January 11th, 18th and so on.
+
+Let's assume that we agreed with the client for an approximate date around the end of June.
+
+You must be wondering why the activities stopped before.
+
+This is, of course, to absorb any possible delay, as there would be some delays, except in rare
+
+occasions when the project is finished on time.
+
+It can also be seen that some tasks cannot begin until others are completed.
+
+For example, one cannot build the walls.
+
+Until the foundations are finished, which gives us what is called the critical path.
+
+These are all the tasks that I have called here in light gray.
+
+These tasks need to be monitored very closely.
+
+The electrical work in blue cannot begin until the walls are ready, which is why you see these tasks
+
+start in the middle of the diagram. For the installation of the windows.
+
+It's the same thing it is that you see in orange.
+
+The creation of the house, which you see in yellow, is left towards the end so as not to damage the
+
+furniture with the work, the garden and the driveway, which are shown in green, are planned towards
+
+the and also as not to obstruct the access of large machinery during the construction of the house.
+
+And we left two weeks after the end of the critical path, before the delivery to the customer.
+
+The idea here is to represent the tasks that follow one another and the ones that can be performed in
+
+parallel.
+
+You can easily and visually follow the progress of the project.
+
+Here I did it quickly with Excel, but know that you can do the same thing with Microsoft Project.
+
+6.- PROJECT BUDGET ESTIMATION
+As we have just seen, the Gantt chart provides a visual representation of the different stages of the
+
+project with the start date and and date of each task. Project managers plans, the execution of the
+
+various tasks, but also plans to project budget.
+
+He must have an estimate of the overall budget, which also estimates by deliverables.
+
+The project manager must discuss with the various members of the project, the various managers, suppliers
+
+and consultant to gather this information.
+
+Sometimes he can coordinate meetings or delegate some estimation task.
+
+But you remain the person responsible for the budget.
+
+He must remain responsible for this estimate and change the numbers he's given if necessary.
+
+He's an example of an Excel sheet for managing the budget for our project.
+
+I completed the task.
+
+We saw the Gantt chart, except this time I used months instead of weeks to break down the budget for
+
+each task.
+
+Sometimes certain tasks are spread over two months.
+
+For example, the construction of the foundation extends from January to February.
+
+And the idea is to have an estimate of the activities for each month to make it easier for you to follow
+
+up later.
+
+Some tasks require an advance.
+
+As you can see here, for interior decoration were an expense is expected from the start of the project.
+
+This is also something to take into account during your budget planning here.
+
+I have shown you high level way the different expenses.
+
+Normally your budget sheet should contain the details of each deliverable to ensure a better estimate
+
+of the different expenses.
+
+7.- RISK ANALYSIS
+Before finishing this part on planning, I would like to talk about the management of the risks that
+
+threatened the project.
+
+There's no such thing as zero risk.
+
+Every project carries risks.
+
+Sometimes these risks are known and something must be done to limit or eliminate them.
+
+But sometimes certain risks arise during the project, which is why we need a way to monitor these risks.
+
+And analyze them.
+
+Good risk management can avoid surprises, but can also prevent the entire project from failing, rigorous
+
+study is therefore essential to carry out the risk analysis to carry out the study.
+
+They are three steps, List the risks you take the inventory of all the risks that threaten the project.
+
+Sometimes certain risks were raised during the initiation phase.
+
+Others were communicated by different members of the team.
+
+And we must list all these risks.
+
+Financial, organizational, technical and so on.
+
+Don't neglect anything.
+
+You can also consult with experts in your organization and ask them if they think of any risk that could
+
+threaten the project.
+
+Second, analyze the risks and not all the risks you have identified have the same probability and not
+
+all are equal in terms of impact on the project.
+
+During this step.
+
+Your job is to estimate their severity and likelihood.
+
+And third, define the treatment during this third phase.
+
+The objective is to to determine how can we eliminate these risks or limit their effect sometimes to
+
+eliminate the risk.
+
+We can change and aspect of the project.
+
+Imagine that defaulting in the entrance hall could threaten the delivery of the project because one
+
+has to wait for the installation of defaulting before being able to finish the installation of the whole
+
+door.
+
+We can discuss with the customer to see if the dimensions of the phone thing cannot be changed or simply
+
+change the fountain into a statue for instance. Or any other decorative object that does not have the same risk as
+
+a fountain.
+
+In our case, let's assume that the customer didn't really want funding and it was the salesperson who
+
+convinced him joining stolen.
+
+I'm telling you about this example just to show you that the project is dynamic.
+
+Nothing is set in stone.
+
+We can always discuss, change, rethink new solutions.
+
+The ultimate goal is to complete the project and achieve customer satisfaction.
+
+Here's what it looks like if we take the example of the House, we have identified three risks on a
+
+real site.
+
+They will surely be many more.
+
+Here it is, just to give you an example.
+
+We can see that the first risk concerns the dimensions of the fountain in the hall.
+
+These dimensions may delay the installation of the front door.
+
+The probability is high because we know that these dimensions are too large and the severity is also
+
+high because a delay in the installation of the front door risks delaying the whole project.
+
+You see that we are adding color codes to show that this risk is very likely and has significant impacts
+
+on the project.
+
+Then actions are defined to eliminate these risks.
+
+Here we have two actions.
+
+Either we change dimensions or we offer a decorative statue instead of fountain.
+
+Then there is another risk related to the weather.
+
+The probability is medium, so we put it in orange and its impact in high on the project.
+
+And finally, we have a final risk related to the team of tailors who will be busy with another site
+
+and which ends only three days before the start of their task on our site.
+
+There is a risk of delay, too, because.
+
+It is their task that will be performed last in our project.
+
+It is therefore necessary to closely monitor their site and look for another team of tilers
+
+If, let's say, their work is delayed and they cannot start our project.
+
+Oh, not that way.
+
+We don't leave anything to chance.
+
+We prepare in advance.
+
+Plan A and plan B if in case plan A doesn't work.
+
+8.- EXCERCISE, GANTT DIAGRAM, BUDGET AND RISKS
+Your turn now.
+
+We have just seen how to create a Gantt chart to follow the progress of the different activities of the project.
+
+We also talked about the budget sheet and the risk list.
+
+I recommend that you take a few minutes to create your Gantt chart. Choose the tool that suits you best (Excel, Microsoft Project, or other).
+
+Gather the different budget estimates for your project in tabular form.
+
+And finally, list all the risks that threaten your project.
+
+You can ask the various experts in your organization for help with each of these tasks.

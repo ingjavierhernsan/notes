@@ -1,0 +1,488 @@
+1.- THE INITIATION PHASE
+2.- BUSINESS CASE
+3.- THE PROJECT'S SCOPE
+4.- FEASIBILITY STUDY
+5.- PROJECT CHARTER
+
+1.- THE INITIATION PHASE
+As we saw in the previous section, the purpose of the initiation phase is to define the objectives
+
+of the project, clarify the scope, the tasks and the responsibilities, but also make feasibility
+
+study of the project if necessary, because the goal of this initial phase is to gather enough information
+
+to facilitate decision making by management sponsors or stakeholders to say, go or no go for the
+
+project.
+
+In other words, we study whether the project is interesting or not.
+
+So the first thing to do is to define the problem you are trying to solve.
+
+What are we trying to do?
+
+As we have seen before, projects are created to solve a problem, improve a process or seize an opportunity.
+
+So we must be clear about the problem to be solved from the start of the project.
+
+Here we are not talking about a solution.
+
+We are talking about the challenge to be overcome.
+
+For example, is there a drop in sales?
+
+Is the e-mail system archaic and needs to be changed?
+
+Are we trying to put in place a new system to manage customer complaints?
+
+We are not talking about the solution yet.
+
+We are just describing the problem we are trying to solve.
+
+For example, if the turnover is declining, you can simply write the annual turnover is declining at
+
+this stage.
+
+We must resist the temptation to talk about a solution.
+
+For example, we must create new products or we must update our products catalog.
+
+These are solutions, not problems to be solved.
+
+So to help you in this phase, you may ask yourself why?
+
+Why do we want to launch new product?
+
+Why do we want to update our products catalog?
+
+This way we discover the real motivation behind these solutions.
+
+Why do we want to launch a new product to acquire new customers?
+
+Why do we want to acquire new customers to increase the turnover?
+
+So do not hesitate to ask these questions.
+
+Why several times to get to the source of the problem?
+
+One method recommends asking yourself why five times in a row in order to get to the root cause.
+
+This is called the five whys technique.
+
+Once clear on the problem to be solved, it's time to set a goal for the product.
+
+This is the end result of our project.
+
+If you don't have a problem to solve.
+
+You can go straight to setting the goal of the project.
+
+For example, if a client come to you to build a house, for instance, you can skip ahead to setting
+
+goals to define a project objective.
+
+We use the acronym Smart.
+
+It's easy to remember.
+
+And very effective.
+
+So as for specific, objective must be clear and precise and for measurable.
+
+We must be able to measure them and know when they are reached.
+
+A ambitious.
+
+The goal must be challenging for the team.
+
+The goal must be achievable.
+
+So a balance must be struck between the ambition of the goal and its achievement.
+
+The team must be able to achieve it.
+
+If you set a goal that is too ambitious, you risk discouraging the team and temporarily defined.
+
+The objective must be limited in the time.
+
+It must have a deadline.
+
+For example, increase the fourth quarter revenue by six percent net or implement a new customer complaint
+
+management system before December 31st.
+
+And then you precise the year.
+
+These objectives are clear.
+
+They are easy to understand.
+
+They are precise and they are limited in time, and it's easy to check whether they have been achieved
+
+or not.
+
+And of course, these criteria need to be adapted to your specific case.
+
+So now it's your turn.
+
+Describe first the challenge or the problem that your product is going to solve.
+
+And also describe the goals or the objectives for your project using the acronym Smart.
+
+So describe first the challenge or the problem if you don't have a problem.
+
+Then describe the goals or the objectives of your project.
+
+2.- BUSINESS CASE
+We have just spoken of the challenge solved by the project and the objectives to be achieved before
+
+continuing.
+
+I would like to mention that sometimes the project manager is not yet assigned to the project at this
+
+point, which happens.
+
+The project manager is assigned to the project once the initiation phase is over.
+
+And the goal is obtained to continue the project.
+
+So he will take you taking charge the rest of the project, starting with the planning phase.
+
+So whether it is the project manager or the sponsor, the purpose of the initiation phase is to have
+
+the agreement of the executive committee to start to the project.
+
+No matter how your business is organized, these always a group of people, often managers or directors
+
+who decide which product to invest in. In the rest of the training.
+
+We will say that she's the executive committee that decides the GO or NO GO of the project.
+
+So you should know that each project belongs to a product portfolio because each company, they are
+
+one or more product, they are candidates for development.
+
+This project must be carefully studied because the competitiveness of the company is at stake.
+
+A company can gain or lose its competitiveness depending on the project in which it decides to invest.
+
+This is why this phase is important, to show the importance of the project and what it brings to the
+
+organization.
+
+It is often the project sponsor who manages this initiation phase or startup phase.
+
+He studies the feasibility of the project, checks the availability of resources, and identifies the
+
+benefits for the organization.
+
+He is or she is also responsible for choosing the project manager who will take over.
+
+So the project manager can arrive at any time.
+
+There is no specific rule.
+
+So if the project manager is assigned during these phase, he can help the sponsor to set up the business
+
+case.
+
+But it is not his responsibility to do so.
+
+The responsibility for this task remains with the sponsor.
+
+The business case aims to convince the members of the executive committee to invest in this project
+
+and not another.
+
+Remember, several projects are in competition and it is up to the executive committee to choose the
+
+project or projects that will secure the future of the company.
+
+So the business case must meet several criteria.
+
+First of all, you have to make sure that the objective of the project is in line with the objectives
+
+of the organization.
+
+A company that manufactures athletic shoes will not be interested in a project that aims to develop
+
+protein bars for instance.
+
+Even if the business case can be profitable, it is not necessarily in line with the objectives of the
+
+organizations, which are, for example, to became number one in sales of sports shoes.
+
+We must also ensure that the return of investment is positive.
+
+The business case must generate some profit for the company that justifies the initial investment.
+
+The business case must have a financial benefit for the company.
+
+I will not go further into the details because this part falls under the responsibility of the sponsor.
+
+I want to just to make you aware that the project first competes with other projects before it sees
+
+the light of day.
+
+If the sponsor succeeds in convincing the executive committee that the product is worthwhile in this
+
+case.
+
+Bingo.
+
+We can go to the next step, which is the definition of the scope of the project.
+
+3.- THE PROJECT'S SCOPE
+We have just talked about the business case.
+
+It is now time to talk about the scope of the project.
+
+The idea is to define what's in the project and what is outside the project.
+
+It is a high level definition of the the project scope.
+
+We have the opportunity to talk about the scope more in detail in the planning phase, which will be
+
+supported by the project manager.
+
+You have to see the scope as all the specificities of the project.
+
+To give you a simple example, if we take the case of building a house, the architectural firm is responsible
+
+for the plans, foundations, walls, installing electricity, plumbing, et cetera, but is planting
+
+the trees in the garden part of the scope or not?
+
+So these are the questions that we need to ask ourselves.
+
+Let's say in this case, we say it's not in the scope. Is the tarring in front of the entrance to the
+
+house part of the scope or not?
+
+So these are the questions that we need to ask ourselves.
+
+For the vegetable hedge, a tree planting laurels or cypress?The type of tree to be planted must be
+
+specified.
+
+But let's say that the vegetable hedge is indeed part of this Copia.
+
+Sometimes these questions are easy.
+
+Just look at the contract.
+
+But sometimes some questions need clarification.
+
+These are gray areas that need to be clarified.
+
+It is not known whether these things are part of the project or not.
+
+If we take our example of the house, we can have dependencies on other projects, for example, to
+
+finish building the exterior part of the house.
+
+We need to wait for the installation of the swimming pool, which is not part of the scope of this project.
+
+So we have a dependency with the person in charge of the swimming pool.
+
+We also see that in the contract that the owner's wishes to install a video surveillance system.
+
+Even if the system is not part of the scope of our project, we must ensure that electricity is supplied
+
+to the various places where the cameras will be installed and that it is part of our scope.
+
+So we continue like this, trying to think of everything we do our best to identify what is part of
+
+the scope and what is outside the scope, and also identify the dependencies.
+
+Because they can impact our project, even if the project manager is not responsible for the construction
+
+of the swimming pool, nor for the monitoring system, he or she must communicate with the project managers
+
+responsible for these dependencies to ensure that the dates, the dates stick, that the measurements
+
+match, that the location for the sockets is suitable, for example, for the different cameras.
+
+All this information must be explicitly written in the project charter.
+
+This is a document that I will talk about very shortly.
+
+This is the document.
+
+This must be signed before proceeding to the planning phase.
+
+Now that you are clear on the scope of the project, let's talk about the feasibility study.
+
+4.- FEASIBILITY STUDY
+If we are not clear on the feasibility of a project, guess what, we have to do a feasibility study.
+
+The purpose of this feasibility study is to confirm or not that the project is feasible from technical
+
+and financial point of view.
+
+We are trying to confirm the business case holds up here.
+
+We do not go into details.
+
+We do a high level study to make sure the project is feasible.
+
+During the planning phase, we will have the opportunity to go into details.
+
+Here, we just want to make sure that everything is OK before moving to the next phase. When doing a feasibility
+
+study.
+
+We want to confirm that the organization can support the project in terms of budget, employees and
+
+management to handle the project.
+
+So we ask ourselves different questions.
+
+Does the organization have the expertise to complete the project with her technicians, engineers and
+
+so on?
+
+Or should we call an outside company to help with the project?
+
+If so, what are the costs?
+
+Is it still profitable with these external expenses?
+
+And let's look at another option.
+
+If we train the employees internally.
+
+Wouldn't this be a better option?
+
+Wouldn't be the option more interesting?
+
+Is the project technically feasible?
+
+Or do we have an idea how to create the requested product?
+
+Have any similar products have been made in the past?
+
+Are there any products on the market that already meet the need you see?
+
+We ask all these questions just to have an idea about the feasibility of the project.
+
+If we take our example of building a house, we can imagine that the customer ask for a driveway with
+
+a colored tarring.
+
+He saw this at his friend's house and he wants to same at his house.
+
+The architectural firm has never done this kind of tarring.
+
+So the project manager contacts companies in his region to ask for the feasibility of this work with
+
+the specificities of the land, and that they mentioned just to have an idea of the costs of outsourcing this taks.
+
+Actually, what she is trying to do is to check that this cost
+
+is not going to blow up the budget.
+
+Let's assume that in this case, this task does not cost more than a normal tarring.
+
+He therefore decided to outsource this part and he adds a dependency with the external company.
+
+The feasibility study can take a few days, but sometimes it can take weeks.
+
+It all depends on the complexity of the project.
+
+The project manager is not alone.
+
+To do this study, he can use his knowledge and his expertise, but he can also call on experts to help
+
+answer these questions.
+
+During my career as a functional analyst, at one point I was doing pretty much just that. I was only
+
+working on feasibility studies to help product managers and project manager determine the feasibility
+
+of their projects.
+
+This feasibility study can also show constraints, whether technical or organizational, that must be
+
+taken into account during the project.
+
+Once these feasibility study is completed, we will be ready to write the document that closes the initiation
+
+phase.
+
+This is the project charter.
+
+5.- PROJECT CHARTER
+Before moving on, you need an essential document, which is the project charter.
+
+This document brings together everything that was done during the initiation phase.
+
+It is a high-level document easy to understand, and it must contain the important information of the
+
+project.
+
+This document should be written in such a way that that it can be understood by people who are not technical.
+
+This document contains the name of the project description of the project.
+
+The name of the project sponsor.
+
+The name of the project manager.
+
+The start date of the project or an approximate date?
+
+An end date, if known.
+
+And I open a parenthesis here.
+
+This data depends on your project.
+
+So, of course, you can have the name of the organization.
+
+The name of a program manager if your project is part of a program, etc.
+
+Then the description of the project, the objective of the project, as we have seen before, and the
+
+scope you can detail here, what is in the scope and what is not in the scope and also the dependencies.
+
+So that is clear for everyone.
+
+The project constraints, if there are any, are there any time constraints?
+
+For example, you have to comply with a new law that there is a deadline.
+
+Perhaps you have a budget constraints that you should not exceed or scope.
+
+That is non-negotiable or quality constraints, such as having, for instance, an application available
+
+more than 99, 99 percent of the time.
+
+The risk that are that threaten the project, the assumptions that you made, the stakeholders and the
+
+members of the team.
+
+And the important dates of the project, if there are any, regarding the project team, it is up to
+
+the project manager with the help of the sponsor to determine the project team.
+
+Again, it depends on the organizations.
+
+Sometimes the project manager contacts the director of each department impacted by the project, and
+
+it is the director who gives him a name.
+
+But sometimes it is the project manager who asks for people explicitly.
+
+So it all depends on your organization and how they work.
+
+At this point, the project team is known and you are ready to move on to the planning phase.
+
+We can attach the business case to this document, to the project charter.
+
+So the goal is to have a reference document that can be easily consulted in case of doubt.
+
+This document does not have to be very technical.
+
+It should not exceed a page or two.
+
+So the initiation phase ends with the signing of the project charter.

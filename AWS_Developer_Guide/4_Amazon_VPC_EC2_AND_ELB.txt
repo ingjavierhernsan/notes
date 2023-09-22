@@ -1,0 +1,3110 @@
+1.- INTRODUCTION
+2.- AMAZON VPC, SECURITY GROUPS, AND NACLs
+3.- AMAZON EC2 OVERVIEW
+4.- CREATE A CUSTOM VPC WITH SUBNETS
+5.- LAUNCH INSTANCES AND TEST VPC
+6.- AMAZON EBS AND INSTANCE STORES
+7.- CREATE AND ATTACH AN EBS VOLUME
+8.- AMAZON ELASTIC FILE SYSTEM (EFS)
+9.- CREATE AN AMAZON EFS FILESYSTEM
+10.- AMAZON 3C2 USER DATA AND METADATA
+11.- ACCESSING SERVICES - ACCESS KEYS AND IAM ROLES
+12.- LAUNCH AUTO SCALING WEB APPLICATION ON EC2
+13.- TYPES OF ELASTIC LOAD BALANCER
+14.- ROUTING AND SESSION MANAGEMENT
+15.- DEPLOY AN APPLICATION LOAD BALANCER
+16.- CREATE ASG AND ALB USING THE AWS CLI
+
+1.- INTRODUCTION
+Hello and welcome to this section.
+
+In this section I'm going to cover the amazon virtual private cloud (VPC).
+
+elastic load balancing and amazon EC2.
+
+Now you are expected to understand these as kind
+
+of prerequisite knowledge for the developer associate exam.
+
+In this course I go over it at a basic level
+
+but I do move through quite quickly.
+
+If you want more background on these services then I go
+
+into much more detail in the solutions architect associate course.
+
+But for what you need to know for the developer associate exam,
+
+this should be enough.
+
+So in this section you're going to learn how to create your own custom VPC.
+
+You're going to launch EC2 instances and elastic load balancers and see
+
+how you can scale your application and load balance it for high availability
+
+and there are plenty of hands on exercises to make
+
+sure you get your hands dirty and enjoy the practice.
+
+2.- AMAZON VPC, SECURITY GROUPS, AND NACLs
+Hi guys. In this video, I'm going to cover the Amazon Virtual Private Cloud
+
+security groups, and Network Access Control Lists.
+
+So let's get started with Amazon VPC. So this is the Virtual Private Cloud.
+
+What you have is VPCs that you create within a region.
+
+And these are logically isolated portions of the cloud within a region.
+
+So they're logically isolated, not physically isolated.
+
+We then have availability zones. These are physical separation.
+
+These are essentially separate data centers.
+
+And then we have our subnets such as public subnets
+
+and private subnets.
+
+Public subnets are accessible to the outside world, the internet,
+
+whereas private subnets are not.
+
+And we can create both public subnets and private subnets
+
+in each availability zone.
+
+So the subnets are created within an availability zone, the AZ itself.
+
+That means you can't have a single subnet that spans availability zones,
+
+but you can spread your workloads across availability zones through multiple subnets.
+
+We can then launch our resources such as EC2 instances
+
+into the subnets of our VPC.
+
+We have a router within the VPC.
+
+You don't actually see it as a component but it is actually there
+
+and we manipulate it through updating the route table
+
+to determine how we want to route our traffic.
+
+The VPC router takes care of routing both within
+
+the VPC itself and then outside of the VPC.
+
+So to other VPCs or across some site-to-site
+
+links you might have with on-premises data centers, for example.
+
+So we control the VPC router using the route table. We can add our own routes
+
+in here to determine how traffic should be routed.
+
+The route table is used to configure the VPC router
+
+and we can add routes for within our VPC and outside of our VPC as well.
+
+Now if we want to reach the internet,
+
+then we need something called an internet gateway.
+
+The internet gateway is attached to the VPC
+
+and it's then used to connect out to the internet.
+
+We can create multiple VPCs within a region.
+
+So a VPC does exist within a region and we can create lots of them within our VPC.
+
+Now there are limits.
+
+So there are default limits and you can apply to extend those limits if you need to.
+
+Each VPC has a different block of IP addresses known as a CIDR block.
+
+So here we see, we've got two different CIDR blocks. One for each of our VPCs.
+
+CIDR stands for Classless Inter-Domain Routing.
+
+Now from the CIDR block, we then have our subnet IP addresses.
+
+So these are the blocks of addresses that we then assign
+
+to our resources or they get automatically assigned to our resources
+
+within our subnets.
+
+And they come from the master block, which is the CIDR block.
+
+So each of our VPCs then has a CIDR block
+
+and it has subnets that come from that block of addresses.
+
+Now, let's just look at the components of the VPC.
+
+So we talked about a VPC and what it is and what a subnet is.
+
+And we talked about internet gateways and how they help you route within
+
+the VPC and outside of the VPC.
+
+An egress only internet gateway is used only for IPv6.
+
+so it's not used for the IPv4 protocol.
+
+An egress only internet gateway allows your resources
+
+that have IPv6 addresses to connect out to the internet
+
+but doesn't allow traffic back in again to reach them from the internet.
+
+We talked about the router.
+
+Now, a peering connection is where you can directly peer two VPCs together
+
+within or across regions.
+
+And that means you get private routing between those VPCs
+
+rather than having to send the traffic out to the internet
+
+and then back to the other VPC.
+
+VPC endpoints allow you to connect to public AWS endpoints via private addresses.
+
+So for example if you want to connect to Amazon S3, that's a public endpoint.
+
+So it's available on the internet but you can connect privately to it
+
+using a private IPv4 address using a VPC endpoint.
+
+We then have NAT instances and NAT gateways. Now they both do the same thing.
+
+They allow your instances in private subnets
+
+which only have private IP addresses to be able to connect to the internet.
+
+So its Network Address Translation.
+
+The instance is an EC2 instance that you manage
+
+and the gateway is managed by AWS and scales seamlessly.
+
+If you want to set up a site-to-site link between your on-premises data center
+
+and AWS, you can do so by creating an AWS VPN.
+
+There are two principal components to a site-to-site connection.
+
+The customer gateway, which is your router and the configuration of
+
+your router in the on-premises data center,
+
+and then the virtual private gateway, which is the component on the AWS side.
+
+Direct connect is another way to connect your on-premises data centers to AWS.
+
+This time it uses private connections where you get very high speed
+
+and bandwidth and low latency and you get consistent network throughput.
+
+So you're not going via the internet.
+
+Now, security groups and network ACLs are two different types of firewalls.
+
+And we're going to cover those in detail within this lesson.
+
+So to summarize, a VPC is a virtual network dedicated to your AWS account.
+
+It's similar to having your own data center inside AWS.
+
+And it's logically isolated from other virtual networks in the AWS cloud.
+
+You get complete control over the virtual networking within your VPC.
+
+So you get to define the IP ranges, the CIDR blocks
+
+and the ranges that you assign to your subnets.
+
+You get to create your subnets and configure your route tables and gateways
+
+as you need to.
+
+And then you can launch your resources like EC2 into your VPC.
+
+When you create a VPC, you need to specify
+
+the CIDR blocks, that's the IPv4 address block for the VPC.
+
+So for example, here we have 10.0.0.0/16.
+
+A VPC will span all availability zones in the region
+
+and you have full control over who has access to the resources inside your VPC.
+
+So you can apply your policies to define role-based access control for your VPC.
+
+By default, you get to create up to five VPCs per region but you can extend that.
+
+And the default VPC is created
+
+in each region and that has a subnet in each availability zone within the region.
+
+So let's move on to security groups and network ACLs, so these are both firewalls
+
+which protect the network traffic that's able to connect to our EC2 instances.
+
+Now the network ACLs apply at the subnet level.
+
+So we can see here that they're actually attached to each of these subnets.
+
+They then apply to traffic coming into and going out of the subnet.
+
+So that's one really important point to remember.
+
+They don't apply to traffic within the subnet.
+
+This is only the ingress and egress traffic.
+
+Security groups are applied at the instance level.
+
+So they're actually applied to the Elastic Network Interfaces
+
+that are attached to each of your EC2 instances.
+
+Security groups can be applied to instances in any subnet.
+
+So for example, here we can see that security group A is applied to instances
+
+in multiple subnets just as security group B is as well.
+
+Security group rules are defined for outbound traffic and inbound traffic.
+
+So what we're seeing here
+
+is a set of rules for traffic that's coming inbound to our EC2 instance.
+
+Security groups only support allow rules.
+
+So essentially there's no such thing as a deny rule.
+
+What you're doing
+
+is you're adding rules to say this is the traffic that I want to allow
+
+and anything outside of what you've defined as an allow is implicitly denied.
+
+Each rule specifies the type, the protocol like TCP, UDP, or iCMP
+
+and then the actual port range.
+
+And then we have the source.
+
+A source can be an IP address or a security group ID.
+
+Next we have network ACLs.
+
+So here again we have inbound rules and outbound rules.
+
+Each knuckle will have an explicit deny, so these are the denies at the end.
+
+The rules are processed in order.
+
+So if an allow is found, then the traffic is allowed.
+
+If not then eventually it will reach the deny at the
+
+end of the rule set and the traffic will be denied.
+
+A couple of important characteristics to remember for your exam
+
+is that security groups support allow rules only.
+
+Network ACLs also support deny rules and also a security group is stateful.
+
+And that means that if the traffic is allowed out, outbound
+
+any return traffic coming in will automatically be
+
+allowed if it's associated with the same connection.
+
+Whereas with a network ACL, it's stateless.
+
+So you need a separate rule for outbound
+
+and the return traffic that's coming back inbound.
+
+3.- AMAZON EC2 OVERVIEW
+In this lesson, you're going to learn about the Amazon Elastic compute cloud, also known as EC2.
+
+Easy two is really one of the oldest and most important services on AWS, and it's the service that
+
+we can use to run virtual servers in the cloud.
+
+So let's have a look at what EC2 is and how it can help businesses in the US data center.
+
+Eight AWS have lots of servers and we'll call those easy to host servers.
+
+Now the ESI two instances run on top of the host server, so this is an example of server virtualization.
+
+The AC two hosts, the actual physical servers are fully managed by AWS and we then launch our EC2 instances
+
+and those instances can run Windows or Linux or Mac OS.
+
+So that's the operating system.
+
+And of course then we can install our applications like websites or whatever our application is on top
+
+of our EC2 instance.
+
+So the instance is a virtual server, there's a variety of instance types and they have a different
+
+combination of CPU memory storage and networking.
+
+So you can choose the instance type that is best suited for your particular use case.
+
+So you get to choose your instance type and then the operating system that you want to run and that
+
+can be Windows, Linux or Mac OS.
+
+Now AC two is an example of infrastructure as a service.
+
+You learned about that earlier in the course, IaaS or IaaS.
+
+So with infrastructure as a service at AWS are going to manage the physical hardware and they manage
+
+the software, the virtualization and management layer that sits on top of the hardware.
+
+But the key to instance is something that you manage.
+
+So you have to manage Windows and whatever application you put on top, that means things like patching
+
+are your responsibility.
+
+Now each instance will be attached to a network and that network is within your virtual private cloud,
+
+your VPC, and you will choose the subnets that you want to assign to your EC2 instance and that determines
+
+where they're launched and what they can access from a network perspective.
+
+Now each instance will have one or more IP addresses, and as you can see from this table, there are
+
+three different types of IP address.
+
+The first one at the top of the table is a public IP address.
+
+If your instance is running in a public subnet within the VPC, it will have a public IP address.
+
+Now these are lost when the instances stopped, that means they're assigned dynamically and if you stop
+
+the instance and start it again, it will have a different public IP address they used in public subnets
+
+and there's no charge for them.
+
+Now.
+
+They're actually associated with a private address on the instance and you can't move these addresses
+
+between instances.
+
+We then have the private address.
+
+Every instance, whether it's in a public or a private subnet, will always have at least one private
+
+IP address.
+
+Now these are retained when the instance is stopped and they're used in public and private subnets.
+
+Lastly, we have something called an elastic IP address and there's a bit more flexibility with these.
+
+Now these are also public IP addresses.
+
+The difference between the elastic IP address and the public IP address is that rather than being dynamically
+
+assigned and lost when the instance is stopped, the elastic IP address is static and it isn't lost
+
+when you stop your instance.
+
+So if you want to have a specific public IP address that you can use to connect to your application,
+
+then you would use an elastic IP address so that it doesn't change over time.
+
+Now you are charged if they're not used.
+
+So as long as they're in use, you don't get charged and they're always associated with a private IP
+
+address on the instance, just like the public IP address.
+
+Now another level of flexibility is that you can move them between instances and the network adapters
+
+called Elastic Network adapters.
+
+On the instance, you might want to do that if you need to remap the address to another instance.
+
+In the case of a failure or some other incident, you've learned previously about VPC and subnets.
+
+So remember that public subnets are where we launch our AC two instances and they have either a public
+
+IP address or an elastic IP address.
+
+So in both cases that's an IP address that can be used on the Internet.
+
+So we can connect to the instance from the Internet if we want to, and we can connect out to the to
+
+the Internet via the Internet gateway and in the route table for the public subnet, there's always
+
+a route that goes to the ID of the Internet gateway.
+
+Now, secondly, we've got private subnets, so that's when we're launching our instances and they only
+
+have private IP addresses.
+
+Now if we want to connect our instances in private subnets to the internet, we have to do so of.
+
+Something called a nat gateway, or there's another option called a net instance.
+
+But gateways are the better choice these days.
+
+Usually the Nat Gateway is deployed in the public subnet and the instance can use it to connect to the
+
+internet.
+
+And we can see that a route to the NAT Gateway is added to the private subnet route table and in the
+
+public subnet route table, the Nat Gateway uses the internet gateway to access the internet.
+
+Now this is for outbound traffic only, so it's to enable your EC2 instance to access the internet.
+
+So Nat, by the way, stands for network address translation.
+
+It basically means that when the instance with the private address wants to connect to the Internet,
+
+to connect to the Internet, it will need a public address that can access the Internet.
+
+And so translation happens and that happens within the Nat Gateway, and that allows the Nat Gateway
+
+to forward the connections to the Internet.
+
+4.- CREATE A CUSTOM VPC WITH SUBNETS
+Hey guys.
+
+In this lesson, we're going to create a custom Amazon virtual private cloud.
+
+This is essentially what we're going to create a virtual private
+
+cloud with a CIDR block of 10 000 slash 16.
+
+There's going to be two public subnets and
+
+two private subnets across two availability zones.
+
+And you can see the CIDR blocks for each individual subnet
+
+in the diagram.
+
+Of course,
+
+we're going to need an internet gateway so we can launch
+
+instances and enable them to be accessible from the internet.
+
+And,
+
+and there's going to be a main route table.
+
+That's the default route table that's created when we create our VPC.
+
+We'll also create a separate route table. That's one for the private subnets.
+
+That means it doesn't have the internet gateway.
+
+And if we want to in the future, of course,
+
+we can put a path to a net gateway
+
+if we want to enable outbound internet connectivity.
+
+So that's why we need a separate route table for the private subnets. So I'm in the
+
+managmeent console, let's go across to VPC and we're going to create our VPC here.
+
+So let's go to your VPC's,
+
+we're going to click on create VPC. Now, there's a couple of options here.
+
+We can do it manually or you can actually use this VPC and more function.
+
+And that's really good. It gives you this diagrammatic output as well.
+
+So it kind of shows you what you're creating, you can give it a name,
+
+it's chosen the exact CIDR block we want by default.
+
+And also you can then choose the number of availability zones
+
+by default.
+
+It's two with the number of public subnets as
+
+two and the number of private subnets as two.
+
+Then you can choose whether you want to create NAT gateways and an S3 gateway as well.
+
+So that's one option.
+
+The other way is to just create VPC only and
+
+then you can actually add in the subnets yourself.
+
+So of course, both ways are really good.
+
+I really enjoy this VPC and more, I think this is a great function
+
+and you'll probably use that quite a lot. But let's look at the other way as well. And
+
+we're going to use a file which has defined the ranges that we're going to use.
+
+So this is the file in the Amazon VPC directory in here
+
+We've got the name,
+
+the CIDR block and then we've got the information for the different subnets.
+
+Public one, A public one B, private one A and private one B.
+
+So let's start by copying the name of the VPC.
+
+We're going to pop that in the name tag here. And then we need the IPV four CIDR block.
+
+So that's this one here exactly as you see
+
+it in the file 10 000 slash 16.
+
+Back in the console. We can put this in here where it says IPV four CIDR.
+
+Now, we don't need an IPV six CIDR block and the default tenancy is the best option.
+
+So that's it. We just create the VPC. So that's it. The VPC has now been created.
+
+You can see that we don't actually have any subnets.
+
+There is a route table, of course, that's created by default by the VPC creation.
+
+Now what we want
+
+next is create our subnets.
+
+So let's come back to sub nets on the left hand side here, I'm going to create subnets,
+
+choose my VPC.
+
+So of course, we need to choose the one we just created my VPC.
+
+Then we can add in the subnets one by one.
+
+So Subnet, one of one is going to be our first one.
+
+I'm going to copy the name, paste that in.
+
+You may have noticed that we had a
+
+specification for which availability zone in the file.
+
+It said US easr one A. So we'll choose us
+
+east one A and then let's get the CIDR block.
+
+So back in the file, we're now going to copy this CIDR block. So this is
+
+a slash 24 10 010 back in the file.
+
+Let's just paste that in now I can do exactly the same thing for the next subnet
+
+and then repeat that for subnets 2, 3 and four. So I've just done that.
+
+I now have all four subnets to find Subnet one there
+
+Subnet two public one B in us East one B subnet,
+
+three private one A in US East one A
+
+and then finally Subnet four private one B in US East one B.
+
+And of course, I've added in the correct side of blocks for each of those.
+
+So now we can create the subnets. It's going to automate that process for us.
+
+And now we have these four new subnets in our VPC.
+
+Let's go over and have a look at the route table configuration.
+
+So we have a route table here for my VPC.
+
+It won't have any explicit associations.
+
+So we can see subnets without explicit associations are here. We have four.
+
+So essentially they're implicit associations.
+
+They haven't been statically defined or
+
+manually defined against this particular route table.
+
+So there's no explicit subnet associations.
+
+Now,
+
+what we do want to do is create a new route table and
+
+take our private subnets and put those in the new route table.
+
+So let's go back up a level, create rout table in the file here. We've got private RT
+
+as the name. It's got to be in the correct VPC
+
+Of course, and then we're going to associate private one A and private one B.
+
+So let's give it the name, select the VPC and create rout table.
+
+And now we want to go to sub net associations, edit
+
+and then choose private one A and private one B and then save associations.
+
+So now we have the explicit subnet associations.
+
+So if we won't go back to the original route table, the default one,
+
+the main route table, we now see there's only two implicit associations.
+
+OK?
+
+There's none explicitly but the private one A and one B have been
+
+moved out to the new route table that's designed for the private subnets.
+
+Lastly, we're going to create an internet gateway. So we're going to it my
+
+IGW back in the console, we're going to go to internet gateways,
+
+create internet gateway, provide the name and then create it.
+
+Now, what we need to do is go to actions and attach to VPC,
+
+select my VPC and then attach internet gateway.
+
+So that's it.
+
+The route table creates very quickly if you come back to rout tables,
+
+choose the main route table.
+
+That's this one here. In fact, I'm going to give it a name. Let's call this one main Dash
+
+RT.
+
+So we know that's the one in
+
+our custom VPC. I'm going to choose the route table ID
+
+and we can see we only have the local route.
+
+So what we want to do is add the route now to the internet gateway,
+
+it's going to be all zeros.
+
+And then we're going to choose internet gateway and select
+
+my IG W and then save and that's it.
+
+Our custom VPC is now configured.
+
+All that's left to do is launch some EC2 instances and test it out.
+
+So let's go to EC2. I'm going to launch an instance.
+
+We're going to use the default Amazon Linux 2023 AMI
+
+T two micro. I'm going to proceed without a key pair.
+
+We're going to choose the correct VPC. So that's the new VPC, my VPC
+
+and create a security group. So we'll just call this one web access as we usually do.
+
+In fact, I'm going to add on my VPC on the end.
+
+So it's clear sometimes in the console which one
+
+to choose now, what we want to do is just add in any rules.
+
+We've got SSH, let's also add in http from anywhere
+
+and we've got SSH
+
+already by default.
+
+So let's launch this instance now that we have our route table set up successfully,
+
+we're going to launch an EC2 instance and test
+
+that we can actually access that instance from the internet.
+
+Now, before we do that, what I want to do is head over to subnets,
+
+we're going to choose our public subnets, one by one, go to actions,
+
+edit Subnet settings
+
+and enable auto assigned public IPV four address and then click on save.
+
+I'll do that one for the other public Subnet as well.
+
+We want to make sure that we get those public IP addresses.
+
+OK. Let's save that one.
+
+And now we're ready to launch our instance in the course download,
+
+we have some user data here, which we're going to use.
+
+So let's copy this user data.
+
+It's simply going to install a web server under security groups.
+
+We're going to create a security group. I'm going to call this web access dash
+
+my VPC and the same in the description as well.
+
+So we know which one this is associated with for VPC
+
+We're going to select my VPC for inbound rules. We're going to add both SSH
+
+and then http
+
+and in both cases from anywhere. And that's our security group set up.
+
+Now, let's go to the EC2 management console in EC2.
+
+I'm going to launch an instance. I'll leave the default Amazon Linux 2023 MA
+
+I T two micro. I don't need to keep air. Of course, we need to change our VPC.
+
+So I'm going to choose my VPC, select existing security group,
+
+choose web access and then we need to scroll down to advance
+
+details all the way to the bottom and paste in our user data
+
+and then launch
+
+while that's happening. I'm also going to launch an instance into a private subnet.
+
+OK.
+
+So let's call this one private and I'm just
+
+going to scroll down for the instance type.
+
+We'll leave it as it is. I don't need a key pair for VPC.
+
+Of course, we need to check, select our my VPC.
+
+And then for security group, this one's going to be private access.
+
+And what I'm going to put into here is simply
+
+we can have SSH
+
+but also I want to have the ICMP all, so all ICMP
+
+IPV four from,
+
+and we can actually select the security group of our public instance.
+
+So that would be the web access, my VPC.
+
+OK. So we're only going to allow IC MP from this security group.
+
+Now, we do need to make sure that the subnet is correct as well.
+
+So let's just go and put this into a private subnet.
+
+So I'm going to choose private one A
+
+so now it's not going to get a public IP. All right, scroll down.
+
+Let's launch the instance on EC2
+
+I'm going to select my public instance,
+
+copy the public IP address and let's put that into a browser
+
+and that works. So that's awesome. That's definitely working.
+
+We know that port 80 from the internet is working.
+
+So we have an internet gateway,
+
+we have a public IP address and we should be able to connect in via SSH
+
+as well. So let's use instance connect and now we're connected to our instance.
+
+Now what I want to do is send a ping request to the private instance.
+
+So that will check that we connectivity to our private EC2
+
+instance.
+
+So we're simply going to run ping,
+
+put in the private IP address and we get a successful response.
+
+So that's it.
+
+I've now tested that my internet gateway and everything is working,
+
+routing is working as expected and all that's left to do is
+
+just terminate these two instances and we're done for this lesson.
+
+5.- LAUNCH INSTANCES AND TEST VPC
+So we've created our custom VPC, and I'd just like to test it now. So, we're going to launch some EC2
+
+instances, two instances in two different public subnets and one in a private subnet.
+
+And we're actually going to do that via the command line.
+
+It's really useful to know the command line.
+
+Now, not all exams require you to know the command line, so for the Solutions Architect Associate,
+
+it doesn't really matter too much. For the developer,
+
+it does a bit more for certain services. And definitely, for the SysOps exam.
+
+Now, whatever exam you're doing or whatever career path you're taking in AWS, it's still a really
+
+useful skill to have.
+
+So, it's definitely worth learning the command line.
+
+So, we'll launch some instances using the command line and then we'll use those instances just to test
+
+connectivity with each other.
+
+There's a couple of things I want to do before we get started there.
+
+Firstly, I want to create a NAT gateway. So, I'm in the VPC management console. Under NAT gateways,
+
+let's create a NAT gateway.
+
+I'm just going to call it My NAT-GW. And I need to select a subnet.
+
+Now, remember, with NAT gateways, they always go in public subnets.
+
+So here I'm going to choose public-1A.
+
+And that I know is within the correct VPC as well.
+
+So connectivity is public.
+
+We allocate an elastic IP and then just create the NAT gateway.
+
+Now, of course, it won't work until we update the route table for our private subnets.
+
+So under route tables, let's choose the Private-RT, go to routes, edit routes, add route and we're
+
+going to specify 0.0.0/0.
+
+And this time it's going to be a NAT gateway and we'd choose that Nat gateway ID.
+
+Now, our private subnets will have access to the internet. And that's important because when our instance
+
+launches, we're going to run some user data. And that's going to connect to the internet to download
+
+some binaries for HTTPD.
+
+Next thing is, under security groups, we need a security group.
+
+Let's create a security group.
+
+I'm going to call it Public-Web,
+
+give it a description, and make sure I select My VPC. For outbound rules,
+
+by default, it allows all traffic to any destination. For inbound,
+
+just for now, we're going to add all traffic from any destination.
+
+So, this is very open.
+
+Don't worry, we're going to lock it down in a subsequent lesson and practice with some different security
+
+group configurations.
+
+But for now, let's just open everything up.
+
+I'm going to create my security group. And that's ready to use.
+
+There's a file in your course download and that's in the code Amazon VPC Directory, and it's AWS CLI
+
+Run Instances.
+
+We need to add some values into this file.
+
+The first thing we need to do for this command is specify an image ID. So, the command is aws ec2 run
+
+-instances. And these are the values that we need to specify.
+
+So first, let's find the AMI ID that we want to use.
+
+AMI IDs are region specific, so we've got to make sure that everything we do in this lesson is within
+
+the same region.
+
+It's also where you created your custom VPC.
+
+So for me, that's North Virginia.
+
+Hopefully, it's the same for you.
+
+Let's launch an instance. Next to the Amazon Linux 2 AMI,
+
+let's grab this AMI ID.
+
+Don't take anything in brackets there.
+
+Copy that to the clipboard.
+
+Come back and paste that it.
+
+In the instance type, we can just type this in.
+
+It's just going to be t2.micro. For security group ID,
+
+let's go back and find the ID of our security group.
+
+I can see my public web access security group.
+
+Let's just copy that security group
+
+ID, come back and paste that one in.
+
+Then we need the subnet ID.
+
+This time, I'm back in the VPC management console.
+
+Let's go to subnets. First,
+
+I want the public-1A subnet ID. So, I'm just going to copy that to my clipboard.
+
+Key name is the key pair that you're using in this specific region.
+
+Back in EC2, you can go to key pairs if you don't remember what it is and just copy this name and we
+
+can paste
+
+that in.
+
+Lastly, there's some user data that we're going to specify.
+
+Now, this is the user data file.
+
+What it does is it runs a web server and then it creates a couple of variables from the metadata where
+
+it actually grabs the subnet ID.
+
+And it basically just puts that into a simple web page so we can see where the instance is running. In
+
+our command here,
+
+we just need to specify the name of that file.
+
+Now, what you want to do is change to your Amazon VPC directory where we have all of this information
+
+and this is where the file is.
+
+So copy that to your clipboard.
+
+Make sure you have the file:// and then the name of your file.
+
+Now, let's copy this and make sure it works before we fill out the other two.
+
+Now you will have had to run
+
+AWS Configure before you do this exercise. You should have specified an access key ID,
+
+secret access key, and your region must be the same as the region where we're trying to deploy our instances
+
+now. So mine is all good. Let's paste in this command and run the command. That appears successful.
+
+And we can see that we have an instance running in US-East-1A and there's quite a bit of information
+
+if you just space bar and go down the page here.
+
+So let's go into EC2 and check
+
+it's launching. Back in EC2, I can see I have this instance at the bottom here running.
+
+Now, I'm just going to label this one as public-1A
+
+so I know which one it is. Now, the next thing we need to do is to go back over to the VPC management
+
+console,
+
+take the subnet ID of public-1B, and come back to our file. And we're going to use this one.
+
+So what we can do is copy all of this.
+
+Put it in 1B here, and then I'm going to take this subnet ID and just overwrite this one here.
+
+So we should now be able to launch into public-1B. Let's copy this to our clipboard, come back and paste
+
+it in.
+
+That looks good.
+
+If I refresh the page here, we have this pending instance.
+
+That's the public-1B.
+
+So I'll just give that a label so we know which one it is.
+
+And then lastly, we're going to launch the instance in our private subnet.
+
+So again, I just need to get the subnet ID for private-1B.
+
+So I've copied that to my clipboard, come back, paste that in.
+
+And now we have the command.
+
+And this user data should run okay
+
+in the private subnet because we're able to connect out to the internet via the NAT gateway.
+
+So I paste this in. Hit enter. There we go,
+
+we should have another instance.
+
+Back in EC2, I can see my pending instance here.
+
+So let's call this one private-1B. Great,
+
+so I have these instances.
+
+Let's just give a refresh and see where we're at.
+
+So a couple of them are running. Let's sort by name. That might make things a bit easier.
+
+I'm just going to copy to my clipboard the public IP for public-1A and paste this into a browser
+
+window.
+
+And I get this web page. And it gives me the subnet ID. So that should correspond with the subnet for
+
+public-1A.
+
+So that's great.
+
+We've proved that we can connect from the internet to our EC2 instance.
+
+Now, the other thing I want to do is connect between my EC2 instances. Back in the console here,
+
+what I'm going to do is connect to public-1A.
+
+Use the EC2 instance connect.
+
+And while that's just connecting, let's come back. Next,
+
+I want to get the private IP address of my public-1B instance, and that's 10.0.2.25.
+
+And let's just change back to the EC2 instance connect.
+
+And I'm going to ping 10.0.2.25 and let's see if that responds.
+
+So that proves that we have connectivity to our instance in the other public subnet, public subnet 1B.
+
+So we have two-way connectivity,
+
+the response is coming back as well.
+
+So that's great.
+
+Lastly, let's check that we can connect to our private subnet.
+
+So let's see what the private IP address is.
+
+It's 10.0.4.148.
+
+So let's ping 10.0.4.148 and let's see if that works. And it does.
+
+So, we get an ICMP response.
+
+So that's great.
+
+That shows that we have that connectivity working.
+
+One other thing we could do from here is see if we can connect to that web page.
+
+So we'll use the call command and specify 10.0.4.148 and hit enter.
+
+And we get a response here that says this instance is in the subnet with ID and it gives us the subnet
+
+ID.
+
+So that's the H1 header for the HTML web page that we have on that website. So, we can see that we have
+
+port 80 open as well.
+
+We're able to connect to the instance in the private subnet. And we can also infer from that that the
+
+instance can connect out to the internet because it was able to install that web service.
+
+So that's it for our connectivity testing for now.
+
+Now, I'm going to leave all of these instances and the Nat gateway running because we're going to come
+
+back and carry on when we do some testing with security groups and network ACLs.
+
+6.- AMAZON EBS AND INSTANCE STORES
+Hey, guys, you've already learned lots about Amazon EC2 and how to deploy EC2 into VPC.
+
+Now we're going to look a little more into the storage layer for our EC2 instances, specifically at
+
+the Amazon Elastic BLOCK Store EBS and Instant store volumes.
+
+So first, let's look at EBS volumes and by default, when we launch our instances, they have one attached
+
+EBS volume, but you can attach more.
+
+So an EBS volume is a block based storage that's actually attached over a network.
+
+So the EBS volume does not actually exist on the AC to host.
+
+It actually exists over a network, but it's attached at the block level.
+
+And of course that means that the volumes appear as disk drives, which can be formatted and have a
+
+drive letter assigned to them on a Windows machine like this.
+
+In this case we've got our C and our DD drive, so the volume is attached over a network and of course
+
+we can attach EBS volumes to any EC2 instance, whether it's a Windows Linux or Mac OS instance.
+
+The EPS volumes exist within and availability zone.
+
+And as we can see here, they are in the same availability zone as our EC2 instance.
+
+The volume is automatically replicated within the availability zone, so AWS are replicating it on the
+
+back end to ensure durability for the data.
+
+There are several types of EBS volume.
+
+These are a few.
+
+There are other types as well.
+
+But I just want to give you an overview of some of the more commonly used volume types.
+
+Now the GP2 has been around for a long time.
+
+That's our general purpose SSD and in the provisioned IOPS on the right here we have the IO one.
+
+So these are both solid state drives.
+
+That means they're very high performance.
+
+Now the older style of hard disk drive is still available, but it's less commonly used.
+
+So most of the time you're going to be using solid state drive options, which are all of these here
+
+on the screen.
+
+Newer options are the GP free, the IO two and the IO two BLOCK Express.
+
+And of course you can read all about the different features and limitations and performance characteristics
+
+on this page here and us have lots more information on their website.
+
+A couple of features to point out at the bottom of the table here we can see boot volume is supported
+
+for all of these different types.
+
+So that means that any of these volume types can be used as a boot volume where your operating system
+
+is installed for your EC2 instance.
+
+EBS multi attach where we attach one EBS volume to multiple instances is not supported except for on
+
+the right hand side here.
+
+And of course we have the performance characteristics here.
+
+So we have the volume size ranging up to 16 TB bytes for general purpose and then up to 64 here for
+
+the BLOCK Express, IOPS is one of the performance characteristics of the volume.
+
+So here where it says Max IOPS 16,000, that stands for having up to 16,000 input output operations
+
+per second.
+
+And we can see the BLOCK Express has a huge number of IOPS.
+
+They're very high performance and of course you will pay for that.
+
+And throughput is essentially the measurement of how much data can be read and written to the disk.
+
+And we can see that for the different volume types here as well.
+
+I mentioned before that there's two different volume types that we're going to discuss.
+
+We've got the EBS volume and then we have the instance store.
+
+So what is an instance store?
+
+Well, in this diagram you can see we have the easy to host server.
+
+So remember that your AC two instances are running on a physical server in the data center at us.
+
+Now our EBS volumes are attached over a network instance.
+
+Store volumes.
+
+Are these ones here within the host server, They're actually physically attached to the host and they
+
+offer extremely high performance, whereas the EBS volumes are actually attached over the network.
+
+So what else is different?
+
+Well, instant store volumes are ephemeral.
+
+That means non persistent.
+
+And what non persistent means is your data is lost if you terminate your instance.
+
+So if you launch an instance with an instance store volume, the data on the instance store volume is
+
+only accessible for the lifetime of that instance.
+
+You can't actually stop an AC two instance that has an attached instance or volume.
+
+You can restart it and you won't lose your data.
+
+But if you terminate your instance, there's no way to keep that data.
+
+Whereas with an EBS volume, the volume exists independently of the issue instance.
+
+So you can terminate your instance and you can keep your volume and then reattach it to another instance
+
+to read that data.
+
+EBS volumes are persistent, so that means the data is kept there, it's not deleted and it exists independently
+
+of the instance.
+
+So why might you use instance store volumes?
+
+Well, they offer extremely high performance and they come with some instance types.
+
+So the storage is available and it can be used for things like data that's only temporary.
+
+For instance, it can be used as a scratch volume.
+
+That's where data is getting stored for a temporary basis.
+
+It's used, but it doesn't need to be kept and retained or backed up.
+
+In another use case, you might have some data that requires high performance and it's replicated to
+
+other instances, so you always have multiple copies of the data.
+
+So how do we back up our EBS volumes?
+
+Well, we can back them up using something called a snapshot.
+
+So we have an AC two instance here in an availability zone.
+
+It has an attached volume, a snapshot can be taken and it captures a point in time state of the data
+
+that's actually in that volume.
+
+So that data can then be created as a snapshot and it's actually created in Amazon S3 So it's outside
+
+of the availability zone.
+
+Then we can take additional snapshots and each snapshot is incremental.
+
+So it captures the changes since the previous snapshot because our snapshots live in Amazon is free,
+
+which is outside of the availability zone.
+
+We can also use our snapshot to create volumes in different availability zones.
+
+So here we've created an EBS volume in availability Zone B from the snapshot, and then we can attach
+
+that volume to an easy to instance in availability zone B So we've been able to essentially move that
+
+data between availability zones.
+
+You can also create images, the Amazon machine images from our snapshots, and they can be used then
+
+to create instances in different availability zones.
+
+7.- CREATE AND ATTACH AN EBS VOLUME
+In this lesson, I'm going to show you how to create and attach EBS volumes in the AC two management
+
+console.
+
+I'm going to go to launch templates and use the launch template we created earlier, and that makes
+
+it a bit easier to launch my instance.
+
+So I'm going to launch instance from template.
+
+Now I do need to change a couple of things.
+
+I need to select the option, proceed without a keeper and I need to select a subnet and I'm going to
+
+choose Public one A and that has to be in the same VPC as our security group, which in this case it
+
+is.
+
+So now I should be able to launch my instance.
+
+Great.
+
+That's launching.
+
+So while my instance is launching, let's just refresh here so we can see it.
+
+We are going to go down to EBS and the volumes pane here.
+
+Choose volumes.
+
+Now you can see that we already have a volume and that is the route volume for the instance that we
+
+just launched.
+
+And you can see that it's in use.
+
+So what we're going to do is create a extra volume.
+
+So we choose create volume.
+
+Now we get to choose the volume type.
+
+So we could choose GP to GP free IO one, IO two or the older hard disk drives, the C one or RST one
+
+or even the magnetic, which has been around a long time.
+
+Now if we choose something like the IO one, you get to configure the performance characteristics such
+
+as the input output per second.
+
+The IOPS.
+
+You get to specify the size, of course, as well.
+
+Now, what we'll do is we'll keep things a bit cheaper.
+
+We'll go to GP two and we'll keep the 100 gigabytes and it tells us the fixed performance that we can
+
+get for this particular volume.
+
+Now which availability zone should we put it in?
+
+Well, we just selected us East one A for instance.
+
+That means this volume needs to be in US East one, eh?
+
+Because otherwise the instance won't be able to use it.
+
+So we do need to use the US one a availability zone.
+
+Now you can optionally encrypt the volume and you can choose to use the default key from us.
+
+And that will encrypt the volume and all the data that's stored on it.
+
+I'm not going to select this option for now.
+
+Let's choose create volume.
+
+So the volume is now in the creating state, and it shouldn't take very long before it's ready.
+
+Okay, so the volume is now available.
+
+If I select the volume going to actions, we can then attach the volume.
+
+So note that you can also modify in here.
+
+So if you needed to change the volume type or the size of the volume or obviously you could change the
+
+performance characteristics of IO one as well.
+
+But we'll keep it on GP too.
+
+I'm not going to modify it.
+
+All I want to do is attach it to my EC2 instance.
+
+So now I'm going to attach the volume and I should be able to find my instance nice and easily.
+
+It's going to decide the device name to use and we can click on attach volume and that's it.
+
+That's all there is to it.
+
+We've now attached an additional volume to our instance that we could then partition and format and
+
+use.
+
+Now, what will happen to this volume if we terminate our instance?
+
+Well, the root volume by default will be deleted when you terminate your instance, but any extra volumes
+
+that you add will by default still remain in your account.
+
+So if we terminate the instance, we should find that this extra volume remains behind.
+
+So let's test that out.
+
+Let's go back to instances and I'm going to terminate my ESI two instance.
+
+And if we come back to volumes.
+
+What we should see shortly is that that volume will be removed and the additional volume will remain
+
+and it will be available for us to attach to another EC2 instance.
+
+So there we go.
+
+That didn't take long.
+
+The root volume was deleted and the extra volume is now available for us to use and attach to another
+
+AC two instance.
+
+So EBS is persistent storage and you can keep that data long term and move your volumes between instances
+
+if you need to.
+
+That's it for this lesson.
+
+I will see you in the next one.
+
+8.- AMAZON ELASTIC FILE SYSTEM (EFS)
+Hey, guys, let's look at the Amazon Elastic file system.
+
+Amazon FS.
+
+Now, FS is a file based storage system that we can use to attach to our EC2 instances.
+
+So how does it look?
+
+Well, in FS we create our file system.
+
+We can then attach easy to instances to the file system.
+
+Now, as you can see in this diagram, we have instances in multiple availability zones and they are
+
+connected to the same file system.
+
+So that means they can read and write data to that file system.
+
+They both see it as a mount point and they can both read and write data and see each other's data.
+
+So FS is a great way to attach a shared storage location to multiple instances in different availability
+
+zones.
+
+You can't do that with EBS.
+
+Now, as I mentioned in a previous video with the Elastic BLOCK store EBS, you do have the option for
+
+multi attach, but that's limited to within an availability zone.
+
+There's a limited number of instances you can connect and they must be built with a certain architecture.
+
+So there's quite a few constraints.
+
+Now with FS you can attach many, many instances across multiple availability zones within a region
+
+to the same file system.
+
+So it's a really great storage location.
+
+Now it is mounted using an FS mount point, so that means a path in the file system.
+
+Now it is Linux only and it uses the NFS protocol.
+
+So that's the network file system protocol that's used to access the file system.
+
+And because it runs on Linux only, we have mount points rather than drive letters.
+
+So remember with Windows you might have a drive letter like your D, e, F drive, Z drive and so on.
+
+In this case, because it's Linux, you have a mount point and that is just a location in the file system
+
+of the instance.
+
+If you save data to that location in the file system, it actually gets written to FS.
+
+You can also connect an on premises client in a corporate data center to an FS file system.
+
+And in that case you would want to connect a direct connect connection or at the very least a VPN.
+
+9.- CREATE AN AMAZON EFS FILESYSTEM
+Welcome to another hands on lesson.
+
+In this lesson, we're going to create an Amazon FS file system and mount it to two instances across
+
+two availability zones.
+
+Now remember that the FS file systems are mounted to Linux instances and we'll need to run some commands
+
+on Linux.
+
+The first one here is where we make a mount point.
+
+This is a directory on the Linux instance to which we will mount the file system.
+
+Then there's a couple of ways that we can install the utilities we need and mount the file system.
+
+The first is using the standard NFS client and for that we would install the NFS utils and then run
+
+this command.
+
+Now this command specifies the file system some parameters and then in red here we can see the DNS name
+
+for the file system and it gets mounted to the mount point.
+
+That means that if you write some files to this location, you will see those written to the FS file
+
+system.
+
+Now, the other way, and what we're going to do is to use the AWS fs utils for that.
+
+We install the Amazon FS utils package and then we use the Mount Helper command to actually mount the
+
+file system.
+
+And that's what we're going to do when we're ready to mount our file system.
+
+So let's head over to the console.
+
+I'm in the easy to management console and first what we're going to do is create a security group and
+
+then our instances I'm going to click on Create Security group call this one FS access and add the same
+
+into the description.
+
+It can stay in the default VPC for inbound rules.
+
+We'll need to manage our instances using SSH, and I'll need to allow that from anywhere.
+
+Now I do need to add another rule for FS, but at this point I won't be able to do it the way I want
+
+to.
+
+I'll show you what I mean.
+
+If I type NFS before the network file system, we get the port range specified.
+
+But what I want to do is I want to secure it to the security group itself and I can't see the security
+
+group when I type.
+
+SG.
+
+I can see other security groups in here, but I can't see the ID of this security group, so I can't
+
+do that one yet.
+
+What I have to do is create the security group.
+
+Then we're going to run.
+
+EDIT inbound rules, add a new inbound rule again, Type NFS protocol is correct, and then let's type
+
+SG This time we can see the group.
+
+This security group will be attached to our instances, but it will also be attached to the file system.
+
+And this rule we've just added will allow inbound traffic on the NFS port from the instances that have
+
+this security group attached.
+
+So let's click on Save Rules.
+
+That one's done.
+
+Let's go to instances and it's launched two instances.
+
+Now what I'm going to do is use the Linux to Amy so defaults there t to micro don't need a key pair.
+
+That's fine.
+
+We're going to select an existing security group, we're going to choose FS access.
+
+And the only other thing I want to do is click on, edit and select my subnet.
+
+This one will go into USSD one A and that's basically it.
+
+Let's just launch that instance.
+
+Then we're going to go back, launch a second instance, and it will have the same settings except it's
+
+going to be in US East one B So let's add the security group, come in to subnets and there's one B
+
+there.
+
+Okay, So they're in different subnets.
+
+And that's it.
+
+The instances are launching.
+
+Great.
+
+So let's go over to FS and create our file system.
+
+So I'm going to search for FS.
+
+Open it up in a new tab.
+
+And this is the console page for FS and all we need to do here is simply create a file system.
+
+We can optionally give it a name, I just call it my FS file system.
+
+We'll leave it in the default VPC the same as our instances and we'll leave the standard storage class,
+
+selected it and we'll just create our file system.
+
+There are more options if you want to customize the performance and other characteristics, but we'll
+
+just create.
+
+All right.
+
+So that is being created and that will take a couple of minutes.
+
+Now, if we click on the file system and we come in here and then go to network, what you'll see is
+
+that it's creating these mount targets in all of these different availability zones.
+
+But there's also a DNS name here.
+
+Now we're going to copy that DNS name and use it for our commands.
+
+So I have this document open.
+
+This is in the course download, which you find at the end of section one of the course.
+
+Unzip the file and then in the code Amazon FS directory you'll find this document called Amazon FS commands
+
+MD.
+
+What I need to do is delete out this DNS name here.
+
+So we should be left with just this colon and a slash and then paste in the correct one.
+
+So now I have the correct ID for my file system.
+
+So make sure your document looks like this.
+
+We'll be using this shortly.
+
+Now we're going to run these commands in order, so I'll copy the first one.
+
+Let's go to EC two.
+
+I'm going to refresh the page, so I've got my two instances and I'm going to open easy, to instance,
+
+connect for each of these instances.
+
+So just open up instance, connect for each one and we're going to run the same commands on each instance.
+
+Okay, so let's paste in this command here.
+
+This is going to run the update manager.
+
+Do the same for the second instance.
+
+While that's happening, I'm going to go and get the other command.
+
+Let's come back to the first instance.
+
+There was nothing to update, which is good.
+
+Let's just make that directory that's been done and do the same for the second instance.
+
+Then we're going to install the fs utils.
+
+So let's copy this command, go back to my first instance, paste the command that's installing very
+
+quickly, do the same for the second instance.
+
+So we're ready to mount now, but we need to do a couple of things first.
+
+So let's go back to FS.
+
+Let's refresh the page.
+
+Now you can see that the security group is default and we don't want that.
+
+We want to click on Manage because we have our own security group.
+
+This one is not going to work.
+
+Now our instances are in UX, one, A and B, So for ease, let's remove these other points.
+
+We don't need them.
+
+I'll get rid of the default security group and then I'm going to add in FS access to each of these.
+
+So now we've enabled the mount points only in the US s1a and one B availability zones and we have a
+
+security group attached and that security group will allow inbound access on the NFS port from the instances
+
+because they are in the security group.
+
+All right, let's go down and we're going to save this.
+
+And we now have the DNS name in our command.
+
+So we should be able to mount this file system.
+
+So back in the document, I'm going to copy the entire Mount Command and I've already updated my DNS
+
+name, so it is correct.
+
+Let's come back to our first instance here and I'm going to clear the screen and bring this down so
+
+you can see what's going on.
+
+Let's click on Mount.
+
+And that's done.
+
+So the fact that we don't get an error message is good news.
+
+I'll do the same here.
+
+Let's run this command.
+
+And again, we've mounted the file system.
+
+So we should be able to change directory to the FS mount point now and then create data there and we
+
+should be able to see that data from the other instance.
+
+So we have our file system mounted.
+
+Now if I change directory to the mount point, which should be in my current folder so I can change
+
+directory to FS, Mount Point and then run LHS.
+
+Of course there's nothing in there.
+
+So what I'm going to do is run sudo make directory test directory and now we have a directory and I
+
+could run sudo touch test file and then I have a file as well.
+
+Okay.
+
+So that's all I'm going to do.
+
+Just add a couple of things and hopefully when we mount the directory from the instance in the alpha
+
+availability zone, it should see the same information.
+
+So back on my second instance, I'm going to change directory to the FS Mount Point run LS and of course
+
+there are my files.
+
+So that's it.
+
+We have launched two instances and attach them to an RFS file system and we can read and write data
+
+from multiple availability zones to the same FS file system.
+
+So that's it for this lesson.
+
+What I'm going to do is I'm going to go back and I'm going to terminate my two instances.
+
+And then I'm going to also delete my FS file system so the instances are going down.
+
+Let's go back to FS, click on file systems, select the file system, choose delete, and then we just
+
+need to enter the idea of the file system, which I can just copy from here and then confirm.
+
+And that's it.
+
+That should start deleting fairly soon.
+
+Just keep an eye on it.
+
+Make sure it does.
+
+And I will see you in the next lesson.
+
+10.- AMAZON EC2 USER DATA AND METADATA
+Hi, guys. In this lesson I'm going to cover EC2 user data and metadata.
+
+These are both really important features of EC2.
+
+So firstly, let's have a look at what user data is.
+
+So let's say we go into the management console and we're going to launch an instance.
+
+Now, when we do so on the configuration page, we're able to enter some code and this can be our code.
+
+Now, don't worry, you don't need to understand this particular code here,
+
+but this particular code is actually installing a Web service.
+
+Now, the point is that you're able to run this code and it runs the first time the instance starts up.
+
+So you can configure certain things to happen through these commands on your instance
+
+when it first boots.
+
+So in this case, it's actually going to install a Web service on our EC2 instance.
+
+Now, EC2 user data is limited to 16 kilobytes.
+
+So there's a certain amount of code that you're able to run.
+
+If you're using a Windows instance, then you can run Batch scripts and PowerShell scripts as well.
+
+And what we're doing here is, as you can see, we're entering the text.
+
+You can also upload a file as well.
+
+So that's user data.
+
+Now, what is metadata?
+
+Metadata is some information about your EC2 instance, and it's available at this particular address.
+
+So this address, you can run this from a command window on your computer and it's a local address.
+
+This IP address here corresponds to your local computer.
+
+It doesn't actually connect over a network.
+
+It's just finding this information on the computer that you're actually running this on, on your EC2
+
+instance.
+
+So the path is HTTP://169.254 and then it repeats 169.254/latest/meta-data.
+
+Now, don't worry, you won't have to remember that for the exam, but it's a very useful path to know.
+
+So what do you find when you actually put in this URL?
+
+Well, this is some of the information you can return.
+
+Here we're using a command called curl, which just checks this URL.
+
+And if we just put in this path here, we get a list of information.
+
+And this is data about our instance.
+
+So we can query any of these different pieces of data and we'll find some information.
+
+So let's have a look at some examples of what you might find.
+
+Well, in this case, we're putting in the path we saw before and then we're adding local-IPv4 on the end.
+
+And that actually returns the IPv4 private IP address of this instance.
+
+And you can see it here just before the command prompt.
+
+If we run another command here, you can see this time we're asking for the public IPv4 address
+
+and it's showing us the public address.
+
+So remember the difference between user data and metadata.
+
+User data gives you the ability to run commands when the system is starting and metadata can return
+
+information about the instance that's recorded locally.
+
+And that's really about as much as you need to know for the exam.
+
+11.- ACCESSING SERVICES - ACCESS KEYS AND IAM ROLES
+There are going to be multiple situations where you need your EC2 instance to be able to connect to
+
+another service.
+
+For instance, you might want to save data to a storage service, or you might want to save information
+
+to a database.
+
+So there are a couple of ways that you can do that.
+
+The first is what we call access keys.
+
+Now access keys are configured on the EC2 instance.
+
+This is some secret information that is stored on the file system of the instance.
+
+Now the access keys are actually associated with a user account and the user account has a policy,
+
+so it has some permissions assigned to it.
+
+Now the access keys will pick up whatever permissions the policy allows that user and then the EC2 instance,
+
+using the permissions assigned to the user account is able to connect to, in this case, a storage
+
+service.
+
+So that's how that works.
+
+Now there is a bit of a downside.
+
+The downside is that the access keys are stored on the file system of the instance and it's not a very
+
+secure way of storing that information.
+
+So if the instance was compromised, it's possible an attacker could get access to that information.
+
+In the next lesson, you'll see a hands on and I'll demonstrate how accessible this information is.
+
+Now there is another way.
+
+So the other way is when we use something called an instance profile.
+
+The instance profile is a way that we can connect an Iam role to our EC2 instance.
+
+So in this case the instance has an Iam role attached to it.
+
+Thatrillionole is then assumed by the EC2 instance and the EC2 instance will gain access to whatever
+
+permissions the policy attached to the role provides and is then able to access the S3 bucket.
+
+The great thing about this is there's no credentials stored on the EC2 instance.
+
+The EC2 instance has assumed the role and has been given the permissions assigned to that role, but
+
+it doesn't actually have any credentials stored on its file system.
+
+So this can be a much more secure way of allowing your EC2 instance to access services.
+
+12.- LAUNCH AUTO SCALING WEB APPLICATION ON EC2
+In this lesson, I'm going to launch an Auto Scaling web application on Amazon EC2.
+
+I'm in the EC2 management console.
+
+And the first thing I need to do is create a launch template.
+
+So the launch template is going to specify some information about how to
+
+configure the EC2 instances that are launched by the Auto Scaling group.
+
+So I'm going to click create launch template.
+
+We're going to give it a name.
+
+I'm going to call it my EC2 web app.
+
+And then I don't need to give it a version description at this stage.
+
+Let's just scroll down and specify some information.
+
+So what I'm going to do is click on the quick start.
+
+I'm going to choose Amazon Linux.
+
+The Amazon Linux 2 AMI is selected and that's fine.
+
+We're going to leave this information as it is.
+
+For instance type I want to specify to use the T2 micro instance type.
+
+For key pair, I'm going to select the key pair that I already have in my region
+
+so MyNV-KP.
+
+If you don't have a key pair,
+
+just go back to the EC2 management console and create a key pair.
+
+Under network settings, I want to select an existing security group.
+
+I'm going to choose the web access security group which is in my VPC.
+
+Under advanced network configuration,
+
+all I want to do here is change the auto assign public IP to enable.
+
+Then let's scroll down.
+
+The storage can be left as it is. I don't need to change anything there.
+
+In advanced details at the bottom,
+
+the only thing I want to do is scroll all the way down
+
+and enter some user data.
+
+Now, in the course download which you can find at the end of section one,
+
+you'll have the code directory, EC2, and then this file EC2-user-data-web-app.shh.
+
+And all we need to do is copy all of this information to our clipboard.
+
+This will simply install HTTPD, sort of create an Apache web server.
+
+It's then going to use the instance, metadata service
+
+to find the name of the availability zone into which this instance is launched.
+
+And then it's going to add that to the index.html.
+
+So what we'll see when we go to the website is it will say
+
+this amazon EC2 instance is located in availability zone and then the name of the AZ.
+
+So back in the console we simply paste in our user data
+
+and create our launch template.
+
+So that's done. So now we can go back up to EC2,
+
+come down to the bottom,
+
+select Auto Scaling groups.
+
+We're going to create an Auto Scaling group. This one is going to be called ASG1.
+
+I'm going to find my launch template, scroll down, click on next, choose my VPC.
+
+So remember, I did choose a specific security group that's in this VPC.
+
+So I need to make sure that the security group
+
+specified in the launch template matches the VPC.
+
+So I've selected my VPC.
+
+And then I'm going to choose the public subnets, public-1A and public-1B.
+
+If I come down a little further, I can just select next again.
+
+I don't have a load balancer at this stage
+
+and I don't need to modify any settings. So let's click on next.
+
+Now for desired minimum and max capacity, for now, I'm going to leave it on one.
+
+And I'm not going to use a scaling policy at this point in time.
+
+So let's click on next.
+
+Next again. Next again.
+
+We get the summary of information and then we can create our Auto Scaling group.
+
+So that should launch a single EC2 instance.
+
+And once that instance is launched, we should be able to go
+
+to the public DNS or the public IP of that instance and we should see a web page.
+
+Now, make sure that your security group does have a rule for HTTP.
+
+So I'm going to go to my web access security group.
+
+Under inbound rules, let's just have a look.
+
+I only have RDP and SSH. So it's not going to work. So I need to edit inbound rules,
+
+add rule, and then I'm simply going to choose HTTP.
+
+Under source, I'm going to say anywhere IPv4.
+
+And then save rules.
+
+So now my rules are configured correctly.
+
+Now if we go back to Auto Scaling groups,
+
+select the group
+
+got activity,
+
+and here you can see some of the activity that's happening and
+
+at the moment it's launching a new EC2 instance.
+
+So if we go up to instances,
+
+we can see that this instance is running.
+
+Now, these two were terminated there from a previous exercise.
+
+This is the one that is just being initialized by the Auto Scaling group.
+
+So in a couple of minutes we should be able
+
+to connect to the website running on our instance.
+
+With the instance selected, I can now see lots of information about the incidents
+
+including the public IP.
+
+So I'm going to select to copy the public IP to my clipboard.
+
+Alternatively you can use the DNS.
+
+And in a new tab I'm going to enter
+
+and we can see that there is a website running on this instance
+
+and it's telling us the availability zone that the instance is running in.
+
+So that's exactly as expected.
+
+Now back in the console, what I'm going to do is just go down to Auto Scaling groups,
+
+go into ASG1, and I'm going to click on edit next to group details.
+
+And I'm going to change the desired capacity to two
+
+and the maximum to three.
+
+So that should launch another EC2 instance.
+
+If I click on update, it's going to save those changes.
+
+Now another thing you can do is use dynamic or predictive
+
+scaling policies to scale based on whether it's something dynamic such as
+
+the CPU utilization or predictive where it's going to scale because it knows
+
+when certain activity is going to happen like an increase in traffic.
+
+With dynamic, you have some options. You've got target tracking where it tries to
+
+keep the certain metric at a specific value.
+
+So for example you can say keep the CPU utilization around 50% aggregated across
+
+the instances in the Auto Scaling group.
+
+Or you can choose step
+
+where you can have different reactions to different levels of change.
+
+So if you have a small increase in traffic you launch one instance if you have a larger
+
+increase in traffic then you launch a few instances at a time.
+
+Or otherwise there's simple scaling where you simply add a certain
+
+number of capacity units or percent of the group
+
+when it's needed, so based on a specific alarm in CloudWatch.
+
+So we're not going to do that. Let's just go back to details.
+
+In fact let's go to activity.
+
+And we can see that a new instance is being launched.
+
+So that should now be launched in the console.
+
+Let's just refresh EC2. Now, we have two running instances.
+
+And that's it for this hands-on lesson.
+
+Please leave your Auto Scaling group running as we're going to be launching an
+
+Application Load Balancer in another hands on lesson
+
+and attaching it to our ASG.
+
+13.- TYPES OF ELASTIC LOAD BALANCER
+In this lesson, I'm going to cover the different types of Elastic Load Balancer available on AWS
+
+and you do need to understand for the exam which one to use for specific use cases.
+
+The first type is the Application Load Balancer, of the ALB.
+
+The ALB will listen at the request level, so it's listening at layer seven.
+
+That means the actual listener is using the HTTP or HTTPS protocol, and the ALB can route connections
+
+based on information at that level.
+
+So, for example, it supports path-based routing.
+
+That means the path in the URL can be used to determine where to send the connection.
+
+So which group of instances on the backend to send the connection to.
+
+It also supports host-based routing.
+
+That means it's checking the domain name and making a routing decision there.
+
+Query string parameter-based routing checks the query strings in the URL and will then route-based on
+
+that information.
+
+So the ALB is quite intelligent in how it can check this information and make routing decisions.
+
+The ALB supports instances, IP addresses, Lambda functions and containers as targets.
+
+Next, we have the Network Load Balancer, the NLB. This operates at the connection level, so it's
+
+more around layer four.
+
+It's using IP protocol data to make routing decisions.
+
+The NLB will listen on TCP, TLS, UDP and TCP_UDP.
+
+Both the ALB and the NLB are the newer generation of load balancers.
+
+Now that an NLB is really good for when you need ultra-high performance and extremely low latency, or
+
+if you need TLS offloading at scale.
+
+So that means it's processing the encryption for TLS connections and offloading that from your back
+
+end instances.
+
+So, if you see exam questions asking for a very low latency load balancer, it's likely to be the NLB.
+
+And then the other key piece of information is going to help you determine which type of load balancer
+
+to use
+
+out of these two is the protocol.
+
+So if you're looking for UDP or TCP or TLS, then that's going to be a Network Load Balancer. If you
+
+need to route based on information at the http or https level,
+
+that's going to be the ALB. Next
+
+we have the Classic Load Balancer, the CLB. Now
+
+you really shouldn't see this on the exam anymore.
+
+There could very occasionally be a reference to it, but it's very unlikely to be the correct answer.
+
+AWS don't really want you to be using this anymore.
+
+They'd prefer you to use an ALB or an NLB for the same sort of use cases
+
+you might have used a CLB for in the old days before the newer generations came along.
+
+The CLB performs routing at layer four and layer seven, but it doesn't have anywhere near the intelligence
+
+of the ALB or the NLB.
+
+Lastly, we have the Gateway Load Balancer, the GLB.
+
+This is very new and it has just started appearing on the exam recently, so you may see some questions.
+
+The GLB is used in front of virtual appliances such as firewalls, intrusion detection systems, intrusion
+
+prevention systems, and deep packet inspection systems.
+
+It operates on layer three and it listens for all packets on all ports.
+
+It then forwards the incoming traffic to the target group specified in listener rules. And it exchanges
+
+traffic with appliances using the GENEVE Protocol on port 6081.
+
+Now I just want to cover the ALB and the NLB side by side.
+
+For most load balancing use cases, these are going to be the ones that you're going to use, so you
+
+really need to know how to determine which one you should be using for your use case.
+
+So remember, with the OSI layer, the ALB is at layer seven and the NLB is at layer four.
+
+That means these two load balancers are using different information to make their decisions on where
+
+to forward connections.
+
+The targets type for an ALB can be an IP address, an instance, a Lambda function or a container.
+
+With the NLB it can be an IP address or an EC2 instance. For protocol listeners
+
+The ALB supports http and https. And GLB is supported through http too. The NLB listens on TCP, UDP
+
+and TLS. For private link, which we'll cover later in the VPC section
+
+there's no support for the ALB but there is for the NLB. For static IP addresses
+
+the ALB does not have them, whereas the NLB does support static IP addresses.
+
+That means the actual nodes of your load balancer that run in your subnets can have static addresses.
+
+That's good for whitelisting and firewalls and we'll cover that more
+
+later on. You get http header-based routing with the ALB but you do not with the NLB. For source IP
+
+preservation, the ALB uses x-forwarded-for.
+
+That means the information about the IP address of the client is forwarded in the x-forwarded-for
+
+header, whereas it's native in the protocol data with the NLB. For SSL termination
+
+you have load balancer terminate with the ALB. And load balancer or a target with the NLB.
+
+Let's finish off going over a few use cases. For the ALB
+
+you'd use this when you have web applications and a layer seven routing, microservices architectures such
+
+as Docker Containers and lambda targets. For the NLB, TCP and UDP based applications where you need
+
+ultra-low latency and you might need static IP addresses.
+
+It's also used with VPC endpoint services.
+
+And then lastly, for the Gateway Load Balancer, you'd use this for load balancing virtual appliances
+
+such as intrusion detection systems, intrusion prevention systems, next generation firewalls, web
+
+application firewalls, and distributed denial of service protection systems.
+
+It also integrates with Auto Scaling groups for elasticity, and you can apply network monitoring and
+
+logging for analytics.
+
+14.- ROUTING AND SESSION MANAGEMENT
+In this lesson,
+
+I'm going to cover routing and session management for the Elastic Load Balancer.
+
+So firstly we're going to look at an Application Load Balancer.
+
+Here, we have multiple subnets in different availability zones
+
+and we have our workload distributed across those subnets.
+
+Now we've actually got each of these,
+
+each of these tiers of our application perhaps in a different target group.
+
+So we've got TG1, TG2, and TG3.
+
+Now they're used by the ALB
+
+to route requests to the registered instances within each of the target groups.
+
+So we have an application load balancer here
+
+and we can configure rules on the listener.
+
+Now ALBs will listen on HTTP or HTTPs.
+
+So let's say we have a client here.
+
+And the client is trying to connect to our application and they've typed in the URL
+
+example.com/specials.
+
+Now it reaches the load balancer
+
+and the load balancer sends this specific request to TG1.
+
+So why does it do that?
+
+Well, we've got a couple of options for how we distribute
+
+or route our traffic to our different target groups.
+
+Requests can be routed based on the path in the URL.
+
+So in this case the path has been used and slash specials has been used
+
+by the load balancer to determine where to route the traffic.
+
+So it's using the path in the URL.
+
+Maybe the user now clicks on another link and they go to orders.
+
+Now orders might be processed by a different part of the application.
+
+So now we have the connection going through to target group two.
+
+So as I mentioned that this is where we're using the path in the URL
+
+and that's called path-based routing with the ALB.
+
+And it's one of several different ways we can intelligently route our traffic.
+
+Another way we can do it is by using the host header information.
+
+So here the customer is connected to members.example.com,
+
+and the load balancer can now see members in the host header
+
+and it knows that that means it should route the traffic
+
+to target group three instead.
+
+Here the request is being routed based on the host field in the HTTP header.
+
+And this is known as host-based routing.
+
+With our ALB, the targets can be EC2 instances,
+
+IP addresses, Lambda functions, or containers.
+
+Next we have the Network Load Balancer.
+
+So again, let's say we have workloads across multiple subnets.
+
+And in this example we have two target groups.
+
+We've got a Network Load Balancer and we've got elastic IP addresses attached to each
+
+of our subnets for our load balancer to use.
+
+So NLB nodes can have elastic IPs in each subnet.
+
+So that's a static public IP address that your NLB can
+
+use and that can be white listed in your client's firewalls.
+
+NLBs can listen on multiple protocols, TCP TLS, UDP, or TCP_UDP.
+
+So here again we have a client who wants to connect to an application.
+
+They've typed in example.com.
+
+And the Network Load Balancer has routed the request to target group one.
+
+If the client then connects to example.com again,
+
+but this time they're using the colon :8080 to indicate
+
+that they want to connect to the port 8080
+
+rather than the default port for the protocol.
+
+So the default ports for the protocol would be 443 for HTTPS,
+
+but now we're indicating that we want to connect 8080.
+
+The NLB can't do host-based or path-based routing like the ALB.
+
+But we can create different listeners.
+
+And each of those will require a unique port for routing.
+
+Now the connection can get routed to target group two
+
+if the connection is made with a different port number.
+
+So here we're using the IP protocol data in the connection request to route the
+
+connection to a different target group.
+
+Targets can be EC2 instances or IP addresses.
+
+Targets can also be outside of a VPC such as on-premises data centers.
+
+Now what about session state?
+
+So session state is where we want to store some information somewhere about a session
+
+that's taking place on one of our applications like an application running on EC2.
+
+So that will help us if a connection needs to be made again
+
+and we don't want to have to recreate that information, so we want it to be there.
+
+So we want some session state data.
+
+Maybe it's authentication information.
+
+Maybe if it's a gaming application,
+
+it's information about the current gaming session.
+
+So here we have multiple instances.
+
+We have a client connecting to a load balancer
+
+and getting sent to one of the instances.
+
+Now what happens here is
+
+information about the session is getting stored in a DynamoDB table.
+
+DynamoDB is a great option for storing session state data.
+
+Elasticache is another one that sometimes comes up in exam questions
+
+in relation to session state data.
+
+So what happens now is if the EC2 instance fails then the connection needs
+
+to be made again and it gets made to a different EC2 instance.
+
+But that instance can go and pull the cached information that's in
+
+the DynamoDB table so that session state data doesn't get lost.
+
+And in this case maybe it's authentication information
+
+so the user does not get asked to re-authenticate
+
+when they're connecting to the new instance.
+
+So hopefully they won't even notice that anything happened.
+
+Elasticache as I mentioned is another
+
+popular solution for storing session state data.
+
+We then have something called sticky sessions.
+
+What this is, is when our connection goes through to a certain EC2 instance,
+
+a cookie is generated and client bound to the instance for a specific lifetime.
+
+So how long the cookie actually lives in their cache.
+
+Session state data such as authentication details may be
+
+stored locally here or they could also get stored
+
+in something like DynamoDB so we don't lose that information.
+
+But for some reason we might want to make sure that
+
+if the client reconnects they come back to this same instance.
+
+So that's what the cookie will tell them to do.
+
+Now, if the instance fails, then a connection will need to be made to a new instance
+
+and now the client is directed to that instance
+
+and obviously the session state data is going to be lost.
+
+So you could use it with a session store like DynamoDB
+
+if you want to make sure that information is available.
+
+So that's it for this lesson. I will see you in the next one.
+
+15.- DEPLOY AN APPLICATION LOAD BALANCER
+Welcome to another hands-on lesson.
+
+In this one we're going to launch an application load balancer
+
+and attach it to our Auto Scaling group.
+
+In the EC2 management console we already have our Auto Scaling group ASG1.
+
+And it has a desired capacity of two and there are actually two running instances.
+
+Now if I click on instances and if I
+
+select one of these instances and click on networking,
+
+we can see the subnet is public-1B.
+
+Let's have a look at the other instance.
+
+Go to networking.
+
+And it's in public-1A.
+
+Great, that's exactly what I wanted.
+
+Next, I'm going to create a target group for our load balancer.
+
+So I'm going to select crate target group.
+
+Now, the target type for this is going to be instances
+
+because we already have our EC2 instances.
+
+Alternatively, you can use IP addresses, you can direct traffic to Lambda functions
+
+and even other ALBs.
+
+Now I'm going to call this TG1.
+
+The protocol is going to be HTTP, the port is going to be 80.
+
+So this is where traffic is going to be directed to from the load balancer.
+
+And of course we have a web application, a simple Apache website running on Port 80.
+
+I need to make sure my VPC is correct.
+
+I'm using this VPC for the Auto Scaling group and the instances.
+
+So I need to have the same one for my load balancer.
+
+I'm going to leave the protocol version.
+
+For health check, we've got either HTTP or HTTPS.
+
+HTTP is fine. We don't have a certificate on the instance so we can't use HTTPS.
+
+We can click next.
+
+And you can see that there are instances. I could directly add the instances
+
+to the target group but I don't want to do that.
+
+So let's just click on create target group.
+
+So that is the target group created.
+
+Next, we're going to create the load balancer.
+
+So let's create a load balancer.
+
+Now I'm going to choose an Application Load Balancer. Click on create.
+
+I'm going to call it ALB 1.
+
+It's going to be an internet-facing load balancer
+
+so we can connect to it from the internet using IPv4.
+
+I don't want to use dual stack which means you get IPv4 and six.
+
+Again, I want to make sure that my VPC is correctly selected.
+
+And I'm going to select us-east-1A and 1B.
+
+And in those two I want to make sure that I've got my public subnets, so public-1A.
+
+In this case it's chosen the wrong one. So public-1B.
+
+For security groups, I don't want to use this one.
+
+I want to select my web access security group which already has HTTP enabled.
+
+For listeners and routing,
+
+we're going to create a listener which listens on port 80, that's HTTP
+
+and then it forwards traffic to target group one, and remember
+
+target group one also then is listening on port 80.
+
+So the traffic comes straight through to the web application running on that port.
+
+Now we don't need a global accelerator,
+
+let's just come down and select create load balancer.
+
+So that's the load balancer being created.
+
+And you can see it's in a provisioning status.
+
+But we haven't actually connected the instances to the target group.
+
+We've connected the target group to the load balancer
+
+but the Auto Scaling group is currently detached.
+
+So what I want to do there is go to Auto Scaling groups,
+
+click on ASG1,
+
+scroll down and under load balancing, click on edit,
+
+choose Application, Network or Gateway Load Balancers,
+
+and then choose my target group.
+
+So by doing it this way what happens is any time a new instance is launched
+
+into the Auto Scaling group, it will be picked up by the
+
+load balancer and load balancing will include that instance.
+
+So let's select update.
+
+And that's done.
+
+So now it's just a matter of waiting for a few minutes for it all to start working.
+
+Now if I go across to target groups,
+
+select TG1, we can see that we have our two instances
+
+and the health status is initial.
+
+And that means that target registration is in progress.
+
+So those instances will be registered and they should turn to healthy very soon.
+
+So it just took a couple of minutes and now the health status has changed to healthy.
+
+So our instances are registered.
+
+Now if your instances don't become healthy, if they become unhealthy then
+
+there's something wrong in your configuration so if you do follow
+
+all of my steps exactly, you will get the same result.
+
+But if you don't then it must mean that you've missed something.
+
+So one of the things to check is your security groups to make sure
+
+you have your security groups set up to allow port 80.
+
+We use the same security group for the instances and the load balancer.
+
+So make sure you're using a security group that allows inbound
+
+traffic from any source to port 80.
+
+The other thing you can do is actually go
+
+and try and connect directly to your instance using its public iP address.
+
+So if I copy the public IP
+
+and try and connect, I should see direct access to the instance.
+
+If that doesn't work then you've done something wrong.
+
+You need to make sure that the user data run correctly,
+
+your instance has public connectivity to the internet and is reachable,
+
+and of course you have the security groups set up.
+
+So ours looks good.
+
+So let's go down to load balancers.
+
+And what I'm going to do is I'll just copy the DNS name of the load balancer,
+
+go to a new tab in my browser,
+
+put that in, and we can see that we get a result.
+
+Now if I just hit refresh, we should get load balanced between the instances
+
+in the different availability zones.
+
+So that's all working.
+
+So that's it for this lesson.
+
+Now, we have finished with the load balancer and the Auto Scaling group.
+
+So what we're going to do is simply terminate the load balancer
+
+by clicking on delete, click on yes delete.
+
+Now don't delete the target group.
+
+We are going to use that again. So you can leave the target group.
+
+There's no cost to having a target group.
+
+The other thing we're going to do is to terminate the Auto Scaling group.
+
+So we can select our auto scaling group, click on delete.
+
+We need to type delete to confirm and then delete.
+
+And that will delete the Auto Scaling group and the EC2 instances.
+
+So that's it for this lesson. I'll see you in the next one.
+
+16.- CREATE ASG AND ALB USING THE AWS CLI
+Hi guys, in this lesson we're going to use the Command Line Interface to create
+
+an Auto Scaling group and an Application Load Balancer.
+
+Now it does rely on the fact that you performed the
+
+lessons using the management console earlier on because we're going to use the same
+
+launch template and target group that we created earlier.
+
+In the course download,
+
+you'll find the EC2 directory and you'll find this file, create-asg-alb-cli.md.
+
+Now, in here you're going to find the commands that we need to run.
+
+So what we need to do is make sure that the information in here is correct
+
+before we run these commands.
+
+So the first one is to create the Auto Scaling group.
+
+So we use the command AWS Auto Scaling group, create Auto Scaling group.
+
+We give it a name. I'm going to call mine ASG2.
+
+We give it a launch template.
+
+I already called my launch template My EC2 Web App.
+
+So I'm going to use the same name here.
+
+I want the minimum size to be one, max to be three,
+
+and the desired capacity to be two.
+
+And I want to use two availability zones, us-east-1A and us-east-1B.
+
+Now for those availability zones we need to specify the zone identifiers.
+
+That's the subnet IDs.
+
+So let's make sure those are correct.
+
+In the VPC management console, I'm going to go to subnets,
+
+choose public-1A,
+
+and then copy the subnet ID.
+
+Come back,
+
+paste that in, mine was already correct and then do the same for public-1B.
+
+So just make sure you got the correct subnets IDs.
+
+Mine's already done so there shouldn't be any change there.
+
+That's all ready to go.
+
+So now I can copy this whole command to my clipboard,
+
+and on a command prompt, I'm going to run this command.
+
+You know how to use profiles. We did that earlier on in this course.
+
+And what I'm going to use is a profile which is called cloud labs.
+
+And that profile has access keys associated with my user account.
+
+So make sure you have your CLI set up with your user credentials,
+
+not the ones we used for Paul earlier on.
+
+And if you need to either delete the credentials file and recreate it by
+
+running AWS Configure or just create a profile for your specific user name.
+
+So let's try and run enter and see if this works.
+
+And we didn't get any response in terms of error messages so it looks like it worked.
+
+Let's go to the EC2 management console,
+
+go to Auto Scaling groups,
+
+give it a refresh.
+
+And there we go. We've got the ASG2.
+
+And we can see the desired capacity of two.
+
+So we should find that means that our instances are going to be launched.
+
+Let's refresh EC2.
+
+And we've got two pending instances here.
+
+So that worked.
+
+Next we need to create the load balancer, create a listener and then attach TG1,
+
+the target group one to ASG2.
+
+So the first one is the create load balancer command.
+
+Note that this is AWS ELBV2 create load balancer.
+
+We're going to call it ALB2.
+
+Now, I've already added my subnet IDs.
+
+So, you can copy yours down from the first command
+
+and then --security groups.
+
+And I've specified my security group ID.
+
+For that, you can go back to the management console
+
+and simply copy the security group ID
+
+for the web access security group that you're using.
+
+So that's all set up.
+
+Let's copy this to my clipboard.
+
+I'm going to paste that in.
+
+Again, I'm going to use my profile, hit enter,
+
+and that should create the load balancer.
+
+And we can see some information about what's being created.
+
+Back in the EC2 management console, we should now be able to go down to load balancers
+
+and if we give this a refresh we should soon see our load balancer.
+
+I need to remove this filter.
+
+And there we go. We've got ALB2 and that's being created.
+
+It's in a provisioning state.
+
+The next command is to create the listener, so we need a listener
+
+and we need to specify the ports that we're going to listen on the
+
+protocol and also what we're going to do for forwarding.
+
+So in this case, we create a listener using AWS ELBV2 create listener.
+
+And then we have --load-balancer-ARN.
+
+And this is the ARN of our load balancer.
+
+So simply come back to the management console, copy the ARN
+
+for your load balancer, come back here.
+
+I need to update mine.
+
+So let's paste this in.
+
+Now I've got my ARN correctly set.
+
+The protocol is HTTP the port is 80
+
+and the default actions are to forward to a target group
+
+And we need to get the ARN for our target group.
+
+So let's find our target group.
+
+Copy the ARN,
+
+and then paste it in.
+
+So let's go here to target group ARN equals, remove this,
+
+paste it in, and we've got our command.
+
+So let's create our listener.
+
+I'll paste that onto my command line and again specify my profile
+
+and hit enter.
+
+So that's done.
+
+So if we go back to the management console,
+
+we should be able to see this configuration.
+
+Let's look at our load balancer, click on listeners,
+
+and that's the listener we just created.
+
+That's forwarding to target group one.
+
+Now the only thing to do now is we need to attach
+
+the target group to the load balancer.
+
+For that, we're using the AWS Auto Scaling attach low balancer target groups.
+
+The Auto Scaling group name is ASG2.
+
+And then the target group ARN
+
+is the ARN of our target group, so I'm going to copy that from up here
+
+and then just override that information.
+
+So now I have the correct ARN for my target group.
+
+Copy to the clipboard, paste it in, add my profile information,
+
+and hit enter.
+
+And I think that's worked.
+
+So now if we go back to our Auto Scaling group,
+
+choose ASG2, scroll down
+
+and we can see that we have the target group one attached to the load balancer.
+
+So let's go and grab the ARN
+
+for our load balancer, in fact the DNS name.
+
+Let's copy the DNS name, go to a new tab in my browser and hit enter.
+
+And there we go.
+
+Just as before we now have instances running.
+
+So that's how we can do this all using the Command Line Interface.
+
+If you want to delete your load balancer, an auto scaling group
+
+using the command line, you can do that using these commands here.
+
+I do need my load balancer at ARN.
+
+So let's take that from here.
+
+Copy and then I'll paste it into this command.
+
+And lastly we only need the ASG2 name.
+
+So it just requires the name of the Auto Scaling group.
+
+So first let's delete our load balancer.
+
+And that's done.
+
+And then I'm going to delete my Auto Scaling group as well.
+
+And that's done.
+
+So now if we come back to the EC2 management console, refresh,
+
+load balancer has gone.
+
+And if I go down to Auto Scaling groups, we can already see
+
+that it's in a deleting state.
+
+So that should remove the load balancer,
+
+the Auto Scaling Group and the EC2 instances.

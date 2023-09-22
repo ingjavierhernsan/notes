@@ -1,0 +1,459 @@
+1.- What is a project?
+2.- Why project management is important?
+3.- The 5 stages of teh project life cycle
+
+1.- What is a project?
+So let's first start by defining what is a project?
+
+The project is a set of activities or actions carried out by a project team in order to meet a need.
+
+According to the PMBOK, a project is a temporary endeavor undertaken to create a unique project, service or result.
+
+We can summarize this with the Triangle of project management, also called the Iron Triangle, with the two ends at the bottom, which are the cost and the time to accomplish the scope of the project.
+
+The scoop contains all the things that needs to be achieved during the project.
+
+So this iron triangle represents the three constraints of project with which the project manager will have to work.
+
+We say that we are in project mode when the activity is unique.
+
+So it has a specific need or a specific goal, a beginning and an end, and sometimes a fixed budget.
+
+These are activities that are distinguished from the ongoing activities of a business.
+
+For example, the production of parts in a factory is not a project, but a regular activity.
+
+We switch to project mode when we have a batch of specific parts to produce, for example.
+
+This requires a specific organization with a feasibility study.
+
+There is also a start date and end date.
+
+A number of parts to produce a budget and so on.
+
+So we have a single objective, specific need, a beginning and end and a budget.
+
+Sometimes some companies do just that.
+
+They manage all their activities in project mode.
+
+If we are talking about an architectural firm that deals with the construction of houses for individuals, each house is considered as a separate project.
+
+But the baker in the corner of your street does not make his bread everyday in Project mode.
+
+This is mass production.
+
+We speak of process mode.
+
+So most of the time, project mode is not meant to be repeated.
+
+It is for this reason that it is said to be unique.
+
+If we take the example of the architectural firm, even if the houses look the same, the terrain may be different, depending on the city,
+
+the climate may be different.
+
+The constitution of the soil may be different and so on.
+
+All these elements make the construction of each house unique.
+
+Hence the need to carry them out in project mode.
+
+The foundations will be more or less deep.
+
+Maybe, they need a soil survey.
+
+Perhaps we will need to modify the structure of a wall to support the load of a sloping ground.
+
+The second characteristic of a project is that the project meets a specific need or has specific objectives for the project.
+
+The aim to produce a limited series of parts for a particular client.
+
+Let me give you an example of a company where it used to work.
+
+The company was specialized in the manufacture of parts for the automobile.
+
+Sometimes an Italian sports car brand occasionally contact them to manufacture parts in limited numbers
+
+as cars were manufactured in limited numbers.
+
+So you see there was a specific need.
+
+These pieces were unique.
+
+Their number was limited.
+
+Hence, the need to manage them in project mode.
+
+You had to do a feasibility study.
+
+You had to design the parts, test them, test the strengths of the material, produce samples.
+
+Test the samples, start the production and so on.
+
+But be aware that a project can take other forms.
+
+Sometimes the product may have the objective of reducing production costs or launch a new prototype on the market.
+
+To test an idea or a project may aim to seize an opportunity.
+
+So they have a specific goal to accomplish.
+
+Then the project have a start date and an end date.
+
+They are limited in time.
+
+The baker makes his breath every day as long as his business is going.
+
+He will continue to make his bread.
+
+Unlike it, a product has a start date and an end date, and we close the project at the end.
+
+It's important to underline that: all projects need to be closed.
+
+And the last point that characterizes a project is the budget.
+
+When we talk about the budget, we think of a sum of money, but it's not always the case.
+
+Sometimes the budget can be translated in resources, whether human or material resources.
+
+I remember I saw a project where there were no budgets in financial terms allocated to the project,
+
+but the project manager has access to a number of human resources.
+
+The project was strategic and the project manager had carte blanche to make this project successful
+
+with the number of people allocated to the project, because this project was strategic for the company,
+
+and the investors weren't looking at how much money to spend.
+
+They wanted to break into the market and they want they were willing to put their hands in their pocket
+
+to make this project a success.
+
+Here the constraint was the number of people working on the project.
+
+But I admit that this was rather rare.
+
+Most of the time, we know the budget allocated to a project in advance. So now that we are clear on the characteristic of the project, we will see what project management is in the next video.
+
+2.- Why project management is important?
+
+Why project management is important?
+What is it used for?
+
+That's an important question.
+
+What is the goal of project management?
+Why do we need a project manager?
+
+Sometimes it's tempting to go headlong into execution without an organization.
+
+But that would be a mistake.
+
+The role of a project manager is to orchestrate the transformation of an idea into a plan and then into a reality.
+
+The projects are often complex.
+
+They involve several teams, several core businesses, even several organizations.
+
+It quickly becomes essential to have someone to make all these beautiful people work together and work together effectively.
+
+Project managers are not just there to make pretty graphs, send emails and organize meetings.
+
+They are essential in the life of a business.
+
+They are actively involved in finding the best approaches to execute their plan.
+
+They challenge.
+They negotiate.
+
+They sometimes even coach the teams to better communicate and collaborate.
+
+The project manager is also responsible for ensuring that the deadlines are met.
+
+He or she makes sure that the costs are not exceeded and he keeps an eye on the risks.
+
+Project manager plays a strategic role.
+
+When a project is managed properly, it allows each team member to focus on their work without distraction.
+
+It also allows the company to save money by avoiding delays or unpleasant surprises.
+
+The project manager also allows for better communication between the different actors of the project, whether it is communication between members of different teams within the same organization or communication with stakeholders.
+
+To do all of this, you need to master the fundamentals of project management.
+
+First, you need to know the different phases of the lifecycle of a project.
+
+And this is exactly what we will see in the next video.
+
+3.- The 5 stages of teh project life cycle
+Let's go into more detail.
+
+The Project Management Institute, PMI, tells us that projects follow milestones.
+
+These are initiating, planning, executing, monitoring and control and closing during the initiation phase.
+
+The objective of the project is clarified.
+
+Is it a problem to be solved or an opportunity to be seized?
+
+What are we looking to accomplish specifically?
+
+We also choose the best approach to achieve this goal.
+
+We define the scope.
+
+We establish the tasks to be accomplished.
+
+One can rely on the results of a feasibility study.
+
+So at the end of this step, we know the objective of the project and the expected end result.
+
+At this stage, several documents can be produced, such as the specifications or the project description.
+
+It is a document that details the project.
+
+Precisely.
+
+We define the acceptance criteria.
+
+That is the necessary conditions that allow the project or each stage of the project to be considered as complete.
+
+Roles and responsibilities are defined, and sometimes we also write a document that brings together the result of the feasibility study.
+
+It should be noted that these actions and these documents depend on each organization and each project.
+
+Sometimes we use them, sometimes we use only part of them, and sometimes we need other documents that I'm not listed here.
+
+For example, if your organization must comply with certain specific laws or applicable standards, these documents must be gathered during the initiation phase.
+
+During the planning phase, we define the deadline's different dates, budget resources and all the necessary things to complete the project.
+
+We plan execution of the project in order to achieve the goals that were defined during the initiation phase.
+
+We also establish a list of risks that will threaten the project and a plan to eliminate or mitigate them.
+
+At the end of this phase, we usually produce different documents, such as the project plan, the Gantt chart with different dates and dependencies, specifications and test plans and so on.
+
+Then comes the execution phase, which is during this phase that the different members of the project team are brought together to make the presentations and start working.
+
+We call it the kickoff meeting.
+
+So during this meeting, we agreed on the rules and tools that we use in the project.
+
+Also, we also clarified what is expected from the team.
+
+It is during the execution phase that the development and the testing are done and we train the different team members if necessary.
+
+During this phase, all the document necessary for the execution of the work are produced.
+
+We can think of a document that described the technical design, the implementation plan, training documents and so on.
+
+The purpose of the monitoring and control phase is to ensure that the team is on track to achieve the goal, according to the plan.
+
+It allows corrective actions to be put in place to rectify the situation, if necessary, as a project manager.
+
+You can follow the progress of the work by having regular meeting with the team members or by having the different team leaders to send you a report at the end of each week, especially if you are managing a project with multiple teams.
+
+You will receive the report from each team.
+
+You can then consolidate this report and share it with the stakeholders.
+
+It should be noted that the control and monitoring phase does not come after the execution, but the
+
+two are done in parallel.
+
+We control and monitor the project during its execution to ensure that the plan is followed.
+
+And finally, the closing phase finalizes the project.
+
+It is during this phase that the customer accepts the end of the project.
+
+They sign a document certifying that they have received the product or the service.
+
+This document states that they are satisfied and the project can be closed.
+
+If the project is internal to the organization.
+
+Just an email may be sufficient to close the project.
+
+But this phase is important.
+
+It is also during this phase, this closing phase that we learn the lessons from the project, which has just ended.
+
+We archive what needs to be archived.
+
+We help the various resources who worked on the project to transition to their next activities.
+
+We are also closing the various budget lines that we were open specifically for the project. At the end
+
+A summary document is produced.
+
+This is a document that brings together the lessons learned and the final document signed by the client to close the project.
+
+Sometimes it is the project manager who manages this part, but sometimes it is the sales team who is in charge and take care of finalizing the signature with the client.
+
+It all depends on your organization and the different role.
+
+There is the important detail that I would like to highlight to you before moving from initiation to planning there is a GO / NO GO meeting.
+
+This is a meeting where the sponsor, with the help of the project manager, present the result of the initiation phase and request the agreement from management or stakeholders to take the next step.
+
+Sometimes the project manager is not involved in the initiation phase if he or she is involved.
+
+He can participate, but technically he is not responsible for that part.
+
+But in all scenarios, the project manager will be involved from the planning phase. After the planning phase.
+
+It is necessary to have the GO of the stakeholders before moving to the execution phase.
+
+If ever we realize that the project is not holding up to the benefits are less important than the costs, then there is still time to stop the project, especially knowing that the execution phase is the most expensive.
+
+Thise GO / NOGO meetings should not be neglected.
+
+They are of the utmost importance, and we do the same thing before entering the closing space.
+
+Each time we make sure to have the agreement of the sponsors or stakeholders before moving on.
+
+I would like to say two words about the difference between two different approaches to project management.
+
+The traditional waterfall and so-called agile.
+
+In both approaches, they are five steps that remain the same.
+
+What changes is the order in which these steps are performed.
+
+In the traditional approach known as waterfall, the different phases of a project are carried out one after the other in a sequential fashion.
+
+One phase must end before the next begin.
+
+This is why we talk about the waterfall cycle. Again
+
+The monitoring and control phase is conducted during the execution phase.
+
+The project manager controls the work at the same time as it is carried out to correct the situation if necessary.
+
+We use this waterfall method when we are in a domain with little complexity.
+
+When you are familiar with these kinds of projects and when the scope and the things to be done during the project are clear.
+
+So we use waterfall project management when we are on a familiar ground, and then sometimes we don't have a choice.
+
+We must use the waterfall method for the construction of a house, for instance.
+
+We have to go through these stages one after the other.
+
+We plan everything in advance.
+
+We call on various entrepreneurs and trades.
+
+We construct the house.
+
+We check that everything is OK before giving the keys to the future owners.
+
+In the agile approach, the steps are executed in cyclical ways.
+
+We take an iterative and incremental approach because we don't know exactly what the final product will look like, or maybe we are not sure which is the best technology to use during the project.
+
+So we discover things as we move forward in the project.
+
+This is the case in IT project, for instance, after the initiation phase, several planning, execution, control and closing cycles are carried out before the project is completed.
+
+These are called iterations.
+
+For example, let's say you are an IT project manager and a restaurant owner comes to see you to develop a mobile application for here for his or her customers.
+
+He has an idea, but he's not entirely sure what the customer wants.
+
+So he knows that this is an opportunity to attract new customers and increase his turnover.
+
+But he is not sure what content will be available on the application.
+
+So he expresses the needs, but believes that this needs may evolve depending on the responses of his customers.
+
+After the launch of the first version of the application.
+
+So he has a budget for the project.
+
+He knows the approximate delivery date.
+
+He would like to have, but he's flexible on the scope of the project.
+
+The various application modules will be developed as the project progresses.
+
+Agile is ideal for these kind of scenario.
+
+In this case, we use an incremental approach.
+
+We plan a model.
+
+We develop it.
+
+We test it.
+
+We show it to the client for feedback.
+
+And we move on to the next one.
+
+We plan it.
+
+We develop it, we test it and so on.
+
+Now that we are clear on the five stages of the lifecycle of a project, I would like to come back to
+
+the importance of these steps, because you may wonder.
+
+But why go to so much trouble?
+
+Why complicate your life, which so many steps?
+
+The first thing I would like to say that is this approach allows us to optimize resources.
+
+Organizations are made up of resources.
+
+They can be human, financial or material.
+
+The goal of a project management, of a project manager is to organize the work of the individuals involved
+
+in the project, but also to maximize the use of the material and financial resources.
+
+If nothing is done to organize the work, it risks becoming anarchy.
+
+So we channel the energy of the organization into a specific purpose and in a structured way.
+
+We do it to to avoid mistakes.
+
+We go to great lengths to do all these phases of organizing, initiating, planning, monitoring and
+
+controlling to avoid mistakes, because people went out and they're pressured.
+
+They can be trapped by their emotions and make bad decisions.
+
+So the goal of these organizations is to limit as much as possible the errors due to human judgment.
+
+How do we do that?
+
+By taking the time to complete the tasks in each phase before moving to the next one.
+
+We therefore avoid precipitation.
+
+We do not go straight to straight to work.
+
+We frame it to keep it under control.
+
+Since we control, we reduce uncertainty, which we look for in organizations is to have consistent and predictable results.
+
+This is the dream of any product manager or business owner.
+
+We all dream of having an organization that allows us to say when we do that, we get that.
+
+And product management helps us reduce uncertainties as much as possible.
+
+It does not eliminate them, but helps reduce them.
+
+It also helps anticipate risks.
+
+Now that we are clear on the different phases of the projects and their benefits, I suggest we analyze each phase of the project before talking about the different methodologies that exist.
+

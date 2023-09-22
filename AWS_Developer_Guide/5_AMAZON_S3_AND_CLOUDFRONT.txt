@@ -1,0 +1,2812 @@
+1.- INTRODUCTION
+2.- AMAZON S3 OVERVIEW
+3.- AMAZON S3 STORAGE CLASSES
+4.- CREATE AMANZON S3 BUCKET
+5.- POLICIES, BUCKET POLICIES AND ACLS
+6.- ACCESS CONTROL LIST (ACLS)
+7.- BUCKET AND USER POLICY PRACTICE
+8.- MFA WITH AMAZON S3
+9.- S3 ENCRYPTION
+10.- ENFORCE ENCRYPTION
+11.- S3 EVENT NOTIFICATIONS
+12.- S3 PRESIGNED URLS
+13.- SERVER ACCESS LOGGING
+14.- CROSS-ORIGIN RESOURCE SHARING (CORS)
+15.- AMAZON S3 PERFORMANCE OPTIMIZATION
+16.- AMAZON CLOUDFRONT ORIGINS AND DISTRIBUTIONS
+17.- CLOUDFRONT SIGNED URLS AND OAI
+18.- CLOUDFRONT WITH S3 STATIC WEBSITE AND OAI
+19.- AMAZON ROUTE 53 DNS
+
+1.- INTRODUCTION
+The amazon Simple storage service,
+
+amazon S three is an object based storage system and it features
+
+in many different AWS exams is one of the fundamental AWS technologies
+
+now.
+
+It does feature quite a lot on the DVA exam,
+
+so there's quite a few particular topics
+
+that are very important to understand for the
+
+exam and that's all gonna be covered in lots of detail in this section.
+
+So quite a lot of coverage of amazon S three. Then we look at cloudfront as well.
+
+So Cloudfront is a content delivery network at CDN.
+
+That means it caches media assets like video,
+
+files and images and all sorts of different types of files around
+
+the world to get them closer to end users for better performance.
+
+So we're going to be looking at Cloudfront in a
+
+little bit of detail to understand how it works,
+
+what the benefits are and what settings you need to understand for the exam.
+
+So that's it for now, enjoy the section, I'll see you in the next lesson.
+
+2.- AMAZON S3 OVERVIEW
+Hi, guys. In this lesson, you're going to learn about the Amazon Simple Storage Service or Amazon
+
+S3.
+
+Now we have used Amazon S3 a little bit in this course already where I showed you how to create a bucket
+
+and upload an object.
+
+But I wasn't really aimed at teaching you S3 at that point, so we went through it fairly quickly.
+
+In this section, you're going to learn about S3 in a lot of detail. Now, S3 is what's called
+
+an object-based storage system.
+
+So let's have a look at what this is.
+
+With Amazon S3,
+
+we have something called a bucket. A bucket is a container. And inside that container we put our objects.
+
+Our objects
+
+are files. So, things like a word document, a PDF, an MP4 movie or a JPEG image, or any other
+
+file type.
+
+You can store files in S3 as objects within a bucket.
+
+Each object is a single file and you can have many, many objects.
+
+In fact, you can have millions of objects in a bucket.
+
+S3 is extremely scalable, so you really can store huge quantities of data on Amazon S3, and it scales
+
+seamlessly.
+
+There's nothing you need to do in order to be able to add more files to your storage.
+
+How do we access the objects in our buckets?
+
+Well, with an object-based storage system, we actually use a URL.
+
+The URL will look something like this.
+
+Access is using the HTTPS protocol, so it's secure.
+
+And as you can see in this URL, there's a few of the words are in red, and that's where we have variables.
+
+So, bucket would be the name of your bucket.
+
+AWS-region would be the region in which you created the bucket.
+
+And then on the end, we have slash and then key.
+
+And the key is actually the name of the file. S3 is a key value store.
+
+So, the key is the name of the file and the value is the data of the file itself.
+
+There are actually a couple of different formats for the URL, so it's worth understanding
+
+it's not always going to look the same.
+
+So, as I mentioned, we're using the secure version of the HTTP protocol. And an object-based storage
+
+system is accessed using HTTP over a REST API.
+
+So, REST stands for Representational State Transfer and API is Application Programming Interface.
+
+Essentially, a REST API over HTTP allows you to use the HTTP methods to manipulate your data. So, you're
+
+actually issuing
+
+GET requests to read data from S3 or PUT requests or POST requests to actually upload files to S3.
+
+You can select files, delete files, etc. And all this is done programmatically using an API.
+
+Let's go over a few key facts.
+
+You can store any file type in S3.
+
+Your files can be anywhere from zero bytes up to a maximum individual file size of five terabytes.
+
+There's unlimited storage available. So, as long as your file size is within those limits, then you
+
+can store an unlimited number of those files on S3.
+
+S3 is a universal namespace.
+
+So, bucket names must be unique globally.
+
+So, as you've seen, we actually access our buckets using a URL,
+
+and as you know, no two domains on the internet can share the same name or the same URL. That would
+
+be impossible.
+
+So, every URL has to be unique on the internet.
+
+Therefore, the bucket name must be unique globally because we're going to use it from anywhere on the
+
+internet.
+
+Now, even though the bucket name must be unique globally, you actually create your bucket within a
+
+region.
+
+So, the actual physical data is stored within a single AWS region. And it will never leave that region
+
+unless you specifically configure it to do so.
+
+You can replicate your data to another region, but you have to manually set that up. In all other circumstances,
+
+your data will always sit within a single region.
+
+It's therefore a best practice that you create your buckets closer to where the users are, who are
+
+going to access the data.
+
+And that just means that you're geographically or physically closer, and that means less latency to
+
+access the files in your buckets.
+
+There's no hierarchy for objects within a bucket.
+
+It's essentially a flat namespace.
+
+So just like if you took a lot of sand and throw it into a bucket, there's no hierarchy.
+
+It's just a whole load of individual grains of sand in a bucket. And that's essentially what your objects
+
+are in S3.
+
+Now there is a way that you can mimic a structure. And that's by using a folder, which really just
+
+is an extra part of the key, which makes it look like you have a structure in your bucket.
+
+So, we'll look at that a bit later on.
+
+S3 delivers what's called strong read-after-write consistency.
+
+Now this is a change.
+
+This was implemented towards the end of 2020.
+
+Before that, you only had eventual consistency
+
+when you actually over-wrote something. That means if you uploaded a new version of a file and somebody
+
+immediately tried to read that file, they might get the old version or they might get the new version,
+
+it really depends on whether it's replicated.
+
+That's no longer the case. But it's unclear at this point in time which questions you'll see on the
+
+exam.
+
+Let's have a look at the structure and a bit more detail.
+
+So, we have our bucket and we have a new URL with which we can access that bucket.
+
+We then have our files within the bucket.
+
+So here we have a spreadsheet and we can access that using this URL. And on the end of /orders.xlsx.
+
+So that is the key or the name of the file.
+
+The value is the actual data of that file itself.
+
+We might then have a word document and another word document here as well.
+
+And each of those will then also have a URL with a key on the end.
+
+But what you might notice here is that we have an extra level, so we have this Project+Alpha/
+
+and then the sales proposal.
+
+Now this is a folder.
+
+Now, as I mentioned, that is actually part of the key.
+
+It looks like a folder. And in the management console it will look like a folder and it looks like you've
+
+created a hierarchy.
+
+But really, all the objects are at the same level, but you've mimicked a folder structure instead.
+
+So, you can think of a folder as a shared prefix for grouping your objects together.
+
+A few more facts about buckets, folders, and objects.
+
+Folders can be created within folders to mimic an even deeper hierarchy.
+
+But buckets can never be created inside another bucket.
+
+A bucket is not a hierarchical structure.
+
+You just create a bucket and then you can potentially create your own folder structure within that or
+
+just throw your object straight into it.
+
+But you can never have one bucket in another bucket.
+
+Each object consists of a key, and that's the name of the object,
+
+so, the actual file name itself, a version ID, a value.
+
+So remember, this is a key value store.
+
+So, at a basic level, you have the key, the name of the object or the file, and the value, which is
+
+the actual data.
+
+Then you have metadata, and subresources. We'll cover some of these a bit later on.
+
+And also, access control information. We'll go into quite a bit detail about how you can implement access
+
+control with S3.
+
+So how do we access Amazon S3?
+
+Well, as you've seen, it uses a public URL, so a URL that you can access over the internet.
+
+And that's because it has a public endpoint, it's a public service.
+
+It's not within a VPC.
+
+It's in the AWS public space and it's always accessed via the internet.
+
+So, you might have an internet client with some kind of web browser-based application accessing S3
+
+over the internet.
+
+You might have an application that uses the REST API to talk to Amazon S3 programmatically.
+
+You can also use the CLI as well.
+
+Now, what about accessing S3 from a VPC?
+
+Let's say you have EC2 instances in public and private subnets.
+
+Well, as you know, we have Internet gateways that we can attach to our VPC. And that's great for
+
+the instance in the public subnet because it can use the Internet gateway to talk to S3 across
+
+the internet using the S3 public endpoint.
+
+Now, there is another way that we can access S3, and this is useful for clients, especially in
+
+private subnets. And that's using an S3 gateway endpoint.
+
+What this does is it creates a private connection. So, we're actually able to use private addresses
+
+to access S3. Really important exam tips to remember that. If you ever see a question that relates
+
+to accessing Amazon S3 where you want to avoid the internet or you want to use private addresses,
+
+S3 gateway endpoints which are a type of VPC endpoint are the most likely answer.
+
+So that's it for the overview. And we've got lots more to get on with. So,
+
+I'll see you in the next lesson.
+
+3.- AMAZON S3 STORAGE CLASSES
+Amazon S3 has several different storage classes and it's really important to understand these storage
+
+classes so we can determine the best place to store our data for our specific use case.
+
+Now, before we get into the actual storage classes themselves, I want to bring to your attention a
+
+couple of important concepts.
+
+That is durability and availability.
+
+So firstly, what is durability?
+
+Durability is protection against data loss and data corruption.
+
+Now S3 offers what's called 11 nines of durability.
+
+So 99 point and then another nine nines.
+
+Now that is a really high level of durability, and it means that there's a very low chance that AWS
+
+is going to lose your data.
+
+In fact, if you store 10 million objects, you can expect to lose one object every 10,000 years.
+
+Achieves this by having a lot of different copies of your data spread out across different availability
+
+zones.
+
+So your data is protected in terms of durability from loss.
+
+Now what about availability?
+
+Durability means that data is not lost.
+
+It doesn't mean that you can actually access it.
+
+So availability is a measurement of the amount of time the data is available to you to use so you can
+
+actually access it.
+
+It's expressed again as a percent of time per year, for example, 99.99%.
+
+So when you look at the storage classes, you'll see that durability and availability are a couple of
+
+the characteristics of each storage class that you might need to think about when you determine which
+
+one to use.
+
+So here we go.
+
+These are the storage classes.
+
+As you can see, the top two elements here is designed for durability and designed for availability.
+
+Now, the good news from a durability perspective is there's no decisions to make.
+
+Every single one of these storage classes offers 11 nines of durability, so your data is always safe
+
+against loss.
+
+However, for availability see, you can see it varies from 99.5% for S3, one zone iAa up to four nines,
+
+99.99%, which you get with multiple storage classes.
+
+So one Zone iAa is the lowest availability and that's because your data is stored in one availability
+
+zone.
+
+Now there's obviously different costs associated with each of these storage tiers.
+
+So if, for example, the data that you store on S3 is not that important to you, you're okay to lose
+
+it, you need it, but maybe you've got another copy of it somewhere else, then one zone IA could be
+
+a good way to lower the cost.
+
+We then have the availability SLA and then availability zones with zones.
+
+You can see one zone iAa only has one zone, that's one availability zone and then all of the others
+
+have three availability zones, hence they have higher availability.
+
+SLAs Now, as you can see, there's also a minimum capacity charge per object for some storage classes.
+
+So that means that each object you store will be charged at a minimum of 128kB.
+
+If you use, for example, the standard IA the AIA stands for infrequently accessed.
+
+There's also, in some cases a minimum storage duration and there can be a retrieval fee as well.
+
+The four storage classes on the left hand side here, these relate to data that you need to be able
+
+to access fairly quickly.
+
+So for example, we have S3 standard.
+
+If you just upload an object and you don't specify where you want to store it, it will automatically
+
+go into S3 Standard Intelligent-tiering will automatically move data between different storage classes
+
+based on how you're actually utilizing that data to try and optimize it for cost and performance.
+
+Standard.
+
+IIa is for infrequently accessed data.
+
+Now you do get a lower cost for storing your data, but now you're going to pay for the amount of data
+
+you retrieve and there's a minimum storage duration and a minimum capacity charge per object.
+
+So you've got to account for those.
+
+And then as I mentioned before, one zone iAa means you're lowering the amount of availability you get,
+
+but again, you're dropping the price point.
+
+Another characteristic of the different classes is first byte latency.
+
+As you can see, it's milliseconds for several storage classes.
+
+Now, on the right hand side here we have the free glacier storage classes.
+
+Glacier is used for archival data.
+
+This is where you want to store your data at a much lower cost for longer time frames.
+
+Now Glacier Instant retrieval, which is a fairly new storage class, also gives you milliseconds of
+
+first byte latency, but you've got to store your data there for a minimum of 90 days and you have a
+
+higher minimum capacity charge per object than the other two classes of Glacier.
+
+Now deep archive is the one where you're really storing your data for a long period of time.
+
+If you have, for example, compliance reasons why you need to store your data for several years, but
+
+you're very unlikely to need to access it regularly, then you would put it into.
+
+Glacier deep archive and it will be very cost effective with flexible retrieval.
+
+Here the price point is lower than instant retrieval, but not as low as deep archive.
+
+But you can access your data in somewhere between minutes and hours, whereas with deep archive it takes
+
+hours to retrieve your information.
+
+4.- CREATE AMANZON S3 BUCKET
+Hi guys, this is the first of several hands-on lessons for Amazon S3.
+
+And in this lesson we're simply going to go and have a look at how we can create
+
+an Amazon S3 bucket using the management console.
+
+I'm in the management console for Amazon S3 and here you'll
+
+be able to see your buckets if you already have some.
+
+Now we don't actually have any in this particular account.
+
+So what I'm going to do is click on create buckets.
+
+Now, the first thing we need to do is give it a bucket name.
+
+Now you'll notice that with S3, this is a global service so you can't choose a region
+
+and that's because the namespace for Amazon S3 uses DNS and is therefore global.
+
+So just like you can only have one Amazon.com,
+
+you can only have one bucket name globally.
+
+It uses DNS.
+
+So we have to create a bucket name that's completely unique around the world.
+
+There's no other S3 buckets with that specific name.
+
+So for example, I'm going to call mine DCT Cloud S3 HOL,
+
+and hopefully that is unique around the world.
+
+Now if you want to use a similar name,
+
+you can always just add on some random characters at the end.
+
+Now, even though it is a global namespace,
+
+you do actually select where your data is going to be stored.
+
+So you can select the region and your data will be stored within that region only.
+
+Now your data is never replicated outside of that region
+
+unless you specifically enable that to happen.
+
+So here, I'm going to choose us-east-1.
+
+If you want to you can choose another bucket and it will actually copy the settings
+
+from that bucket across.
+
+In this case we're not going to do that.
+
+Next there's objects ownership.
+
+This is specifying whether ACLs, Access Control Lists
+
+are enabled or not for this bucket.
+
+It's a relatively new setting.
+
+So this didn't used to be here, but it's been here for several months now.
+
+What I want to do is actually enable ACLs. They are useful for some specific use cases
+
+and we will be doing a hands-on where we use ACLs a bit later on.
+
+So I'm going to leave those enabled with bucket owner preferred, the default option.
+
+And then let's go down a little bit further.
+
+Now, AWS is trying to enforce default security.
+
+So one of the things they do is they block all public access by default.
+
+So if for example you wanted the contents of your bucket to be available
+
+for anyone in the world who is not authenticated,
+
+then you would need to disable this setting.
+
+And that way you would enable the ability
+
+to have your contents of your buckets publicly accessible.
+
+And then you can actually use the ACLs or other settings to
+
+make sure that they are available.
+
+And that's something we'll look at later on.
+
+For now, I'm going to leave the default setting.
+
+Bucket versioning is a feature where it will keep
+
+multiple variants of the files that you upload to S3.
+
+So for example, if you uploaded a word document
+
+and then you made some modifications to that document,
+
+saved it with the same file name and then uploaded that to S3,
+
+you would now actually have two versions.
+
+So you could go back to the older version if you needed to.
+
+You can enable tags and you can also specify encryption for your bucket.
+
+We're going to look at that as well later on.
+
+Now I'm happy with these settings. So I'm just going to create my bucket.
+
+So my bucket has been successfully created.
+
+You can see the name, you can see the region,
+
+and some other information.
+
+So what I'm going to do now is just select my bucket and let's go in
+
+and have a look at some of the settings.
+
+The first screen we come to is objects.
+
+This is where you can actually upload and view the objects in your bucket.
+
+So objects can be any type of file can be video files can be photos,
+
+can be word documents and much, much more.
+
+So we can easily upload our objects here.
+
+If I click on upload
+
+and then choose a file,
+
+so let's choose this beach.jpg.
+
+Click on upload.
+
+So the file is now ready for upload.
+
+Now we can specify the ACL permissions on this if we want to.
+
+We'll look at that in another lesson.
+
+And also if we click on properties here,
+
+this is where you can specify the storage class
+
+that your object is going to belong to.
+
+The default is standard and that's available through three availability zones.
+
+And of course if you want to lower the cost you can use things like One Zone-IA
+
+Or Standard I A.
+
+I'll just leave this on standard.
+
+You can then specify the encryption settings for this particular object.
+
+We can also enable checksums, tags, and metadata.
+
+Now I'm just going to click on upload.
+
+And that has succeeded.
+
+And so now we have our jpeg file in the objects pane here.
+
+Next we've got properties.
+
+Here you can see things like the ARN for your bucket
+
+if you need to copy that to your clipboard so you can use it somewhere.
+
+You can change the versioning status,
+
+add tags for the bucket rather than the objects which we just saw a moment ago.
+
+You can specify the default encryption,
+
+intelligent-tiering archive configs, server access logging, CloudTrail data events,
+
+event notifications, and Amazon EventBridge.
+
+So you can actually send information about what's
+
+happening in your bucket to these services.
+
+We'll look at event notifications a bit later on in this section.
+
+You can also enable transfer acceleration and that improves
+
+the upload speeds for your objects, but it does come at a cost.
+
+We've got object lock, requester pays
+
+and also static website hosting. Again, we'll look at that later on in this section.
+
+Back at the top here, we then have the permissions pane. And in here
+
+you can change that block public access settings, add your bucket policies.
+
+We'll definitely look at those shortly as well.
+
+You can modify the object ownership settings, ACLs,
+
+and enable cross origin resource sharing.
+
+There's also metrics about the data in your bucket.
+
+There's a few things that we can do on the management page
+
+including specifying our lifecycle rules if we want to specify rules for when
+
+our data is moved between different storage classes.
+
+There are replication rules for replicating our data
+
+between buckets in the same or different regions,
+
+and inventory configurations as well.
+
+And lastly, there are access points.
+
+So you can actually create your own named network endpoints for accessing S3.
+
+So that's a quick overview of creating buckets and looking
+
+at these settings that we can apply to our buckets.
+
+And in subsequent lessons we're going to do some more hands-on working with S3.
+
+5.- POLICIES, BUCKET POLICIES AND ACLS
+There are a few ways that we can control access to our buckets and the objects that we store within
+
+our S3 buckets.
+
+So in this lesson I'm going to walk you through Iam policies, bucket policies and access control lists.
+
+And then in the next couple of lessons we'll do hands on to see these in action as well.
+
+So firstly, we have policies created in the identity and access management service.
+
+Now these are identity based policies, which means that they get associated with principles like users
+
+and roles.
+
+So with an Iam policy, we're directly applying the permissions that we want to assign to a principal,
+
+to that principal, or we might be applying them to a group by attaching a policy to a group and then
+
+adding a user into the group.
+
+We can specify what actions are allowed on what resources.
+
+So we can say that you're allowed to perform specific actions on a specific bucket, for example.
+
+So with Iam policies, these are attached to users or groups or roles.
+
+And remember, with a group you attach the policy to the group and then you add the user to the group
+
+and they will get the permissions assigned to that permissions policy.
+
+Iam policies are written in Json using the AWS access policy language and the principal element is not
+
+required in the policy.
+
+So when you see one of these Json snippets of code, if it doesn't have a principal element in it,
+
+then that means that it could be an Iam policy that's used for S3 rather than a bucket policy.
+
+So next we have S3 bucket policies and these are resource based policies.
+
+So with a bucket policy, you're attaching it directly to an S3 bucket.
+
+They can only be attached to Amazon S3 buckets and they also use the same access policy language.
+
+So it's still Json.
+
+Looks very much like the policies created at the identity level, but it's on a resource instead.
+
+So we might have an S3 bucket.
+
+We apply our bucket policy to it and a bucket policy might look something like this.
+
+So note that there is a principal element here which specifies the specific user we want to assign these
+
+permissions to.
+
+There's also a resource and it specifies the bucket name.
+
+And of course there's an action which in this case is to the effect is allow and the action is any S3
+
+action.
+
+So a wildcard for S3 actions.
+
+So in this case, Paul will be able to put an object into that S3 bucket because he's allowed through
+
+the resource based policy.
+
+Lastly, we have access control lists.
+
+These are really a legacy access control mechanism that predates identity and access Management generally
+
+recommends that you try and use bucket policies or Iam policies rather than using ACLs.
+
+They can be attached to a bucket or directly to an object.
+
+So a bucket policy is always at the bucket level, whereas an ACL can be specified at the object level
+
+as well.
+
+There are limited options for grants and permissions.
+
+We'll see this in the hands on.
+
+It's not as powerful as using the access policy language.
+
+So when might you use these different access control mechanisms?
+
+You might use Iam policies for the following use cases where you need to control access to AWS services
+
+other than S3, because you can then specify whatever permissions you want to whatever AWS service as
+
+well as the S3 buckets.
+
+You have numerous S3 buckets, each with different permissions requirements, so that means you're centrally
+
+controlling access to lots of different buckets using a single Iam policy, which is, you know, centralizing
+
+the management and hopefully simplifying it.
+
+You might just prefer to keep access control policies in the Im environment rather than using resource
+
+based policies which can be a bit harder to track.
+
+So you might want to use bucket policies if you want a simple way to grant Cross-account access to S3
+
+without using Iam roles, you can do that quite easily in a bucket policy.
+
+Your Iam policies might be reaching the size limits.
+
+There is a limit on the size of an Iam policy, so that might force you to use a bucket policy or you
+
+might just prefer to keep your access control policies in the S3 environment and that could be down
+
+to separation of control within your organization.
+
+It's important to understand the authorization process, so let's work through the logic.
+
+The decision will always start at a deny, and then it evaluates the policies and looks for explicit
+
+denies.
+
+If there is an explicit deny, then that's the end.
+
+The final decision is deny.
+
+Next, if there isn't an explicit deny, we look for any allows.
+
+If there is an allow, then the decision is to allow.
+
+That's an explicit allow.
+
+If there isn't one, then the decision is deny.
+
+So that's basically the process for how authorization works.
+
+6.- ACCESS CONTROL LIST (ACLS)
+Hi guys, In this lesson, we're going to work with Access Control Lists.
+
+I'm back in the S3 management console.
+
+And we already created this bucket before.
+
+Now in my bucket, I have this file, it's a jpeg image.
+
+Now if I select the image, we'll see that I have an object URL.
+
+Now let's see what happens if I try to go to that object URL.
+
+So I'm just going to paste it into a web page here.
+
+And what you'll see is we get this access denied error message.
+
+So we can't actually access that object.
+
+Now, one of the ways that we can access the object is if we update the ACL.
+
+Now, ACLs are configured in a couple of places.
+
+So firstly, if we go to permissions for the bucket, so now I'm at the bucket level,
+
+and we scroll down, now, note, we do have block public access on.
+
+But if you scroll down a little bit further, you'll see here,
+
+we've got Access Control Lists.
+
+Now, let's click on edit.
+
+And you can see the settings you can apply.
+
+Now there's only a few grantees, so you have an option of applying
+
+Access Control List permissions to the bucket owner,
+
+to everyone, so public access,
+
+to authenticated users group, so that's anyone with an AWS account who's logged in,
+
+and the S3 log delivery group and also other accounts.
+
+So you can add a grantee and specify the canonical idea of another account.
+
+And that means anyone coming from that
+
+account will have whatever permissions you apply.
+
+So these are the settings. Now it's not a huge amount.
+
+I know sometimes in the documentation refers to how ACLs are very granular.
+
+But of course this is nothing like as granular
+
+as using bucket policies or user policies.
+
+So when you apply a bucket policy you have all the power
+
+of using JSON code and all the various different options we can configure
+
+such as configuring whether we're allowing people access based on the IP address,
+
+they're coming from, that kind of thing.
+
+So you get a lot more granularity with bucket policies than you do with ACLs.
+
+So with an ACL, we might want to for example, allow public access.
+
+So here we can say well, for objects I'm going to enable list access.
+
+If you want people to be able to see the bucket ACL, you can enable read here.
+
+Now note the other options are actually grayed out.
+
+Now, the console is warning us that by configuring these settings,
+
+anyone in the world will be able to access these objects.
+
+I'm okay with that. So I'm going to click I understand.
+
+So let's see what happens when I try and save my changes.
+
+I opened this up so I need to remove that. And let's try and save those changes.
+
+Now I'm not able to.
+
+And the reason for this
+
+is because we still have that block public access setting on.
+
+So it's not going to allow me to make these changes. So let's cancel out there.
+
+Click on edit under block public access.
+
+Deselect this option, click on save.
+
+We need to confirm.
+
+And those settings were applied.
+
+And now we can go back to the ACL.
+
+Click on list for everyone,
+
+accept it, and click on save changes and now it works.
+
+So we've done that. Does that mean that we can now come back and access our object?
+
+Let's refresh.
+
+And no it doesn't. We still have an access denied.
+
+So we've enabled that setting at the bucket level,
+
+but what we haven't done is we haven't enabled
+
+it actually at the object level as well.
+
+So if I click back on this object and go to permissions,
+
+you'll see that here there are no permissions for public access.
+
+So if I want to enable public access, I need to enable read here.
+
+Again, I need to confirm it.
+
+Come down, click on save changes.
+
+Now let's go back to our objects,
+
+click on refresh.
+
+And this time we get a nice image.
+
+So that's how we can work with ACL. So key things to remember are ACLs
+
+they're not particularly granular as you can
+
+see there's just a few different grantees.
+
+It's different at the object level versus the bucket level.
+
+But you only have a few different options.
+
+So you can use these for certain use cases such as enabling public access.
+
+They're really good for that.
+
+They're also quite good for enabling cross account access.
+
+The other thing to remember is that they are different between the object level
+
+and the bucket level.
+
+So sometimes you have to specify the settings in multiple places.
+
+Okay, so that's it for this lesson and I'll see you in the next one.
+
+7.- BUCKET AND USER POLICY PRACTICE
+In this lesson, we're going to work with user policies and bucket policies
+
+to control access to Amazon S3.
+
+Now, there are a few things you need to do for this particular lesson.
+
+So we already have this bucket we created before.
+
+Now, what I am going to do is go back to permissions, click on edit,
+
+and I'm going to restore the block all public access.
+
+So I don't actually want any public access to this bucket.
+
+Let's click on confirm.
+
+That's done.
+
+If I come back to objects, we have our objects here.
+
+And I go to permissions.
+
+What we'll find is now that we've done that, it's removed
+
+that ACL that allowed read access. So that's great.
+
+So let's come back and what I'm going to do is go back up to the bucket level
+
+and I'm going to create a couple of folders.
+
+One is going to be called confidential.
+
+Let's create that folder.
+
+Create one more folder.
+
+And this one will be called department.
+
+And let's create that folder.
+
+So now we have these two folders and one image.
+
+So next I want to go back to the management console,
+
+go to users,
+
+we've got the second account called Paul.
+
+And I just want to make sure that Paul doesn't have any permission.
+
+So we don't have any groups assigned to Paul
+
+and we don't have any policies applied to Paul. So that's great.
+
+And you'll need to go and log in as Paul in a separate browser window.
+
+So use a private window so that you can still stay logged in as yourself as well.
+
+So I'm logged in as Paul.
+
+And if I click on S3,
+
+what we should find is that we don't have any permissions.
+
+That's exactly what we should expect.
+
+Now, you'll find this file in your course, downloads so go to the code directory,
+
+Amazon S3 and then user policies and bucket policies.
+
+Now this first policy statement here
+
+simply allows the action S3 list all my buckets
+
+and it uses this wild card, so this is any S3 bucket.
+
+So let's just copy this code to our clipboard.
+
+And back where I'm logged in as myself, under Paul's account
+
+I'm going to add an in-line policy.
+
+Go to JSON.
+
+I'm going to copy over the top of this code,
+
+paste my code in,
+
+click on review.
+
+We'll give it a name,
+
+and then create the policy.
+
+So that's done.
+
+Now let's go back to where we logged in as Paul.
+
+Here, I'm going to simply click refresh.
+
+and now we can actually see the bucket.
+
+But it's still saying insufficient permissions so we can
+
+list it but we can't really do anything else.
+
+If I click on the bucket name,
+
+I can't see any of the objects including the folders inside the bucket.
+
+So back in my JSON file, what I'm going to do now is use this second user policy.
+
+So this one allows us to see the root level bucket items.
+
+Now, we do need to add something in here, so we need to add in the bucket name.
+
+So let's go back and get the ARN of our bucket.
+
+So back in S3, let's click on properties next to our bucket,
+
+copy the ARN.
+
+And then in my policy here I'm just going to paste it over the top here.
+
+So now I have that policy configured.
+
+So I'm going to copy that to my clipboard.
+
+And back in IAM,
+
+what I'm going to do is just click on this policy, expand, edit,
+
+go to JSON, and then we'll copy the code over the top.
+
+So this policy is going to allow us to list all the buckets in the account.
+
+So, with the wild card for the resource
+
+and then it's going to allow us to list
+
+the contents of the bucket for this specific bucket.
+
+So let's review this policy.
+
+Click on save.
+
+Come back to where Paul's logged in.
+
+I'm going to refresh.
+
+Just give it a couple of refreshes
+
+and now I can actually see the contents of the bucket.
+
+Now, we don't have anything in here yet, but if I go in I can't find anything.
+
+So let's go back and what I'm going to do, under S3,
+
+I am actually going to add some content into those folders.
+
+So let's go to confidential.
+
+I'm going to upload,
+
+add files, add my confidential report,
+
+upload.
+
+Let's go back to the other folders and that's department.
+
+Upload.
+
+I'm going to add another file.
+
+And this one is going to be just the company goals.
+
+So let's upload that document.
+
+And we now have some files. Now, that won't make any difference to Paul.
+
+He still won't be able to see anything because there aren't any permissions to do so.
+
+So back in our JSON file, what we're now going to do
+
+is we're going to enable Paul to be able to view the department folder contents.
+
+So now we're going to need to get the ARN again.
+
+So let's go up and I've already got it here.
+
+So I'm just going to copy this ARN.
+
+We've got a couple of places to put this first.
+
+We need to put it in here.
+
+So this is the list bucket, it's the same statement as before.
+
+And then we also need it in here, this is the new statement that we're adding in now.
+
+So this is going to allow the list bucket
+
+for the specific resource which is the ARN of the bucket and then the department
+
+folder and the contents, the /* means the contents of that folder.
+
+So let's copy this user policy.
+
+And I'm going to edit the policy for Paul again.
+
+It's going to JSON.
+
+Paste it in,
+
+review,
+
+and save and you get the odd warning here and there but it should work as expected.
+
+So let's come back to Paul.
+
+And Paul should now be able to see the contents of the department folder and he can.
+
+Now, though Paul can see in this folder is he able to actually download
+
+anything from the folder?
+
+So let's try and download this file.
+
+And we get an access denied.
+
+Now what about uploading? Can Paul upload?
+
+Let's try and add a file at the beach.JPEG.
+
+Click on upload.
+
+And again, we get an access denied.
+
+So let's close that out
+
+and let's go and enable those permissions for Paul.
+
+So back in the JSON file, we have another user policy here.
+
+What I'm going to do is just first update my ARN.
+
+There's a few places to do this.
+
+That's the first one.
+
+Then there's this one here which allows us access to
+
+the department folder contents to be able to list those contents.
+
+And then we have this new statement here and I'm going to copy
+
+over the top of the ARN making sure that I leave /department/*.
+
+Now here we've got the S3 get object and S3 put objects api actions.
+
+So those should allow us to retrieve, so download and also upload objects.
+
+So I've copied my code.
+
+And let's edit this policy again.
+
+Click on JSON.
+
+Paste it in,
+
+review and save.
+
+So coming back to where Paul's logged in, let's try and download this file.
+
+And that worked, that happened on another screen.
+
+So you can't see it but that did download successfully.
+
+And now let's try and upload an object.
+
+So let's add files. Trying to add the same image file as before.
+
+Click on upload.
+
+And that worked successfully.
+
+The next policy is a bucket policy.
+
+So what this will do is grant access to Paul to list the confidential folder
+
+and we're going to use it with policy two above.
+
+So this is going to show you that you can use a combination
+
+of bucket and user policies.
+
+So firstly, let's go back and get the user policy number two.
+
+So back at the top here, let's grab this policy. It's already configured for us.
+
+And I'm going to go back in and edit this policy.
+
+Save the policy.
+
+And of course now
+
+Paul will have access to view the bucket
+
+but won't be able to see anything in the confidential folder.
+
+Next we need the actual bucket policy here.
+
+And so what we need to do is copy over the bucket name here.
+
+And we also need Paul's ARN.
+
+So back in IAM, I'm going to copy the ARN for Paul's user account
+
+and then paste that in here.
+
+Then let's copy the code.
+
+And this is going to be a bucket policy.
+
+So back in S3, let's go up to the bucket level,
+
+go to permissions, and let's add a bucket policy, so we click on edit right here.
+
+Remove all this code,
+
+paste this code in,
+
+and make sure that you've got the ARNs correct.
+
+And then save changes.
+
+Now let's go back to Paul
+
+And let's see if Paul can actually see the objects in the confidential folder.
+
+And that all works.
+
+So that's just a simple demonstration of using user policies to provide access to S3
+
+and also bucket policies.
+
+And of course we can use them in combination as well.
+
+So I hope that worked well for you. I will see you in the next lesson.
+
+8.- MFA WITH AMAZON S3
+There are a couple of ways we can use Multi-Factor Authentication with Amazon S3. So, Multi-Factor Authentication
+
+means you have a second factor of authentication above and beyond your password.
+
+So you have a username and password and then you have to supply something else.
+
+And that something else is typically a code that's generated by either a physical device like a token
+
+generating key card or it's actually an app on your phone like Google Authenticator.
+
+So, the first one is Multi-Factor Authentication Delete. This simply adds a requirement for a second factor
+
+of authentication when performing certain operations. That is, changing the versioning state of a bucket
+
+and permanently deleting an object version.
+
+It's important for the exam to remember those two specific operations. And those are the operations
+
+for which the extra requirement for MFA will be enforced.
+
+When you use MFA Delete, the x-amz-mfa requests that it gets included in the requests for those
+
+specific operations.
+
+The second factor of authentication is typically a code that's generated by a hardware device or software
+
+program. And the image here is from Google Authenticator.
+
+Now it does require versioning to be enabled on the bucket.
+
+Versioning can be enabled by bucket owners,
+
+the AWS account that created the bucket, or authorized IAM users. MFA Delete can only be enabled by
+
+the bucket's owner, so that's an important distinction to remember.
+
+The next use of MFA is something called MFA Protected API Access.
+
+This is used to enforce another factor of authentication when accessing AWS resources,
+
+not just this S3, other resources as well using the API or the CLI. It's enforced using the AWS
+
+MultiFactorAuthAge key in a bucket policy.
+
+So you might have a bucket policy that looks like this.
+
+What this does is it denies any principal, any S3 action on a specific resource in this case.
+
+But it could be, you know, broadly across all S3 buckets as well.
+
+And the condition is if the AWS Multi-Factor authentication age true is not set if it's null. And that
+
+particular attribute will be included in your request if you have authenticated using MFA, if you haven't,
+
+then it's going to deny the access.
+
+Now, if you log in to the console with MFA, but then you issue a command via the CLI or the API,
+
+it doesn't matter.
+
+The MFA from the console is completely separate from this.
+
+What this means is you actually have to supply a token from an MFA device to the CLI or API to get
+
+your temporary security credentials, and then you go and issue your API request to S3
+
+and that information gets included. So you must be authenticated with MFA at the command line or the
+
+API rather than through the console.
+
+So I hope that was useful and I'll see you in the next lesson.
+
+9.- S3 ENCRYPTION
+Welcome to another lesson in this one
+
+We're going to cover Amazon S3 encryption with encryption on S3
+
+There's a few different options.
+
+Firstly, we have what's called server side encryption with S3 manage keys known as
+
+SSE-S3. Here, the keys are managed by AWS using a
+
+256 bit encryption.
+
+And
+
+the encryption and decryption takes place on the AWS side within the S3 service.
+
+So if you're a user and you upload and objects, when you upload that object,
+
+it's secured in transit using TLS, but then it's secured in S3 at rest by
+
+AWS encrypting it as it's actually written to the discs.
+
+If you then download it, it's decrypted on the S3 side.
+
+But then it's encrypted in transit using TLS.
+
+Another option is server side encryption with
+
+AWS KMS manage keys, SSE
+
+KMS.
+
+So here we're using the key management service. The keys are managed by KMS.
+
+They can be
+
+Aws managed keys or customer managed KMS keys.
+
+Again, the encryption and decryption is taking place in S3.
+
+Next, we have server side encryption with client provided keys
+
+known as
+
+SSE-C
+
+We still have the encryption decryption taking place in S3 here,
+
+but the keys are managed on the client side,
+
+they're not stored on
+
+AWS
+
+at all.
+
+Lastly, we have client side encryption here, we have client manage keys,
+
+they're not stored on
+
+AWS at all, but you can use a KMS key as well. Here
+
+The difference is that the encryption and decryption
+
+is taking place on the client side.
+
+OK.
+
+So you have some kind of application that
+
+is performing the encryption and the decryption on the
+
+client side, not in AWS,
+
+Aws will just see the encrypted objects and it
+
+has no way of decrypting them for you all
+
+Amazon S3 buckets have encryption configured by default. Now,
+
+that's the default option.
+
+It wasn't always like that you used to have to choose to turn on encryption.
+
+But now this is the default setting. All new
+
+object uploads to S3 are automatically encrypted and
+
+there's no additional cost and there's no impact
+
+on the performance objects are automatically encrypted by
+
+using server side encryption with S3 manage keys.
+
+That's the default. Of course, you can change that
+
+If you want to, to encrypt existing unencrypted objects,
+
+you can use S3 batch operations.
+
+So if you were using S3 before the default encryption option was implemented,
+
+then you can encrypt those existing unencrypted objects.
+
+You can also encrypt existing objects using the copy objects,
+
+API operation or the copy objects,
+
+AWS
+
+CLI command.
+
+You can also use bucket policies to enforce the encryption settings that
+
+you want this particular one enforces encryption using SSE KMS.
+
+We can also enforce encryption
+
+using a bucket policy.
+
+So for example, we might want to force the use of SSE KMS rather than SSE S3.
+
+This policy would do that.
+
+So here we have a deny for the put objects API action, we can specify our bucket name.
+
+And then there's a condition that says that the
+
+string not equals S3 X AM Z server side encryption
+
+AWS KMS.
+
+So if KMS is not present in the put request as it is in this one here, then
+
+the bucket policy will deny access.
+
+10.- ENFORCE ENCRYPTION
+In this lesson we're going to look at how we can use a bucket policy
+
+in order to enforce encryption for objects that are uploaded to the bucket.
+
+Now, we're going to use this policy here.
+
+And I've already copied the ARN of my bucket to my clipboard
+
+and I'm going to paste that in and make sure that the /* is still on the end.
+
+So just do that and then you can copy this code to your clipboard.
+
+And back in S3, I'm going to go to permissions,
+
+come down to where my bucket policy is, click on edit,
+
+and we're going to override this policy here.
+
+This policy is going to deny all principals
+
+the S3 PUT objects API action, so you can't upload objects
+
+to this resource so this bucket and any object within the bucket.
+
+And there's a condition in the condition is that this value is null.
+
+Now this value is XMZ server-side encryption true.
+
+Now if that is specified, that means the object is going to be encrypted.
+
+If it's null then you're trying to upload an object that isn't encrypted.
+
+And in that case this policy will apply and you'll be denied.
+
+So let's save those changes.
+
+Come back to objects,
+
+click on upload,
+
+add files.
+
+Let's try uploading this mountain image. And if we come down to properties,
+
+this is where we can specify encryption if we want to.
+
+So let's try not specifying encryption.
+
+And what happens?
+
+Well, it fails. So we can't upload that object.
+
+Now, we can also run commands. So we can run these commands.
+
+What I'm going to do is copy the bucket name to my clipboard,
+
+paste it in here where it says your bucket name.
+
+And now we have this command.
+
+Now we need to specify our own file name, so mine is called mountain.jpg.
+
+And then I can copy this command to my clipboard.
+
+So this command is essentially trying to do exactly
+
+the same as we just did through the console.
+
+So if I come to a location here where I have this file,
+
+and I'm going to try and run this command with my profile specified.
+
+And of course, we get an access denied just as before.
+
+The next command we can run to try and actually get around this issue
+
+is using the AWS S3 API CLI.
+
+And then we can specify service side encryption using the command line.
+
+Now, I need to copy the name of my file into two locations here for the body
+
+and for the key.
+
+So let's paste that one in.
+
+Then I need to copy my bucket name
+
+and put that here next to the --bucket.
+
+Now I can copy this entire command.
+
+Let's paste that in. I'm going to specify my profile information.
+
+And let's try and upload this file.
+
+And this time it succeeds.
+
+So now we know that the S3 bucket policy is enforcing encryption and this is
+
+how we can actually ensure that our objects are encrypted using the command line.
+
+Now back in the console, we could also achieve this by adding a file.
+
+Let's add a different file this time.
+
+Click on upload.
+
+And under properties,
+
+I'm going to scroll down.
+
+I'm going to specify an encryption key and I'll
+
+just use the Amazon S3 managed keys option
+
+and then upload.
+
+And again that's going to work.
+
+Now another thing you can do to make this a bit easier is go to properties,
+
+and let's enable default encryption.
+
+So now I'm going to specify enable.
+
+Default encryption is going to be using S3 managed keys.
+
+Let's save those changes.
+
+So now we actually have the default encryption specified,
+
+but we also do have this bucket policy so let's remove our bucket policy.
+
+I just need to delete this policy
+
+because that's going to enforce us to set certain settings for encryption.
+
+So I've deleted the bucket policy.
+
+We have enabled default encryption.
+
+Now let's see what happens if I try and upload a file without specifying
+
+any encryption information.
+
+So I'm going to upload this file. Let's go to properties.
+
+Let's make sure that we have not specified encryption settings.
+
+And then let's click on upload.
+
+And this time it does succeed despite the fact that we didn't actually
+
+enable any encryption settings. And if we click on the file here,
+
+we can see the information relating to this file and down here we can see
+
+that the server-side encryption is actually enabled through default encryption.
+
+So that's how we can use bucket policies to enforce encryption,
+
+and we can use default encryption to automatically encrypt objects in our bucket.
+
+11.- S3 EVENT NOTIFICATIONS
+In this lesson, we're going to use Amazon S3 event notifications.
+
+What we're going to do is create an
+
+event notification that triggers an email using SNS
+
+whenever objects are uploaded to our bucket.
+
+Now, the first thing we need to do is create our SNS topic.
+
+So in the Simple Notification Service, I'm going to create a new topic,
+
+choose standard,
+
+give it a name,
+
+and then I'm going to scroll down a little way and create this topic.
+
+Then I'm going to go to subscriptions
+
+and I'm going to create a subscription to my topic.
+
+Choose the ARN,
+
+select the protocol,
+
+here I'm going to choose email.
+
+And for endpoint, I'm going to give it my email address.
+
+Then I need to go to my email and confirm the subscription so that it starts working.
+
+We now need to configure the access policy for our topics. So I've gone to topics.
+
+I've selected the name of my topic and here we can see the access policy.
+
+Now what I want to do here is I simply want to copy
+
+the resource ARN. That's all I need.
+
+Then I'm going to come to this file here which is in the course download,
+
+Amazon S3 and it's called S3 Event Notification.
+
+What I need to do is paste the topic ARN
+
+next to resource.
+
+I'm then going to take the account number which is this piece here
+
+and I'm going to paste it down here where it says bucket owner account ID.
+
+And then lastly I need the ARN for my bucket.
+
+So I've pasted the ARN for my bucket
+
+and now I can simply copy all of this code.
+
+And back in SNS I'm going to click on edit for the topic.
+
+Come down to access policy again,
+
+and let's just delete all of this code, paste my code in,
+
+click on save changes.
+
+So what we've just done is we've granted the SNS publish API action to the S3 service
+
+for a specific resource which is the SNS topic
+
+and then the ARN for the bucket.
+
+So anything coming from this bucket with this account number is going to be allowed
+
+the SNS public API action. So those are the permissions we need.
+
+Now we can go back to S3 and create our event notification.
+
+So back in S3, on the properties page for my bucket,
+
+I'm going to scroll down a little way,
+
+find event notifications, click create event notification,
+
+give it a name.
+
+You can optionally specify a prefix or suffix to apply this to.
+
+I'm going to leave those blank.
+
+I'm going to select all objects create events.
+
+That's Put, Post, Copy, and multipart uploads.
+
+Let's scroll down a little way
+
+and now we get to choose
+
+the destination so we can choose Lambda functions, SNS topics, or SQS queues.
+
+So we're going to choose topic.
+
+I'm going to choose the Email-Me topic I just created
+
+and then save changes.
+
+So that's all there is to it.
+
+Now if you did get any access denied issues when you were trying to save then
+
+that's because you haven't properly specified those permissions in SNS.
+
+So just go back to that policy we created and make sure that you have correctly
+
+specified the ARNs for your bucket,
+
+for your topic as well, and also the account number.
+
+So now what we're going to do is go to objects
+
+and just upload an object.
+
+Doesn't matter what it is. So I'm just going to upload the file.
+
+Click on upload,
+
+and upload.
+
+And now I can go over to my email inbox and see what's been delivered.
+
+And this is what turned up in my email inbox.
+
+Here we can see an event notification that's just told us
+
+an event has happened, and clearly there's quite a bit of information in here.
+
+Things like the region, the event time, what type of EPI
+
+action was actually initiated.
+
+So this was a PUT operation, an object-created operation.
+
+We can see the principal ID, so who actually performed this, what IP address
+
+they came from and much, much more.
+
+So that's really useful information that could be
+
+then used by another service to process that information in some way.
+
+So that's it for this lesson.
+
+And if you are going to be uploading lots of objects to this bucket,
+
+make sure you go back and delete your
+
+event notification or you're going to get lots of emails.
+
+12.- S3 PRESIGNED URLS
+Hi guys. In this lesson we're going to use presigned URLs.
+
+And what we're going to do with a pre-signed URL
+
+is you're going to see how we can actually add an object to a bucket
+
+that's not publicly accessible and then give someone a URL that
+
+can make it accessible to them without authentication.
+
+We're going to use the CLI to actually run a command to create our presigned URL.
+
+So this is the command that we're going to run. It will generate a presigned URL.
+
+The response will look something like this.
+
+So we're actually then going to have this information returned
+
+and this is the URL that we're able to then use to access the objects.
+
+And it actually has some information about expiry in here.
+
+So you can see it says expires in 3,600 seconds.
+
+I'm back in S3.
+
+And what I'm going do is I have this beach JPG in my bucket.
+
+So I'm going to select this object, click on object URL.
+
+Let's go to a new window and let's try and access that.
+
+Now, I just want to make sure that I cannot access it and that is exactly the case.
+
+So it's not publicly accessible.
+
+We did make an object publicly accessible earlier on
+
+in this section but we then removed those permissions.
+
+So make sure that you don't have any bucket policies
+
+specified and you don't have the block public access disabled.
+
+So it should be on.
+
+So we now know that we can't access this object.
+
+So what we're going to do is see how we can make
+
+this available to us using a presigned URL.
+
+So I'm going to take the bucket name,
+
+copy it to my clipboard,
+
+on a command line I'm going to type AWS S3 presign then S3://
+
+provide the bucket name,
+
+and then I'm going to provide the file name.
+
+Now, I also need to specify my profile information for my account.
+
+So that should be it. That should be all I need to specify. I just hit enter.
+
+And this is the URL that I'm now going to use, so I can copy this to my clipboard.
+
+Let's come back to our browser window here
+
+and I'm going to paste this one in.
+
+And now we can see this nice image.
+
+So that's it. That's how a presigned URL works.
+
+And once the 3,600 seconds expire, I will no longer be able to access this object.
+
+13.- SERVER ACCESS LOGGING
+Server Access Logging is simply a way that we can log around the events that happen in our Amazon S3
+
+buckets.
+
+So, what we do is we can go to our bucket and enable logging.
+
+And we choose a target bucket.
+
+Now, you do want the target bucket to be a different bucket to the source bucket.
+
+Otherwise, you can get a circular loop where every time there's an update you're writing to the same
+
+bucket, which causes another update, and the loop kind of just goes on and on.
+
+Now, you can also choose a target prefix as well.
+
+So, this provides detailed records of the requests that are made to an S3 bucket.
+
+And the information that you can log includes the requester, the bucket name, the request time,
+
+action, response status, and error code
+
+if it's applicable. It is disabled by default, so you have to go in and manually enable server access
+
+logging and choose your target bucket.
+
+You only ever pay for the storage used, and you must configure a separate bucket as the destination,
+
+so always do that.
+
+You also need to grant write permissions to the Amazon S3 Log Delivery group on the destination bucket.
+
+So, you remember when we were looking at ACLs on a bucket, there was an option to configure permissions
+
+for the Amazon S3 Log Delivery group.
+
+That's where you would tick the box, which allows write access.
+
+Now, it's very easy to implement if you want to go and have a practice. It does take a bit of time sometimes
+
+to actually see the logs come through, but just create yourself a target bucket and then go to your
+
+source bucket,
+
+enable logging,
+
+specify the target and optionally a prefix.
+
+14.- CROSS-ORIGIN RESOURCE SHARING (CORS)
+Cross-Origin Resource Sharing or CORs can be a little bit of a confusing subject. So, I'm going to
+
+try and make it as easy as possible in this lesson for you to understand.
+
+So, with S3, you do sometimes need to enable CORs.
+
+What it means is it will allow requests from an origin to another origin.
+
+Now, that in itself probably sounds rather confusing.
+
+Let's first define what an origin is. Now,
+
+an origin is defined by the DNS name that you're connecting to, the protocol you're using, and the
+
+port that you're connected to as well.
+
+So, if you're connected from a client to a specific domain name using HTTP on port 80, then that's your
+
+origin.
+
+Let's look at this in a quick diagram to help you to understand.
+
+So, we've got a client who's using a browser and they're connecting to an S3 bucket.
+
+Now, that S3 bucket is configured as a website, in this case for mycompany.com. We then have another
+
+bucket. And that bucket is holding some web font assets, which we're going to need to access.
+
+Now, firstly, the browser is connecting to mycompany.com, so the DNS name is mycompany.com.
+
+The protocol is http and the port is port 80, so that now becomes the origin.
+
+And in this case, we're using JavaScript, so a JavaScript web client has been loaded on the browser.
+
+Now, we need to actually connect to the S3 endpoint for the other bucket with the web font assets in
+
+it.
+
+So, we're going to issue a connection request.
+
+And what happens is something called a pre-flight request is going to check if we are allowed to make
+
+a request to that specific bucket.
+
+So remember, we're connected to one origin, but now our browser is trying to connect to a different
+
+origin.
+
+Now, whether we're able to do that or not is defined on that bucket with the web font assets.
+
+That's where the CORs configuration is.
+
+So, you have to add a configuration that's going to allow requests from the other origin.
+
+Now, how do we do that?
+
+Well, we enable it through a series of settings.
+
+We've got the access control allow origin, the access control allow methods, and the access control
+
+allow headers.
+
+You don't need to use all of these, but these are the available settings. And we define these settings
+
+through rules.
+
+The rules are added using JSON files in Amazon S3.
+
+So let's have a look at an example.
+
+Here's an example rule in JSON format for a CORs configuration. And we can see we've got the allowed
+
+headers in this case is *, methods is PUT, POST, and DELETE, and the origins is www.mycompany.com.
+
+So that would have to be the origin. That would allow www.mycompany.com.
+
+It might not actually allow mycompany.com because that's a slightly different domain name.
+
+This is a subdomain. So, you'll need to make sure that's hopefully set correctly.
+
+So, that's CORs. Now,
+
+the key thing to remember is that you don't implement your CORs configuration on the origin, you
+
+implement it on the other bucket that you're trying to connect to.
+
+15.- AMAZON S3 PERFORMANCE OPTIMIZATION
+Hi guys. In this lesson, I'm going to cover a quick bit of theory
+
+on performance optimization in relation to Amazon S3.
+
+So let's look at some design patterns for optimizing S3 performance.
+
+S3 will automatically scale to very high request rates with at least,
+
+and this is per prefix,
+
+3,500 Put, copy, post, or delete request per second
+
+and 5,500 Get, head request per second.
+
+Now you can increase the read and write
+
+performance by using parallelization across multiple prefixes.
+
+So you're going to spread your data across more prefixes.
+
+And these limitations only apply within each prefix.
+
+To increase upload speeds over long distances
+
+you can use S3 transfer acceleration that leverages the CloudFront network to upload
+
+your data and move it into S3 across the AWS global network.
+
+You can also use what are called byte-range fetches with the range HTTP header.
+
+And that means that you're only transferring the specified
+
+byte range from an object that you actually need.
+
+You should also look at combining S3 and EC2 in the same AWS region.
+
+And use the latest version of the AWS SDKs.
+
+You could also use caching services to cache the latest content
+
+like a content delivery network like CloudFront
+
+or ElastiCache for an in-memory cache.
+
+Try to horizontally scale your requests across S3 endpoints.
+
+So S3 has lots of public endpoints. You can look up what they are.
+
+And you can configure your application to spread
+
+the load across those different public endpoints.
+
+Now there's more info here. I do suggest that you click on this link and have a look.
+
+It's worth a little bit of revision ahead of your exam.
+
+16.- AMAZON CLOUDFRONT ORIGINS AND DISTRIBUTIONS
+Amazon CloudFront is a content delivery network, a CDN. The purpose of a CDN is to improve the performance
+
+of accessing objects.
+
+And what I mean by objects here, it's basically files. So, it could be image files, it could be video
+
+files, it could be pretty much any file type.
+
+Now, we're specifically looking here at helping performance over a large geographical area, perhaps
+
+the entire world.
+
+So, you might have some content that's somewhere like North America, but you have users all the way over
+
+in China, in Japan, and Australia, and that's a big physical distance.
+
+And that long physical distance means that there's more latency and poor performance.
+
+So, what we're trying to do is get the content closer to those users. And we have two particular things
+
+that you really need to understand that are components of CloudFront, and that's an origin and a distribution.
+
+So let's have a look.
+
+So, CloudFront origins are literally the origin of where the content is coming from.
+
+So, for instance, you can have Amazon S3, so your content can be sitting as objects in Amazon
+
+S3 and you want to get that closer to users.
+
+Or it could be Amazon EC2.
+
+So maybe your content is on an Amazon EC2 instance.
+
+Maybe it's a website, maybe it's a mounted file system on EFS, but the content is being served
+
+by EC2. And those EC2 instances can also be behind a load balancer.
+
+So, that's the origin, and the origin is within a single region.
+
+So, it's in one physical place in the world.
+
+Now, we then have something called edge locations.
+
+Edge locations are actually all over the world. And there's hundreds of edge locations located in different
+
+parts of the world.
+
+And what happens is the content from the origin gets pushed out and cached in the edge location.
+
+And so, the idea being that those edge locations are distributed broadly around the world, and that
+
+means your content is somewhere where it can be closer to the users who want to access it.
+
+So, we have users accessing the edge locations.
+
+So as you can see, these users are in all sorts of different places around the world.
+
+So, as you may know, latency is essentially the delay.
+
+So it means that the greater the latency, the poorer the performance. If you have high latency when you're
+
+trying to access a video, you're going to get a really bad experience.
+
+Latency is primarily a factor of distance.
+
+The farther you are from, wherever you're trying to play that video, then the greater the latency.
+
+But there are also other factors as well such as the number of hops, the number of routers and switches,
+
+the amount of congestion and oversubscription on the line somewhere between you and the content you're
+
+trying to access.
+
+So, CloudFront aims to resolve a lot of this. And it does say a couple of ways.
+
+Firstly, the content gets cached in an edge location, which means hopefully it's physically much,
+
+much closer to where your users are, so they can then access the content in the edge location.
+
+And what happens is users are directed automatically to the closest edge location.
+
+So, if your users are in Asia, they might have a different edge location than if they're in Australia
+
+or India or so on.
+
+So, they get access to that content faster.
+
+Now, if the content doesn't happen to be on the edge location at that point in time, maybe it expired
+
+from the cache, then it has to be pulled from the origin.
+
+But even here, it's going over the AWS global network, not the internet.
+
+And that means lower latency and better performance.
+
+Let's look at origins and distributions in a bit more detail.
+
+So, a distribution is what you create in CloudFront.
+
+When you create a distribution, you get a name or an access endpoint for that distribution. And the
+
+standard endpoint looks something like this.
+
+You'll have some combination of characters and numbers .cloudfront.net.
+
+You can then use your own custom domain.
+
+That's something you can do, so you can have your own domain name like dctcloudlabs.com,
+
+or whatever you have available.
+
+Now, when you create your CloudFront distribution, you also specify the origin. And your origin
+
+is where your files are.
+
+You can even have multiple origins as well.
+
+You might have an S3 origin and a custom origin.
+
+The custom origin is EC2 or EC2 behind a load balancer.
+
+With CloudFront, we're creating something called a web distribution. And this speeds up the distribution
+
+of static and dynamic content.
+
+So, any of those file types on the screen there. You access your web distribution using HTTP or HTTPS,
+
+and you can add, update, or delete objects and even submit data through a web form.
+
+You can even use live streaming for real time events as well.
+
+Now, there used to be something called an RTMP
+
+distribution.
+
+These were discontinued.
+
+So they're not actually available anymore. And you shouldn't see these coming up in the exam.
+
+We also have something called a behavior that we can configure within our distribution.
+
+And this means we can look for things like a path pattern. With a path pattern
+
+you might say that if somebody is looking for a specific path/something, then they should go
+
+to the S3 origin.
+
+If they're going to a different path, then maybe they have to go to the customer origin.
+
+You can configure the protocol policy you want to use, whether you redirect to HTTPS to stop people making
+
+unsecured connections and that kind of thing.
+
+You can define the cache policy, which helps you to work out how long things stay in the cache and
+
+the origin requests policy.
+
+So, how do you configure the security and other factors of the connection from your edge locations to your
+
+origin when they need to request content.
+
+And by the way, you can also use a static website as an origin running on S3.
+
+So that's it for the theory.
+
+What we're going to do in the next lesson is create a web distribution in CloudFront.
+
+And we're going to have a look at how we can configure caching behaviors so that we can send certain
+
+requests to two different S3 origins.
+
+So I hope that was useful.
+
+I'll see you in the next lesson.
+
+17.- CLOUDFRONT SIGNED URLS AND OAI
+In this lesson, I'm going to cover Amazon cloudfront, signed
+
+URLS and
+
+OAI
+
+slash
+
+OAC
+
+So let's start with signed
+
+URLS. These provide more control over access to your content.
+
+So it's essentially a way of creating a
+
+URL that can be used to access to content that otherwise would not be accessible.
+
+You can specify the beginning and expiration date and time for the
+
+URL. So it expires and can no longer be used and also IP addresses.
+
+So what IP addresses are allowed to use the signed
+
+URL.
+
+Here we have a mobile application, cloud front and a serverless application.
+
+The mobile actually uses the serverless application in order
+
+to authenticate to the application and then request a signed
+
+URL. So normally the content is restricted
+
+and what we're doing here is using this authentication via a function, for example,
+
+that might be on lambda and we're gaining
+
+that authorization to then access the content.
+
+So the signed
+
+URL is returned and then the mobile client can actually use the signed
+
+URL to access the distribution and the content which
+
+has been granted for access to this particular application.
+
+So that's the third step.
+
+Then of course, the content is delivered securely to the clients. Signed
+
+URLS should be used for individual files and clients that don't support cookies.
+
+So next we have cloud front signed cookies. These are very similar to signed
+
+URLS, but you can use them when you don't want to change
+
+URLS. Also when you want to provide access to multiple restricted files.
+
+So now a cookie is used for accessing the content.
+
+Let's now have a look at origin access identity.
+
+So what we have here is an origin, in this case,
+
+a custom origin which is an S3 bucket configured as a static website.
+
+We have cloud front and we have our users on the internet,
+
+the users access the distribution from there, they can access the content
+
+and it's secured using an OAI how it's secured is via a bucket policy.
+
+So the bucket policy will only allow
+
+the cloud front distributions OAI
+
+which is essentially a special type of user to access the bucket.
+
+We can see that in the principal element here,
+
+we have the cloud front user and it's specifying a specific origin access identity.
+
+So this is essentially like a user account within cloud front
+
+and the bucket will only allow access from this user account. OK.
+
+So it's restricting access to the OAI only.
+
+That means that if you try to access the bucket directly,
+
+then that would not work.
+
+So that's the purpose of an OAI
+
+and OAI
+
+is only useful for S3.
+
+It's no use if you're using an origin, that's an EC2 instance or a load balancer.
+
+For example
+
+only S3. Also the OAI
+
+has been deprecated.
+
+There's actually a new thing called an origin access control or OAC.
+
+So what is an OAC? Well, it's like an OAI
+
+but it supports additional use cases. And
+
+AWS recommend using the OAC instead of the OAI.
+
+It also requires an S3 bucket policy that allows the cloud
+
+front service principle to access the contents of the bucket.
+
+And it looks like this. It's a little bit similar to the one that we looked at before.
+
+But instead of the cloud front
+
+OAI
+
+user, the principle is the service. So cloudfront dot Amazon
+
+Aws dot com, then we have a condition where a string equals condition for the
+
+aws source ARN
+
+of the cloudfront distribution itself.
+
+Other than that, it's essentially performing exactly the same purpose as the
+
+OAI
+
+It's ensuring that you can restrict access to your content such
+
+that it can only be accessed via the cloudfront distribution.
+
+18.- CLOUDFRONT WITH S3 STATIC WEBSITE AND OAI
+In this lesson, we're going to create a static website on Amazon S3
+
+and then we're going to create a CloudFront distribution in front of
+
+our static website.
+
+And we'll use an origin access identity to secure access
+
+so that people can only access the static website through CloudFront.
+
+They can't go directly to the S3 bucket.
+
+I'm back in, Amazon S3 and I'm going to create a new bucket.
+
+I'm going to give this one a name.
+
+I'm going to call mine My Static Website-DCT. Hopefully that name is unique.
+
+It's going to be in the us-east-1 region.
+
+I do recommend you use us-east-1 whenever you're using a CloudFront distribution.
+
+It can make it a lot faster to actually converge and become ready.
+
+So use us-east-1 for your bucket.
+
+We're not going to enable ACLs
+
+and we're not going to enable public access.
+
+We're just going to scroll down to the bottom and create the bucket.
+
+So I've got that bucket.
+
+Now at the moment, we don't have any public access to
+
+this bucket and I'm actually going to keep it that way.
+
+But I do need to upload some files.
+
+So I'm going to add files.
+
+And in the code Amazon S3 directory you should find error.html and index.html.
+
+So we're going to upload these two files
+
+and click on upload.
+
+So those have been added. Next, we need to go to properties,
+
+scroll all the way to the bottom and this is where we enable static website hosting.
+
+So we click on enable.
+
+We're going to host a static website.
+
+And we're going to use index.html and error.html for the two documents.
+
+So I've added my document names and then I simply save my changes.
+
+when you do that, you will find that there's a URL for the bucket.
+
+So at the bottom of the page here I can see a URL.
+
+I'm going to copy that to my clipboard.
+
+And I just want to check if this is accessible. It shouldn't be accessible.
+
+And sure enough it says access denied.
+
+And that's fine. I'm actually going to leave it this way.
+
+I don't want anyone to be able to come and directly access this S3 bucket.
+
+I want them to only be able to access
+
+the contents of the bucket via the CloudFront distribution.
+
+I've opened the CloudFront management console
+
+and here I'm just going to create a CloudFront distribution.
+
+For origin domain name here, we'll see the actual S3 bucket.
+
+So as you can see you can choose S3 buckets, Elastic Load Balancers,
+
+media store containers, and media package containers.
+
+So I'm going to choose my static website.
+
+I'm not going to enter an origin path.
+
+The name is fine. I don't need to change that.
+
+Now we are going to use an origin access identity, so I need to click yes.
+
+Now, we can select from existing OAIs
+
+or we can create a new one.
+
+So we'll create a new OAI. I'm happy with the name that it suggests.
+
+And that's now specified.
+
+So that is the identity that's being created through CloudFront.
+
+And what we want to do is update the bucket policy.
+
+And that will actually add a bucket policy that only allows access to the bucket
+
+if the caller is this particular OAI.
+
+Let's just scroll down now. We're going to leave the default cache behavior.
+
+We want to use HTTP and HTTPS.
+
+And then we just scroll down farther.
+
+We can leave all of these settings as they are.
+
+The only thing we need to update
+
+is the default root object which needs to be index.html.
+
+So make sure you put in index.html as the default root object
+
+and then create distribution.
+
+Now it can take several minutes for the CloudFront distribution
+
+to deploy and become ready. So at the moment we can see it's in the deploying status.
+
+And that should change within the next 5-10 minutes.
+
+While that's happening. Let's go back to our static website.
+
+And I want to go across to the permissions page.
+
+And here we can actually see the bucket policy that was automatically added
+
+by CloudFront.
+
+So this policy has a statement which is allow
+
+and then it specifies a principal.
+
+And that principal is the origin access identity.
+
+And only that principal will be allowed the get object permission.
+
+And you can see the resource is also locked down to this particular bucket
+
+and its contents.
+
+So that all looks good.
+
+Let's go back to CloudFront and let's just wait a few minutes for it to become ready.
+
+It's been a few minutes and I refresh my page and it does look like it's now deployed.
+
+So let's copy the distribution domain name to our clipboards
+
+and then go over to a new browser window.
+
+I'm going to paste it in.
+
+And we can see the web page, that's the index.html from our bucket, which tells
+
+us we've successfully launched a static website
+
+and then we've securely accessed it through amazon CloudFront.
+
+So it's as simple as that just to serve a static website through CloudFront.
+
+And of course we've used an OAI here to make sure that there's no way that anyone
+
+can directly access the S3 bucket.
+
+They must come through the CloudFront distribution.
+
+Now I've finished with the distribution for this demonstration, but feel
+
+free to go and have a look around the various options
+
+that you can configure through CloudFront.
+
+What I want to do now that I've finished is select my distribution
+
+and then click on disable.
+
+And then disable again.
+
+Now it will take several minutes for this to happen. Until it's fully disabled,
+
+you will not be able to delete it.
+
+So just make sure you don't forget about it.
+
+Give it a few minutes, probably 10-15 minutes maximum
+
+and then you can delete your distribution
+
+19.- AMAZON ROUTE 53 DNS
+Amazon.
+
+Route 53 is an intelligent DNS service, a domain name system service, and it has a variety of capabilities.
+
+On the left of the screen here, you can see that Route 53 can perform domain registration.
+
+So if you want to register your own domain name, you can use Route 53 and it will charge you a small
+
+fee and register your domain.
+
+And we'll see how that works in the hands on.
+
+When you register a domain such as example dot com, you will then find that a hosted zone is created
+
+for you in a US.
+
+The hosted zone is essentially a container into which your DNS records are added and you can also create
+
+private hosted zones as well for use within the environment with your VPC.
+
+So the hosted zone has the records which need resolution.
+
+You remember from earlier in the course we talked about DNS resolution.
+
+So for example, your computer might need to know the IP address, for example, dot com.
+
+So it checks the hosted zone for example, dot com to find that information.
+
+Amazon Route 53 can also do health checks.
+
+That means it checks endpoints on a regular basis to make sure that they're accessible.
+
+If they're not accessible, that means, you know, there could be a problem and you wouldn't want to
+
+route any connections to those instances.
+
+So what around 53 will do is make sure that once it knows a health check has failed, it will no longer
+
+respond with the addresses that relate to those failed health checks.
+
+There's also a feature called Traffic Flow, where you can build even more intelligence using workflows.
+
+Now let's just have a quick recap on DNS resolution.
+
+So here we have a user, the user wants to connect to the website, for example, dot com.
+
+And we can see here there's a hosted zone called example dot com In Route 53, the hosted zone represents
+
+a set of records belonging to a domain.
+
+The user enters example dot com into their web browser and the computer will then connect to Route 53
+
+and ask the question What's the address for example, dot com That's known as an A record where we're
+
+trying to get the IP address for a name.
+
+Route 53 responds with the IP address.
+
+8.1.2.1 Now the computer knows where to connect to the server on the internet, so it performs an HTTP
+
+get request to 8.1.2.1 and it can view the website.
+
+So that's the basics of how DNS resolution works.
+
+And that is what we're doing with Route 53.
+
+Now, Route 53 is an intelligent DNS service, so it's not just responding in a simple way by providing
+
+a response such as we saw before, there's some additional things that we can do so we can have conditional
+
+responses based on various criteria that is implemented through what's called a routing policy.
+
+Now, the simple routing policy at the top really is simple.
+
+There's not a lot of intelligence there.
+
+It's simply providing the IP address associated with the name, just as we saw in the previous slide.
+
+We then have fail over with.
+
+Fail over Route 53 is checking whether the resources alive based on health checks, Is it responding
+
+to health checks?
+
+If so, I will provide the response to go to the primary server.
+
+If the primary server has failed its health checks, then it will route the connection to a secondary
+
+destination.
+
+So it's failing over because we know that the primary resource is not available.
+
+We then have geolocation which uses the geographic location that the client is in to route the connection
+
+to the closest geographic endpoint geo proximity routes you to the closest region within a specific
+
+area.
+
+We then have latency which is really useful.
+
+What latency does is it tries to work out what is the latency between the various endpoints and send
+
+you to the lowest latency endpoint.
+
+So let's say for example, you have a website deployed on Amazon EC2 in the US East region.
+
+You also have a website with the same information deployed in the Singapore region.
+
+Now if somebody in the United States wants to connect to your website, round 53 is going to send them
+
+to the US East region because it's geographically closer and the latency is likely to be much lower.
+
+Now, if somebody is in South East Asia, they're more likely to be routed to the Singapore instance
+
+because the latency is lower for them to go to Singapore.
+
+Now we also have multi value answer.
+
+It's kind of a bit like load balancing where different IP addresses are returned and so the load gets
+
+spread across the different instances that you have records for.
+
+Lastly, we have weighted which uses relative weights.
+
+So for example, you can configure it such that 80% of the traffic goes to one resource and 20 to another.
+
+It's a great way of testing out some updates before you fully implement them.
+
+It means you can send a subset of your traffic to one resource that's been updated and see what happens.
