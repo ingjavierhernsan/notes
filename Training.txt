@@ -249,3 +249,7 @@ ACCIONES NECESARIOS:
 - En el area de entrenamiento asignar los puesto correspondientes a los empleados.
 
 ================================================================================================================================
+
+Describir el proceso de cada ventana.
+Describir cada ventana.
+Repartir las ventanas por los roles hechos por Abdeel.

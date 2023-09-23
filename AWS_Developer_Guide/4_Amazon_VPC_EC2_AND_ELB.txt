@@ -18,40 +18,18 @@
 1.- INTRODUCTION
 Hello and welcome to this section.
 
-In this section I'm going to cover the amazon virtual private cloud (VPC).
+In this section I'm going to cover the amazon virtual private cloud (VPC), elastic load balancing and amazon EC2.
 
-elastic load balancing and amazon EC2.
+Now you are expected to understand these as kind of prerequisite knowledge for the developer associate exam.
 
-Now you are expected to understand these as kind
+In this course I go over it at a basic level but I do move through quite quickly.
 
-of prerequisite knowledge for the developer associate exam.
+If you want more background on these services then I go into much more detail in the solutions architect associate course. But for what you need to know for the developer associate exam, this should be enough. So in this section you're going to learn how to create your own custom VPC.
 
-In this course I go over it at a basic level
-
-but I do move through quite quickly.
-
-If you want more background on these services then I go
-
-into much more detail in the solutions architect associate course.
-
-But for what you need to know for the developer associate exam,
-
-this should be enough.
-
-So in this section you're going to learn how to create your own custom VPC.
-
-You're going to launch EC2 instances and elastic load balancers and see
-
-how you can scale your application and load balance it for high availability
-
-and there are plenty of hands on exercises to make
-
-sure you get your hands dirty and enjoy the practice.
+You're going to launch EC2 instances and elastic load balancers and see how you can scale your application and load balance it for high availability and there are plenty of hands on exercises to make sure you get your hands dirty and enjoy the practice.
 
 2.- AMAZON VPC, SECURITY GROUPS, AND NACLs
-Hi guys. In this video, I'm going to cover the Amazon Virtual Private Cloud
-
-security groups, and Network Access Control Lists.
+Hi guys. In this video, I'm going to cover the Amazon Virtual Private Cloud security groups, and Network Access Control Lists.
 
 So let's get started with Amazon VPC. So this is the Virtual Private Cloud.
 
@@ -65,59 +43,33 @@ We then have availability zones. These are physical separation.
 
 These are essentially separate data centers.
 
-And then we have our subnets such as public subnets
+And then we have our subnets such as public subnets and private subnets.
 
-and private subnets.
+Public subnets are accessible to the outside world, the internet, whereas private subnets are not.
 
-Public subnets are accessible to the outside world, the internet,
-
-whereas private subnets are not.
-
-And we can create both public subnets and private subnets
-
-in each availability zone.
+And we can create both public subnets and private subnets in each availability zone.
 
 So the subnets are created within an availability zone, the AZ itself.
 
-That means you can't have a single subnet that spans availability zones,
+That means you can't have a single subnet that spans availability zones, but you can spread your workloads across availability zones through multiple subnets.
 
-but you can spread your workloads across availability zones through multiple subnets.
-
-We can then launch our resources such as EC2 instances
-
-into the subnets of our VPC.
+We can then launch our resources such as EC2 instances into the subnets of our VPC.
 
 We have a router within the VPC.
 
-You don't actually see it as a component but it is actually there
+You don't actually see it as a component but it is actually there and we manipulate it through updating the route table to determine how we want to route our traffic.
 
-and we manipulate it through updating the route table
+The VPC router takes care of routing both within the VPC itself and then outside of the VPC.
 
-to determine how we want to route our traffic.
+So to other VPCs or across some site-to-site links you might have with on-premises data centers, for example.
 
-The VPC router takes care of routing both within
+So we control the VPC router using the route table. We can add our own routes in here to determine how traffic should be routed.
 
-the VPC itself and then outside of the VPC.
+The route table is used to configure the VPC router and we can add routes for within our VPC and outside of our VPC as well.
 
-So to other VPCs or across some site-to-site
+Now if we want to reach the internet, then we need something called an internet gateway.
 
-links you might have with on-premises data centers, for example.
-
-So we control the VPC router using the route table. We can add our own routes
-
-in here to determine how traffic should be routed.
-
-The route table is used to configure the VPC router
-
-and we can add routes for within our VPC and outside of our VPC as well.
-
-Now if we want to reach the internet,
-
-then we need something called an internet gateway.
-
-The internet gateway is attached to the VPC
-
-and it's then used to connect out to the internet.
+The internet gateway is attached to the VPC and it's then used to connect out to the internet.
 
 We can create multiple VPCs within a region.
 
@@ -135,85 +87,53 @@ CIDR stands for Classless Inter-Domain Routing.
 
 Now from the CIDR block, we then have our subnet IP addresses.
 
-So these are the blocks of addresses that we then assign
-
-to our resources or they get automatically assigned to our resources
-
-within our subnets.
+So these are the blocks of addresses that we then assign to our resources or they get automatically assigned to our resources within our subnets.
 
 And they come from the master block, which is the CIDR block.
 
-So each of our VPCs then has a CIDR block
-
-and it has subnets that come from that block of addresses.
+So each of our VPCs then has a CIDR block and it has subnets that come from that block of addresses.
 
 Now, let's just look at the components of the VPC.
 
 So we talked about a VPC and what it is and what a subnet is.
 
-And we talked about internet gateways and how they help you route within
-
-the VPC and outside of the VPC.
+And we talked about internet gateways and how they help you route within the VPC and outside of the VPC.
 
 An egress only internet gateway is used only for IPv6.
 
 so it's not used for the IPv4 protocol.
 
-An egress only internet gateway allows your resources
-
-that have IPv6 addresses to connect out to the internet
-
-but doesn't allow traffic back in again to reach them from the internet.
+An egress only internet gateway allows your resources that have IPv6 addresses to connect out to the internet but doesn't allow traffic back in again to reach them from the internet.
 
 We talked about the router.
 
-Now, a peering connection is where you can directly peer two VPCs together
+Now, a peering connection is where you can directly peer two VPCs together within or across regions.
 
-within or across regions.
-
-And that means you get private routing between those VPCs
-
-rather than having to send the traffic out to the internet
-
-and then back to the other VPC.
+And that means you get private routing between those VPCs rather than having to send the traffic out to the internet and then back to the other VPC.
 
 VPC endpoints allow you to connect to public AWS endpoints via private addresses.
 
 So for example if you want to connect to Amazon S3, that's a public endpoint.
 
-So it's available on the internet but you can connect privately to it
-
-using a private IPv4 address using a VPC endpoint.
+So it's available on the internet but you can connect privately to it using a private IPv4 address using a VPC endpoint.
 
 We then have NAT instances and NAT gateways. Now they both do the same thing.
 
-They allow your instances in private subnets
-
-which only have private IP addresses to be able to connect to the internet.
+They allow your instances in private subnets which only have private IP addresses to be able to connect to the internet.
 
 So its Network Address Translation.
 
-The instance is an EC2 instance that you manage
+The instance is an EC2 instance that you manage and the gateway is managed by AWS and scales seamlessly.
 
-and the gateway is managed by AWS and scales seamlessly.
-
-If you want to set up a site-to-site link between your on-premises data center
-
-and AWS, you can do so by creating an AWS VPN.
+If you want to set up a site-to-site link between your on-premises data center and AWS, you can do so by creating an AWS VPN.
 
 There are two principal components to a site-to-site connection.
 
-The customer gateway, which is your router and the configuration of
-
-your router in the on-premises data center,
-
-and then the virtual private gateway, which is the component on the AWS side.
+The customer gateway, which is your router and the configuration of your router in the on-premises data center, and then the virtual private gateway, which is the component on the AWS side.
 
 Direct connect is another way to connect your on-premises data centers to AWS.
 
-This time it uses private connections where you get very high speed
-
-and bandwidth and low latency and you get consistent network throughput.
+This time it uses private connections where you get very high speed and bandwidth and low latency and you get consistent network throughput.
 
 So you're not going via the internet.
 
