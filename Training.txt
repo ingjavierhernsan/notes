@@ -253,3 +253,68 @@ ACCIONES NECESARIOS:
 Describir el proceso de cada ventana.
 Describir cada ventana.
 Repartir las ventanas por los roles hechos por Abdeel.
+
+Propuesta de procesos
+Administración
+Se podrá capturar, modificar, desactivar o eliminar la información de los diferentes catálogos:
+- Usuarios
+- Trainers
+- SME
+- Type of source
+- Training method
+- Knowledge type
+- Training category
+- Training Distribution Category
+- Training distribution
+- Position Trainig distribution
+- Status training
+- Training records status
+- Catalogo puestos STPS
+- Catalogo áreas STPS
+
+Además, en la sección de administración se podrá:
+- Relacionar puestos con el catálogo de Safran con el catalogo STPS
+- Relacionar áreas con el catálogo de Safran con el catalogo STPS
+
+También se tendra una sección para:
+- Capturar, modificar, desactivar o eliminar la información de los entrenamientos.
+- Capturar los OCRs como entrenamientos por autorizar.
+- Pasar a entrenamiento el OCR autorizado.
+- Capturar, modificar, desactivar o eliminar las matrices por puesto.
+- El líder de área podrá asignarle un valor al campo Knowledge type de cada entrenamiento en la matriz de entrenamiento.
+
+Calendario
+Mostrará en un calendario que días hay entrenamientos, si se da clic en el día mostrará los entrenamientos registrados.
+
+Planeación
+Se podrá armar un entrenamiento con la información capturada y basándose en un calendario.
+El sistema proporcionara que entrenamientos hay pendientes según la opción a seleccionar:
+- Que usuarios necesitan entrenamiento según su matriz de entrenamiento.
+- Que entrenamiento está pendiente.
+
+El usuario podrá hacer la planeación de un entrenamiento virtual para asignar la lectura del entrenamiento.
+El usuario podrá hacer una planeación de entrenamiento con la información capturada ya sea un entrenamiento por parte del área de entrenamiento, un área de la empresa o un proveedor externo.
+
+Reporteria:
+- Reporte de entrenamientos capturados.
+- Reporte de matrices de entrenamiento.
+- Reporte de empleados y sus entrenamientos.
+- Reporte de asistencia a entrenamientos.
+- Reporte de resultados de los entrenamientos.
+- Reporte de entrenamientos calendarizados.
+- Reporte de métricos por puesto.
+
+Asistencia
+- Registrar asistencia y calificación (si lo requiere).
+- Revisar asistencia y calificación (si lo requiere).
+
+Expedición DC-3
+- Por separado
+- Masivo
+
+Solicitud de nuevo entrenamiento
+- Tendrán acceso los M. M. para poder llenar una solicitud de nuevo entrenamiento.
+- Se mostrará las solicitudes de nuevo entrenamiento y su estatus.
+
+Quiosco de entrenamientos 
+Solo será visible para empleados no registrados en la aplicación, pero el requisito será ingresar su código FK y su contraseña.
