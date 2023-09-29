@@ -1,0 +1,30 @@
+xavi
+sefiro
+latis
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+
+aws s3 ls
+
+aws configure
+AWS Access Key ID [None]:
+AWS Secret Access Key [None]:
+Default region name [None]: us-east-2
+Default output format [None]:
+
+en ~
+cat .aws/config
+cat .aws/credentials
+
+aws help
+aws ec2 help
+
+aws s3 mb s3://mytestbucket12345x123x
+
+aws s3 cp testfile.txt s3://mytestbucket12345x123x
+
+aws s3 cp testfile.txt s3://mytestbucket12345x123x
+
+aws s3 cp testfile.txt s3://mytestbucket12345x123x --force
+
+arn:aws:iam::390924261504:role/EC2-FULL-ACCESS
