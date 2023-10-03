@@ -28,3 +28,98 @@ aws s3 cp testfile.txt s3://mytestbucket12345x123x
 aws s3 cp testfile.txt s3://mytestbucket12345x123x --force
 
 arn:aws:iam::390924261504:role/EC2-FULL-ACCESS
+
+VPC CIDR Block and Subnets
+
+VPC CIDR Block  10/0/0/0
+/16 Subnet Mask 255/255/0/0
+
+Subnet name     IPv4 CIDR Block     Availability Zone       Route Table     Auto-assign Public IPv4
+private-1a      10.0.3.0/24         us-east-1a              Private-RT      No
+private-1b      10.0.4.0/24         us-east-1b              Private-RT      No
+public-1a       10.0.1.0/24         us-east-1a              MAIN            Yes
+public-1b       10.0.2.0/24         us-east-1b              MAIN            Yes
+
+Go to VPC Dashboard. Services/Networking & Content Delivery/VPC
+Your VPCs
+Click on Create new VPC
+Copy the configuration of the course documents. Code/AmazonVPC/custom-vpc.md
+Click on Actions
+Select Edit DNS hostnames (Edit VPC settings)
+Select Enable (Enable DNS hostnames)
+Create subnets.
+Copy configuration
+Click on Subnets.
+Click on Create Subnets.
+Search MyVPC.
+Put IP in IPv4 subnet CIDR block.
+Select Public-1B and Public-1A.
+View details
+Select Edit subnet settings.
+Enable auto-assign public IPv4 address
+Create Route Tables for the privates subnets
+Click on Route Table
+Put name to the Route Table
+Select MyVPC
+Create
+Select the tap Subnet associations
+Edith subnet associations.
+Select the private subnets.
+In the section of Route table search the main Rout table of MyVPC and named it MAIN.
+Create an Internet Gateway.
+Click on Internet Gateway.
+Put the name of the file.
+Attach to VPC
+Return Route Tables
+Select Route Table MAIN
+Select the tap Routes
+Edit routes
+Add route
+Add 0.0.0.0/0 and select MyGateway (igw-047e2ddaea0efbc11)
+
+Launch Instances ans Test VPC
+In the VPC Dashboard
+Click on NAT Gateways
+Create NAT Gateway.
+MyNATGW
+Select subnet Public-1A
+Click on Allocate Elastic IP
+Click on Create NAT Gateway
+Click on Route Tables
+Select Private-RT
+Tap Routes
+Edit Routes
+Add Route
+Add 0.0.0.0/0 and select MyNATGW
+In the section Security click on Security Groups
+Create a Security group
+Name it Public-Web
+Description: Public Web Access
+In VPC select MyVPC
+In Inbound rules
+Add rule
+Type: All traffic
+IP: 0.0.0.0/0
+Click on Create Security group
+Go to the file aws-cli-run-instances.md (later we have to use it)
+Goto EC2 Dashboard
+Click on Launch an instance
+Create a Key pair.
+Select Amazon Linux.
+Copy AMI ID (ami-03a6eaae9938c858c)
+Use the code of Launch instance in Public 1A
+Paste the id in the field of value
+Before
+aws ec2 run-instances --image-id <value> --instance-type <value> --security-group-ids <value> --subnet-id <value> --key-name <value> --user-data <value>
+After
+aws ec2 run-instances --image-id ami-0bb4c991fa89d4b9b --instance-type t2.micro --security-group-ids sg-0e31bf4b1a687c29c --subnet-id subnet-07a6736a5e154321a --key-name jhs-aws-labs --user-data file://user-data-subnet-id.txt
+In the section of instances name it Public-1A
+Launch another one with another subnet
+aws ec2 run-instances --image-id ami-0bb4c991fa89d4b9b --instance-type t2.micro --security-group-ids sg-0e31bf4b1a687c29c --subnet-id subnet-057c001250effc2b1 --key-name jhs-aws-labs --user-data file://user-data-subnet-id.txt
+Launch another one with another private subnet
+aws ec2 run-instances --image-id ami-0bb4c991fa89d4b9b --instance-type t2.micro --security-group-ids sg-0e31bf4b1a687c29c --subnet-id subnet-059d5930e28967a22 --key-name jhs-aws-labs --user-data file://user-data-subnet-id.txt
+
+aws ec2 run-instances --image-id ami-0bb4c991fa89d4b9b --instance-type t2.micro --security-group-ids sg-0e31bf4b1a687c29c --subnet-id subnet-091a70db2c757ac7e --key-name jhs-aws-labs --user-data file://user-data-subnet-id.txt
+To show a console to conect to instances Click on Conect button.
+
+
