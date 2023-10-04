@@ -1,0 +1,23 @@
+AWS Developer
+https://seda.udemy.com/?next=%2Forganization%2Fhome%2F
+
+Introduction to Service Management with ITIL 4 - 2
+https://seda.udemy.com/course/service-management-itil-4/
+
+Project Management : the Fundamentals - 2.5
+https://seda.udemy.com/course/project-management-the-fundamentals/
+
+Six Sigma: Certified Lean Six Sigma White Belt - 2
+https://seda.udemy.com/course/lean-six-sigma-white-belt-certification/
+
+70-462: SQL Server Database Administration (DBA) - 10
+https://seda.udemy.com/course/70-462-sql-server-database-administration-dba/
+
+Web Server IIS Mastery Course - 4.5
+https://seda.udemy.com/course/mastering-web-server-iis-85-from-scratch/
+
+Complete Guide to ASP.NET Core Identity - 7
+https://seda.udemy.com/course/complete-guide-to-aspnet-core-identity/
+
+AWS Certified Cloud Practitioner (CLF-C01) - 14.5
+https://seda.udemy.com/course/aws-certified-cloud-practitioner-new/
