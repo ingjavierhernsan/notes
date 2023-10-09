@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Datalist</title>
+</head>
+<body>
+	<header>
+		<h1>Sitio de peliculas</h1>
+		<search>
+			<form action="./search/">
+				<label for="movie">Buscar pelicula</label>
+				<input type="search" id="movie" name="q" />
+				<button type="submit">Buscar</button>
+			</form>
+		</search>
+	</header>
+	<br />
+	<input list="languages" id="language-choice" name="language-chice" />
+	<datalist id="languages">
+		<option value="1"></option>
+		<option value="2"></option>
+		<option value="3"></option>
+		<option value="4"></option>
+	</datalist>
+	<br />
+	<h3>Tiempo</h3>
+	<input type="time" list="popularHours" />
+	<datalist id="popularHours">
+		<option value="12:00"></option>
+		<option value="13:00"></option>
+		<option value="14:00"></option>
+	</datalist>
+	<br />
+	<form action="server.cgi" method="post" enctype="multipart/form-data">
+		<input type="file" name="image" accept="image/*" capture="user"> <!--camara frontal del cel-->
+		<input type="file" name="video" accept="video/*" capture="environment" /> <!--camara delantera del cel-->
+		<input type="submit" value="Upload" />
+	</form>
+	<br />
+	<dialog>
+		<button autofocus>Close</button>
+		<p>Hola a todos</p>
+	</dialog>
+	<button>Show the dialog</button>
+	
+	<script>
+		const dialog=document.querySelector("dialog");
+		const showButton=document.querySelector("dialog + button");
+		const closeButton=document.querySelector("dialog button");
+		
+		showButton.addEventListener("click", ()=>{
+			dialog.showModal();
+		});
+		
+		closeButton.addEventListener("click", ()=>{
+			dialog.close();
+		});
+	</script>
+	
+	<br />
+	<details>
+		<summary>Details</summary>
+		Something small enoufh to escape casual notice.
+	</details>
+	
+	<br />
+	<button popovertarget="my-popover">Abrir PopOver</button>
+	<div popover id="my-popover">Saludos a todos, devs!</div>
+	
+</body>
+</html>
