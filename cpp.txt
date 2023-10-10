@@ -22,7 +22,7 @@ C++
 20.- CONSTRUCTOR DE LA CLASE
 21.- DESTRUCTOR DE LA CLASE
 22.- PARTE PRIVATE Y PUBLIC DE UNA CLASE EN C++
-
+23.- SOBRECARGA DE METODOS
 
 1.- COMPILAR CODIGO C++
 g++ file.cpp -o file
@@ -619,3 +619,24 @@ class Dado{
 	public:
 		void imprimir();
 };
+
+23.- SOBRECARGA DE METODOS
+Otra caracteristica de C++ con respecto a los metodos es que podemos definir varios con el mismo nombre.
+
+Cuando definimos dos o mas metodos con el mismo nombre decimos que los estamos sobrecargando.
+
+La resticcion para la sobrecarga de metodos es qeu lso mismos deben diferir en cantidad o tipo de parametros. Es decir podemos definir dos metodos con el mismo nombre pero uno tenga por ejemplo 3 parametros y otro tenga 2 parametros:
+
+void mayor(int x1, int x2, int x3)
+void mayor(int x1, int x2)
+
+O tengan la misma cantidad de parametros pero sean de distinto tipo:
+
+void mayor(int x1, int x2)
+void mayor(char nombre1[40], char nombre2[40])
+
+Sobrecarga del constructor
+
+Como sabemos el constructor es un metodo de la clase y como tal podemos sobrecargarlo, es decir definir mas de un constructor.
+
+Cuando definimos un objeto de la clase es cuando indicamos a que constructo llamaremos segun nuestras necesidades.
