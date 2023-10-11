@@ -23,6 +23,8 @@ C++
 21.- DESTRUCTOR DE LA CLASE
 22.- PARTE PRIVATE Y PUBLIC DE UNA CLASE EN C++
 23.- SOBRECARGA DE METODOS
+24.- COLABORACION DE CLASES EN C++
+
 
 1.- COMPILAR CODIGO C++
 g++ file.cpp -o file
@@ -640,3 +642,156 @@ Sobrecarga del constructor
 Como sabemos el constructor es un metodo de la clase y como tal podemos sobrecargarlo, es decir definir mas de un constructor.
 
 Cuando definimos un objeto de la clase es cuando indicamos a que constructo llamaremos segun nuestras necesidades.
+
+24.- COLABORACION DE CLASES EN C++
+Normalmente un problema resulto con la metodologia de programacion orientada a objetos no interviene una sola clase, sino que hay muchas clases que interactuan y se comunican.
+
+Plantearemos un problema separando las actividades en dos clases.
+
+archivo1.cpp
+#include<iostream>
+
+using namespace std;
+
+class Cliente {
+	char nombre[40];
+	float monto;
+
+	public:
+		Cliente(const char nom[40]);
+		void depositar(int m);
+		void extraer(int m);
+		float retornarMonto();
+		void imprimir();
+};
+
+class Banco {
+	Cliente cliente1, cliente2, cliente3;
+
+	public:
+		Banco();
+		void operar();
+		void depositosTotales();
+};
+
+Cliente::Cliente(const char nom[40])
+{
+	strcpy_s(nombre, nom);
+	monto=0;
+}
+
+void Cliente::depositar(int m)
+{
+	monto=monto+m;
+}
+
+void Cliente::extraer(int m)
+{
+	monto=monto-m;
+}
+
+float Cliente::retornarMonto()
+{
+	return monto;
+}
+
+void Cliente::imprimir()
+{
+	cout << "Nombre: " << nombre << " Monto:" << monto << "\n\n";
+}
+
+Banco::Banco() :cliente1("juan"), cliente2("pedro"), cliente3("luis")
+{
+
+}
+
+void Banco::operar()
+{
+	cliente1.depositar(100);
+	cliente2.depositar(150);
+	cliente3.depositar(200);
+	cliente3.extraer(150);
+}
+
+void Banco::depositosTotales()
+{
+	float t = cliente1.retornarMonto() + cliente2.retornarMonto() + cliente3.retornarMonto();
+	cout << "El total de dinero en el banco es: " << t << "\n\n";
+	cliente1.imprimir();
+	cliente2.imprimir();
+	cliente3.imprimir();
+}
+
+int main()
+{
+	Banco banco1;
+	banco1.operar();
+	banco1.depositosTotales();
+	return 0;
+}
+
+Segundo ejemplo:
+#include<iostream>
+#include<cstdlib>
+#include<ctime>
+
+using namespace std;
+
+class Dado{
+	int valor;
+
+	public:
+		void tirar();
+		void imprimir();
+		int retornarValor();
+};
+
+class JuegoDeDados{
+	Dado dado1, dado2, dado3;
+	
+	public:
+		void jugar();
+};
+
+void Dado::tirar()
+{
+	valor=rand()%6+1;
+}
+
+void Dado:imprimir()
+{
+	cout << "Valor del Dado: " << valor << "\n";
+}
+
+int Dado::retornarValor()
+{
+	return valor;
+}
+
+void JuegoDeDados::jugar()
+{
+	dado1.tirar();
+	dado1.imprimir();
+	dado2.tirar();
+	dado2.imprimir();
+	dado3.tirar();
+	dado3.imprimir();
+
+	if(dado1.retornarValor() == dado2.rerornarValor() && 
+		dado1.retornarValor() == dato3.retornarValor())
+		{
+			cout<<"Gano";
+		}
+		else
+		{
+			cout<<"Perdio";
+		}
+}
+
+int main()
+{
+	srand(time(NULL));
+	JuegoDeDados juego1;
+	juego1.jugar();
+	return 0;
+}

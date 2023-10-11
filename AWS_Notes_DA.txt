@@ -1,0 +1,31 @@
+Launching an EC2 Instance running Linux
+
+Enter EC2
+Clic on Instances
+Clic on Launch an instance
+Type a instance name (you can put it a tag)
+In Application and OS Images (Amazon Machine Image), select an OS (Amazon Linux 2 AMI(HVM) - Kernel 5.10, SSD Volume Type)
+Select 64-bit (x86)
+Select Instance type (t2.micro)
+Key pair (login), clic on Create key pair
+Type the name EC2 Tutorial
+Select RSA
+Select .pem (to Windows 7 or Windows 8 select .ppk)
+And clic in Crear Key pair
+Network settings
+Select Allow SSH traffic from (Anywhre 0.0.0.0/0)
+Select Allow HTTP traffic from the internet
+Configure storage
+Select 1x8 GiB gp2 Root Volume
+Clic in Advance
+Select Yes in Delete on termination
+Advanced details
+In the final section User data paste the next info:
+From the files of CODE/ec2-fundamentas/ec2-user-data.sh copy the text on it.
+This code will be read when the isntance is first started and only once.
+Clic on Launching instance
+Check in the list of Instances (maybe it be in Instance state Pending)
+To Check the Instance on Internet clic in open address in the seccion of Public IPv4 address.
+When the practice finish stop the instance.
+
+When start again the instance the public IPv4 will change, but the Private IPv4 won't change.
