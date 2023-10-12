@@ -29,3 +29,25 @@ To Check the Instance on Internet clic in open address in the seccion of Public 
 When the practice finish stop the instance.
 
 When start again the instance the public IPv4 will change, but the Private IPv4 won't change.
+
+Security groups
+In the section EC2, the area of instances, select a instancess and select the tap Security
+Search the Security groups and check the information.
+In the area Networking & Security
+Clic on Security groups
+Select the security group launch-wizard-1
+Select the tap Inbound rules
+Clic on Edit inbound rules
+You can see the begin page of a instance because the second rule (HTTP)
+Delete it
+Save the rules.
+Now refresh the beginig page, this appear with the animation of process.
+When a timeout error occure, the most time is because of Security rule.
+Create a again the deleted rule.
+Clic on the Add rule button
+Select HTTP
+Select Anywhere-IPv4 0.0.0.0/0
+Clic on Save rules button
+Refresh the page again
+Select the Outbound rules.
+
