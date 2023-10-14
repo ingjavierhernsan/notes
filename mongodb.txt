@@ -1,0 +1,144 @@
+MongoDB
+
+1.- ELEMENTOS ESENCIALES DE MONGODB: BASE DE DATOS - COLECCION - DOCUMENTO
+2.- MOSTRAR LAS BASE DE DATOS
+3.- LIMPIAR PANTALLA
+4.- INSERTAR DOCUMENTOS MEDIANTE LOS METODOS INSERTONE E INSERTMANY DE UNA COLECCION
+5.- CAMPO OBLIGATORIO _ID
+6.- COMANDOS DEL SHELL DE MONGODB: USE (NOMBRE BASE DATOS), SHOW DBS, SHOW COLLECTIONS, HELP
+
+
+1.- ELEMENTOS ESENCIALES DE MONGODB: BASE DE DATOS - COLECCION - DOCUMENTO
+MongoDB es una base de datos documental, el elemento esencial es el documento que normalmente se los agrupa en colecciones de documentos similares. Una base de datos en MongoDB es un conjunto de colecciones:
+
+Base de datos 1:
+    Coleccion 1:
+        - Documento1
+        - Documento2
+        - Documento3
+    
+    Coleccion 2:
+        - Documento1
+        - Documento2
+        - Documento3
+
+MongoDB utiliza el formato JSON para representar los datos en un "documento"
+
+{
+    codigo: 1,
+    nombre: 'El aleph',
+    autor: 'Borges',
+    editoriales: ['Planeta', 'Siglo XXI']
+}
+
+Crear base de datos:
+use base1
+
+Mediante el comando 'use' activamos una base de datos existente o creamos una nueva, queda luego acitva la base de datos 'base1'.
+
+Insertar datos:
+
+insertOne()
+db.NombreColeccion.insertOne()
+
+db.libros.insertOne(
+    {
+        codigo: 1,
+        nombre: 'El aleph',
+        autor: 'Borges',
+        editoriales: ['Planeta', 'Siglo XXI']
+    }
+)
+
+Mostrar los datos almacenados en la coleccion 'libros' podemos llamar al metodo 'find':
+
+find()
+
+db.NombreColeccion.find()
+
+db.libros.find()
+
+{
+    _id: ObjectId("652a4232b3948c7b311df3af"),
+    codigo: 1,
+    nombre: 'El aleph',
+    autor: 'Borges',
+    editoriales: ['Planeta', 'Siglo XXI']
+}
+
+Todos los documentos requiere una clave principal almacenada en el campo _id. Podemos indicar nosotros el valor a almacenar en el campo _id, pero si no lo hacemos se crea en forma automatica.
+
+Mostrar la base de datos donde estamos:
+
+db
+
+Cada vez que iniciamos MongoDB shell se activa por defecto la base de datos 'test' mediante el comando 'use' debemos activar la base de datos que necesitamos trabajar.
+
+2.- MOSTRAR LAS BASE DE DATOS
+
+show dbs
+
+3.- LIMPIAR PANTALLA
+
+cls
+
+ctrl + l
+
+
+4.- INSERTAR DOCUMENTOS MEDIANTE LOS METODOS INSERTONE E INSERTMANY DE UNA COLECCION
+
+InsertOne: Inserta un documento en una coleccion.
+InsertMany: Inserta multiples documentos en una coleccion.
+
+db.libros.insertMany(
+    [
+        {
+            codigo: 3,
+            nombre: 'Aprenda PHP',
+            autor: 'Mario Molina',
+            editoriales: ['Planeta']
+        },
+        {
+            codigo: 4,
+            nombre: 'Java en 10 minutos',
+            autor: 'Barros Sergio',
+            editoriales: ['Planeta', 'Siglo XXI']
+        }
+    ]
+)
+
+5.- CAMPO OBLIGATORIO _ID
+En MongoDB todo documento requiere un campo clave que se debe llamar _id. Si nosotros como desarrolladores no definimos dicho campo el mismo se crea en forma automatica y se carga un calor unico.
+
+Podemos definir y cargar un valor en el campo _id cuando inicializamo un documento:
+
+db.clientes.insertOne(
+    {
+        _id: 1,
+        nombre: 'Lopez Marcos',
+        domicilio: 'Colon 111',
+        provincia: 'Cordoba'
+    }
+)
+
+Cuando se ejecuta el metodo insertOne nos retorna un objeto JSON informando del resultado de la insercion medinate un objeto con dos campos, el primero 'acknowledged' que indica si el documento fue admitido en la coleccion y el _id que en este caso lo define el usuario de la base de datos.
+
+Se se produce un error nos genera un objeto JSON con otra estructura, probemos de intentar de ingresar un segundo docuemnto con el mismo _id.
+
+Nos retorna un objeto JSON que entre otros campos define uno llamado 'errmsg' con el mensaje de error.
+
+Si nuestra aplicacion administra el campo '_id' hay que tener en cuenta que nunca puede repetirse y en el caso que intentemos ingresar un documento con clave repetida luego dicho documento no se inserta en la coleccion.
+
+6.- COMANDOS DEL SHELL DE MONGODB: USE (NOMBRE BASE DATOS), SHOW DBS, SHOW COLLECTIONS, HELP
+
+show dbs
+Muestra las bases de datos.
+
+use base1
+Selecciona la base de datos que deseamos utilizar.
+
+show collections
+Muestra las colecciones que tiene la base de datos.
+
+help
+Si queremos consultar los comandos esenciales del shell de MongoDB debemos emplear el comando 'help'.
