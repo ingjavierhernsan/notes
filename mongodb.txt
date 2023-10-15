@@ -6,6 +6,8 @@ MongoDB
 4.- INSERTAR DOCUMENTOS MEDIANTE LOS METODOS INSERTONE E INSERTMANY DE UNA COLECCION
 5.- CAMPO OBLIGATORIO _ID
 6.- COMANDOS DEL SHELL DE MONGODB: USE (NOMBRE BASE DATOS), SHOW DBS, SHOW COLLECTIONS, HELP
+7.- BORRAR BASES DE DATOS, COLECCIONES O TODOS LOS DOCUMENTOS DE UNA COLECCION
+8.- RECUPERAR ALGUNOS DOCUMENTOS DE UNA COLECCION CON EL METODO FIND
 
 
 1.- ELEMENTOS ESENCIALES DE MONGODB: BASE DE DATOS - COLECCION - DOCUMENTO
@@ -142,3 +144,40 @@ Muestra las colecciones que tiene la base de datos.
 
 help
 Si queremos consultar los comandos esenciales del shell de MongoDB debemos emplear el comando 'help'.
+
+7.- BORRAR BASES DE DATOS, COLECCIONES O TODOS LOS DOCUMENTOS DE UNA COLECCION
+Si queremos eliminar todos los documentos se una coleccion debemos utilizar el metodo 'deleteMany' aplicado a una coleccion existente:
+
+db.NombreColeccion.deleteMany({})
+
+use base1
+deb.libros.deleteMany({})
+show collections
+
+Es importante notar que luego de llamar al metodo deleteMany la coleccion 'libros' sigue existiendo.
+
+Para eliminar los documentos de una coleccion y la coleccion propiamente dicha debemos emplear el metod 'drop':
+
+db.NombreColeccion.drop()
+
+use base1
+db.libros.drop()
+show collections
+
+Para eleminar una base de datos en forma completa, es decir todas sus colecciones y documentos debemos emplear el metodo 'dropDatabase' del objeto 'db':
+
+use nombreBaseDeDatos
+db.dropDatabase()
+
+show dbs
+use base1
+db.dropDatabase()
+
+8.- RECUPERAR ALGUNOS DOCUMENTOS DE UNA COLECCION CON EL METODO FIND
+El metodo find nos permite seleccionar solo algunos documentos que cumplen una condicion:
+
+db.libros.find({_id:1})
+
+Podemos disponer mas de un campo:
+
+db.libros.find({precio:50, cantidad:20})

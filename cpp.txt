@@ -24,6 +24,10 @@ C++
 22.- PARTE PRIVATE Y PUBLIC DE UNA CLASE EN C++
 23.- SOBRECARGA DE METODOS
 24.- COLABORACION DE CLASES EN C++
+25.- HERENCIA EN C++
+26.- LOS PUNTEDOS EN C++
+27.- PARAMETROS DE METODOS DE TIPO PUNTERO
+28.- VECTORES Y PUNTEROS
 
 
 1.- COMPILAR CODIGO C++
@@ -795,3 +799,266 @@ int main()
 	juego1.jugar();
 	return 0;
 }
+
+25.- HERENCIA EN C++
+La herencia significa que se pueden crear nuevas clases partiendo de clases existentes, que tendra todas los atributos y los metodos de su 'superclase' o 'clase padre' y ademas se le podran anadir otros atributos y metodos.
+
+Clase padre
+Clase de la que desciende o deriva una clase. Las clases hijas (descendientes) heredan (incorporan) automaticamente los atriburos y metodos de la clase padre.
+
+Subclase
+Clase que desciende de otra. Hereda automaticamente los atributos y metodos de su superclase. Es una especializacion de otra clase. Admiten la definicion de nuevos atributos y metodos para aumentar la especializacion de la clase.
+
+#include<iostream>
+
+using namespace std;
+
+class Operacion{
+	protected:
+		int valor1;
+		int valor2;
+		int resultado;
+	public:
+		void cargar1();
+		void cargar2();
+		void mostrarResultado();
+};
+
+class Suma: public Operacion{
+	public:
+		void opearar();
+};
+
+class Resta: public Operacion{
+	public:
+		void operar();
+};
+
+
+void Operacion::cargar1(){
+	cout << "Ingrese primer valot: ";
+	cin >> valor1;
+}
+
+void Operacion::cargar2(){
+	cout << "Ingrese segundo valor: ";
+	cin >> valor2;
+}
+
+void Operacio::mostrarResultado(){
+	cout << resultado << "\n";
+}
+
+void Suma::operar(){
+	resultado=valro1+valor2;
+}
+
+void Resta::operar(){
+	resultado=valor1-valor2;
+}
+
+int main(){
+	Suma suma1;
+	suma1.cargar1();
+	suma1.cargar2();
+	suma1.operar();
+
+	cout<<"Lasuma de los dos valores es: ";
+
+	suma1.mostratResultado();
+
+	Resta resta1;
+	resta1.cargar1();
+	resta1.cargar2();
+	resta1.operar();
+
+	cout<<"La diferencia de los dos valores es: ";
+
+	resta1.mostrarResultado();
+
+	return 0;
+}
+
+Definimos los atributos con modificador de acceso 'protected' para que la subclase tenga acceso a dichos atributos. Si los definimos private las subclases no pueden acceder a dichos atributos.
+
+Ahora veamos como es la sintaxis para indicar que una clase hereda de otra:
+
+class Suma: public Operacion{
+	public:
+		void operar();
+};
+
+Luego la caracteristica que anade la clase Suma es el siguiente metodo:
+
+void Suma::operar()
+{
+	resultado = valor1+valor2;
+}
+
+El metod operar puede acceder a los atributos heredados (siempre y cuando lso mismos se declaren protected, en caso que sean private si bien lo hereda de al clase padre solo los pueden modificar metodos de dicha clase padre).
+
+Ahorea podemos decir que la clase Suma tiene cuatro metodos (tres heredados y uno propio) y 3 atributos (todos heredados).
+
+26.- LOS PUNTEDOS EN C++
+Los punteros son variables que almacenan direcciones de memoria de otra variable.
+
+El manejo de punteros es fundamental para conceptos futuros como la creacion y liberacion de objetos en tiempo de ejecucion de una programa.
+
+hemos visto las estructuras de datos tipo vector y matrices, pero hay otro tipo de estructuras llamadas estructuras dinamicas que requieren obligatoriamente el empleo de punteros y resuelven otro conjunto de problemas qeu las estructuras estaticas no pueden.
+
+Un puntero se define de la siguiente manera:
+
+<tipo de dato al que apunta> * <nombre del puntero>;
+
+Puntero a tipo de dato numerico
+
+int *pe;
+
+Asignacion de contenido a un puntero:
+
+int x=9;
+pe=&x;
+
+Un puntero contiene una direccion, aqui le asignamos la direccion de la variable entera x, por eso debemos anteceder el simbolo &.
+
+Podemos asignar un valor a lo apuntado por el puntero:
+
+int x=9;
+pe=&x;
+*pe=5; //la variable x almacena 5
+cout<<x; //5
+
+Aqui le asignamos el valor 5 a la direccion a la cual apunta el puntero pe, es decir, a la variable entera x. Para indicar que el valor 5 es asignado a donde apunta el puntero pe, antecedemos al nombre del puntero el simbolo *.
+
+Impresion:
+No se puede imprimir el contenido de un puntero, que es una direccion de memoria, lo que imprimimos es el contenido de la variable a la cual apunta el puntero:
+
+int x=9;
+pe=&x;
+cout<<*pe; // imprime 9
+
+27.- PARAMETROS DE METODOS DE TIPO PUNTERO
+Hemos visto que cuando un metodo debe retornar un dato diponemos al principio del metodo el tipo de dato que retornara (int, float, etc.) y dentro del metodo especificamos con la palabra return el valor que devuelve.
+
+Que sucede si queremos rerotnar dos valores o mas en un solo metodo? Una forma de solucionar este problma es pasar la direccion de dos variables y que las recivan dos parametros de tipo puntero, luego por medio de estos punteros modificamos las variables que les pasamos por ejemplo desdde la main.
+
+#include<iostream>
+
+using namesapce std;
+
+class Vector{
+	int vec[5];
+
+	public:
+		void cargar();
+		void retornarMayorMenor(int *pmay, int *pmen);
+};
+
+void Vector::cargar()
+{
+	for(int f=0; f<5; f++){
+		cout<<"Ingrese component: ";
+		cin >> vec[f];
+	}
+}
+
+void Vector::retornarMayorMenor(int *pmay, int *pmen){
+	*pmay=vec[0];
+	*pment=vec[0];
+
+	for (int f=1; f<5; f++){
+		if (vec[f]>*pmay){
+			*pmay=vec[f];
+		} else {
+			if(vec[f]<*pmen){
+				*pmen=vec[f];
+			}
+		}
+	}
+}
+
+int main(){
+	Vector vector1;
+	vector1.cargar();
+
+	int ma, me;
+
+	vector1.teronarMayorMenor(&ma, &me);
+
+	cout<<"El elemento mayor del vector es: " << ma << "\n";
+	cout<<"El elemento menor del vector es: " << me << "\n";
+
+	return 0;
+}
+
+28.- VECTORES Y PUNTEROS
+Cundo definimos un vector, por ejemplo:
+
+int vec[3];
+vec[0]=10;
+vec[1]=50;
+vec[2]=100;
+
+Lo que estamos definiendo es un puntero que reserva espacio para 3 componentes de tipo entero, guardando la direccion del primer elemento. Esto sucede en memoria (suponiendo que un tipo int ocupa 4 bytes).
+
+Cuando accedemos a una componente en particular del vector, calcula la direccion correspondiente de la siguiente manera: direccion del puntero + (bytes que ocupa segun tipo de dato * subindice).
+
+Suma a la direccion que almacena, que es la del primer elemento, los bytes segun el tipo de dato * subindice indicado.
+
+Para ejecutar esta linea:
+
+cout<<x[0];
+
+Encuentra la direccion de la componente 0 utilizando el calculo anterior: 1004 + (4*0), o sea 1004.
+
+Para encontrar la direccion de la componente subindice 2: 1004 +(4*2), o sea 1012.
+
+Vectores de caracteres
+Cuanod definimos un vector de caracteres, por ejemplo:
+
+char cadena[10];
+
+lo que estamos definiendo es un puntero que reserva espacio para 10 componentes de tipo char, guardando la direccion del primer elemento, el cero. Esto sucede en memoria:
+
+Dir. de Mem.		Contenido		Nombre de variable
+1000				1004			Cadena
+1004								[0]
+1005								[1]
+1006								[2]
+1007								[3]
+1008								[4]
+1009								[5]
+
+Cuando cargamos la cadena con:
+
+strcpy_s(Cadena, 10, "Hola");
+
+busca la direccion del puntero (1004) y comienza a cargar los caracteres, cuando la cadena finaliza, agrega el terminador de cadena. En memoria:
+
+Dir. de Mem.		Contenido		Nombre de variable
+1000				1004			Cadena
+1004				'H'				[0]
+1005				'o'				[1]
+1006				'l'				[2]
+1007				'a'				[3]
+1008				'\0'			[4]
+1009								[5]
+
+cout<<cad[5];
+
+Cuando solicitamos la impresion de la componete 5, encuenta la direccion de dicha componente utilizando el calculo cisto anteriormente: direccion del vector + (bytes segun tio de dato *subindice). El tipo de dato caht ocupan normalmente 1 byte.
+
+Punteros a char
+Carga e impresion
+
+char cad[10];
+strcpy_s(cad, 10, "Sol");
+char *pc;
+pc=cad;
+cout<<pc
+
+Cuando asignamos a un puntero a char una cadena, no antecedemos a cad el simbolo & porque cad contine una direccion. Tampoco antecedemos el asterisco * antes de pc. Estamos manejando direcciones.
+
+Imprimimos donde apunta el puntero:
+
+cout<<pc;
