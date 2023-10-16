@@ -28,6 +28,8 @@ C++
 26.- LOS PUNTEDOS EN C++
 27.- PARAMETROS DE METODOS DE TIPO PUNTERO
 28.- VECTORES Y PUNTEROS
+29.- OPERADORES ++ Y -- CON VARIABLES DE TIPO PUNTERO
+30.- PILA DINAMICA
 
 
 1.- COMPILAR CODIGO C++
@@ -1062,3 +1064,113 @@ Cuando asignamos a un puntero a char una cadena, no antecedemos a cad el simbolo
 Imprimimos donde apunta el puntero:
 
 cout<<pc;
+
+29.- OPERADORES ++ Y -- CON VARIABLES DE TIPO PUNTERO
+Los operadores de incremento y devremento ++ y -- pueden utilizarse con punteros. Estos operadores aplicados a un puntero incrementa o decrementan la direccion que contiene el puntero seugn el tipo de dato a que apunta. Si aun puntro a entero le aplicamos el operador ++, incrementa la direccion en 4 bytes (puede depender del sistema operativo). Si este puntero a entero almacena la direccion 5000, al aplicarle el operador ++ sucesivamente la direccion ira aumentando 5004, 5008, 5012, 5016, etc.
+
+Si a un puntero a float le aplicamos el operador --, incrementa la direcion en 4 bytes (puede depender del sistema operativo). Si este puntero almacena la direccion 5000, al aplicarle el operador ++ sucesivamente la direccion ira aumentando 5004, 5008, 5012, etc.
+
+Si a un puntero a char le aplicamos el operador --, decrementa la direccion en 1 byte (puede depender del sistema operativo). Si este puntero alamacena la direccion 5000, al aplicarle el operador -- sucesivamente la direccion ira disminuyendo: 4009, 4008, 4007, 4006, etc.
+
+#include<iostream>
+
+using namespace std;
+
+int main(){
+	char cad[5];
+	strcpy_s(cad, 5, "sol");
+
+	char *pc;
+	pc=cad;
+
+	cout<<pc; //imprime sol
+	pc++;
+
+	cout<<pc; //imprime ol
+	pc++;
+
+	cout<<pc; //imprime l
+	pc--;
+
+	cout<<pc; //imprime ol
+
+	int x[5] = {10, 50, 100, 99, 33};
+
+	int *pe;
+	pe = &x[3];
+	
+	cout<<*pe; //imprime 99
+	pe--;
+
+	cout<<*pe; //imprime 100
+
+	return 0;
+}
+
+30.- PILA DINAMICA
+Otra utilizacion fundamental de los punteros es para hacer uso de la pila dinamica de la memoria que administra el sistema operativo.
+
+Lo primero que veremos es qeu todas las variables qeu definimos ocupan un sapcio llamado PILA ESTATITCA del programa (esta pila es limitada).
+
+A medida que definimos variables se reduce el espacio disponible para definir otras variables.
+
+Por ejemplo si definimos un vector con 10000 componente de tipo entero en la funcion main debemos tener en cuenta que 40 Kb (si cada entero ocupa 4 bytes) de la pila estatica estara reservado para dicha estructura.
+
+Es colun que en programas de mediano y gran tamano la pila estatica no nos alcance para almacenar los datos. En estos casos debemos recurrir a la PILA DINAMICA.
+
+La PILA DINAMICA solo se puede acceder por medio de punteros.
+
+La pila dinamica solo esta limitada por la cantidad de memoria ram del equipo.
+
+Memoria:
+Sistema Operativo | Programa (exe) | Pila Estatica | Pila Dinamica
+
+Podemos observer que la memoria del equipo tiene cargado el sistema operativo que administra entre otras cosas los programas que se ejecutan. Todo programa que se ejecuta (exe) tiene asignado un espacio para la pila estatica (puede variar a partir, por ejemplo 64 Kb).
+
+La pila dinamica es toda la memoria RAM que no es ocupada por el sistema operativo y otros programas que estan ejecuatandose actualmente.
+
+Para acceder al espacio de memoria llamada Pila dinamica debemos solicitarla al sistema operativo.
+
+Para solicitar espacio en la pila dinamica debemos utilizar el operador new y es funcamental devolverla mediante el operador delete (la no devolucion del espacio solicitado hara que nuestra computadora en algun momento se bloquee por falta de espacio en la memoria RAM).
+
+La administracion de la memoria dinamica ofrece una gran libertad al programador pro trae como contrapartida una gran responsabilidad para administrarla correctamente.
+
+Definir un vector de 5 elementos y localizarlo en la pila dinamica.
+
+#include<iostream>
+
+using namespace std;
+
+int main(){
+	int=*p;
+
+	p=new int[5];
+
+	for(int f=0; f<5; f++){
+		cout<<"Ingrese elemento: ";
+		cin>>p[f];
+	}
+
+	cout<<"Contenido del vector: ";
+
+	for(int f=0; f<5; f++){
+		cout<<p[f]<<"-";
+	}
+
+	delete []p;
+
+	return 0;
+}
+
+Para crear un vector en la pila dinamica debemos utilizar el operador new:
+int=*p;
+p=new int[5];
+
+Finalmente otro punto nuevo a tener en cuenta cuando trabajamos con variables licalizadas en la pila dinamica es devolver el espacio utilizado:
+
+delete []p;
+
+La localicacion de variables en la pila dinamica trae consigo dos ventajas, por una parte la pila dinamica es mucho mas grande que la pila estatica por lo que podemos definir muchas mas variables que en la pila estatica.
+
+Por otro lado podemos solicitar espacio para estructura de datos en tiempo de ejecucion (Por ejemplo podemos definir un vector con una cantidad de componentes que dependa de una variable).
+

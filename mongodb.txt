@@ -8,6 +8,10 @@ MongoDB
 6.- COMANDOS DEL SHELL DE MONGODB: USE (NOMBRE BASE DATOS), SHOW DBS, SHOW COLLECTIONS, HELP
 7.- BORRAR BASES DE DATOS, COLECCIONES O TODOS LOS DOCUMENTOS DE UNA COLECCION
 8.- RECUPERAR ALGUNOS DOCUMENTOS DE UNA COLECCION CON EL METODO FIND
+9.- OPERADORES RELACIONALES $EQ, $GT, $GTE, $LT, $LTE, $IN, $NIN Y $NE
+10.- BORRAR DOCUMENTOS DE UNA COLECCION CON LOS METODOS DELETEONE Y DELETEMANY
+11.- MODIFICAR UN DOCUMENTO MEDIANTE EL METODO UPDATEONE
+12.- MODIFICAR MULTIPLES DOCUMENTOS CON EL METODO UPDATEMANY
 
 
 1.- ELEMENTOS ESENCIALES DE MONGODB: BASE DE DATOS - COLECCION - DOCUMENTO
@@ -181,3 +185,116 @@ db.libros.find({_id:1})
 Podemos disponer mas de un campo:
 
 db.libros.find({precio:50, cantidad:20})
+
+9.- OPERADORES RELACIONALES $EQ, $GT, $GTE, $LT, $LTE, $IN, $NIN Y $NE
+Listado de operadores relacionales
+$eq - equal - igual
+$lt - low than - menor que
+$lte - low thna equal - menor o igual que
+$gt - greater than - mayor que
+$gte - greater than equal - mayor o igual que
+$ne - not equal - distinto
+$in - in - dentro de
+$nin - not in - no dentro de
+
+Otra froma de expresar  la busqueda de todos los libros con un precio igual a 50 es:
+
+db.libros.find({precio:{$eq:50}})
+
+Para mostrar todos los libros con un precio inferior a 30 tenemos que utilizar el operador $lt:
+
+db.libros.find({precio:{$lt:30}})
+
+Recuperar todos los libros que tienen un precio mayor a 40:
+
+db.libros.find({precio: {$gt:40}})
+
+Rcuperar todos los libros que en el campo cantidad tiene 50 o mas:
+
+db.libros.find({cantidad:{$gte:50}})
+
+Recuperar todos los libros que en le campo cantidad hay un valot distinto a 50:
+
+db.libros.find({cantidad:{$ne:50}})
+
+Recuperar todos los libros cuyo precio esten comprendidos entre 20 y 45:
+
+db.libros.find({precio:{$gte:20, $lte:45}})
+
+Recuperar todos los libros del editorial 'Planeta':
+
+db.libros.find({editorial: {$in:['Planeta']}})
+
+Recuperar todos lso libros que no pretenezcan a la editorial 'Planeta':
+
+db.libros.find({editorial:{$nin: ['Planeta']}})
+
+10.- BORRAR DOCUMENTOS DE UNA COLECCION CON LOS METODOS DELETEONE Y DELETEMANY
+Hemos vidto en conceptod anteriores que podemos eliminar todos los documentos de unacoleecion mediante el metodod deleteMany y psando un objeto literal vacio:
+
+db.libros.deleteMany({})
+
+deleteMany: Borra todos los documentos que cumplen la condicion que le enviamos.
+deleteOne: Borra el primer documento que cumple la condicion que le pasamos.
+
+Si queremos eliminar el documento que almacena en el campo el _id con valor 1 luego podemos utilizar la sintaxis:
+
+db.libros.deleteOne({_id:1})
+
+Tambien:
+
+db.libros.deleteOne({_id:1 {$eq:1}})
+
+Lo mas conveniente es utilizar el metodo 'deleteOne' ya que solo uno puede cumplir esa condicion al ser la clave primaria del documento.
+
+La sintaxis anterior es bueno recordarv ya que los otros operadores relacionales hay que utilizarlos en forma obligatoria y no tienen una sintaxis alternativa como el $eq.
+
+Para borrar todos los libros que tienen un precio mayor o igual a 50 tenemos:
+
+db.libros.deleteMany({precio: {$gte:50}})
+
+11.- MODIFICAR UN DOCUMENTO MEDIANTE EL METODO UPDATEONE
+Para modificar un documento en particular disponemos de un metodo llamado updateOne.
+
+db.libros.updateOne({_id:{$eq:1}, {$set:{precioL15, cantidad:1}}})
+
+Hemos llamado al metodo updateOne con dos prametros, el primero indica el documento a modificar y el segundo parametro utilizamos el operador $set que es un operador de actualizacion seguidamente con lso campos y valores a modificar.
+
+Con las vase de datos documentales tengamos en cuenta que los documentos pueden tener distintas cnatidades de campos. Por ejemplo si queremos agrefar el comapo descripcion al libro con '_id:4' debemos utilizar la sintaxis:
+
+db.libros.updateOne({_id:{$eq:t}}, {$set: {descripcion: 'Cada unidad trata un tema fundamental de Java desde 0.'}})
+
+El campo 'descripcion' solo se aplicara al documento con '_id:4', los demas no los tendran.
+
+Si queremos eliminar un campo de un documento debemos emplear el operador de actualizacion $unset.
+
+db.libros.updateOne({_id:{$eq:4}}, {$unset:{descripcion:''}})
+
+Luego de ejecutar el updateOne tenemos que para el documento que tiene el _id 4 se ha eliminado el campo 'descripcion'.
+
+Es importante entender que mediante el operador $unset eliminamos el cmapo, en camvio si utilizamos el operador $set modificamos el contenido del campo.
+
+Discponemos tambien de operadores de modificacion para arreglos, veamos como podemos agregar y eliminar elementos en el arreglo 'editorial'.
+
+db.libros.updateOne({_id:{$eq:1}}, {$push:{editorial:'Atlantida'}})
+
+Podemos ver que luego de ejecutarse el metodo updateOne el arreglo 'editorial' tiene una nueva componente para el documento con '_id:1'.
+
+De forma similar para eliminar un elmento del arreglo debemos emplear el operador $pull:
+
+db.libros.updateOne({_id:{$eq:1}}, {$pull:{editorial:'Atlantida'}})
+
+12.- MODIFICAR MULTIPLES DOCUMENTOS CON EL METODO UPDATEMANY
+El sigundo metodo que nos permite actualizar documentos pero en forma masiva es el metodo updateMany.
+
+db.libros.updateMany({_id:{$gt:2}}, {$set:{canitdad:0}})
+
+db.libros.updateMany({cantidad: {$eq:0}}, {$set:{faltantes:true}})
+
+db.libros.updateMany({cantidad:{$eq:0}}, {$unset:{faltantes:true}, $set:{cantidad: 100}})
+
+La primera modificacion masiva la hacemos con todos los libros cuyo _id sean mayores a 2, fijando el campo cantidad con 0.
+
+La segunda modificacion masiva la hacemos con todos los libros que almacenan en el campo 'cantidad' el valor cero, agregando el campo 'faltantes' con el valor true.
+
+La tercer y ultima modificacion masiva la hacemos con todos los libros que almacenan en el campo 'cantidad' el valor cero, elimnamos el campo faltantes y fijamos el campo cantidad con el valor 100.
