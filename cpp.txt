@@ -30,6 +30,8 @@ C++
 28.- VECTORES Y PUNTEROS
 29.- OPERADORES ++ Y -- CON VARIABLES DE TIPO PUNTERO
 30.- PILA DINAMICA
+31.- OBJETOS DINAMICOS
+32.- METODOS INLINE
 
 
 1.- COMPILAR CODIGO C++
@@ -1159,7 +1161,7 @@ int main(){
 
 	delete []p;
 
-	return 0;
+	return \0;
 }
 
 Para crear un vector en la pila dinamica debemos utilizar el operador new:
@@ -1174,3 +1176,167 @@ La localicacion de variables en la pila dinamica trae consigo dos ventajas, por 
 
 Por otro lado podemos solicitar espacio para estructura de datos en tiempo de ejecucion (Por ejemplo podemos definir un vector con una cantidad de componentes que dependa de una variable).
 
+31.- OBJETOS DINAMICOS
+Hemos visto que podemos localizar vectores en la pila dinamica, lo mismo podemos hacer cuando creamos objetos de una determinada clase.
+
+Tengamos en cuenta que almacenar objetos en la pila dinamica nos provee como ventaja tener mas espacio y  poderlo crear y destruir segun la necesidad de nuestro programa. Veremos que cambia la sintaxis cuanod trabajamos con objetos dinamicos.
+
+Desarrollar una clase que permita cargar el nombre y la edad de una persona. Mostrar los datos cargados. Imprimir un mensaje si es mayor de edad (edad>=18) o no. Crear en la main un objeto dinamico de esta clase y llamar a sus metodos.
+
+#include<iostream>
+
+using namespace std;
+
+class Persona {
+	private:
+		char nombre[40];
+		int edad;
+	public:
+		void inicializar();
+		void imprimir();
+		void esMayorEdad();
+};
+
+void Persona::inicializar(){
+	cout<<"Ingrese nombre: ";
+	cin.getline(nombre, 40);
+	cout<<"Ingrese edad: ";
+	cin>>edad;
+}
+
+void Persona::imprimir(){
+	cout<<"Nombre: ";
+	cout<<nombre;
+	cout<<"\n";
+	cout<<"Edad: ";
+	cout<<edad;
+	cout<<"\n";
+}
+
+void Persona::esMayorEdad(){
+	if(edad>=18){
+		cout<<"Es mayor de edad.";
+
+	} else {
+		cout<<"No es mayor de edad.";
+	}
+
+	cin.get();
+	cin.get();
+}
+
+int main(){
+	Persona *persona1;
+	
+	persona1=new Persona();
+	
+	persona1->inicializar();
+	persona1->imprimir();
+	perosna1->esMayorEdad();
+
+	delete persona1;
+
+	return 0;
+}
+
+Para llamar a los metodos debemos utilizar el operador -> (flecha) que son los caracteres: menos y el mayor.
+
+persona1->imprimir();
+
+Si bien podemos utilizar el caracter *(que significa lo apuntado) luego debemos disponer entre parentesis el nombre del puntero (es una sintaxis poco utilizada):
+
+(*persona1).imprimir();
+
+32.- METODOS INLINE
+Los metodos inline tienen por objetivo hacer partes de nuestro programas mas eficientes en tiempo de jecucion.
+
+Cuando definimos un metodo inline el codigo de la misma hace que se copie en el lugar donde se la llama a dicha funcion. Hay que tener en cuenta que cuando llamamos a un metodo hay una perdida de tiempo en la llamada en si mismo.
+
+Es conveniente utilizar metodos inline solo para algoritmos pequenas ya que si bien hacen el codigo mas eficiente por otro lado generan un codigo compilado mas grande.
+
+#include<iostream>
+
+using namespace std;
+
+class Temperatura {
+	int minima;
+	int maxima;
+	int actual;
+Public:
+	Temperatura(int min, int max, int act);
+	int rango (){
+		int valor = maxima-minima;
+		return valor;
+	}
+	void imprimir();
+};
+
+Temperatura::Temperatura (int min, int max, int act){
+	minima = min;
+	maxima = max;
+	actual = act;
+}
+
+void Temperatura::imprimir(){
+	cout<<"Minima: "<<minima<<"\n";
+	cout<<"Maxima: "<<maxima<<"\n";
+	cout<<"Actual: "<<actual<<"\n";
+}
+
+int main(){
+	Temperatura temperatura1(5, 25, 17);
+
+	cout<<"Rango de variacion de temperaturas: " <<temperatura1.rango()<<"\n\n";
+
+	temperatura1.imprimir();
+
+	return 0;
+}
+
+En C++ un metodo es inline solo con implementarlo en la declaracion de la clase:
+
+class Temperatura {
+	int minima;
+	int maxima;
+	int actual;
+Public:
+	Temperatura(int min, int max, int act);
+	int rango (){
+		int valor = maxima-minima;
+		return valor;
+	}
+	void imprimir();
+};
+
+Si bien podemos agregar la palabra clave inline normalmente los programadores no lo hacen:
+
+	inline int rango (){
+		int valor = maxima-minima;
+		return valor;
+	}
+
+Tanto constuctores como destructores pueden implementarse inline, en el problema anterior si implementamos el constructor inline el codigo queda como sigue:
+
+class Temperatura {
+	int minima;
+	int maxima;
+	int actual;
+Public:
+	Temperatura(int min, int max, int act){
+		minima = min;
+		maxima = max;
+		actual = act;
+	}
+	int rango (){
+		int valor = maxima-minima;
+		return valor;
+	}
+	void imprimir();
+};
+
+Otra cosa que podemos notar en programas escritos en C++ es que cuando se declaran metodos inline se codifiquen en una sola linea, tener en cuenta que el resultado del algoritmo no cambi en absoluto, sino es solo una forma de organizar el codigo fuente de la declaracion de la clase. En nuestro ejemplo tendriamos:
+
+Public:
+	Temperatura(int min, int max, int act){minima = min; maxima = max; actual = act;}
+	int rango (){int valor = maxima-minima; return valor;}
+	void imprimir();

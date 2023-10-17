@@ -12,6 +12,8 @@ MongoDB
 10.- BORRAR DOCUMENTOS DE UNA COLECCION CON LOS METODOS DELETEONE Y DELETEMANY
 11.- MODIFICAR UN DOCUMENTO MEDIANTE EL METODO UPDATEONE
 12.- MODIFICAR MULTIPLES DOCUMENTOS CON EL METODO UPDATEMANY
+13.- OPERADORES LOGICOS $AND, $OR Y $NOT
+14.- CURSORES Y SUS METODOS EN MONGODB
 
 
 1.- ELEMENTOS ESENCIALES DE MONGODB: BASE DE DATOS - COLECCION - DOCUMENTO
@@ -298,3 +300,82 @@ La primera modificacion masiva la hacemos con todos los libros cuyo _id sean may
 La segunda modificacion masiva la hacemos con todos los libros que almacenan en el campo 'cantidad' el valor cero, agregando el campo 'faltantes' con el valor true.
 
 La tercer y ultima modificacion masiva la hacemos con todos los libros que almacenan en el campo 'cantidad' el valor cero, elimnamos el campo faltantes y fijamos el campo cantidad con el valor 100.
+
+13.- OPERADORES LOGICOS $AND, $OR Y $NOT
+Cuando necesitamos construir consultas que deban cumplir varias condiciones utilizaremos los operadores logicos.
+
+El operador $and lo hemos utilizado en forma implicita, por ejemplo si tenemos:
+
+db.libros.find({precio:50, cantidad:20})
+
+La sintaxis alternativa para el find es:
+
+db.librod.find({$and:[{precio:50}, {cantidad:20}]})
+
+El valor para el operador $and es un arreglo con cada una de las condiciones que debe cumplir.
+
+Para los operadores $or y $not no hay una forma de disponer una sintaxis implicita.
+
+db.libros.find({$or: [{precio:{$gte:50}}, {cantidad:1}]})
+
+Si queremos recuperar todos los documentos de la coleccion libros que no tienen un precio mayor o igual a 50 la sintaxis debe ser:
+
+db.libros.find({precio:{$not:{$gte:50}}})
+
+Los operadores logicos podemos utilizarlos no solo para recuperar datos, sino tambien cuando borramos o actualizamos documentos.
+
+db.libros.deleteMany({precio:{$not:{$eq:50}}})
+
+14.- CURSORES Y SUS METODOS EN MONGODB
+Cada vez que llamamos al metodo find de una coleccion el mismo no retorna un objeto de la clase Cursor.
+
+Si no asignamos el valor a una variable en el shell de MongoDB luego se muestran los documentos recuperados y se nos pide que confirmemos cada vez que se muestran 20.
+
+Podemos encadenar la llamada al metodo find con los metodos de la clase Cursor, por ejemplo si queremos que se muestren todos los libros ordenados por el nombre tenemos que implementar la siguiente logica:
+
+db.libros.find().sort({titulo:1})
+
+Apartir del cuarsor que retorna el metodo 'find' llamamos al metodo 'sort' de la clase Cursor y como condicion indicamos por el campo que queremos ordenar (si pasamos un 1 se ordena en forma ascendente y si pasamos un -1 se ordena en forma decendente).
+
+Otro metodo de la clase Cursor que nos puede qyudar cuando ejecutamos comandos desde el shell de MongoDB es 'pretty', el mismo tiene por objetivo mostrarnos los datos del cursor en forma mas legible:
+
+db.libros.find().pretty()
+
+{
+    "id":1,
+    "titulo": "El aleph",
+    "autor": "Borges",
+    "editorial":[
+        "Siglo XXI",
+        "Planeta"
+    ],
+    "precio":20
+}
+{
+    "id":2,
+    "titulo": "Martin Fierro",
+    "autor": "Jose Hernandez",
+    "editorial":[
+        "Siglo XXI"
+    ],
+    "precio":50
+}
+
+El metodo sort tambien retorna un Cursor con los datos ordenados, luego podemos llamar al metodo pretty a partir del Cursor devuelto por sort:
+
+db.libros.find().sort({titulo:1}).pretty()
+
+Otro metodo util es el 'limit' que tiene por objetivo limitar a un determinado numero de documentos a recuperar del Cursor.
+
+db.libros.find().limit(2)
+
+db.libros.find().sort({titulo:1}).limit(2)
+
+Otro metodo llamado 'skip' nos permite saltear una determinada cantidad de documentos desde el principio del cursor.
+
+db.libros.find().skip(1)
+
+Podemos combinar las llamadas al metodo skip y limit:
+
+db.libros.find().skip(2).limit(2).pretty()
+

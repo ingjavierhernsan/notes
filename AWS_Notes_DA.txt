@@ -51,3 +51,134 @@ Clic on Save rules button
 Refresh the page again
 Select the Outbound rules.
 
+HOW TO SSH USING LINUX OR MAC
+
+Got to EC2 Dashboard.
+Select the instance
+Copy the public IPv4 address
+Go to Security tap
+Go to Inbound rules
+Find the port 22
+If the source is 0.0.0.0/0 is ok. If not, clic in the Security group and config it.
+In the terminal write:
+ssh ec2-user@IPv4 address
+ssh ec2-user@3.250.26.200
+Go for the EC2Tutorial.pem file.
+Write:
+ssh -i EC2Tutorial.pem ec2-user@3.250.26.200
+if occur a erro, write:
+chmod 0400 EC2Tutorial.pem
+ssh -i EC2Tutorial.pem ec2-user@3.250.26.200
+test with a ping:
+ping google.com
+To exit of the EC2 wirte: exit
+
+HOW TO SSH USING WINDOWS 7 OR 8
+
+Download PuTTY
+Install PuTTY
+Go to PuTTY Gen
+Load the file EC2Tutorial.pem
+Save the private key:
+Load the EC2Tutorial.ppk
+Close the PuTTY Gen
+Go to Putty application
+Copy the public IPv4 address
+Paste in Putty
+Write EC2 Instance
+Clic on the second option that appear in the text box of down.
+A CMD window will appear
+Write: ec2-user
+Return to PuTTY
+Select the second option and clic on Load.
+In the first text box add: ec2-user@
+In the left tree select SSH, click on Auth
+In the text box select the key authentication EC2Tutorial.ppk
+Return to the principal window and clic on open.
+It will open a CMD Window.
+
+HOW TO SSH USING WINDOWS 10
+
+Go to Power Shell
+Write: ssh -i .\EC2Tutorial.pem ec2-user@3.250.26.200
+write: yes
+To exit write: exit
+
+In a CMD window is the same process.
+
+SSH TROUBLESHOTING
+
+1.- There's a connection timeout
+This is a security group issue. Any timeout (not just for SSH) is relted to security groups or a firewall. Ensure your security group looks like this and correctly assigned to your EC2 instance.
+
+2- There's still a connection timeout issue
+If your security group is properly configured as above, and you still have connection timeout issues, then that means a corpotare firewall or a personal firewall is blocking the connection. Please use EC2 Instance Connect as described in the next lecture.
+
+3.- SSH does not work on Windows
+- If it says: ssh command not found, that means you have to use Putty.
+- Follow again the video. If things don't work, please use EC2 Instance Connect as described in the nest lecture.
+
+4.- There's a connection refused
+This means the instace is reachable, but no SSH utility is running on the instance.
+- Try to restart the instance.
+- If it doesn't work, terminate the instance and create a new one. Make sure you're using Amazin Linux 2.
+
+5.- Permission denied (publickey, gssapi-keyex, gssapi-with-mic)
+This means either two things:
+- Your are using the wrong security key or not using a security key. Please look at your EC2 instance configuracion to make sure you have assigned the correct key to it.
+- You are using the wrong user. Make sure you have started an Amazon Linux 2 EC2 instance, and make sure you're using the user ec2-user. This is something you specify when doing ec2-user@<pulic-ip> (ex: ec2-user@35.180.242.262) in your SSH command or yout Putty configuration.
+
+6.- Nothing is working - aaaahhhhhh
+Don't panic. Use EC2 Instance Connect from the next lecture. Make sure you started an Amazon Linux 2 and you will be able to follow along with the tutorial.
+
+7.-I was able to cnnect yesterday, but today I can't
+This is probably because you hace stopped your EC2 instance and tehn started it again today. When you do so, the public IP of your EC2 instance will change. Therefore, in your command, or Putty configuration, please make sure to edit and save the new public IP.
+
+EC2 INSTANCE CONNECT
+
+In EC2 Dashboard
+Clic in My First Instance
+In the top clic Connect
+Clic in the boton Connect below
+In the new tap appear a Shell
+
+If you want to deny the access from a SSH external (Linux, Windows, AWS Shell) go to EC2/Security Groups/Edit security_group... rules/Edit inbound rules
+Delete the rule SSH.
+Save the rule.
+
+EC2 INSTANCE ROLES DEMO
+
+Go to EC2 Dashboard.
+Select instance 
+Clic on Connect
+Clic on Connect below
+Check aws version: aws --verion
+Write: aws iam list-users
+It indicate your permisions.
+It needs credentials, to put write:
+aws configure
+Ask you a AWS Access key ID
+Secret Access key
+Region name
+Output format
+
+Recomendation: Never put the Access key ID and Scret Access key in a EC2 instance.
+
+In IAM/Roles create a role
+In EC2 Dasboard select the instance.
+Clic in the security tap
+Check if it has a IAM Role assigned.
+Go to teh EC2 Dashboard
+Clic in the control Actions
+Select Security
+Modify IAM role
+In the option IAM Role select the create role.
+And clic on Save
+Back to the tap security
+Check if the role is assigned
+In the Shell check again: aws iam list-users
+
+To remove the role go to IAM/Roles
+Go to the Tap Permissions.
+And find the policy
+And clic in the x in the right.
