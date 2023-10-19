@@ -32,6 +32,10 @@ C++
 30.- PILA DINAMICA
 31.- OBJETOS DINAMICOS
 32.- METODOS INLINE
+33.- FUNCIONES AMIGAS (FRIEND)
+34.- CLASE AMIGAS (FRIEND)
+35.- ATRIBUTOS ESTATICOS DE UNA CLASE
+36.- METODOS ESTATICOS DE UNA CLASE
 
 
 1.- COMPILAR CODIGO C++
@@ -1340,3 +1344,198 @@ Public:
 	Temperatura(int min, int max, int act){minima = min; maxima = max; actual = act;}
 	int rango (){int valor = maxima-minima; return valor;}
 	void imprimir();
+
+33.- FUNCIONES AMIGAS (FRIEND)
+El lenguaje C++ es compatible y hereda todas las caracteristivas del lenguaje C. El lenguaje C es un lenguaje estructurado y solo permite definir funciones (no existen las clases).
+
+En C++ seguimos pudiendo definir funciones independientes fuera de una clase pero no es convenienre pra uan buena organizacion de nuestro codigo.
+
+En algunas situaciones puede ser conveniente definir una funcion independiente pero que tenga acceso a los atributos privados y protegidos de una clase, esto se logra con las funciones amiga (friend).
+
+Para definir una funcion amiga debemos anteceder la palabra clave friend y cuando la llamamos como realmente no pertenece a la clase sino que es amiga la invocamos por su nombre y no antededemos un nombre de objeto.
+
+#include<iostream>
+
+using namesapce std;
+
+class Temperatura {
+	int minima, maxima, actual;
+
+public:
+	Temperatura (int min, int max, int act) {minima=min; maxima=max; actual=act;}
+	friend int temperaturaMedia(Temperatura t1, Temperatura t2);
+};
+
+int temperaturaMedia(Temperatura t1, Temperatura t2){
+	int pro=(t1.actual + t2.actual)/2;
+}
+
+int main(){
+	Temperatura temperatura1(10, 20, 15);
+	Temperatura temperatura2(12, 25, 17);
+
+	cout<<"La temperatura promedio de las temperaturas actuales es: ";
+	cout<<temperatureaMedia(temperatura1, temperatura2);
+
+	return 0;
+}
+
+34.- CLASE AMIGAS (FRIEND)
+Otra posibilidad en C++ es que una clase sea amiga. Esto hace que todos los metodos de la clase amiga tengan acceso a los atributos privados y protegidos.
+
+#include<iostream>
+
+using namespace st;
+
+class Nodo{
+	int info;
+	Nodo *ant, *sig;
+public:
+	Nodo (int x){info=x;};
+	friend class ListaGenerica;
+}
+
+class ListaGeneriaca {
+	Nodo *raiz;
+Public:
+	ListaGenerica(){raiz=NULL;};
+	~ListaGenerica();
+	void insertarprimero(int x);
+	void imprimir();
+};
+
+ListaGenerica::~ListaGenerica(){
+	Nodo *reco=raiz;
+	Nodo *bor;
+
+	while(reco != NULL){
+		bor=reco;
+		reco=reco->sig;
+		delete bor;
+	}
+}
+
+void ListaGenerica::insertarPrimero(int x){
+	Nodo *nuevo = new Nodo(x);
+	nuevo->ant = NULL;
+
+	if(raiz==NULL){
+		nuevo->sig=NULL;
+		raiz=nuevo;
+	} else {
+		nuevo->sig=raiz;
+		raiz->ant=raiz;
+		raiz=nuevo;
+	}
+}
+
+void ListaGenerica::imprimir(){
+	Nodo *reco=raiz;
+
+	while(reco != NULL){
+		cout<<reco->info<<"-";
+		reco=reco->sig;
+	}
+
+	cout<<"\n";
+}
+
+int main(){
+	ListaGenerica *lista1 = new ListaGenerica();
+
+	lista1->insertarPrimero(10);
+	lista1->insertarPrimero(20);
+	lista1->insertarPrimero(5);
+	lista1->imprimir();
+
+	delete lista1;
+
+	return 0;
+}
+
+Las clases amigas deben utilizarse en situaciones especiales ya que deteriora el concepto de encapsulamiento de nuestra aplicacion.
+
+35.- ATRIBUTOS ESTATICOS DE UNA CLASE
+Un atrivuto estatico de una clse se crea independientemente a que se definan objetos de la misma, y en el caso que se creen mas de un objeto de dicha clase dicho atributos es compartido por todas las instancias.
+
+Como vemos es muy distinto el funcionamiento a los atributos de la clase que hemos visto hasta ahora. Un atributo estatico pertenece a la clase pero su existencia es independiente a que se difinan o no objetos de la misma.
+
+#include<iostream>
+
+using namespace std;
+
+class Prueba{
+	int x1;
+	static int x2;
+	public:
+		Prueba(int v1, int v2) {x1=v1; x2=v2;};
+		void imprimir();
+};
+
+int Prueba::x2;
+
+void Prueba::imprimir(){
+	cout<<x1<<"-"<<x2<<"\n";
+}
+
+int main(){
+	Prueba prueba1(1, 1);
+	prueba1.imprimir();
+	
+	Prueba prueba2(20, 20);
+	prueba1.imprimir();
+
+	return 0;
+}
+
+Para declarar un atributo estatico tenemos que agregar la palabra clave static:
+
+static int x2;
+
+Y luego fuera de la clase crearlo con la siguiente sintaxis:
+
+int Prueba::x2;
+
+Como vemos no alcanza con solo declararlo dentro de la clase debemos definirlo fuera de la clase. Si necesitamos inicializarlo con un valor podemos hacerlo en este momento:
+
+int Prueba::x2=100;
+
+Se puede inicializar el atributo estatico ya que se reserba espacio para esta variable indistintamente se creen o no objetos de la clase que contiene dicho atributo estatico.
+
+Es muy importante entender que el atributo estatico es compartido por todos los objetos que se definan de dicha clase.
+
+36.- METODOS ESTATICOS DE UNA CLASE
+Las funciones o metofos de la clase pueden definirse de tipo estatico.
+
+Un metodo estatico solo puede acceder a los atributos estaticos declarados en la clase.
+
+No se pueden definir dos funciones con igual nombre y que una sea estatica y la otra no.
+
+Un metodo estatico se lo puede llamar sin la necesidad de crear un objeto de dicha clase. Para poder llamarlo debemos anteceder el nombre de la clase y el modificador :: (dos veces dos puntos).
+
+#include<iostream>
+
+using namespace std;
+
+class Prueba{
+	static int x1;
+	public:
+		static int retornarX();
+};
+
+int Prueba::x1=20;
+
+int Prueba::retornarX(){
+	return x1;
+}
+
+int main(){
+	cout << Prueba::retornaX();
+
+	return 0;
+}
+
+La implementacion del metodo estatico es similar a lo ya visto teniendo encuenta que dentro de dicho emtodo solo podemos acceder a atributos estaticos (tengamos en cuenta que este metodo se crea y existe independientemente a que se creen objetos de la clase Prueba).
+
+Finalmente podemos ver que para acceder a dicho metodo no es necesario crear un objeto de la clase Prueba, solo con anteceder al nombre del metodo conel nombre de la clase y los caracteres :: tenemos acceso.
+

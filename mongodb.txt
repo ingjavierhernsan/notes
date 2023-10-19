@@ -14,6 +14,12 @@ MongoDB
 12.- MODIFICAR MULTIPLES DOCUMENTOS CON EL METODO UPDATEMANY
 13.- OPERADORES LOGICOS $AND, $OR Y $NOT
 14.- CURSORES Y SUS METODOS EN MONGODB
+15.- RECUPERAR ALGUNOS CAMPOS DE UNA COLECCION CON EL METODO FIND
+16.- DOCUMENTOS EMBEBIDOS: DEFINICION DE CAMPOS DE TIPO DOCUMENTO
+17.- DOCUMETNOS EMBEBIDOS: DEFINICION DE CAMPOS DE ARREGLO CON ELEMENTOS DE TIPO DOCUMENTO
+18.- CAMPO _ID GENERADO POR MONGODB
+19.- TIPO DE DATO DATE EN MONGODB
+20.- TIPO DE DATO BINARY DATA
 
 
 1.- ELEMENTOS ESENCIALES DE MONGODB: BASE DE DATOS - COLECCION - DOCUMENTO
@@ -378,4 +384,197 @@ db.libros.find().skip(1)
 Podemos combinar las llamadas al metodo skip y limit:
 
 db.libros.find().skip(2).limit(2).pretty()
+
+15.- RECUPERAR ALGUNOS CAMPOS DE UNA COLECCION CON EL METODO FIND
+Hay un segundo parametro opcional en el cual debemos indicar que campos del documento queremos recuperar:
+
+db.libros.find({precio:50}, {titulo:1, cantidad:1})
+
+En el segundo parametro del metodo 'find' debemos especificar cada campo y un valor 1 indicando que se lo quiere recuperar. El campo _id se recupera por defecto, salvo que indiquemos con un valor 0 para que no se recupere.
+
+16.- DOCUMENTOS EMBEBIDOS: DEFINICION DE CAMPOS DE TIPO DOCUMENTO
+Hasta ahora hemos trabajado definiendo documentos con una serie de campos que almacenan tipo de datos simples como enteros, reales, cadena de caracteres y datos compuestos de tipo arreglo.
+
+Segun el tipo de consultas que haremos a nuestros documentos debemos definir el esquema de campos de los mismos. Supongamos que tenemos que alamacenar el dato de clientes y luego hacer consultas de donde viven y discriminar por calle y numero, luego puede tener sentido tener un campo direccion que sea un documento donde se almacenen por separado la calle, el numero y el codigo postal.
+
+db.clientes.insertOne(
+    {
+        _id:1,
+        nombre:'Martinez Victor',
+        mail:'mvictor@gmail.com',
+        direccion:{
+            calle:'Colon',
+            numero: 620,
+            codigopostal: 5000
+        }
+    }
+)
+
+Para recuperar todos los clientes que viven en la calle 'Colon' tenemos que plantear la siguiente consulta:
+
+db.clientes.find({'direccion.calle':'Colon'}).pretty()
+
+Es obligatorio disponer las comillas cuando hacemos referencia a un subcampo de un documento: 'direccion.calle'.
+
+Para recuperar todos los clientes que viven en la calle 'Colon' y su numero esta comprendido entre 1 y 1000 tenemos que plantear la siguiente consulta:
+
+db.clientes.find({'direccion.calle':'Colon', 'direccion.numero':{$gte:0}, 'direccion.numero':{$lte:1000}}).pretty()
+
+17.- DOCUMETNOS EMBEBIDOS: DEFINICION DE CAMPOS DE ARREGLO CON ELEMENTOS DE TIPO DOCUMENTO
+Podemos definir campos de tipo arreblo y almacenar en los mismos documentos embebidos, por ejemplo:
+
+db.posts.insertOne(
+    {
+        _id:1,
+        titulo:'Lenguaje Java',
+        contenido: 'Uno de los lenguajes mas utilizados es ...',
+        comentarios: [{
+            autor:'Marcos Paz',
+            mail:'pazm@gmail.com',
+            contenido:'Me parece un buen...'
+        },
+        {
+            autor:'Ana Martinez',
+            mail:'marineza@gmail.com',
+            contenido:'Todo ha cambiado en...'
+        },
+        {
+            autor:'Luiz Blanco',
+            mail:'blancol@outlook.com',
+            contenido:'Afirmo que es...'
+        }]
+    }
+)
+
+La idea fundalmental en MongoDB es disponer de todos los datos agrupados dependiendo de los accesos futuros a la informacion, es evidente que cuando quremos acceder a una entrada de un bloq tambien necesitemos acceder a los comentarios de dicha entrada.
+
+Podemos generar documentos embebidos con mas niveles, por ejemplo definir un campo en el arreglo que sea de tipo documento.
+
+Si queremo recuperar los titulos de todos los posts y los nombres de los usuarios que hicieron comentarios en cada post, debemos implementar la siguiente consulta:
+
+db.posts.find({}, {_id:0, titulo:1, 'cometarios.autor':1}).pretty()
+
+Para recuperar todos los posts donde ha comentado el usuario 'Pablo Rodriguez':
+
+db.posts.find({'comentarios.autor':'Pablo Rodriguez'}).pretty()
+
+Podemos utilizar el subindice del arreglo para analizar un documento en particular, por ejemplo si queremos recuperar todos los posts que comento primero 'Rodriguez Pablo':
+
+db.posts.find({'comentarios.0.autor':'Pablo Rodriguez'}).pretty()
+
+Acotaciones
+Cuanod definimos documentos embebidos debemos tener en cuenta que un documento en MongoDB no puede tener un tamano mayor a 16 MB.
+
+No podemos crear una coleccion 'ciudades' y alamcenar documetnos con el nombre de la ciudad y embeber documentos con los nombres de todas sus ciudades (podria haber millones por cada ciudad).
+
+18.- CAMPO _ID GENERADO POR MONGODB
+Cuando creamos un documento podemos o no iniciar el campo _id, en la mayoria de los ejemplos hemos definido nosotros el campo _id y su valor, recordemos que no pueden repetirse.
+
+Si no definimos nosotros el campo _id se genera en forma automatica.
+
+El calor que se genera es de la clase ObjectId y tiene la caracteristica de poder generarse con un valor unico aunque se este generando en servidores distintos.
+
+Uno de los objetivos fundamentales de emplear MongoBD es poder tener servidores distribuidos, la posibilidad de definir una clave primaria unica y no tener que comunicarse entre los servidores se resuelve utilizando la clase ObjectId.
+
+No se puede generar un campo numerico autoincremental como en los gestores de base de datos relacionales, esto obligaria a sincronizar dicho campo con otros servidores y generaria cuellos de botella y excesivo trafico.
+
+MongoDB fue disenado para ser una base de datos distribuida, es fundamental poder generar identificadores unicos en un entorno fragmentado con multiples servidores.
+
+Un objeto de la clase ObjectId requiere 12 bytes y representan:
+
+- Los primeros 4 bytes indican la cantidad de segundos desde el 1 de enero de 1970 (epoca unix). Cuando de ordena por el _id luego los documentos se encontraran organizados segun el tiemo que se lo inserto.
+
+- Los 3 bytes siguientes del ObjectId son un identificador unico de la maquina en la que se genero, esto nos garantiza que los diferentes servidores no generaran ObjectId iguales.
+
+- Los 2 bytes siguientes evitan que haya colisiones de ObjectId en el mismo servidor, el mosmo se genera con el Id del numero de proceso que lo genero.
+
+- Los primero 9 bytes de un objectId garantizan su unicidad en todas las maquinas y procesos durante un segundo. Los ultimos 3 bytes son simplemente un contador incremental que es responsable de la unicidad dentro de un segundo en un solo proceso. Esto premite generar hasta 16, 777, 216 ObjectIds unicos por proceso en un solo segundo.
+
+19.- TIPO DE DATO DATE EN MONGODB
+Hemos utilizado hasta ahora varios tipos de datos cuando inicializamos campos de un documento:
+
+String: Permite almacenar cadenas de caracteres en foramto UTF-8.
+Integer32: Valores entero numerico.
+Integer64: Valores entero numerico.
+Double: Almacena valores de puneto flotante.
+Object: Almacena un documento embebido.
+Array: Permite almacenar un arreglo con elementos de distinto tipo.
+Boolean: Permitealmacenar un valor true o false.
+
+Veremos ahora como almacenar datos de tipo Date.
+
+La fecha es un entero de 64 bits que representa el numero de milisegundos desde la epoca de Unix (1 de enero de 1970). Esto da como resultado un intervalo de fechas representables de aproximadamente 290 millones de anos en el pasado y el futuro. El tipo Date alamcena el signo, un valor negativo representa una fecha anterior a 1970.
+
+db.autos.insertOne({patente : 'aaa111', fechahora : new Date()})
+
+La representacion de los datos de tipo Date cuando llamamos al metodo find es:
+
+{
+    _id : ObjectId("5c3a60d52c419f7680420488").
+    patente: "aaa111",
+    fechahora : ISODate("2019-01-12T21:49.852Z")
+}
+
+Para almacenar la fecha se utiliza el estandar ISO 8601 que tiene un formato:
+
+YYYY-MM-DDTHH:MM:SS
+
+Podemos almacenar una fecha particular cuando creamos el objeto de la case Date:
+
+db.empleados.insertOne({_id:20456234, nombre:'Rodriguez Pablo', fehcaingreso:new Date(2010, 0, 31)})
+
+db.empleados.insertOne({_id:17488834, nombre:'Gomez Ana', fechaingreso: new Date(2001, 11, 1)})
+
+Como el shell de MongoDB esta implementado en JavaScript debemos indicar al crear un objeto de la clase Date para el mes un valor comprendido entre 0 y 11.
+
+Podemos ver las fechas almacenadas en el cmapo 'fechaingreso', y que la parte de la hora esta en cero por no pasarlas cuando creamos el objeto de la clase Date:
+
+{
+    _id: 20456234,
+    nombre: 'Rogriguez Pablo',
+    fechaingreso: ISODate("2010-01-31T3:00:00Z")
+}
+
+Si necesitamos que los datos de empleados se recuperen en forma ordenada por el cmapo 'fechaingreso" debemos codificar la siguiente consulta:
+
+db.empleados.find().pretty().sort({fechaingreso:1})
+
+Imprimir solo el aprllido y la fecha de nacimiento.
+
+db.alumnos.find({}, {apellido:1, fehcanacimento:1, _id:0}).pretty()
+
+Imprimir todos los datos ordenados por la fecha de nacimiento de mayor a menor.
+
+db.alumnos.find().prettey().sort({fechanamiciento:-1})
+
+Imprimir todos los alumnos que nacieron a partir de 1970.
+
+db.alumnos.find({fechanacimiento:{$gte: new Date(1970, 0, 1)}}).pretty()
+
+20.- TIPO DE DATO BINARY DATA
+MongoDB permite definir la carga de datos binarios (por ejemplo archivos jpg, png, pdf, etc.) en un campo de un documento, siempre y cuanod no supere el limite de 16MB definido por el gestor de base de datos por motivos de eficiencia. Si tenemos que almacenar archivos muy grandes como podrian ser un archivo mp4 con una pelicula debemos utilizar otra tecnica, como por ejemplo que un el campo del documento se almacene la URL donde se encuentra la pelicula.
+
+Hay otra tecnica de trocear el archivo y almacenarlo en una sucesion de documentos, puede consultar en la pagina oficial de MongoDB.
+
+Desde el shell de mongoDB estamos bastante limitados para la carga de un campo de tipo binario pero podemos hacerlo creando una variable y almacenando el valor retornado por BinData:
+
+var datobinario=BinData(0, 'e8MEnzZoFyMmD7WSHdNrFJyEk8M=')
+
+db.usuarios.insertOne({nombre: 'Marcos', clave: 'abc123', fotoperfil: datobinario})
+
+{
+    _id: ObjectId("6530be92086d075ffc9c7063"),
+    nombre: 'Marcos',
+    clave: 'abc123',
+    fotoperfil: Binary.createFromBase64("e8MEnzZoFyMmD7WSHdNrFJyEk8M=", 0)
+}
+
+Recordemos que en el mundo real cuanod almacenemos campos de tipo Binary Data lo haremos desde una aplicacion creada con algun de los tantos lenguajes que soporta MongoDB como pueden ser: C, C++, C#, Go, Java, Node.js, Perl, PHP Phyton, Ruby o Scala.
+
+Las ventajas de tener los datos binarios dentro de los documentos son:
+- Proporciona el motor de base de datos alta disponibilidad y replicacion de datos.
+- Una arquitectura de aplicacion mas simple al tener centralizado todos los datos.
+- Cuando se usan conjuntos de replicas destribuidas geograficamente, MongoDB distribuira automaticamente los datos a centros de datos geograficamente distintos.
+- El almacenamiento de datos en la base de datos aprovecha los mecanismos de autenticacion y seguridad de MongoDB.
+- Mejor rendimeinto en los accesos a datos. Accediendo al docuamto contamos con todos los datos y no tenemos que hacer referencias a otras locaciones con datos.
 
