@@ -36,7 +36,8 @@ C++
 34.- CLASE AMIGAS (FRIEND)
 35.- ATRIBUTOS ESTATICOS DE UNA CLASE
 36.- METODOS ESTATICOS DE UNA CLASE
-
+37.- PUNTERO THIS
+38.- DIRECTIVA #DEFINE
 
 1.- COMPILAR CODIGO C++
 g++ file.cpp -o file
@@ -1539,3 +1540,159 @@ La implementacion del metodo estatico es similar a lo ya visto teniendo encuenta
 
 Finalmente podemos ver que para acceder a dicho metodo no es necesario crear un objeto de la clase Prueba, solo con anteceder al nombre del metodo conel nombre de la clase y los caracteres :: tenemos acceso.
 
+37.- PUNTERO THIS
+Hasata ahora no hemos nombrado un puntero especial que se pasa a todos los metodos llamado this.
+
+Como sabemos podemos crear varios objetos de una clase. Cada objeto tiene una copia en memoria de todos los atributos (variables) que son independientes de los otros objetos. en el lenguaje C++ para poder identificar a que objeto en particular estamos accediento cuando llamamos a un metodo se le pasa un parametro llamado this (significa este objeto).
+
+#include<iostream>
+
+using namespace std;
+
+class Temperatura{
+	int minima;
+	int maxima;
+	int actual;
+	void imprimir();
+public:
+	Tempoeratura(int min, int max, int actual);
+};
+
+Temperatura::Temperatura(int min, int max, int act){
+	this->minima=min;
+	this->maxima=max;
+	this->actual=act;
+	this->imprimir();
+}
+
+void Temperatura::imprimir(){
+	cout<<this->minima<<" "<< this->actual<<" "<< this->maxima<<"\n";
+}
+
+int main(){
+	Temperatura temperatura1(10, 20, 15);
+	Temperatura temperatura2(25, 35, 29);
+	
+	return 0;
+}
+
+Podemos ver que cada vez que accedemos a un atributo o llamamos en un metodo dentro de la clase le antecedemos el puntero this.
+
+Este puntero almacena la direccion de memoria donde se guardan los atriburos del objeto respectivo, por ejemplo cuando en la main creamos un objeto de la clase Temperatura.
+
+Cuando llamamos a n metodo dentro de la clase estamos antecediendo elpuntero this para saber de cuan objeto se trata:
+
+this->imprimir();
+
+Pero porque no lo hemos estado haciendo hasta ahora? Es que no es obligatorio anteceder a los nombres de atributos y metodos, pero en realidad la direccion de los atributos de cada objeto en C++ se resuelve mediante este puntero.
+
+Un caso muy sencillo donde debemos utilizar el puntero this obligatorio es cuando un metodo tiene parametros con el mismo nombre que los atributos de la clase.
+
+#include<iostream>
+
+using namespace std;
+
+class Temperatura{
+	int minima;
+	int maxima;
+	int actual;
+	void imprimir();
+public:
+	Temperatura(int min, int max, int actual);
+};
+
+Temperatura::Temperatura(int minima, int maxima, int actual){
+	this->minima=minima;
+	this->maxima=maxima;
+	this->actual=actual;
+	imprimir();
+}
+
+void Temperatura::imprimir(){
+	cout << minima << " " << actual << " " << maxima << "\n";
+}
+
+int main(){
+	Temperatura temperatura1(10, 20, 15);
+	Temperatura temperatura2(25, 35, 29);
+	
+	return 0;
+}
+
+Como podemos observar en este caso si tenemos que hacer uso al puntero this para hacer referencia a los atributos del objeto y diferenciarlos de los parametros (cuando llamamos al metodo imprimir no hace falta anteceder el puntero this, es tacito).
+
+38.- DIRECTIVA #DEFINE
+La directiva #define especifica un nombre que sera reemplazado por un ciento valor en todos los lugaras del programa donde se haga referencia.
+
+Se crean fuera de cualquier funcion o clase normalmente en la parte inicial del archivo. La sintaxis es la siguiente:
+
+#define [nombre de la macro] [valor de la macro]
+
+Un ejemplo concreto es:
+
+#define TAMANO 20
+#define MENSAJEFIN "Presione una tecla para finalizar"
+
+El nombre de la macro es comun que se la escriba con caracteres mayusculas (es una regla que utilizan muchos programadores pero no es obligatoria).
+
+Luego de especificar el nombre de la macro hay uno o mas espacios y debemos especificar el valor de la macro.
+
+El primer paso del compilador es reemplazar todas las partes del programa donde hay delcaradas macros por los valores de dichas macros.
+
+El uso excesivo de macros puede tornar dificil el mantenimiento de programas.
+
+#include<iostream>
+
+#define TAMANO 5
+#define MENSAJEFIN "Presione una tecla para finalizar\n"
+#define DETENER cin.get();cin.get();
+
+using namespace std;
+
+int main(){
+	int vec[TAMANO];
+	
+	for(int f=0; f<TAMANO; f++){
+		cout << "Ingrese elemeto: ";
+		cin >> vec[f];
+	}
+	
+	for(int f=0; f<TAMANO; f++){
+		cout << vec[f] << "-";
+	}
+	
+	cout << "\n";
+	cout << MENSAJEFIN;
+	
+	DETENER
+	
+	return 0;
+}
+
+Es importante entender que lo primero que hace el compilador es reemplazar todos los luegares donde se hace referencia a la macro por el valor de la misma, luego este programa lo que realmente se esta compilando es:
+
+#include<iostream>
+
+using namespace std;
+
+int main(){
+	int vec[5];
+	
+	for(int f=0; f<5; f++){
+		cout << "Ingrese elemeto: ";
+		cin >> vec[f];
+	}
+	
+	for(int f=0; f<5; f++){
+		cout << vec[f] << "-";
+	}
+	
+	cout << "\n";
+	cout << "Presione una tecla para finalizar\n";
+	
+	cin.get();cin.get();
+	
+	return 0;
+}
+
+Es decir en el programa en ejecucion no podemos hacer referencias a las macros como hacemos en las variables. Las macros en el programa final no ocupan espacio ya que son sustituidas por los valores asignados a las mismas en tiempo de compilacion.
