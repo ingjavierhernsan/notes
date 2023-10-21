@@ -38,6 +38,9 @@ C++
 36.- METODOS ESTATICOS DE UNA CLASE
 37.- PUNTERO THIS
 38.- DIRECTIVA #DEFINE
+39.- DEFINICION DE CONSTANTES (CONST)
+40.- PARAMETROS DE UN METODO CONSTANTE (CONST)
+
 
 1.- COMPILAR CODIGO C++
 g++ file.cpp -o file
@@ -1696,3 +1699,136 @@ int main(){
 }
 
 Es decir en el programa en ejecucion no podemos hacer referencias a las macros como hacemos en las variables. Las macros en el programa final no ocupan espacio ya que son sustituidas por los valores asignados a las mismas en tiempo de compilacion.
+
+39.- DEFINICION DE CONSTANTES (CONST)
+Una constante es un identificador con un valor inmodificable, permanece fijo durante toda la ejecucion del programa. Se las define antecediendole la palabra reservada const. No existe una zona determinada par su declaracion. Pueden ser globales o locales.
+
+Una constante a diferencia de una macro ocupa un espacio durante la ejecucion del programa.
+
+#include<iostream>
+
+using namespace std;
+
+const int inicio=1;
+cost float altura=1.92f;
+const char mensaje1[]="Bienvenido al programa";
+
+int main(){
+	cout << "Constante entera: " << inicio << "\n";
+	cout << "Constante flotante: " << altura << "\n";
+	cout << "Constante de tipo cadena de caracteres: " << mensaje1 << "\n";
+
+	const int fin=10;
+
+	cout << "Constante local: " << fing;
+
+	return 0;
+}
+
+Definicion de constantes dentro de la clase. Una primer forma es definir una constante estatica que podemos utilizar dentro de la clase. Al ser estatica todos los objetos de la clase acceden al mismo elemento en memoria.
+
+#include<iostream>
+
+using namespace std;
+
+class Vector{
+	static const int tamano = 5;
+	int vec[tamano];
+public:
+	void cargar();
+	void imprimir();
+};
+
+void Vector::cargar(){
+	for(int f=0; f<tamano; f++){
+		cout << "Ingese elemento: ";
+		cin >> vec[f];
+	}
+}
+
+void Vector::imprimir(){
+	for(int f=0; f<tamano; f++){
+		cout << vec[f] << "-";
+	}
+}
+
+int main(){
+	Vector vec1;
+
+	vec1.cargar();
+	vec1.imprimir();
+
+	return 0;
+}
+
+Como podemos observar cuando definimos la constante le antecedemos los modificadores static const. Es importante tener en cuenta que solo podemos definir constantes estaticas si se trata de valores enteros.
+
+Para definir atriburos de una clase que sean constantes debemos inicializarlos por unica vez en la zona de inicializacion del constructor:
+
+#include<iostream>
+
+using namespace std;
+
+class Temperatura{
+	const int media;
+	int minima, maxima;
+public:
+	Temperatura(int min, int max, int me);
+	void impirmir();
+};
+
+Temperatura::Temperatura(int min, int max, int me):media(me){
+	minima=min;
+	maxima=max;
+}
+
+void Temperatura::imprimir(){
+	cout << minima << " " << maxima << " " << media << "\n";
+}
+
+int main(){
+	Temperatura t1(10, 20, 14);	
+	t1.imprimir();
+
+	Temperatura t2(5, 9, 7);
+	t2.imprimir();
+
+	return 0;
+}
+
+No podemos asignarle un valor (no tendria sentido ya que todos los objetos de la clase tendrian el mismo valor) entonces inicializamos la constante por unica vez en el constructor:
+
+Temperatura::Temperatura(int min, int max, int me):media(me){
+	minima=min;
+	maxima=max;
+}
+
+Como vemos luego de los parametros del constructor disponemos el nombre de la constante y entre parentesis el valor con el que inicializamos la constante normalmente un dato que llega como parametro al constructor.
+
+Si la clase tiene que inicializar mas de una constante no estatica la sintaxies en le constructor quedaria (con dos constantes):
+
+Temperatura::Temperatura(int min, int max, int me, int valor2):media(me), constante2(valor2)
+
+40.- PARAMETROS DE UN METODO CONSTANTE (CONST)
+En muchas situaciones podemos enviar a un metodo puntero a objetos para trabajar en el mismo cons us contenido y sin la intencion de modificar el objeto que le pasamos. Por defecto tenemos la posibilidad de modificar el objeto pasado por parametros.
+
+El lenguaje C++ nos provee el modificardor const para ser utilizado en los parametros de los metodos de la clases.
+
+Cuando indicamos que un parametro es de tipo const significa que el cuaerpo del metod no puede modificarlo, pero si consultar la informacion del mismo.
+
+El no definir un paramtero de tipo const no hace que nuestro programa no funcione. El objetivo de definir un parametro de tipo const es ecitar por descuido modificar con dicho parametro del dato que llega.
+
+#include <iostream>
+
+using namespace std;
+
+Class ListaGenerica{
+	public:
+		bool iguales(const ListaGenerica *lista2);
+};
+
+bool ListaGenerica::iguales(const ListaGenerica *Lista2)
+{
+
+}
+

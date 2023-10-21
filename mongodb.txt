@@ -22,6 +22,8 @@ MongoDB
 20.- TIPO DE DATO BINARY DATA
 21.- INDICES
 22.- INDICES - SIMPLES Y COMPUESTOS
+23.- INDICES - CON CAMPOS DE TIPO DOCUMENTO Y ARRAY
+24.- INDICES - ELIMINACION
 
 
 1.- ELEMENTOS ESENCIALES DE MONGODB: BASE DE DATOS - COLECCION - DOCUMENTO
@@ -695,3 +697,64 @@ db.clientes.insertOne(
 db.clientes.createIndex({dni: 1}, {unique: true})
 
 Luego si intentamos ingresar un documento en la coleccion 'clientes' con un 'dni' repetido, MongoDB no lo permite.
+
+23.- INDICES - CON CAMPOS DE TIPO DOCUMENTO Y ARRAY
+MongoDB permite acceder a sus documentos y crear indices en campos de tipo documento. Los campos de tipo documento se pueden combinar con campos de nivel superior en indices compuestos y, aunque tienen algunas particularidades en algunos aspectos, se comportan principalmente como se comportan los campos de indice "normales".
+
+Podemos crear un indice simple de un subcampo, como por ejemplo la 'calle' del campo 'direccion':
+
+db.clientes.insertOne(
+    {
+        _id: 1,
+        nombre: 'Martinez Victor',
+        mail: 'mvictor@gmail.com',
+        direccion: {
+            calle: 'Colon',
+            numero: 620,
+            codigopostal: 5000
+        }
+    }
+)
+
+db.clientes.createIndex({'direccion.calle': 1})
+
+db.clientes.find({'direccion.calle': 'Dean Funes'})
+
+Podemos tambien crear un indice que incluya todos los subcampos:
+
+db.libros.insertOne(
+    {
+        _id: 1,
+        titulo: 'El aleph',
+        autor: {
+            nombre: 'Borge',
+            nacionalidad: 'Argentina'
+        },
+        editorial: ['Siglo XXI', 'Planeta'],
+        precio: 20,
+        cantidad: 50
+    }
+)
+
+db.libros.createIndex({autor: 1})
+
+db.libros.find({'autor.nombre':'Java en 10 minutos', 'autor.nacionalidad':'Espanola})
+
+El indice se utiliza solo en los casos que en la consulta indiquemos ambos subcampos: 'nombre' y 'nacionalidad'.
+
+Podemos tambien incluir un campo de tipo arreglo cuando se define un indice.
+
+24.- INDICES - ELIMINACION
+Para conocer los indices que tiene una coleccion hacemos uso del metodo 'getIndexes', nos devuelve informacion de cada uno de los indices:
+
+db.libros.getIndexes()
+
+Para eliminar un indice contamos con el metodo 'dropIndex' al cual le debemos pasar el nombre del indice a eliminar:
+
+db.libros.dropIndex('autor_1')
+
+Tengamos en cuenta que no podemos eliminar el indice que crea MongoDB sobre el campo _id.
+
+Para eliminar un indice si no queremos llamar a getIndexes podemos indicar los campos por los que se creo el indice.
+
+db.libros.dropIndex({titulo:1})
