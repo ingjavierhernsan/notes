@@ -40,6 +40,8 @@ C++
 38.- DIRECTIVA #DEFINE
 39.- DEFINICION DE CONSTANTES (CONST)
 40.- PARAMETROS DE UN METODO CONSTANTE (CONST)
+41.- METODOS CONSTANTES (CONST)
+42.- PARAMETROS POR VALOR Y POR REFERENCIA DE DATOS SIMPLES
 
 
 1.- COMPILAR CODIGO C++
@@ -1831,4 +1833,75 @@ bool ListaGenerica::iguales(const ListaGenerica *Lista2)
 {
 
 }
+
+41.- METODOS CONSTANTES (CONST)
+Otra parte mas donde podemos utilizar la palabra clave "const" es al final de la declaracion de un metodo.
+
+Cuando implementamos un metodo y sabemos que no moficara en ningun momento atributos de la clase lo mas conveniente es hacerlo explicito agregando la palabra "const" luego del nombre del metodo.
+
+#include <iostream>
+
+using namespace std;
+
+class ListGenerica{
+	public:
+		bool iguales(const ListaGeneriaca *lista2) const;
+};
+
+boot ListaGenerica::iguales(const ListaGEneriaca *lista2) const{
+
+}
+
+Como vemos los parametros constantes y los metodods constantes nos permiten dejar mas claro y seguro el codigo en cuanto a que pueden modificar. Ahora el metodo iguales en nuestro problema no puede modificar ni la lista que llega ni la lista propiamente dicha del objeto actual.
+
+Es importante notar que el constructor y el destructor no pueden ser constantes. Casi siempre es un constructor inicializamos atributos y en el destructor liberamos espacio.
+
+42.- PARAMETROS POR VALOR Y POR REFERENCIA DE DATOS SIMPLES
+En C++ hay dos formas de pasar parametros a un metodo: por valor o por referencia.
+
+Hasta ahora siempre hemos pasado los parametros por valor, cuando pasamos un tipo de dato simple (int, float, etc.) se hace una copia del dato en otra parte de la memoria. Veremos que podemos pasar una variable y que el parametro pueda acceder y modificar directamente la variable que le pasamos.
+
+#include <iostream>
+
+using namespace std;
+
+class Prueba{
+	public:
+		void cambiar1(int z);
+		void cambiar2(int &z);
+};
+
+void Prueba::cambiar1(int z){
+	z = 0;
+}
+
+void Prueba:cambiar2(int &z){
+	z = 0;
+}
+
+int main(){
+	Prueba prueba1;
+
+	int num = 10;
+
+	cout << "Valor de la variable num: " << num << "\n";
+
+	prueba1.cambiar1(num);
+
+	cout << "Valor de la variable num luego de envuarla por valor: " << num << "\n";
+
+	prueba1.cambiar2(num);
+	
+	cout << "Valor de la variable num luego de enviarla por referencia: " << num << "\n";
+
+	return 0;
+}
+
+Los parametros por valor solo se le antecede el nombre del tipo de dato.
+
+El parametro z recibe una copia del valor alamacenado en la variable num definida en la main. Cuando modificamos z con el valor 0 no se modifica la variable nom definida en la main.
+
+Loas parametrod por referencia se les antecede al nombre del parametro el caracter &. Un parametro por referencia es como un alias del nombre de la variable que le pasamos desde la main. En nuetro ejemplo el parametro z accede directamente al contenido de la variable num que definimos en la main.
+
+Cuando modificamos z estamos realmente modificando la variable num definida en la main.
 

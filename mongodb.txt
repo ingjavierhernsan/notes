@@ -24,6 +24,9 @@ MongoDB
 22.- INDICES - SIMPLES Y COMPUESTOS
 23.- INDICES - CON CAMPOS DE TIPO DOCUMENTO Y ARRAY
 24.- INDICES - ELIMINACION
+25.- MONGODB SHELL - CARACTERISTICAS
+26.- MONGODB SHELL - CARGAR Y EJECUTAR UN ARCHIVO *.JS
+27.- MONGODB SHELL - CONECTARNOS A UN SERVIDOR REMOTO
 
 
 1.- ELEMENTOS ESENCIALES DE MONGODB: BASE DE DATOS - COLECCION - DOCUMENTO
@@ -758,3 +761,134 @@ Tengamos en cuenta que no podemos eliminar el indice que crea MongoDB sobre el c
 Para eliminar un indice si no queremos llamar a getIndexes podemos indicar los campos por los que se creo el indice.
 
 db.libros.dropIndex({titulo:1})
+
+25.- MONGODB SHELL - CARACTERISTICAS
+En MongoDB shell podemos ejecutar todas las funciones del lenguaje JavaScript, para comprobar esto ejecutemos:
+
+x=1;
+x++;
+x;
+cubo=Math.pow(x, 3)
+cubo;
+
+Podemos incluso codificar una funcion y luego llamarla:
+
+functon mayor(x1, x2){
+    if(x2 > x2)
+        return x1;
+    else
+        return x2;
+};
+
+mayor(10, 3);
+mayor(6, 34);
+
+Personalizacion del prompt de MongoDB shell
+
+Ahora que savemos que tenemos un entorno en JavaScript en MongoDB shell podemos personalizar por ejemplo el shell modificando la variable 'prompt' asignando una funcion:
+
+prompt = function(){
+    return (new Date())+"> ";
+};
+
+El prompt de MongoDB shell nos muestra la fecha y hora actual.
+
+Algo mas util es que el prompt muestre el nombre de la base de datos activa, esto logramos asignando la siguiente funcion:
+
+prompt = function(){
+    return db+"> ";
+};
+
+Crear una gran coleccion de datos mediante codigo JavaScript
+Podemos utilizar la funcionalidad de JavaScript en el shell de MongoDB para poblar una coleccion con datos de prueba por ejemplo:
+
+for(i=1; i<=1-; i++){
+    db.articulos.insertOne{
+        _id: i,
+        nombre: 'nombre'+i
+    }
+};
+
+Desplegar el codigo JavaScript de los metodos de MongoDB
+Podemos desplegar el codigo JavaScript de cada metodo visto en conceptos anteriores simplemente indicando su nombre desde el shell:
+
+db.articulos.insertOne
+
+Muy util si tenemos conocimeintos de JavaScript para conocer su implementacion.
+
+26.- MONGODB SHELL - CARGAR Y EJECUTAR UN ARCHIVO *.JS
+Vimos en el comcepto anterior que desde la aplicacion de consola de MongoDB (shell) podemos ejecutar comandos JavaScript, ahora veremos que dichos comandos podemos tenerlos en un archivo *.js y cargarlos mendiante un comando.
+
+Luego de haver grabado el archivo con el nombre 'creation.js' en la carpeta c:\scriptmongodb procedamos a ejecutar el comando load desde el shell de MongoDB:
+
+load("c:\\scriptmongodb\\cracion.js")
+
+Luego de ejecutar la funcion load nos informara si se ejecuto el bloque de comandos en forma exitosa con un 'true'.
+
+Hemos pasado el path absoluto donde se encuentra el archivo, si el archivo *.js se encuentra en la msima carpeta desde donde iniciamos MongoDB shell podemos especificar solamente el nombre del archivo al llamar a load:
+
+load("creacion.js")
+
+Si queremos ejecutar mongo.exe desde cualquier carpeta de Windows 10, debemos configurar una cariable de entorno con la carpeta donde hemos instalado MongoDB.
+
+Comandos de MongoDB en un archivo *.js
+
+En un script no podemos utilizar los comandos show dbs, use, show collections, etc. pero podemos sustituirlos llamando a metodos:
+
+use base1                   ->  db = db.getSiblingDB('base1')
+show dbs, show databases    ->  db.adminCommand('listDatabases')
+show collections            ->  db.getCollectionNames()
+show users                  ->  db.getUsers()
+show roles                  ->  db.getRoles({showBuiltinRoles: true})
+show log                    ->  db.adminCommand({'getLog':''})
+show logs                   ->  db.adminCoomand({'getLog':'*'})
+it                          ->  cursor = db.collection.find();
+                                while(cursor.hasNext()){
+                                    printjson(cursor.next());
+                                }
+
+En un script simpre que necesitemos hacer salidas por pantalla debemos utilizar la funcion print y printjson, por ejemplo:
+
+printjson(db.adminCommand('listDatabases))
+
+Ejemplo:
+
+printjson(db.adminCommand('listDatabases'))
+
+db = db.getSiblingDB('base1')
+
+print(db.gerCollectionNames())
+
+deb.articuls.drop()
+
+for(i = 1; i<= 10; i++){
+    db.articulos.insertOne(
+        {
+            _id; i,
+            nombre: 'nombre' + i
+        }
+    )
+}
+
+cursor = db.articulos.find();
+
+while(cursor.hasNext()){
+    printjson(cursor.next());
+}
+
+27.- MONGODB SHELL - CONECTARNOS A UN SERVIDOR REMOTO
+Hasta ahora hemos trabajado con nuestro servidor instalado en forma local. Veremos ahora los pasos que debemos dar para conectarnos a un servidor remoto desde MongoDB shell.
+
+Creamos un servidor en forma gratuita, un servicio que presta la empresa que desarrolla MongoDB.
+
+Primero debemos obtener una cuenta, para ello debemos registrarmos en MongoDB Atlas.
+Debemos crear como primer paso un "Cluster".
+Seguidamente debemos crear un usuario ingresando su nombre y clave.
+Una vez registrado se nos suministran todos los accesos para poder crear bases de datos en nuestro servidor remoto.
+Desde su panel de control podemos obtener la cadna de conexion para conectarnos al servidor remoto MongoDB desde nuestro shell.
+Presionando el boton "Connect" aparece un dialogo que nos informa las distintas formas que tenemos para conectarnos al servidor segun la aplicacion que utilicemos.
+Utilizaremos Short SRV connection string (shell 3.6+)
+Desde una consola de Windows procedemos a ejecutar 'mongo' con la cadena indicada en el panel de control, se nos solicita la clave definida para el ususario que creamos anteriormente.
+
+Todas las actividades qeu desarrollemos ahora se efectuaran en el servidor remoto que acabamos de crear.
+
