@@ -42,7 +42,10 @@ C++
 40.- PARAMETROS DE UN METODO CONSTANTE (CONST)
 41.- METODOS CONSTANTES (CONST)
 42.- PARAMETROS POR VALOR Y POR REFERENCIA DE DATOS SIMPLES
-
+43.- PARAMETROS POR VALOR Y POR REFERENCIA DE OBJETOS
+44.- CLASE STRING
+45.- CLASE STRING (SIZE - LENGTH - EMPTY - AT)
+46.- CLASE STRING (APPEND - INSERT - ERASE)
 
 1.- COMPILAR CODIGO C++
 g++ file.cpp -o file
@@ -1905,3 +1908,268 @@ Loas parametrod por referencia se les antecede al nombre del parametro el caract
 
 Cuando modificamos z estamos realmente modificando la variable num definida en la main.
 
+43.- PARAMETROS POR VALOR Y POR REFERENCIA DE OBJETOS
+Los parametros de un metodo pueden ser de tipo objeto y tambien los podemos hacer por valor o referencia.
+
+Cuando un parametro de tipo objeto se hace por valor se hace una copia identica de dichao objeto en otra parte de memoria.
+
+Si modificaramos los atributos de dicho parametro no se estarian modificando los atributos del objeto que le pasamos en la llamada.
+
+#include <iostream>
+
+using namespace std;
+
+Class Reloj{
+	int hora;
+	int minuto;
+	int segundo;
+public:
+	Reloj(int hora, int minuto, int segundo) {this->hora = hora; this->minuto = minuto; this->segundo = segundo;};
+	void imprimir();
+	void intentoCambiar(Reloj r);
+};
+
+void Reloj::imprimir(){
+	cout << hora << ":" << minuto << ":" << segundo << "\n";
+}
+
+void Reloj::intentoCambiar(Reloj r){
+	r.hora = 1;
+	r.minuto = 0;
+	r.segundo = 0;
+}
+
+int main(){
+	Reloj reloj1(10, 10, 10);
+	Reloj reloj2(20, 20, 20);
+
+	reloj1.intentoCambiar(reloj2);
+	reloj1.imprimir(); // imprime: 10:10:10
+
+	reloj2.imprimir(); // imprime: 20:20:20
+
+	return 0;
+}
+
+Como podemos comprobar cuando desde la main le enviamos el objeto reloj2 al metodo intentoCambiar los atributos originales de dicho objeto no se alteran (siguen teniendo los valores que le pasamos ala cosntructor):
+
+Esto funciona asi ya que dentro del metodod intentoCambiar se crea un parametro r de la clase Reloj con una copia identica del objeto que le pasamos desde la main. Es importante hacer notar que si la clase Reloj tiene destructor el mismo se ejecutara cuando se libere el espacio del parametro r al finalizar el metodo intentoCambiar.
+
+Modifiquemos este mismpo problema y definamos el parametro por referencia:
+
+#include <iostream>
+
+using namespace std;
+
+Class Reloj{
+	int hora;
+	int minuto;
+	int segundo;
+public:
+	Reloj(int hora, int minuto, int segundo) {this->hora = hora; this->minuto = minuto; this->segundo = segundo;};
+	void imprimir();
+	void intentoCambiar(Reloj &r);
+};
+
+void Reloj::imprimir(){
+	cout << hora << ":" << minuto << ":" << segundo << "\n";
+}
+
+void Reloj::intentoCambiar(Reloj &r){
+	r.hora = 1;
+	r.minuto = 0;
+	r.segundo = 0;
+}
+
+int main(){
+	Reloj reloj1(10, 10, 10);
+	Reloj reloj2(20, 20, 20);
+
+	reloj1.intentoCambiar(reloj2);
+	reloj1.imprimir(); // imprime: 10:10:10
+
+	reloj2.imprimir(); // imprime: 20:20:20
+
+	return 0;
+}
+
+El unico cambio que hemos dispuesto es qeu el parametro r pasa por referencia (es decir ahora r es un alias de la varaible que le pasamos desde la main).
+
+Otra cosa importante que hay que destacar que cuando pasamos un parametro por referencia el destructor de dicho parametro no se ejecuta.
+
+Cuando se pasan objetos grandes el tiempo de hacer la copia en el parametro puede ser costoso para la eficiencia de nuestro programa. Es muy comun en estos casos pasar por referencia aunque no tengamos que modificar el objeto que le pasamos, le agregamos el modificador const al parametro por referencia para evitar modificarlo.
+
+44.- CLASE STRING
+Para poder utilizar la clase string debemos incluir en nuestro programa:
+
+#include <string>
+
+Para crear un objeto de la clase sting podemos hacerlo de dos formas:
+
+string cadena1("Hola mundo");
+
+o la mas comoda y legible:
+
+sting cadena1 = "Hola mundo";
+
+Creacion, iniciazion por asignacion y carga por teclado de un objeto de tipo string.
+
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+int main(){
+	string cadena1 = "Hola mundo";
+	string cadena2;
+
+	cout << "Ingrese una cadena de caraxteres son espacions en blanco: ";
+
+	cin >> cadena2;
+	cin.get();
+
+	cout << "Primer string: " << cadena1 << "\n";
+	cout << "Segundo string: " << cadena2;
+
+	return 0;
+}
+
+cin >> cadena2;
+
+Como el cin deja en el buffer de teclado un enter procedemos a extraerlo mediante la llamada al get:
+
+cin.get();
+
+Es importante hacer notar que cuando ingresamos una cadena con el objeto cin no podemos ingresar el espacio en blanco, sino se corta el string de dicho caracter.
+
+Para permitir ingresar esapcios en blanco dentro del string por teclado debemos utilizar la funcion getline:
+
+getline(cin, cadena2);
+
+Esta funcion ya libera el buffer del ultimo "enter" ingresado. El programa visto anteriormente queda finalmente codificado como:
+
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+int main(){
+	string cadena1 = "Hola mundo";
+	string cadena2;
+
+	cout << "Ingrese una cadena de caraxteres son espacions en blanco: ";
+
+	cin >> cadena2;
+	getline(cin, cadena2);
+
+	cout << "Primer string: " << cadena1 << "\n";
+	cout << "Segundo string: " << cadena2;
+
+	return 0;
+}
+
+Operadores relacionales aplicados a la clase string.
+Asi como vimos que a un objeto de la clase string podemos iniciarlo por el operador = (asignacion) tambien podemos utilizar los operadores relacionales para comparar el contenido de dos string:
+
+==
+!=
+>
+>=
+<
+<=
+
+La clase string facilita la comparacion de cadenas de caracteres a diferencia del manejo con vectores de caracteres donde debemos utilizar las funciones strcmp.
+
+string s1 = "";
+string s2 = "";
+
+if(s1 > s2)
+
+if(s2>s1)
+
+Hay que tener en cuenta que cuando utilizamos el operador > estamos haciendo una comparacion no por la cantidad de caracteres sono alfabeticamente (por ejemplo el sting "bien" es mayor al string "alma" ya que la "b" es mayor a la "a").
+
+Operador +
+La clase string redefine el operador + con el objeto de generar otro objeto de la clase string que resulte de concatenar los contenidos de los string respectivos.
+
+string s1 = "";
+string s2 = "";
+string s3 = s1 + "-" + s2;
+
+Acceder a un caracter individual del string por medio de un subindice.
+Podemos acceder a cualquier caracter del string indicando la posicion del elemento que queremos acceder. Las posisiones comienzan a numerarse a partir de cero.
+
+string cadena1 = "Hola";
+cout << cadena1[0];
+cout << cadena1[3];
+
+Hay que tener cuidado de acceder siempre a posiciones dentro del string que tengan caracteres, por ejemplo se generara un error en tiempo de ejecucion si queremos acceder al caracter de la posicion 12.
+
+45.- CLASE STRING (SIZE - LENGTH - EMPTY - AT)
+Metodos: length() y size()
+Estos metodos retornan la cantidad de caracteres qeu contiene el string. Podemos utilizar indistintamente uno u otro (similar a la funcion strlen con vectores de caracteres)
+
+string cadena1 = "Hola";
+cout << "Cadena: " << cadena1;
+cout << "\n";
+cout << cadena1.size();
+cout << "\n";
+cout << cadena1.length();
+
+Metodo: empty()
+El metodo empty returna true si el string tiene una cadena vacia. Por ejemplo un string vacio se inicia con:
+
+string cad="";
+
+Pero tambien podemos hacerlo sin asignar un valor (laforma anterior es solo para dejarlo mas legible):
+
+string cad;
+
+string cadena;
+
+if(cadena.empty())
+
+Metodo: at()
+El metodo at me permite recuperar un caracter de una determina posicion dentro del string, por ejemplo para recuperar el tercer caracter almacenado en el string:
+
+char letra = str.at(2);
+
+El resultado es identico a acceder por medio de subindices:
+
+char letra = str[2];
+
+string cadena;
+
+for (int f=0; f<cadena.length(); f++){
+	cout << cadena.at(f) << "=";
+}
+
+46.- CLASE STRING (APPEND - INSERT - ERASE)
+Veamos algunos metodos que nos provee la clase stirng para modificar el contenido de un string.
+
+append: Para anadir al final otra cadena de caracteres.
+
+insert: Para anadir otra cadena en cualquier parte de la cadena indicando la posicion inicial.
+
+erase: Borrar desde una determinada posicion una determinada cantidad de caracteres del string.
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main(){
+	string cad = "uno tres";
+	cout << "Cadena original: " << cad << "\n";
+
+	cad.append(" cuatro");
+	cout << "Cadena despues de llamar a append: " << cad << "\n";
+
+	cad.insert(3, " dos");
+	cout << "Cadena despues de llamar a insert: " << cad << "\n";
+	
+	cad.erase(0, 4);
+	cout << "Cadena despues de llamar a erase: " << cad << "\n";
+
+	return 0;
+}
