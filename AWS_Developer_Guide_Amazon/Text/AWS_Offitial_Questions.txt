@@ -1,0 +1,93 @@
+Review question 1
+
+1.- Which of the following is typically used to sign API calls to AWS services?
+AWS access key.
+
+The specific credentials include the access key ID and secret access key. If the access key is valid onlu for a short-term session, the credentials also include a session token.
+
+AWS uses the user name and passwoeds for working with the AWS Management Console, not for working with the APIs. Data encryption uses the customer master keys, not API access.
+
+2.- When you make API calls to AWS services, for most services those requests are directed at a specific endpoint that corresponds to which of the following?
+
+3.- When you're configuring a local development machine to make AWS API calls, with of the following is the simplest secure method of obtaining an API credential?
+
+4.- You have a large number of employees, and each employee already has a identity in an external directory. How might you manage AWS API credentials for each employee so that they can interact with AWS for short-term sessions?
+
+5.- You have a team member who needs access to write records to an existing Amazon DynamoDB table within your account. How might you grant write permission to this specific table and only this table?
+
+6.- You created a Movies DynamoDB table in the AWS Management Console, but when you try to list your DynamoDB tables by using the Java SDK, you do not see this table. Why?
+
+7.- You make an API request to describe voices offered by Amazon Polly by using the AWS CLI, and you receive the following error message:
+Could not connect to the endpoint URL:
+https://polly.us-east-1a.amazonaws.com/v1/voices
+What went wrong?
+
+8.- To what resource does this IAM policy grant access, and for which actions?
+{
+	"Version":"2012-10-17",
+	"Statement": {
+		"Effect":"Allow",
+		"Action":"s3.ListBucket",
+		"Resource":"arn:aws:s3:::example_bucket"
+	}
+}
+
+9.- When an IAM user makes an API call, that user's long-term credentials are valid in which context?
+
+10.- When you use identity federation to assume a role, where are the credentials you use to make AWS API calls generated?
+
+11.- You have an on-premises application that needs to sample data from all your Amazon DynamoDB tables. You have defined an IAM user for your application called TableAuditor. How can you give the TableAuditor user read access to new DynamoDB tables as soon they are created in your account?
+
+12.- The principals who have access to assume an IAM role are defined in which document?
+
+13.- A new developer has joined your small team. You would like to help your team member set up a development computer for access to the team account quickly and securely. How do you proceed?
+
+14.- You have been working with the Amazon Polly service in your application by using the Python SDK for Linux. You are building a second application in C#, and you would like to run that application on a separate Windows Server with .NET. How can you proceed?
+
+15.- You are a Virginia-based company, and you have been asked to implement a custom application exclusively for customers in Australia. This application has no dependencies on any of your existing applications. What is a method you use to keep the customer latency to this new application low?
+
+Review questions 2
+
+1.- When you launch an Amazon Elastic compute Cloud (Amazon EC2) instance, which of the following is the most specific type of AWS entity in which you can place it?
+
+2.- You have saved SSH connection information for an Amazon Elastic Compute Cloud (Amazon EC2) instance taht you launched in a public subnet. You previously stopped the instance the last time you used it. Now that you have statted the instance, you are unable to connect to the instace using the saved information. Which of the following could be the cause?
+
+3.- You are working from a new location today. You are unable to initiate a Remote Desktop Protocol (RDP) to your Windows instance, which is located in a public subnet. What could be the cause?
+
+4.- You have a backend Amazon EC2 instance providing a web service to yur web server instances. Your web servers are in a public subnet. You would like to block inbound requests from the internet to uour backend instance but still allow the instance to make API requests over the public internet. What steps must you take? (Select two).
+
+5.- You have launched an Amazon Elastic Compute Cloud (Amazon EC2) instance and loaded your application code on it. You have now dicovered that the instance is missing applications on which your code depends. How can you resolve this issue?
+
+6.- How can code running on an amazon Elastic Compute Cloud (Amazon EC2) instance automatically dicover its public IP address?
+
+7.- How can you customize the software of your Amazon Elastic Compute Clud (Amazon EC2) instance beyond what the Amazon Machin Image (AMI) procides?
+
+8.- Youhave a process running on an Amazon Elastic Compute Clud (Amazon EC3) instance that exeeds the 2 GB of RAM allocated to teh instance. This is causing the pocess to run slowly. How can you resolve the issue?
+
+9.- You have launched an Amazon Elastic Compute Cloud (Amazon EC2) Windows instance, nad you would like to connect to it using the Remote Desktop Protocol. The instance is in a public subnet and has a public IP address. How do you find the password to the Administrator account?
+
+10.- What steps must you take to ensure that an Amazon EC2 instance can receive web requests from customers on the internet? (Select three)
+
+11.- Which of the following are true about Amazon Machine Image (AMI)? (Select two)
+
+12.- Which of the following are true abour amazon Elastic Compute Cloud (A.azon EC2) instance types? (Select two)
+
+13.- Which of the following actions are valid vased on the Amazon Elastic Compute Clud (Amazon EC2) instance lifecycle? (Select two)
+
+14.- You have a development Amazon Elastic Compute Cloud (Amazon EC2) instace where you have installed Apache Web Server and MySQL. How do you verify that the web server application can communicate with the database given that they are both running on the same instance?
+
+15.- What type of route must exist in the associated route table for a subnet to ve a public subnet?
+
+16.- What type of route must exist in the associated route table for a subnet to be a private subnet that allows outbound internet access?
+
+17.- Which feature of Amazon Virtual Private Cloud (Amazon VPC) enables you to see which network requests are being accepted or rejected in your Amazon VPC?
+
+18.- Which AWS services enables you to track the CPY utilization of an Amazon Elasctic Compute Cloud (Amazon EC2) instance?
+
+19.- What happens to the data stored on an Amazon Elastic Block Store (Amazon EBS) volume when you stop an Amazon Elastic Compute Cloud (Amazon EC2) instance?
+
+20.- Which programming language can you use to write the code that runs on an Amazon EC2 instance?
+
+21.- You have launched an Amazon EC2 instance in a public subnet. The instance has a public IP address, and you have confirmed that the Apache web server is running. However, your internet users are unable to make web requests to the instance. How can you resolve teh issue? (Select two)
+
+22.- Which of the following are the customer's responsibility concerning Amazon EC2 instances? (Select two)

@@ -1,0 +1,444 @@
+Exercise 1.1
+Sign up for an account
+
+In this exercise, you'll sign up for an accoun.
+1. Open your browser and go to https://aws.amazon.com/free/
+2. Choose Create a free account.
+3. Provide personal information.
+4. Provide payment information.
+5. Verify your phone number.
+6. Select a supprt plan.
+7. Choose Sing in to the console.
+8. Sogn in to the console.
+
+You are now signed in to the AWS Management console.
+
+Exercise 1.2
+Create an IAM administrators group and user
+
+In this exercise, you'll define an administrators grup and then add a user to that group. Generate API keys fro this user and call this user DevAdmin.
+
+1. Sign in to the AWS Management Console (at signin.aws.amazon.com/console).
+2. Select All services.
+3. To open the IAM dashboard, select IAM.
+4. To view the list of IAM groups, select Groups. I this is a new account, the list is empty.
+5. Choose Create new group.
+6. For Group name, enter Aministratos.
+7. Choose Next step.
+8. On the Attach policy page, select the Administrator Access policy.
+9. Choose Next step.
+10. On the Review page, choose Create group to create the Administrators group.
+11. To view the list of IAM users, select Users. If this is a new account, the list is empty.
+12. Choose Add user.
+13. Set teh user name to DevAdmin.
+14. Select Both Access type check boxes: Programmatic access and AWS Management Console access.
+15. Choose Next: Permissions.
+16. To add this user to the Administratos group, select the Administratos group check box.
+17. Clear the Require password reset check box.
+18.- Choose Next: Tags.
+19.- Provide a tag with a key of prohect and a value of dev-study-guide. Use tags to add customizable key-value pairs to resources so that you can more easily track and manage them.
+20.- Choose Next: Review.
+21.- Choose Create user.
+22.- Download the credentials.csv file.
+23.- Rename the file to devamin-credentials.csv, and move the file to a folder where you would like to keep it.
+24.- Sign out of the AWS Management Console by clicking you name in the top bar and selecting Sign out.
+
+You now have a .csv file that contains a user name, password, access key ID, secret access key, and console login link. Ue the DevAdmin user name, password, and console sign-in link to sign in to the AWS Managment Console for all future exercises unless otherwise noted. Use teh access key to configure the SDK in the following exercises.
+
+Exercise 1.3
+Install and cofigure teh AWS CLI
+
+In this exercise, you'll install and configure the AWS Command Line Interface (AWS CLI). The AWS CLI requires Python2 or Python3. Install Python using pip, the Python installer.
+
+1.- Intall Python from https://www.python.org/downloads/.
+2.- Open a terminal window.
+3.- To install the AWS CLI, run teh following command: pip installl aws-cli --upgrade --user
+4.- (Optional) If you encounter issues with step 3, review the AWS CLI Installation guide for alternative installation options here: https://docs.aws.amazon.com/cli/latest/userguide/installing.html
+5.- To configure the AWS CLI with a default profile for credentials, run the following command: aws configure
+6.- Enter the following values when prompted:
+* AWS Access Key ID: Paste the value from the CSV you downloaded in Exercise 1.2.
+* AWS Secret Access Key: Paste the valu from the CSV you downloaded in Exercise 1.2.
+* Default region name: Enter us-east-1.
+* Default output format: Press Enter to leave this blank.
+
+7.- Run the CLI command to verify that your CLI is working correctly, and view the availabe voices for Amazon Polly. aws polly descrive-vlices --language en-US --output table
+
+A table in the terminal lists the available voices for Amazon Pilly for the language US English.
+
+Exercise 1.4
+Download the code samples
+
+In this exercise, you'll download the code snippets to execute future exercises.
+
+1.- If you haven't downloaded the chapter resources from the online test bank, go to http://www.wiley.com/go/sybextestprep.
+2.- Register to get an access code.
+3.- Login and then redeem the access code. The book will be added to the online test bank.
+4.- Next to "Course Dashboard", click Resources.
+5.- Click "Chapter Resources" to downlad the code files.
+
+You can also download the code files from the book page at https://www.wilet.com/en-us/AWS+Certified+Developer+Official+Study+Gide%3A+Associate+%28DVA+C01%29+Exam-p-9781119508199. Click Downloads to access the Online Materials for Chapters 1, 2, 11, and 12.
+
+Exercise 1.5
+Run a Python Script that makes AWS API Calls
+
+In this exercise, you'll run the Python script to make an AWS API call.
+
+1.- Open a terminal window and navigate to the folder with the book sample code.
+2.- To install the AWS SDK for Python (Boto), run the following command: pip install boto3
+3.- Navigate to the chapter-01 folder whre you downloaded the sample code.
+4.- To generate an MP3 in the chapter-01 folder, run the helloworld.py program. python helloworld.py
+5.- To hear the audio, open the generated file, helloworld.mp3.
+6.- (Optional) Modify the Python code to use a different voice. See Exercise 1.3 for an AWS CLI command that provides the list of available voices.
+
+You hear "Hello World" when you play the generated audio file. If you completed the optional challenge, you also hear the audio spoken in a different voice from the first audio.
+
+Exercise 1.6
+Working with Multiple regions
+
+In this exercise, you'll use Amazon Polly to understand the effects of working with different AWS Regions.
+
+1.- Open a terminal window and navigate to the folder with the book sample code.
+2.- Navigate to chapter-01 in the folder whre you downloaded the sample code.
+3.- Verigy that the regin is us-east-1 by running the following command: aws configure get region
+4.- Upload aws-lexicon.xml to th Amazon Polly service in the default region, which is US East (N. Virginia). aws polly put-lexicon --name awsLexicon --content file://aws-lexicon.xml
+5.- The file helloaws.py is currently overriding the regin to be EU (London). Run the Python code and observe the LexiconNotFoundException that returns. python.helloaws.py
+6.- Upload the lexicon to EU (London) by setting the region to eu-west-2. aws polly put-lexicon --name awsLexicon --content file://aws-lexicon.xml --region eu-west-2
+7.- Run the following Python script again: python helloaws.py 
+Observe that it executes successfully this time and generate an MP3 file in the current folder.
+8.- Play the generated helloaws.mp3 file to confirm that it says, "Hello Amazon Web Services".
+9.- (Optional) Delete the lexicons with the following commands: 
+aws polly delete-lexicon --name awsLexicon
+aws polly delete-lexicon --name awsLexicon --region eu-west-2
+
+Even though the text supplied by the API call to synthesize speech was "Hello AWS!", the generated audio file uses the lexicon you uploaded to pronounce it as "Hello Amazon Web Services".
+
+Exercise 1.7
+Working with additional profiles
+
+In this exercise, you difine a limited user for the account and configure a new profile in the SDK to use these credentials. Notice that the permissions are restrivtive and that you need to update the permissions for that user to be more permissive.
+
+1.- Sign in to the AWS Management Console (at aws.amazon.com) using the credentials for DevAdmin from Exercise 1.2.
+2.- Select Services.
+3.- Select IAM to open the IAM dashboard.
+4.- Select Users to view the list of IAM users.
+5.- Choose Add user.
+6.- set the user name to DevRestricted.
+7.- For Access type, select Programmatic access.
+8.- Coose Next Permissions.
+9.- Select Attach existing policies directly.
+10.- Select the AmazonPollyReadOnlyAccess policy.
+11.- To narrow the options, in Filter, enter polly.
+12.- Choose Next: Tags.
+13.- Define a tag as follows:
+* Key: project
+* Value: dev-study-guide
+14.- Choose Next: Review.
+15.- Choose Create User.
+16.- To configure the SDK in the following steps, download the credentials.csv file.
+17.- Rename the downloaded file to devrestricted-credentials.csv and move it to the same folder where you put the CSV file from Exercise 1.2.
+18.- Open a terminal window and navigare to the folder with the sample code.
+19.- Navigate to the chapter-01 folder.
+20.- (Optional) Review the code in upload-restricted.py.
+21.- Configure the AWS CLI with a new profile called restricted. Rkun the following command: aws configure --profile restricted
+When prompted, enter the following values:
+*AWS Access Key ID: Copy the value from the CSV you downloaded.
+*AWS Secret Access Key: Copy the value from the CSV you downloaded.
+*Default region name: Enter us-east-1.
+*Default output format: Press Enter to retain the default setting.
+22.- Upload the lexicon.
+The upload operation is expected to fail beacuse of the restricted permissions associated with the profile specified in the script. Run the following Python script: Python upload-restricted.py
+23.- Return to the AWS Management Console for IAM, and in the left navigarion, select Users.
+24.- To view a user summary page, select DevRestricted user.
+25.- Choose Add permissions.
+26.- Select Attach existing policies directly.
+27.- To filter out other policies, in the search box, enter polly, and select the AmazonPollyFullAccess policy.
+28.- Choose Next: Review.
+29.- Choose Add permissions.
+30.- Repeat step 22 to upload the lexicon.
+The upload is successful. After the change in permissions, you did not have to modify the credentials. After a short delay, the new policy automatically takes effect on new API calls from DevRestricted.
+31.- Delete the lexicon by running the following command: aws polly delete-lexicon --name awsLexicon --region eu-west-2
+In this exercise, you have configured the SDK and AWS CLI to refer to a seconday credentials profile and have tested the distinction between the AWS managed IAM policie related to Amazon Polly. You have also confirmed that it is possible to change the permissions of an IAM user without changing the access key used by that user.
+
+======================================================================================
+
+Exercise 2.1
+Create an Amazon EC2 Key pair
+
+In this exercise, you'll generate and save and Amazon EC2 key pair. You are responsible for saving the private key and using it when you want to connect to your Amazon EC2 instances.
+
+1.- Sign in to the AWS Management Console using the DevAdmin IAM user you created in Exercise 1.2.
+2.- To open the Amazon EC2 console, select Services > EC2.
+3.- Select Network & security > Key pairs.
+4.- Select Create key pair.
+5.- For Key pair name, enter devassoc, and then choose Create. The key pair automatically downloads to your Downloads folder.
+6.- Move this key to a safe location on your computer. You need it to connect to your Amazon EC2 instances using Secure Shell (SSH) or Remote Desktop Protoco (RDP).
+
+Exercise 2.2
+Create an Amazon VPC with Public and Private Subnets
+
+In this exercise, you'll create an Amazon Virtual Private Cloud (Amazon VPC). Within that amazon VPC, you eill have a public subnet directly connected to the internet through an internet gateway. You will also have a private subnet that only has an indirect connection to the internet using network address translation (NAT).
+
+1.- To display the Amazon VPC dashboard, select Services > VPC.
+2.- Select Launch VPC Wizard.
+If a field does not contain an explicit value in these directions, retain the default value.
+3.- Select VPC with public and private subnets and then click Select.
+4.- enter the following details for Amazon VPC:
+a.- For Amazon VPC name, enter devassoc.
+b.- In the public and private subnets drop-down lists, select the first AZ.
+c.- In the Elastic IP Allocation ID prompt, select Use a NAT instance instead.
+d.- For the Amazon EC2 Key pair name, slect devassoc.
+5.- Choose Create VPC.
+6.- When the Amazon VPC is created, choose OK.
+7.- Copy the VPC ID of the Amazon VPC named devassoc to a text document.
+8.- To view the list of subnets, select Subnets.
+a.- In the filter box, paste the VPC ID you copied and then press the Enter key to filter the results.
+Two subnets are listed: Public subnet and private subnet.
+9.- Copy the Subnet ID of the public and private subnet to the text file.
+After you have created Amazon VPC, your text document will look like the following:
+
+VPC ID: VPC-06bb2198eaexample
+Public subnet ID: subnet-0625e239a2example
+Private subnet ID: subnet-0e78325d9eexample
+
+Exercise 2.3
+Use an IAM Role for API calls from amazon EC2 Instances
+
+In this exercise, you'll create an IAM role for the web server. This role enables you to make AWS Cloud API calls from code running on the Amazon EC2 instance of the web server. You are not required to save IAM credentials in a file on the instance. To do this, create a new IAM role and call it the devassoc-webserver role. The role provides permissions needed for the API calls.
+
+1.- Select Services > IAM.
+2.- Select Roles and choose Create Role.
+3.- Under Choose the service that will use this role, select the option that allows Amazon EC2 instances to call AWS services on your behalf, and then choose Next: Permissions.
+4.- Select the following AWS managed policies to attach them to the devassoc-webserver role and then choose Next: Tags:
+AmazonPollyReadOnlyAccess: Grand read-only access to resources, list lexicons, fetch lexicons, lsit available voices, and synthesize speech to apply lexicons to the synthesized speech.
+
+TranslateReadOnly: Allow permissions to detect teh dominant language in text, translate text, and list and retrieve custom terminologies.
+
+*These permissions are required to complete future exercises.
+
+5.- Enter the following tag details and then choose Next: Review:
+Key: project
+Value: devassoc
+6.- For the Role name, enter devassoc-webserver and then choose Create Role.
+
+Exercise 2.4
+Launch an Amazon EC2 Instance as a Web server
+
+In this exercise, you'll launch an Amazon EC2 instance as a web server and connect to it.
+
+1.- Select Services > EC2.
+2.- Select Launch Instance.
+3.- select Amazon Linux 2 AMI and then choose Next.
+4.- Select t2.micro and then choose Next: Configure Instance Details.
+5.- On the Configure Instance Details page, set the instance:
+*Select Network > devassoc.
+*Select Subnet > Public Subnet.
+*Select Auto-assign Public IP > Enable.
+*Select IAM Role > devassoc-webserver.
+6.- Expand Advanced Details and then paste the User Data script.
+#!/bin/bash
+yum install httpd -y
+systemctl start httpd
+systemctl enable httpd
+
+Paste thsi snippet from chapter-02/server-short.txt, located in the folder in which you downloaded the sample code for this guide.
+
+7.- Select Next: Add Storage.
+8.- Select Next: Add Tags.
+9.- On the Add Tags page, choose Add Tag and then enter the following:
+Key: Name
+Value: webserver
+10.- Choose Next: Configure Security Group.
+11.- On the Configure Security Group page:
+*For Security group name, enter restricted-http-ssh.
+*For Description, enter HTTP and SSH from my IP address only.
+12.- For the existing SSH rule, select Source > My IP.
+13.- Select Add Rule, and then configure the second rule:
+*For Type, selec HTTP.
+*For Source, select My IP.
+14.- Choose Review and Launch.
+15.- On the Review Instance Launch page, verify the setting and then choose Launch.
+16.- Under Select a key pair, select devassoc and select the box acknowledging that you have access to the key pair.
+17.- To launch your EC2 instance, choose Launch Instances.
+18.- To find your instance, choose View Instaces.
+19.- From the lsit of instances, selec webserver. Wait until Instance Status for your instace reads as running and Status checks changes to 2/2 checks passed.
+20.- Copy the Public IPv4 address ofthe instace to a text document.
+21.- Past the IP address of the webserver instance into a browser window. A test webpafe is displayed. If you do not see a page, wait 30 seconds and then refresh the page.
+22.- Disable your mobile phone's Wi-fi and then attempt to access the IP address of the webserver instance from your mobile phone with mobile data.
+
+The page fails to load because the security group rule allows HTTP access from oly a particular IP address.
+
+Exercise 2.5
+Connect to the Amazon EC2 Instance
+
+In this exercise, you'll connect to the Amazon EC2 Instance using SSH.
+
+1.- Select Services > EC2.
+2.- Select Instances.
+3.- Select the webserver instance from the list of instances.
+4.- Select Actions > Connect.
+5.- In the Connect to Your Instance dialog box, follow the directions to establish an SSH connection.
+6.- From within your SSH session, run this command to view the available metadata fields from the Amazon EC2 metadata service: curl 169.254.169.254/latest/metadata/
+7.- Run this command to query the Amazon EC2 instance ID: curl 169.254.169.254/latest/metadata/instance-id
+8.- Call AWS Cloud API using the AWS CLI. This command translates text from English to French and uses credentials from the AWS role you assigned to the instace. Enter the following command as a single line: aws translate translate-text --text "Hello world." --source-language-code en --target-language-code fr --region us-west-2
+9.- To review the credentials that are beings passed to the instance, query the Amazon EC2 Metadata service: curl 169.254.169.254/latest/metadata/iam/security-credentials/devassoc-webserver
+
+Exercise 2.6
+Configure NAT For instaces in the Private Subnet
+
+In this exercise, you'll create a security group for the NAT instance. NAT allows Amazon EC2 instances in the private subnet to make web request to the internet, to update software packages, and to make API calls.
+
+1.- Select Services > VPC.
+2.- From the Security section, select Security groups.
+3.- Select Create security group and configure teh properties as follows:
+*Set the Name tag to nat-sg.
+*Set the Group name to nat-sg.
+*Set the Description to Allow NAT instance to forward internet traffic.
+*Set amazon VPC to devassoc.
+4.- Choose Create to save the group, and then choose Close to return to the lsit of security groups.
+5.- Select the nat-sg security group.
+6.- To modify the inbound rulse, select the Inbound rules tab and select Edit rules.
+7.- Select Add Rule, and set the following properties for the first rule:
+*From Type, select HTTP(80).
+*From Source, enter 10.0.0.0/16.
+*For Description, enter Enable interner bound HTTP request from VPC instances.
+8.- Select Add Rule, and set the following properties for this rule:
+*From Type, select HTTPS(443).
+*From Source, enter 10.0.0.0/16.
+*For Description, enter Enable internet bound HTTPS.requets from VPC instances.
+9.- Select Add Rule, and set the following properties for this rule:
+*From Type, select All ICMP-IPv4.
+*For Source, enter 10.0.0.0/16.
+*For Description, Enable outbound PING requests from VPC instaces.
+10.- Choose Save rules.
+11.- Select Services > EC2.
+12.- Select Instaces.
+13.- Paste the Public subnet ID into the filter box. Two results are displayed. the result with an empty name is your NAT instance.
+14.- To edit the name of the NAT instance, hover over the name field and select the pencil icon.
+15.- Enter the name devassoc-nat and press Enter.
+16.- Modify the security froups for devassoc-nat to include the nat-sg group as follows:
+*Select the devassoc-nat instace and select Actions.
+*Select Networking > Change security groups.
+*Select nat-sg. You can clear the default.
+*select assign security group.
+
+Exercise 2.7
+Launch an Amazon EC2 Instance into the Private Subnet
+
+In this  exercise, you'll launch an Amazon EC2 instance into the private subnet and then verify that the security group allows HTTP from any where. Because this isntace is in the private subnet, it doues not have a public IP address. Even though the instance can make outbound requests to he internet through the NAT instance, it is not reachable for inbound connections from the internet.
+
+1.- Select Services > EC2.
+2.- Choose Launch Instance.
+3.- Select Amazon Linux 2 AMI.
+4.- Select t2.micro and then choose Next: Configure instance details.
+5.- on the Instance details page, provide the following values:
+*Select Network > devassoc VPC.
+*Select Subnet > Private Subnet.
+*Select IAM Role > devassoc-webserver.
+*Select Advanced details > User data > As file.
+*Download the code files from the book page at
+https://www.wiley.com/en-us/AWS+Certified+Developer+Official+Study+Guide%3A+Associate+%28DVA+CO1%29+Exam-p-9781119508199
+Click Downloads to access teh Online Materials for Chapter 2.
+
+6.- Choose Next: Add Storage.
+7.- Choose Next: Add Tags.
+8.- Select Tags > Add tag and set the following values:
+*For Key, enter Name.
+*For Value, enter private-instance.
+9.- Choose Next: Configure security group.
+10.- For Security group, set the dollowing values:
+*For Security group name, enter open-http-ssh.
+*For Description: enter HTTP and SSH from Anywhere.
+11.- For the SSH rule, select Source > Anywhere.
+12.- Select add Rule and then configure the second fule:
+*For Type, select HTTP.
+*For Source, select Anywhere.
+13.- Choose Review and Launch.
+14.- Choose Launch.
+15.- Under Selecta key pair, choose devassoc and select the check box acknowledging that you have access to the key pair.
+16.- Choose Launch Instances.
+17.- Select View Instances.
+18.- Select private-instance.
+19.- Copy the Private IP of the instance to the text document. Notice that the instance has no public IP address.
+
+Exercise 2.8
+Make requests to private instance
+
+In this exercise, you will explore connectivity to he private instance.
+
+1.- From your web browser, navigate to the private IP of the instances. Though the security group is open to requests from anywhere, this will fail beacuse the private IP address is not routable over the internet.
+2.- Select Services > EC2.
+3.- From the list of instances, select webserver.
+4.- Select Connect and then follow the directions to establish an SSH connection.
+5.- From within the SSH session, make an HTTP request to the private server with curl. Replace the variable private-ip-address with the private IP address of provate-instance address that you copied earlier. curl private-ip-address
+6.- Download the MP3 audio from the private instance to webserver using curl as follows: curl provate-ip-address/instance.mp3 --output instance.mp3
+7.- Make the file available for download from webserver: sudo cp instance.mpe /var/www/html/instance.mp3
+8.- In your web browser, enter the following address. Subtitute public-ip-of-webserver with the public IPv4 address of webserver, and listen to the MP3. https://public-ip-of-webserver/instance.mp3
+
+Though the private web server is not reachable from the internet, you have confirmed that it is reachable to other instances within the same Amazon VPC. As part of the bootstrapping, the private instance made AWS API calls, which require the ability to make both web request via the NAT gateway and credentials from an IAM role. You have confirmed that these request succeeded by downloading the resulting MP3 file from private-instance and placing it on webserver.
+
+Exercise 2.9
+Launch an AWS Cloud9 Instance
+
+In this exercise, you'll launch an Amazon EC2 instance that you will create in the AWS Cloud9 service. You will connect to this Amazon EC2 instance from the AWS Cloud9 console. You will then use the AWS Cloud9 IDE to edit files, build software, and execute commands on the terminal from your web browser.
+
+1.- To display the AWS Cloud9 dashboard, select Services > Cloud9.
+2.- Select create Environment.
+3.- For Name, enter devassoc-c9 and then select Next step.
+4.- Select Network settings > Advanced.
+5.- Select Network (VPC) > Amazon VPC ID (copied earlier).
+6.- Select Subnet > Subnet ID for the Public VPC (copied earlier).
+7.- Select Next step > Create environment.
+8.- When the AWS Cloud9 environment loads, run the following in the AWS Cloud9 terminal. Make sure to replace the IP address in the example command with the address you copied earlier for private-instance. curl private-ip
+9.- From teh private-instance, download the MP3 audio to devassoc-c9 using curl as follows: curl private-ip-address/instance.mp3 --output instance.mp3
+10.- To preview the file, in the navigation pane, double-click instance.mp3.
+11.- Open README.md in a text editor.
+
+You now have an managed development environment in AWS that is connected to your isolated VPC.
+
+Exercise 2.10
+Perform partial cleanup
+
+In this exercise, you will clean up unused instances and keep this Amazon VPC for future use. This partial cleanup reduces costs while providing an environment to complete futrue exercises. After partial cleanup, you may generate charges related to the Elastic IP address that was allocated for devassoc-nat but is naot in use while that instance is stopped.
+
+Complete the following tasks as part of the cleanup:
+
+webserver: Terminate.
+private-instance: Terninate.
+devassoc-nat: Stop. You must start this instance again before completing anay exercises that require Amazon EC2 to launch or interact with instances in the private subnet.
+devassoc-c9: No action. The AWS Cloud9 service will automatically stop and start this instance.
+
+1.- Navigate to the Services > EC2.
+2.- To view your amazon EC2 instances, select Instances. Crear anay filters if they are present.
+3.- Select webserver and private-instance.
+4.- Select Actions > Instance-State and Terminate.
+5.- Clear public-webserver and private-webserver.
+6.- Select devassoc-nat.
+7.- Select Actions > Instance-State and Stop.
+
+Exercise 2.11
+(Optional) Complete cleanup
+
+If you plan to perform future exercises in this guide, this exercise is optional.
+
+In this exercise, you will remove all of the EC2 and VPC resources taht remain after Exerciser 2.10.
+
+1.- Navigate to the Amazon EC2 console, and view the list of running instances.
+2.- Select devassoc-nat.
+3.- Select Actions > Instance-State and Terminate.
+4.- In the Teminate Instances dialog box, expand Release attached Elastic IPs and select release Elastic IPs.
+5.- Select Yes, Terminate.
+6.- Navigate to teh AWS Cloud9 dashboard (Services > Cloud9).
+7.- Select the devassoc-c9 environment.
+8.- On the Environment details page, select Delete and follow the on-screen directions to delete the instance.
+9.- To view the Amazon VPC dashboard, select Services > VPC.
+10.- Navigate to the Elastic IPs list.
+11.- Select any Elastic IPs that are not associated with an instance.
+12.- To release the Elastic IPs, select Actions and Release addresses.
+13.- Select Release.
+14.- Select Your VPCs.
+15.- Select devassoc.
+16.- Select Actions > Delete VPC.
+17.- Select Delete VPC.
+
+If the Amazon VPC deletion fails, wait up to 30 minutes after deleting the Amazon EC2 instances and then try again.
+

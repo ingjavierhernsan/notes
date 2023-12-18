@@ -1,12 +1,9 @@
 #include<iostream>
+#include<stdio.h>
 
-using namespace std;
-
-int main(){
-    int valor1=0;
-
-    cout<<"Type a number: ";
-    cin>>valor1;
+int main()
+{
+    printf("Hello world.");
 
     return 0;
 }
