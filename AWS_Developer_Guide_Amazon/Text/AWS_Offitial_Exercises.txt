@@ -2,14 +2,14 @@ Exercise 1.1
 Sign up for an account
 
 In this exercise, you'll sign up for an accoun.
-1. Open your browser and go to https://aws.amazon.com/free/
-2. Choose Create a free account.
-3. Provide personal information.
-4. Provide payment information.
-5. Verify your phone number.
-6. Select a supprt plan.
-7. Choose Sing in to the console.
-8. Sogn in to the console.
+1.- Open your browser and go to https://aws.amazon.com/free/
+2.- Choose Create a free account.
+3.- Provide personal information.
+4.- Provide payment information.
+5.- Verify your phone number.
+6.- Select a supprt plan.
+7.- Choose Sing in to the console.
+8.- Sign in to the console.
 
 You are now signed in to the AWS Management console.
 
@@ -18,23 +18,23 @@ Create an IAM administrators group and user
 
 In this exercise, you'll define an administrators grup and then add a user to that group. Generate API keys fro this user and call this user DevAdmin.
 
-1. Sign in to the AWS Management Console (at signin.aws.amazon.com/console).
-2. Select All services.
-3. To open the IAM dashboard, select IAM.
-4. To view the list of IAM groups, select Groups. I this is a new account, the list is empty.
-5. Choose Create new group.
-6. For Group name, enter Aministratos.
-7. Choose Next step.
-8. On the Attach policy page, select the Administrator Access policy.
-9. Choose Next step.
-10. On the Review page, choose Create group to create the Administrators group.
-11. To view the list of IAM users, select Users. If this is a new account, the list is empty.
-12. Choose Add user.
-13. Set teh user name to DevAdmin.
-14. Select Both Access type check boxes: Programmatic access and AWS Management Console access.
-15. Choose Next: Permissions.
-16. To add this user to the Administratos group, select the Administratos group check box.
-17. Clear the Require password reset check box.
+1.- Sign in to the AWS Management Console (at signin.aws.amazon.com/console).
+2.- Select All services.
+3.- To open the IAM dashboard, select IAM.
+4.- To view the list of IAM groups, select Groups. I this is a new account, the list is empty.
+5.- Choose Create new group.
+6.- For Group name, enter Aministratos.
+7.- Choose Next step.
+8.- On the Attach policy page, select the Administrator Access policy.
+9.- Choose Next step.
+10.- On the Review page, choose Create group to create the Administrators group.
+11.- To view the list of IAM users, select Users. If this is a new account, the list is empty.
+12.- Choose Add user.
+13.- Set teh user name to DevAdmin.
+14.- Select Both Access type check boxes: Programmatic access and AWS Management Console access.
+15.- Choose Next: Permissions.
+16.- To add this user to the Administratos group, select the Administratos group check box.
+17.- Clear the Require password reset check box.
 18.- Choose Next: Tags.
 19.- Provide a tag with a key of prohect and a value of dev-study-guide. Use tags to add customizable key-value pairs to resources so that you can more easily track and manage them.
 20.- Choose Next: Review.

@@ -8,19 +8,35 @@ The specific credentials include the access key ID and secret access key. If the
 AWS uses the user name and passwoeds for working with the AWS Management Console, not for working with the APIs. Data encryption uses the customer master keys, not API access.
 
 2.- When you make API calls to AWS services, for most services those requests are directed at a specific endpoint that corresponds to which of the following?
+AWS edge location. Most AWS API services are regional in scope. The service is running and replicating your data across multiple Availability Zones within an AWS Regin. You choose a reginal API endpoint either from your default configuration or by explicitly setting a location for your API Client.
 
 3.- When you're configuring a local development machine to make AWS API calls, with of the following is the simplest secure method of obtaining an API credential?
+Create an IAM user, assign permissions by adding the user to an AIM group with AIM policies attached, and generate an access key for programmatic access.
+
+The AWS SDK relies on access keys, not passwords. The best practice is to use AWS Identity and Access Management (IAM) credentials and not the AWS account credentials. Comparing IAM uders or IAM roles, only IAM users can have long-term security credentials.
 
 4.- You have a large number of employees, and each employee already has a identity in an external directory. How might you manage AWS API credentials for each employee so that they can interact with AWS for short-term sessions?
+Define a set of IAM roles, and establish a trust relationship between your directory and AWS. 
+
+Although you can generate IAM users for everyone, this introduces management overhead of a new set of long-term credentials. If you already have an external directory of your organization's users, use IAM roles and identity federation to provide short-term, session-based access to AWS.
 
 5.- You have a team member who needs access to write records to an existing Amazon DynamoDB table within your account. How might you grant write permission to this specific table and only this table?
+Write a custom IAM policy that specifies the table as teh resource, and attach that policy to the AIM user for the team member. 
+
+The permissions for DynamoDBFullAccess managed policy grant access to all Amazon DynamoDB tables in yout account. Write a custom policy to scope the access to a specific table. You can update teh permissions of a user independently from the lifecycle of the table. DynamoDB does not have its own concept of users, but it uses the AWS API and relies on IAM.
 
 6.- You created a Movies DynamoDB table in the AWS Management Console, but when you try to list your DynamoDB tables by using the Java SDK, you do not see this table. Why?
+Your SDK may be listing your resources from a different AWS Region in which the table does not exist. 
+
+You can view or manage your AWS resources with the console, AWS CLI, or AWS SDK. The core fucntionality of each SDK is powered by a common set of web services on the backend. Most AWS services are isolated by AWS Region.
 
 7.- You make an API request to describe voices offered by Amazon Polly by using the AWS CLI, and you receive the following error message:
 Could not connect to the endpoint URL:
 https://polly.us-east-1a.amazonaws.com/v1/voices
 What went wrong?
+You have incorrectly configured the AWS Region for your API call.
+
+If you look closely at teh URL, the AWS Tegin string is incorrectly set as us-east-1a, which is specific to the Availability Zone. An AWS Regin string ends in a number, and teh correct configuration is us-east-1. If the error was related to API credentials, you would receive a more specific error related to credentials, such as AccessDenied.
 
 8.- To what resource does this IAM policy grant access, and for which actions?
 {
@@ -32,19 +48,44 @@ What went wrong?
 	}
 }
 
+The policy grants teh holder teh permission to list the contents of the Amazon S3 bucket called example_bucket. 
+
+This policy allows access to the s3: ListBucket operation on example_bucket as a specific bucket. This does not grant access to operations on the objects within the bucket. IAM is granular. The datein the Version attribute is a specific version of the IAM policy language and not an expiration.
+
 9.- When an IAM user makes an API call, that user's long-term credentials are valid in which context?
+Only in the edge location in which their identity resides. 
+
+The long-term credentials are not limited to a single AWS Region. IAM is a grlobal service, and IAM user credentials are valid across different AWS Regin. However, when the API call is made, a signing key is derived from the long-term credentials, asn that signing key is scoped to a region, service, and day.
 
 10.- When you use identity federation to assume a role, where are the credentials you use to make AWS API calls generated?
+The AWS Security Token Service (AWS STS) generates teh access key ID, secret access key, and session token.
+
+The AssumeRole method of the AWS Security Token Service (AWS STS) returns the security credentials for the role that include the access key ID, secret access key, and session token. AWS Key Management Service (AWS KMS) is not used for API signing. The identity provider may provide a SAML assertion, but AWS STS generates the AWS API credentials.
 
 11.- You have an on-premises application that needs to sample data from all your Amazon DynamoDB tables. You have defined an IAM user for your application called TableAuditor. How can you give the TableAuditor user read access to new DynamoDB tables as soon they are created in your account?
+Attach the AWS managed AIM policy AmazonDynamoDBReadOnlyAccess to the TableAuditor user.
+
+The DynamoDBReadOnlyAccess policy is a built-in policy that applies to teh resource * wildcard, which means that it applies to any and all DynamoDB tables accessible from the account regardless of when those tables were created. Because IAM policies are related to teh IAM user, not the access key, rotating the key does not affect teh policy. IAM policies are also global in scope, so you do not need a custom one per AWS Region. You can add IAM users to IAM groups but not IAM roles. Instead, roles must be assumed for short-term sessions.
 
 12.- The principals who have access to assume an IAM role are defined in which document?
+IAM trust policy. 
+
+The IAM trust policy defines the principlas who can request role credentials from the AWS STS. Access policies define what API actions can be performed with the credentials from the role.
 
 13.- A new developer has joined your small team. You would like to help your team member set up a development computer for access to the team account quickly and securely. How do you proceed?
+Create an IAM user, add it to an IAM group that has the appropriate permissions, and generate a long-term access key.
+
+You can define an AIM user for your new team member and add the AIM user to an AIM group to inherit the appropriate permissions. The best practice is not to use AWS account root user credentials. Though you can use AWS Directory Service to track users, this answer is incomplete, and the AWS KMS is not related to permissions. Toles can be assumed only for short-term sessions - there are no long-term credentials directly associated with the role.
 
 14.- You have been working with the Amazon Polly service in your application by using the Python SDK for Linux. You are building a second application in C#, and you would like to run that application on a separate Windows Server with .NET. How can you proceed?
+Instsll the AWS SDK for .NET on your Windows Server, and leave your existing application unchanged.
+
+The AWS API backend is accessed through web service calls and is operating system-andprogramming language-agnostic. You do not need to do anything special to enable specific programming languages other than downloading the appropiate SDK.
 
 15.- You are a Virginia-based company, and you have been asked to implement a custom application exclusively for customers in Australia. This application has no dependencies on any of your existing applications. What is a method you use to keep the customer latency to this new application low?
+Create all resources fro this application in the Asia Pacific (Sydney) Region, and manage them from your current account.
+
+The primary latency concern is for customers accessiong the data, and there are no explicit dependencies on existing infrastructure in the United States. Physically locatingteh application resources closer to these users in Australia reduces teh distance that the information must trabel and therefore decreases teh latency.
 
 Review questions 2
 
