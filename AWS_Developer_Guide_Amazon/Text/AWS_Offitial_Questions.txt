@@ -90,45 +90,98 @@ The primary latency concern is for customers accessiong the data, and there are 
 Review questions 2
 
 1.- When you launch an Amazon Elastic compute Cloud (Amazon EC2) instance, which of the following is the most specific type of AWS entity in which you can place it?
+Availability Zone.
+B. You launch Amazon Elastic Compute Cloud (Amazon EC2) instances into specific subnets that are tied to specific Availability Zones. You can look up the Availability Zone in which you have launched an Amazon EC2 instance. While an Availability Zone is part of a region, this answer is not the most specific. You do not get to choose the specific. You do not get to choose the specific data center, and edge locations do not support EC2.
 
 2.- You have saved SSH connection information for an Amazon Elastic Compute Cloud (Amazon EC2) instance taht you launched in a public subnet. You previously stopped the instance the last time you used it. Now that you have statted the instance, you are unable to connect to the instace using the saved information. Which of the following could be the cause?
+The public IP of the instance has changed.
+B. When you stop an Amazon EC2 instance, its public IP address is released. When you start it again, a new public IP address is assigned. If you requiere a public IP address to be persistently associated with the instance, allocate an Elastic IP address. SSH key pairs and security group rules do not have any built-in expiration, and SSH is enabled as a service by default. It is available even after restarts. Security groups do not expire.
 
 3.- You are working from a new location today. You are unable to initiate a Remote Desktop Protocol (RDP) to your Windows instance, which is located in a public subnet. What could be the cause?
+Your new IP address may not match the inbound security group rules.
+A. A restricted rule that allows RDP from only certain IP addresse may block your request if you have a new IP address because of your location. Because you are trying to connect to the instance, verify that an appropirate inbound rule is set as opposed to an outbound rule. For many variants of Windows, RDP is the default connection mechanism, and it defaults to enabled even after a reboot.
 
 4.- You have a backend Amazon EC2 instance providing a web service to yur web server instances. Your web servers are in a public subnet. You would like to block inbound requests from the internet to uour backend instance but still allow the instance to make API requests over the public internet. What steps must you take? (Select two).
+Launch the instance in a private subnet and rely on a NAT gateway in a public subnet to forward outbound internet request.
+Modify the inbound security group rules for the instance to allow only inbound requests from your web servers.
+A, D. The NAT gateway allows outbound requests to the external API to succeed while preventing inbound requests from the internet. Configuring the security group to allow only inbound requests to succeed because the default rule for the security group allows outbound requests to the APIs that your web service needs.
 
 5.- You have launched an Amazon Elastic Compute Cloud (Amazon EC2) instance and loaded your application code on it. You have now dicovered that the instance is missing applications on which your code depends. How can you resolve this issue?
+Sign in to the instance as the default user, and install any additional dependencies that you need.
+C. You are in full control over the software on your instance. The default user that was created when the instance launched has full control over the guest operating system and can isntall the necessary software. Instance profiles are unrelated to the software on the instance.
 
 6.- How can code running on an amazon Elastic Compute Cloud (Amazon EC2) instance automatically dicover its public IP address?
+The instance can make an HTTP query to hte amazon EC2 metadata service at 169.254.169.254.
+D. You can query the Amazon EC2 metadata service for this infromation. Nerworking within the Amazon Virtual Private Cloud (Amazon VPC) is based on private IP adderesses, so this rules out options A and B. Because the metadata service is available, you are not required to use a third-party service, which eliminates option C.
 
 7.- How can you customize the software of your Amazon Elastic Compute Clud (Amazon EC2) instance beyond what the Amazon Machin Image (AMI) procides?
+Provide a user data attribute at launch that contains a script or directives to install additional packages.
+A. You can implement user data to execute scripts or directives that install additional packages. Even though you can use Amazon Simple Storage Service (Amazon S3) to stage software installations, there is no special bucket. You have full control of EC2  instances, including the software. AWS KMS is unrelated to software installation.
 
 8.- Youhave a process running on an Amazon Elastic Compute Clud (Amazon EC3) instance that exeeds the 2 GB of RAM allocated to teh instance. This is causing the pocess to run slowly. How can you resolve the issue?
+Stop teh instance, change the instance type to one with more RAM, and then start the instance.
+A. Amazon EC2 instances are resizable. You can change the RAM available by changing the instance type.
 
 9.- You have launched an Amazon Elastic Compute Cloud (Amazon EC2) Windows instance, nad you would like to connect to it using the Remote Desktop Protocol. The instance is in a public subnet and has a public IP address. How do you find the password to the Administrator account?
+Decrypt the password by using the private key from the Amazon EC2 key pair that you used to launch the instance.
+A. AWS generates teh default password forn the isntance and encrypts it by using the public key from the Amazon EC2 key pair used to launch the instance. You do not solect a password when you launch an instance. You can decrypt thid with the private key. IAM userd and IAM roles are not for porviding access to the operationg system on the Amazon EC2 instance.
 
 10.- What steps must you take to ensure that an Amazon EC2 instance can receive web requests from customers on the internet? (Select three)
+Assign a public IP address to the instance.
+Launch the instance in a subnet where the route table routes internet-bound traffic to a NAT gateway.
+Set the inbound rules for the security group to allow HTTP and HTTPS traffic.
+A, B, E. For an instanceto be directly accessible as a web server, you must assign a public IP address, place teh instance in a public subnet, and ensure that the inbound security group rules allow HTTP/HTTPS. A public subnet is one in which there is a direct route to an internet gateway.
 
 11.- Which of the following are true about Amazon Machine Image (AMI)? (Select two)
+AMI can be used to launch one or multiple Amazon EC2 instancees.
+AMIs are available for both Windows and Linux instances.
+A, D. You can use an AMI as a tmeplate for launching any number of Amazon EC2 instances. AMIs are available for various versiojns of Windows and Linux.
 
 12.- Which of the following are true abour amazon Elastic Compute Cloud (A.azon EC2) instance types? (Select two)
+All amazon EC2 instance types can use EBS volumes for persistent storage.
+Some amazon EC2 instances may have access to GPUs or other hardware accelerators.
+B, D. Option B is true; Amazon Elastic Block Store (Amazon EBS) provides presistent storage for all types of EC2 instances. Option D is true because hardware acceleratores, such as GPU and FGPA, are accessible depending on the type of instance.
 
 13.- Which of the following actions are valid vased on the Amazon Elastic Compute Clud (Amazon EC2) instance lifecycle? (Select two)
+Starting a previously stopped instance.
+Stopping a running instance.
+B, D. Only instances in the running state can be started, stopped, or rebooted.
 
 14.- You have a development Amazon Elastic Compute Cloud (Amazon EC2) instace where you have installed Apache Web Server and MySQL. How do you verify that the web server application can communicate with the database given that they are both running on the same instance?
+No extra configuration is required.
+D. Both the web server and teh database are running on the same instance, and they can communicate locally on the instance.
 
 15.- What type of route must exist in the associated route table for a subnet to ve a public subnet?
+A route to an internet gateway.
+C. A public subnet is one in which there is a route that directs internet traffic (0.0.0.0/0) to an internet gateway. None of the other routes provides a direct route to the internet, which is required to be a public subnet.
 
 16.- What type of route must exist in the associated route table for a subnet to be a private subnet that allows outbound internet access?
+A route to a NAT gateway or NAT instance.
+D. A private subnet that allows outbound internet access must provide an indirect route to the internet. This is privided by a route that directs internet traffic to a NAT gateway or NAT instance.
 
 17.- Which feature of Amazon Virtual Private Cloud (Amazon VPC) enables you to see which network requests are being accepted or rejected in your Amazon VPC?
+Amazon VPC Flow Log.
+D. Amazon VPC Flow Logs have metadata about each traffic flow within your Amazon VPC and show whether teh connection was accepted or rejected. The other responses do not provide a log of network traffic.
 
 18.- Which AWS services enables you to track the CPY utilization of an Amazon Elasctic Compute Cloud (Amazon EC2) instance?
+Amazon CloudWatch.
+C. Amazon CloudWatch is the service that tracks metrics, including CPI utilization for an Amazon EC2 instance. The other services are not responsible for tracking metrics.
 
 19.- What happens to the data stored on an Amazon Elastic Block Store (Amazon EBS) volume when you stop an Amazon Elastic Compute Cloud (Amazon EC2) instance?
+The data persist in the EBS volume.
+B. EBS volumes provide presistent storage for an Amazon EC2 instace. The data is persisted until the volume is deleted and therefore perists on the volume when the instance is stopped.
 
 20.- Which programming language can you use to write the code that runs on an Amazon EC2 instance?
+All of the above (C++, Java, Ruby, JavaScript, Python)
+F. You can install any software you want on an amazon EC2 instance, including any interpreters required to run your application code.
 
-21.- You have launched an Amazon EC2 instance in a public subnet. The instance has a public IP address, and you have confirmed that the Apache web server is running. However, your internet users are unable to make web requests to the instance. How can you resolve teh issue? (Select two)
+21.- You have launched an Amazon EC2 instance in a public subnet. The instance has a public IP address, and you have confirmed that the Apache web server is running. However, your internet users are unable to make web requests to the instance. How can you resolve the issue? (Select two)
+Modify the security group for the web server to allow inbound traffic port 80 from anywhere.
+Modify the security group for the web server to allow inbound traffic on port 443 from anywhere.
+B, C. Web requests are typically made on port 80 for HTTP and port 443 for HTTPS. Because security groups are stateful, you must set only the inbound rule. Options A and D are unnecessary because the security group automatically allows the outbound replies to the inbound requests.
 
 22.- Which of the following are the customer's responsibility concerning Amazon EC2 instances? (Select two)
+Patching the guest operating system.
+Managing the sign-in accounts and credentials on the guest operating system.
+B, D. The customer is reponsible for the guest operating system and above. Options C and E fall under AWS responsibility. AWS is responsible for the virtualization layer, underlying host machines, and all the way down toteh physical security of the facilities.
+
