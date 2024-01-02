@@ -185,3 +185,105 @@ Patching the guest operating system.
 Managing the sign-in accounts and credentials on the guest operating system.
 B, D. The customer is reponsible for the guest operating system and above. Options C and E fall under AWS responsibility. AWS is responsible for the virtualization layer, underlying host machines, and all the way down toteh physical security of the facilities.
 
+Review question 3
+
+1.- You are adeveloping an application that will run acreoss dozens of instances. It uses some components from a legacy application that requires some configuration files to be copied from a central location and be held on a volume local to each of the instances. You plan to modify your application with aq new component in the future that will hold this configuration in Amazon DynamoDB. However, in the interim, which storage option should you use that will provide the lowest cost and the lowest latency for your application to access the configuration files?
+Amazon EC2 instance store.
+D. Amazon EC2 instance store is directly attached to the instace, which will give you the lowest latency between the disk and your application. Instance sotre is also provided at no additional cost on isntances types that have it available, so this is the lowest-cost option. Additionally, since the data is being retrieved from somewhere else, it can be copied back to an instance as needed.
+
+2.- Int what ways does Amazon Simple Storage Service (Amazon S3) object storage differ frrom block and file storgae? (Select two)
+Objects contain both data and metadata.
+Objects are stored in buckets.
+D, E. Objects are stored in buckets and contain both data and metadata.
+
+3.- You are restoring an Amazon Elastic Block Store (Amazon EBS) volume from a snapshot. How long will it take before the data is available?
+The data will be available immediately.
+B. The voume is created inmmediately, but the data is loaded lazily, meaning that the volume can be accessed upon creation, and if the data being requested has not yet been restored, it will be restored upon first request.
+
+4.- What are some of the key characteristics of Amazon Simple Storage Service (Amazon S3)?
+All objects have a URL.
+Amazon S3 can store unlimited amounts of data.
+Amazon S3 uses a Representational State (REST) application program interface (API).
+A, B, D.
+
+5.- Amazo0n S3 Glacier is well-suited to data that is which of the following? (Select two)
+Infrequently or rarely accessed.
+Is available after a three-to five-hour restore period.
+A, C. Amazon Simple Storage Service Glacier is optimized for long-term archival storage and is not suited to data that needs immediate access or shortlived data that is erased within 90 days.
+
+6.- You have valuable media files hosted on AWS and want them to be served only to authenticated users of your web application. You are concerned that your content could be stolen and distributed for free. How can you proctec your content?
+Generate presigned URLs for content in the web application.
+B. Option B is correct because pre-signed URLs allow you to grant time-limited permission to download objects from an Amazon S3 bucket.
+
+7.- Which of the following are features of Amazon Elastic Block Store (Amazon EBS)? (Select two)
+Data stored on Amazon EBS is automatically replicated within an Availability Zone.
+Data on an Amazon EBS volume is lost when the attached instance is stopped.
+A, D. Option A is correct because the data is automatically replicated within an availability zone. Option d is correct becuase Amazon EBS volumes persist when the instance is stopped.
+
+8.- Which option should you choose for Amazon EFS when tens, hundreds, or thousands of Amazon EC2 instances will be accessing the file system concurrently?
+Max I/O performance mode.
+C. The Max I/O performance mode is optimized for applications where tens, hundreds, of thousands of EC2 instances are accessing  the file system. It scales to higher levels of aggregate throughput and operations per second with a trade-off of slightly higher latencies for file operations.
+
+9.- Which of the following must be performed to host a static website in an Amazon Simple Storage Service (Amazon S3) bucket? (Select three)
+Configure the bucket for static hosting, and specify an index and error document.
+Create a bucket with the same name as teh website.
+Make the objects in the bucket world-readable.
+A, B, D. Options A, B, and D are required, and optionally you can also set a prindly CNAME to the bucket URL.
+
+10.- You have a workload that requires 1 TB of durable block storage at 1,500 IOPS during normal use. Every night there is an extract, transform, load (ETL) task that requires 3,000 IOPS for 15 minutes. What is the most appropriate volume type for this workload?
+Use a general-purpose SSD volume.
+C. A short period of heavy traffic is exactly the use case for the bursting nature of general-purpose SSD volumes-the rest of the day is more than enough time to build up enough IOPS credits to handle the nightly task.
+
+11.- Which statements about Amazon S3 Glacier are true?
+Archives take 3-5 hours to restore.
+Vaults can be locked.
+It can be used as a standalone service and as an Amazon S3 storage class.
+C, D, E.
+
+12.- You are developing an application that will be running several hundred Amazon EC2 instances. The application on each instance will be required to reach out through a file system protocol concurrently to a file system holding the files. Which storage; option should you choose?
+Amazon EFS.
+A. Amazon EFS supports one to thousands of Amazon EC2 instances connecting to a file system concurrently.
+
+13.- You need to take a snapshot of an Amazon Elastic Block Store (Amazon EBS) volume. How long will the volume be unavailable?
+The volume will be available immediately.
+B. There is no delay in processing when commencing a snapshot.
+
+14.- Amazon Simple Storage Service (S3) bucket policies can restict access to an Amazon S3 bucket and objects by which of the following? (Select Three)
+IP address range.
+AWS account.
+Objects with a specific prefix.
+B, C, E. Amazon S3 bucket policies can specify a request IP range, an AWS account, and prefix for objects tahta can be accessed.
+
+15.- Which of the following are not appropriate use cases for Amazon Simple Storage Service (Amazon S3)? (Select two)
+Storing a file system mounted to an Amazon Elastic Compute Cloud (Amazon EC2) instance.
+Primary storage for a database.
+B, D. Option B is incorrect because Amazon S3 cannot be mounted to an Amazon EC2 instance like a file system.
+
+16.- Which features enable you to manage access to Amazon Simple Storage SErvice (Amazon S3) buckets of object? (Select three)
+Create a presigned URL for an object.
+Use an Amazon S3 Access Control List (ACL) on a bucket of object.
+Use an Amazon S3 bucket policy.
+B, C, E.
+
+17.- Your application stores critical data in Amazon Simple Storage Service (Amazon S3), which must be proctected against inadvertent or intentional deletion. How can this data be protected? (Select two)
+Enable versioning on the bucket.
+Enable MFA Delete on the bucket.
+C, E.
+
+18.- You have a set of users taht have been granted access to your Amazon S3 bucket. For compliance purposes, you need to keep track of all files accessed in that bucket. To have a record of who accessed your amazon Simple Storage Service (Amazon S3) data and from where, what should you do?
+Enable server access logging on the bucket.
+C. To track requests for access to your bucket, enable access logging. Each access log record provides details about a single access request, such as the requester, bucket name, request time, request action, response status, and error code (if any). Access log information can be useful in security and access audits. It can also help you learn about your customer base and understand yout Amazon S3 bill.
+
+19.- What are some reasons to enable cross-region replication on an Amazon Simple Storage Service (Amazon S3) bucket) (Select three)
+Your compliance requirements dictate that you store data at an even further distance than Availability Zones, which are tens of miles apart.
+Minimize latency when your customers are in two geographic regions.
+You have compute clusters in two different AWS Regions that analyze the same set of objects
+A, B, D.
+
+20.- Your company requires that all data sent to external storage be encrypted before being sent. You will be sending company data to Amazon S3. Which Amazon Simple Storage Service (Amazon S3) encryption solution will meet this requiremente?
+Client-side encryption with customer-managed keys.
+C. If data must be encrypted before being sent to Amazon S3, client-side encryption must be used.
+
+21.- How is data stored in Amazon Simple Storage Service (Amazon S3) for high durability?
+Data is automatically replicated within a region.
+B. Data is automatically replicated across at least three Availability Zones within a single region.

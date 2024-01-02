@@ -442,3 +442,70 @@ In this exercise, you will remove all of the EC2 and VPC resources taht remain a
 
 If the Amazon VPC deletion fails, wait up to 30 minutes after deleting the Amazon EC2 instances and then try again.
 
+===================================================================
+
+Exercise 3.1
+
+Create an Amazon Simple storage Service (Amazon S3) Bucket
+
+In this exercise, you will create an Amazon S3 bucket using the AWS SDK for Java. You will use this bucket in the exercises that follow.
+
+For assistance in completing this exercise, copying this code, of for code in other languages, see the following documentation:
+
+https://docs.aws.amazon.com/AmazonS3/lastestdev/create-bucket-get-location-example.html
+
+1.- Enter the following code in your preferred development environment for Java:
+...
+
+2.- Replace the static variable values for clientRegion and bucketName. Note that bucket names must be unique across all of AWS. Make anote of these two values; you will use the same region and bucket name for the exercises that follow in this chapter.
+
+3.- Execute the code. Your bucket gets created with the name you specified in the region you specified. A successful result shows the following oputput:
+
+Bucket Location: [bucketLocation]
+
+Exercise 3.2
+
+Upload an Object to a Bucket
+
+Now that you have a bucket, you can add objects to it. In this example, you will create two objects. The first object has a text string as data, and the second object is a file. This example creates the first object is a file. This example creates the first object by specifying the bucket name, object key, and text data directly in a call to AmazonS3Client.putObject(). The oecample creates a second object by using a PutObjectRequest that specifies the bucket name, object key, and file path. The PutObjectRequest also specifies the ContentType header and title metadata.
+
+For assistance in completing this exercise, coping this code, or for code in other languages, see the following documentation:
+
+https://docs.aws.amazon.com/AmazonS3/latest/dev/UploadObjSingleOpJava.html
+
+1.- Enter the following code in your preferred development environment for Java:
+...
+
+2.- Repalce the static variable values for clientRegion and bucketName used in the previous exercise.
+
+3.- Replace the value for stringObjKeyName with the name of the key that you intend to create in your Amazon S3 bucket, which will upload a text string as a new object.
+
+4.- Replace the Uploaded String Object text with the text being placed inside the object that you are generating.
+
+5.- Replace the someTitle text in the code with your own metadata title for the object that yu are uplouding.
+
+6.- Create a local file on your machine and then repalce the value for fileName with the full path and filename of the file that you created.
+
+7.- Replace the fileObjKeyName with the key name that you want for the file that you will be uploading. A file can be uploaded with a different name than the filename that's used locally.
+
+8.- Execute the code. Your bucket gets created with the name that you specified in the region that you specified. A successful result  without errors will create two objects in your bucket.
+
+Exercise 3.3
+
+Emptying and Deleting a Bucket
+
+Now that you have finished with the Amazon S3 exercises, you will want to clean up your environment by deleting all the files and the bucket you created. It is easy to delete an empty bucket. However, in some situations, you may need to delete or empy a bucket that contains object. In this exercise, we show you how to delete objects and delete the bucket.
+
+For assistance in cpleting this exercise, copying this code, or for code in other languages, see the following documentation:
+
+https://docs.aws.amazon.com/AmazonS3/latest/dev/delete-or-empty-bucket.html
+https://docs.aws.amazon.com/AmazonS3/latest/dev/delete-or-empty-bucket.html#delete-bucket-sdk-java
+
+1.- Enter the following code in your preferred development environment for Java:
+...
+
+2.- Replace the static variable values for clientRegion and bucketName with the values that you used in the previous steps.
+
+3.- Execute the code.
+
+4.- hen execution is complete without errors, both of your objects and your bucket will have been deleted.
