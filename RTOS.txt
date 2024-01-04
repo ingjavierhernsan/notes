@@ -1,0 +1,9 @@
+Free RTOS - Adquirida por Amazon
+Zephyr - Contribuye con Intel
+QNX - Area automotriz
+Sysgo - Area automotriz
+Green Hills - Area automotriz
+
+- Materiales necesarios:
+- STM32 Blackpill
+- Programdor ST Link

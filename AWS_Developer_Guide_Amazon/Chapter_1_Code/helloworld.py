@@ -7,11 +7,15 @@ import boto3
 polly = boto3.client('polly')
 
 # Call the Amazon Polly Web Service
+'''result = polly.synthesize_speech(Text='Hello World!',
+                                 OutputFormat='mp3',
+                                 VoiceId='Aditi')'''
+
 result = polly.synthesize_speech(Text='Hello World!',
                                  OutputFormat='mp3',
                                  VoiceId='Aditi')
 
 # Save the Audio File
 audio = result['AudioStream'].read()
-with open("helloworld.mp3","wb") as file:
+with open("helloworldKevin.mp3","wb") as file:
     file.write(audio)
