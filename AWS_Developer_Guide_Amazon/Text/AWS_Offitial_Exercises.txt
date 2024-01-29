@@ -46,7 +46,7 @@ In this exercise, you'll define an administrators grup and then add a user to th
 You now have a .csv file that contains a user name, password, access key ID, secret access key, and console login link. Ue the DevAdmin user name, password, and console sign-in link to sign in to the AWS Managment Console for all future exercises unless otherwise noted. Use teh access key to configure the SDK in the following exercises.
 
 Exercise 1.3
-Install and cofigure teh AWS CLI
+Install and configure the AWS CLI
 
 In this exercise, you'll install and configure the AWS Command Line Interface (AWS CLI). The AWS CLI requires Python2 or Python3. Install Python using pip, the Python installer.
 
@@ -100,7 +100,8 @@ In this exercise, you'll use Amazon Polly to understand the effects of working w
 1.- Open a terminal window and navigate to the folder with the book sample code.
 2.- Navigate to chapter-01 in the folder whre you downloaded the sample code.
 3.- Verigy that the regin is us-east-1 by running the following command: aws configure get region
-4.- Upload aws-lexicon.xml to th Amazon Polly service in the default region, which is US East (N. Virginia). aws polly put-lexicon --name awsLexicon --content file://aws-lexicon.xml
+4.- Upload aws-lexicon.xml to th Amazon Polly service in the default region, which is US East (N. Virginia). 
+aws polly put-lexicon --name awsLexicon --content file://aws-lexicon.xml
 5.- The file helloaws.py is currently overriding the regin to be EU (London). Run the Python code and observe the LexiconNotFoundException that returns. python.helloaws.py
 6.- Upload the lexicon to EU (London) by setting the region to eu-west-2. aws polly put-lexicon --name awsLexicon --content file://aws-lexicon.xml --region eu-west-2
 7.- Run the following Python script again: python helloaws.py 
