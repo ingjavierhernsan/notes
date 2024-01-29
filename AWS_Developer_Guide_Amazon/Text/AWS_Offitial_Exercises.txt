@@ -19,25 +19,40 @@ Create an IAM administrators group and user
 In this exercise, you'll define an administrators grup and then add a user to that group. Generate API keys fro this user and call this user DevAdmin.
 
 1.- Sign in to the AWS Management Console (at signin.aws.amazon.com/console).
-2.- Select All services.
-3.- To open the IAM dashboard, select IAM.
-4.- To view the list of IAM groups, select Groups. I this is a new account, the list is empty.
+#2.- Select All services.
+2.- Services
+#3.- To open the IAM dashboard, select IAM.
+3.- To open Security, Identity, & Compliance, select IAM.
+#4.- To view the list of IAM groups, select Groups. I this is a new account, the list is empty.
+4.- To view the list of IAM groups, select User groups. This is a new account, the list is empty.
 5.- Choose Create new group.
-6.- For Group name, enter Aministratos.
-7.- Choose Next step.
+6.- For Group name, enter Administrators.
+#7.- Choose Next step.
 8.- On the Attach policy page, select the Administrator Access policy.
-9.- Choose Next step.
-10.- On the Review page, choose Create group to create the Administrators group.
+#9.- Choose Next step.
+#10.- On the Review page, choose Create group to create the Administrators group.
+10.- Create the Administrators group.
 11.- To view the list of IAM users, select Users. If this is a new account, the list is empty.
-12.- Choose Add user.
-13.- Set teh user name to DevAdmin.
-14.- Select Both Access type check boxes: Programmatic access and AWS Management Console access.
-15.- Choose Next: Permissions.
-16.- To add this user to the Administratos group, select the Administratos group check box.
-17.- Clear the Require password reset check box.
-18.- Choose Next: Tags.
-19.- Provide a tag with a key of prohect and a value of dev-study-guide. Use tags to add customizable key-value pairs to resources so that you can more easily track and manage them.
-20.- Choose Next: Review.
+#12.- Choose Add user.
+12.- Choose Create user.
+13.- Set the user name to DevAdmin.
+#14.- Select Both Access type check boxes: Programmatic access and AWS Management Console access.
+14.- Select Access type check boxes: Provide user access to the AWS Management Console access.
+Select I want to create an IAM user.
+Select Custom password.
+Set the password user.
+Unselect User must create a new password at next sign-in-Recommended.
+#15.- Choose Next: Permissions.
+15.- Choose Next.
+#16.- To add this user to the Administratos group, select the Administratos group check box.
+16.- To add this user to the Administratos group, in the Permissions options select the option Add user to group.
+In the User groups table, select the group Administrators.
+#17.- Clear the Require password reset check box.
+#18.- Choose Next: Tags.
+18.- Choose Next.
+In the Tags section.
+19.- Provide a tag with a key of project and a value of dev-study-guide. Use tags to add customizable key-value pairs to resources so that you can more easily track and manage them.
+#20.- Choose Next: Review.
 21.- Choose Create user.
 22.- Download the credentials.csv file.
 23.- Rename the file to devamin-credentials.csv, and move the file to a folder where you would like to keep it.
@@ -46,22 +61,32 @@ In this exercise, you'll define an administrators grup and then add a user to th
 You now have a .csv file that contains a user name, password, access key ID, secret access key, and console login link. Ue the DevAdmin user name, password, and console sign-in link to sign in to the AWS Managment Console for all future exercises unless otherwise noted. Use teh access key to configure the SDK in the following exercises.
 
 Exercise 1.3
-Install and configure the AWS CLI
+Install and cofigure teh AWS CLI
 
 In this exercise, you'll install and configure the AWS Command Line Interface (AWS CLI). The AWS CLI requires Python2 or Python3. Install Python using pip, the Python installer.
 
-1.- Intall Python from https://www.python.org/downloads/.
-2.- Open a terminal window.
-3.- To install the AWS CLI, run teh following command: pip installl aws-cli --upgrade --user
+Actually the aws-cli is not in pip, you have to use the Amazon repository. Sorry :(
+#1.- Install Python from https://www.python.org/downloads/.
+#2.- Open a terminal window.
+#3.- To install the AWS CLI, run teh following command: pip install aws-cli --upgrade --user
 4.- (Optional) If you encounter issues with step 3, review the AWS CLI Installation guide for alternative installation options here: https://docs.aws.amazon.com/cli/latest/userguide/installing.html
+
+Linux
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+Install: sudo ./aws/install 
+or 
+Update: sudo ./aws/install --update
+
 5.- To configure the AWS CLI with a default profile for credentials, run the following command: aws configure
 6.- Enter the following values when prompted:
 * AWS Access Key ID: Paste the value from the CSV you downloaded in Exercise 1.2.
 * AWS Secret Access Key: Paste the valu from the CSV you downloaded in Exercise 1.2.
-* Default region name: Enter us-east-1.
+* Default region name: Enter us-east-1
 * Default output format: Press Enter to leave this blank.
 
-7.- Run the CLI command to verify that your CLI is working correctly, and view the availabe voices for Amazon Polly. aws polly descrive-vlices --language en-US --output table
+7.- Run the CLI command to verify that your CLI is working correctly, and view the availabe voices for Amazon Polly. 
+aws polly describe-voices --language en-US --output table
 
 A table in the terminal lists the available voices for Amazon Pilly for the language US English.
 
@@ -84,9 +109,11 @@ Run a Python Script that makes AWS API Calls
 In this exercise, you'll run the Python script to make an AWS API call.
 
 1.- Open a terminal window and navigate to the folder with the book sample code.
-2.- To install the AWS SDK for Python (Boto), run the following command: pip install boto3
+2.- To install the AWS SDK for Python (Boto), run the following command: 
+pip install boto3
 3.- Navigate to the chapter-01 folder whre you downloaded the sample code.
-4.- To generate an MP3 in the chapter-01 folder, run the helloworld.py program. python helloworld.py
+4.- To generate an MP3 in the chapter-01 folder, run the helloworld.py program. 
+python helloworld.py
 5.- To hear the audio, open the generated file, helloworld.mp3.
 6.- (Optional) Modify the Python code to use a different voice. See Exercise 1.3 for an AWS CLI command that provides the list of available voices.
 
@@ -98,12 +125,15 @@ Working with Multiple regions
 In this exercise, you'll use Amazon Polly to understand the effects of working with different AWS Regions.
 
 1.- Open a terminal window and navigate to the folder with the book sample code.
-2.- Navigate to chapter-01 in the folder whre you downloaded the sample code.
-3.- Verigy that the regin is us-east-1 by running the following command: aws configure get region
+2.- Navigate to chapter-01 in the folder where you downloaded the sample code.
+3.- Verify that the region is us-east-1 by running the following command: 
+aws configure get region
 4.- Upload aws-lexicon.xml to th Amazon Polly service in the default region, which is US East (N. Virginia). 
 aws polly put-lexicon --name awsLexicon --content file://aws-lexicon.xml
-5.- The file helloaws.py is currently overriding the regin to be EU (London). Run the Python code and observe the LexiconNotFoundException that returns. python.helloaws.py
-6.- Upload the lexicon to EU (London) by setting the region to eu-west-2. aws polly put-lexicon --name awsLexicon --content file://aws-lexicon.xml --region eu-west-2
+5.- The file helloaws.py is currently overriding the region to be EU (London). Run the Python code and observe the LexiconNotFoundException that returns. 
+python helloaws.py
+6.- Upload the lexicon to EU (London) by setting the region to eu-west-2. 
+aws polly put-lexicon --name awsLexicon --content file://aws-lexicon.xml --region eu-west-2
 7.- Run the following Python script again: python helloaws.py 
 Observe that it executes successfully this time and generate an MP3 file in the current folder.
 8.- Play the generated helloaws.mp3 file to confirm that it says, "Hello Amazon Web Services".
@@ -125,39 +155,46 @@ In this exercise, you difine a limited user for the account and configure a new 
 5.- Choose Add user.
 6.- set the user name to DevRestricted.
 7.- For Access type, select Programmatic access.
-8.- Coose Next Permissions.
-9.- Select Attach existing policies directly.
-10.- Select the AmazonPollyReadOnlyAccess policy.
+8.- Choose Next Permissions.
+*9.- Select Attach existing policies directly.
+In the section Permissions policies.
+*10.- Select the AmazonPollyReadOnlyAccess policy.
 11.- To narrow the options, in Filter, enter polly.
-12.- Choose Next: Tags.
+#12.- Choose Next: Tags.
+12.- Choose Next.
 13.- Define a tag as follows:
 * Key: project
 * Value: dev-study-guide
-14.- Choose Next: Review.
+#14.- Choose Next: Review.
 15.- Choose Create User.
 16.- To configure the SDK in the following steps, download the credentials.csv file.
 17.- Rename the downloaded file to devrestricted-credentials.csv and move it to the same folder where you put the CSV file from Exercise 1.2.
 18.- Open a terminal window and navigare to the folder with the sample code.
 19.- Navigate to the chapter-01 folder.
 20.- (Optional) Review the code in upload-restricted.py.
-21.- Configure the AWS CLI with a new profile called restricted. Rkun the following command: aws configure --profile restricted
+21.- Configure the AWS CLI with a new profile called restricted. Run the following command: 
+aws configure --profile restricted
 When prompted, enter the following values:
 *AWS Access Key ID: Copy the value from the CSV you downloaded.
 *AWS Secret Access Key: Copy the value from the CSV you downloaded.
 *Default region name: Enter us-east-1.
 *Default output format: Press Enter to retain the default setting.
 22.- Upload the lexicon.
-The upload operation is expected to fail beacuse of the restricted permissions associated with the profile specified in the script. Run the following Python script: Python upload-restricted.py
+The upload operation is expected to fail beacuse of the restricted permissions associated with the profile specified in the script. Run the following Python script: 
+python upload-restricted.py
 23.- Return to the AWS Management Console for IAM, and in the left navigarion, select Users.
 24.- To view a user summary page, select DevRestricted user.
 25.- Choose Add permissions.
+Select Add permissions.
 26.- Select Attach existing policies directly.
 27.- To filter out other policies, in the search box, enter polly, and select the AmazonPollyFullAccess policy.
-28.- Choose Next: Review.
+#28.- Choose Next: Review.
+28.- Choose Next.
 29.- Choose Add permissions.
 30.- Repeat step 22 to upload the lexicon.
 The upload is successful. After the change in permissions, you did not have to modify the credentials. After a short delay, the new policy automatically takes effect on new API calls from DevRestricted.
-31.- Delete the lexicon by running the following command: aws polly delete-lexicon --name awsLexicon --region eu-west-2
+31.- Delete the lexicon by running the following command: 
+aws polly delete-lexicon --name awsLexicon --region eu-west-2
 In this exercise, you have configured the SDK and AWS CLI to refer to a seconday credentials profile and have tested the distinction between the AWS managed IAM policie related to Amazon Polly. You have also confirmed that it is possible to change the permissions of an IAM user without changing the access key used by that user.
 
 ======================================================================================
@@ -168,7 +205,8 @@ Create an Amazon EC2 Key pair
 In this exercise, you'll generate and save and Amazon EC2 key pair. You are responsible for saving the private key and using it when you want to connect to your Amazon EC2 instances.
 
 1.- Sign in to the AWS Management Console using the DevAdmin IAM user you created in Exercise 1.2.
-2.- To open the Amazon EC2 console, select Services > EC2.
+#2.- To open the Amazon EC2 console, select Services > EC2.
+2.- To open the Amazon EC2 console, select Services > Compute > EC2.
 3.- Select Network & security > Key pairs.
 4.- Select Create key pair.
 5.- For Key pair name, enter devassoc, and then choose Create. The key pair automatically downloads to your Downloads folder.
@@ -177,9 +215,10 @@ In this exercise, you'll generate and save and Amazon EC2 key pair. You are resp
 Exercise 2.2
 Create an Amazon VPC with Public and Private Subnets
 
-In this exercise, you'll create an Amazon Virtual Private Cloud (Amazon VPC). Within that amazon VPC, you eill have a public subnet directly connected to the internet through an internet gateway. You will also have a private subnet that only has an indirect connection to the internet using network address translation (NAT).
+In this exercise, you'll create an Amazon Virtual Private Cloud (Amazon VPC). Within that amazon VPC, you will have a public subnet directly connected to the internet through an internet gateway. You will also have a private subnet that only has an indirect connection to the internet using network address translation (NAT).
 
-1.- To display the Amazon VPC dashboard, select Services > VPC.
+#1.- To display the Amazon VPC dashboard, select Services > VPC.
+1.- To display the Amazon VPC dashboard, select Services > Networking & Content Delivery > VPC.
 2.- Select Launch VPC Wizard.
 If a field does not contain an explicit value in these directions, retain the default value.
 3.- Select VPC with public and private subnets and then click Select.
