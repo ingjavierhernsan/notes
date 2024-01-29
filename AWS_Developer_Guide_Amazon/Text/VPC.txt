@@ -1,0 +1,76 @@
+VPC CIDR Block and Subnets
+
+VPC CIDR Block	10 0 0 0
+/16 Subnet Mask	255 255 0 0
+
+Subnet Name	IPv4 CIDR block		Availability Zone	Route Table	Auto-assign Public IPv4
+private-1a	10.0.3.0/24		us-east-1a		Private-RT	No
+private-1b	10.0.4.0/24		us-east-1b		Private-RT	No
+public-1a	10.0.1.0/24		us-east-1a		MAIN		Yes
+public-1b	10.0.2.0/24		us-east-1b		MAIN		Yes
+
+MAIN - Has a route to an Internet Gateway
+
+Create VPC
+- Your VPCs
+- Create VPC
+- Name: MyVPC
+- IPv4 CIDR block: 10.0.0.0/16
+- IPv6 CIDR block: No IPv6 CIDR block
+- Tenancy: Default
+- Tags: Key = Name, Value - optional = MyVPC
+- Create VPC
+
+- Enter in MyVPC
+- Actions: Edit DNS hostnames
+- DNS hostnames: Enable
+- Save changes
+
+Create Subnets
+- Subnets
+- Create subnet
+- VPC ID: MyVPC
+- Subnet name: Public-1A
+- Availability Zone: US East (N. Virginia)/us-eat-1a
+- IPv4 CIDR block: 10.0.1/24
+- Tags: Key = Name, Value - optional = Public-1A
+- Create subnet
+- Select subnet
+- Action: Modify auto-assign IP settings
+- Aunto-assign IPv4: Enable auto-assign pulic IPv4 address
+- Save
+* Only in the public subnets
+
+Create route table
+- Route tables
+- Create Route table
+- Name - optional: Private-RT
+- VPC: MyVPC
+- Create route table
+- Select the route table
+- Tab Subnet associations
+- Edit subnet associations
+- Select the private subnets
+- Save associations
+
+In the Route tables dash board
+- Search the Main: Yes and VPC: id...|MyVPC
+- Add the name: MAIN
+
+Create an internet Gateways
+- Internet Gateways
+- Create internet gateway
+- Name tag: MyIGW
+- Create internet gateway
+- Select the MyIGW
+- Actions: Attach to VPC
+- Select MyVPC
+- Attach internet gateway
+- Go to Route Tables
+- Select tab Routes
+- Edit routes
+- Add route
+- Destination: 0.0.0.0/0, Target: igw-...
+- Save changes
+
+
